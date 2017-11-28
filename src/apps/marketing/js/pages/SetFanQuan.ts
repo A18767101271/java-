@@ -55,7 +55,7 @@ function start() {
         <div class="l-label">
         <div class="left fl">发券数量</div>
         <div class="right fr">
-        <input type="number" placeholder="在此输入发券数量，默认不限" value="不限" id="num-input"></div>
+        <input type="number" placeholder="在此输入发券数量，默认不限" value="" id="num-input"></div>
         </div>    
         </div>
         
@@ -248,11 +248,7 @@ function start() {
         end = new Date(Date.parse(end.replace(/-/g, "/")));
         end = end.getTime() / 1000;
 
-        if (num_input == "") {
-            num_input = "不限";
-        } else {
-            num_input = Number(num_input).toFixed(0);
-        }
+        console.log(num_input);
 
         if (!st || !end) {
             bridge.dialog({
@@ -293,12 +289,19 @@ function start() {
 
         let arr: any[] = [];
         let obj1 = {};
+
+        if (num_input == "") {
+            obj1["couponNum"] = "不限";
+        }
+        else {
+            obj1["couponNum"] = Number(num_input).toFixed(0);
+        }
+
         obj1["discountAmount"] = Number(reduce_input).toFixed(0);
         obj1["fullAmount"] = Number(add_input).toFixed(0);
         obj1["grantCondition"] = Number(money_input).toFixed(0);
         obj1["couponType"] = "满减券";
         obj1["limitDate"] = limitDate; limitDate
-        obj1["couponNum"] = num_input;
         arr.push(obj1);
 
         let obj2 = {
@@ -581,11 +584,7 @@ function resetStart(data) {
         end = new Date(Date.parse(end.replace(/-/g, "/")));
         end = end.getTime() / 1000;
 
-        if (num_input == "") {
-            num_input = "不限";
-        } else {
-            num_input = Number(num_input).toFixed(0);
-        }
+
 
         if (!st || !end) {
             bridge.dialog({
@@ -626,12 +625,19 @@ function resetStart(data) {
 
         let arr: any[] = [];
         let obj1 = {};
+        
+        if (num_input == "") {
+            obj1["couponNum"] = "不限";
+        }
+        else {
+            obj1["couponNum"] = Number(num_input).toFixed(0);
+        }
         obj1["discountAmount"] = Number(reduce_input).toFixed(0);
         obj1["fullAmount"] = Number(add_input).toFixed(0);
         obj1["grantCondition"] = Number(money_input).toFixed(0);
         obj1["couponType"] = "满减券";
         obj1["limitDate"] = pick_time;
-        obj1["couponNum"] = num_input;
+
         arr.push(obj1);
 
         let obj2 = {

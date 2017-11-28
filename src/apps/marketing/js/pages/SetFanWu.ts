@@ -52,7 +52,7 @@ function start() {
  <div class="l-label">
  <div class="left fl">发放数量</div>
  <div class="right fr">
- <input type="number" placeholder="不限" value="不限" id="num-input">
+ <input type="number" placeholder="不限" value="" id="num-input">
  </div>
  </div>
  
@@ -64,7 +64,7 @@ function start() {
  <div class="l-label">
  <div class="left fl">面向用户</div>
  <div class="right fr">
-     <span id="pick-user">请设置面向用户</span>
+     <span id="pick-user">未设置</span>
      <i></i>
  </div>
  </div>
@@ -327,7 +327,7 @@ function start() {
         end = new Date(Date.parse(end.replace(/-/g, "/")));
         end = end.getTime() / 1000;
 
-        var num = $('#num-input').val();
+        var num_input = $('#num-input').val();
         var pick_time = $('#pick-time').text();
 
         if (!st || !end) {
@@ -391,7 +391,12 @@ function start() {
         }
 
         var mark = {};
-        mark["couponNum"] = Number(num).toFixed(0);
+        if (num_input == "") {
+            mark["couponNum"] = "不限";
+        }
+        else {
+            mark["couponNum"] = Number(num_input).toFixed(0);
+        }
         mark["limitDate"] = limitDate;
         mark["grantWay"] = grantWay;
         mark["products"] = PageExtends.larry;
@@ -437,7 +442,7 @@ function resetStart(data) {
     if (typeof data2 == "string") {
         data2 = JSON.parse(data.marketingMeta.returnProduct);
     }
-  
+
     PageExtends.larry = PageExtends.larry || data2[0].products;
     PageExtends.num = PageExtends.num || data2[0].couponNum;
     PageExtends.a1 = PageExtends.a1 || data.limitUser;
@@ -764,7 +769,7 @@ function resetStart(data) {
         end = new Date(Date.parse(end.replace(/-/g, "/")));
         end = end.getTime() / 1000;
 
-        var num = $('#num-input').val();
+        var num_input = $('#num-input').val();
         var pick_time = $('#pick-time').text();
 
         if (!st || !end) {
@@ -828,7 +833,12 @@ function resetStart(data) {
         }
 
         var mark = {};
-        mark["couponNum"] = Number(num).toFixed(0);
+        if (num_input == "") {
+            mark["couponNum"] = "不限";
+        }
+        else {
+            mark["couponNum"] = Number(num_input).toFixed(0);
+        }
         mark["limitDate"] = limitDate;
         mark["grantWay"] = grantWay;
         mark["products"] = PageExtends.larry;
