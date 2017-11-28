@@ -1,0 +1,1237 @@
+﻿    @charset "UTF-8";
+    $baseFontSize: 75px !default; // pixels to rem
+    @function rem($px) {
+        @return $px / $baseFontSize * 1rem;
+    }
+
+    [data-page="home"] {
+        height: 100%;
+        background-color: #fff;
+        .headbar {
+            width: 10rem;
+            height: rem(98px);
+            border-bottom: 1px solid #ddd; //border-top: 1px solid #ddd;
+            ul {
+                width: rem(630px);
+                height: rem(98px);
+                float: left;
+                overflow: hidden;
+                li {
+                    position: relative;
+                    float: left;
+                    width: rem(60px);
+                    height: rem(98px);
+                    text-align: center;
+                    line-height: rem(98px);
+                    font-size: rem(28px);
+                    margin-left: rem(55px);
+                    span {
+                        display: block;
+                        width: rem(60px);
+                        height: rem(98px);
+                        color: #485057;
+                    }
+                }
+                .active {
+                    span {
+                        color: #3360f1;
+                    }
+                    .line {
+                        width: rem(50px);
+                        height: rem(4px);
+                        background-color: #3360f1;
+                        position: absolute;
+                        left: rem(5px);
+                        bottom: 0;
+                    }
+                }
+            }
+            .toolbtn {
+                width: rem(120px);
+                height: rem(98px);
+                float: right;
+                position: relative;
+                background: url(../image/icon_jiantou_up_03.jpg)center center no-repeat;
+                background-size: rem(25px) rem(19px);
+                i {
+                    width: rem(2px);
+                    height: rem(24px);
+                    background-color: #e3e9ed;
+                    position: absolute;
+                    left: 0;
+                    top: rem(37px);
+                }
+            }
+            .bom {
+                background: url(../image/icon_jiantou_bottom_03.jpg)center center no-repeat;
+                background-size: rem(25px) rem(19px);
+            }
+        }
+        .toolbar {
+            width: 10rem;
+            height: rem(80px);
+            overflow: hidden;
+            .btn {
+                float: left;
+                width: rem(106px);
+                height: rem(50px);
+                line-height: rem(50px);
+                text-align: center;
+                background-color: #f2f3f4;
+                font-size: rem(26px);
+                border-radius: rem(20px);
+                color: #7f8a95;
+                margin: 0 rem(22px);
+                margin-top: rem(30px);
+            }
+            .active {
+                color: #3360f2;
+            }
+            &.hide {
+                display: none;
+            }
+        }
+        .contain {
+            .list {
+                width: rem(720px);
+                height: rem(138px);
+                margin-left: rem(30px);
+                border-bottom: 1px solid #e3e9ed;
+                position: relative;
+                i {
+                    width: rem(15px);
+                    height: rem(25px);
+                    background: url(../image/icon_jiantou_right_03.jpg)center center no-repeat;
+                    background-size: rem(15px) rem(25px);
+                    position: absolute;
+                    right: rem(30px);
+                    top: rem(56px);
+                }
+                h1 {
+                    font-size: rem(30px);
+                    color: #1f2427;
+                    float: left;
+                    margin-top: rem(24px);
+                }
+                .sm-text {
+                    font-size: rem(24px);
+                    color: #fea139;
+                    float: left;
+                    margin-top: rem(30px);
+                    margin-left: rem(10px);
+                }
+                .time-text {
+                    font-size: rem(26px);
+                    color: #7f8a95;
+                    position: absolute;
+                    left: 0;
+                    top: rem(85px);
+                }
+                .icon {
+                    text-align: center;
+                    padding: rem(10px);
+                    border-radius: rem(20px);
+                    color: #fff;
+                    font-size: rem(22px);
+                    position: absolute;
+                    right: rem(63px);
+                    top: rem(40px);
+                }
+                .icon-ing {
+                    background-color: #00c4ff;
+                }
+                .icon-end {
+                    background-color: #76809a;
+                }
+                .icon-start {
+                    background-color: #ff8db7;
+                }
+            }
+            .no-img {
+                float: left;
+                margin-top: rem(300px);
+                width: 10rem;
+                height: rem(290px);
+                .img {
+                    float: left;
+                    width: rem(230px);
+                    height: rem(183px);
+                    background: url(../image/no-list.png)center center no-repeat;
+                    background-size: rem(230px) rem(183px);
+                    margin-left: rem(245px);
+                }
+                span {
+                    width: 10rem;
+                    text-align: center;
+                    float: left;
+                    color: #7c8389;
+                }
+            }
+        }
+    }
+
+    [data-page="record"] {
+        height: 100%;
+        background-color: #fff;
+        .headbar {
+            width: 10rem;
+            height: rem(98px);
+            border-bottom: 1px solid #ddd; //border-top: 1px solid #ddd;
+            ul {
+                width: 10rem;
+                height: rem(98px);
+                float: left;
+                overflow: hidden;
+                li {
+                    position: relative;
+                    float: left;
+                    width: rem(60px);
+                    height: rem(98px);
+                    text-align: center;
+                    line-height: rem(98px);
+                    font-size: rem(28px);
+                    margin-left: rem(75px);
+                    span {
+                        display: block;
+                        width: rem(60px);
+                        height: rem(98px);
+                        color: #485057;
+                    }
+                }
+                .active {
+                    span {
+                        color: #3360f1;
+                    }
+                    .line {
+                        width: rem(50px);
+                        height: rem(4px);
+                        background-color: #3360f1;
+                        position: absolute;
+                        left: rem(5px);
+                        bottom: 0;
+                    }
+                }
+            }
+        }
+        .contain {
+            .list {
+                width: rem(720px);
+                height: rem(138px);
+                margin-left: rem(30px);
+                border-bottom: 1px solid #e3e9ed;
+                position: relative;
+                i {
+                    width: rem(15px);
+                    height: rem(25px);
+                    background: url(../image/icon_jiantou_right_03.jpg)center center no-repeat;
+                    background-size: rem(15px) rem(25px);
+                    position: absolute;
+                    right: rem(30px);
+                    top: rem(56px);
+                }
+                h1 {
+                    font-size: rem(30px);
+                    color: #1f2427;
+                    float: left;
+                    margin-top: rem(24px);
+                }
+                .sm-text {
+                    font-size: rem(24px);
+                    color: #fea139;
+                    float: left;
+                    margin-top: rem(30px);
+                    margin-left: rem(10px);
+                }
+                .time-text {
+                    font-size: rem(26px);
+                    color: #7f8a95;
+                    position: absolute;
+                    left: 0;
+                    top: rem(85px);
+                }
+                .icon {
+                    text-align: center;
+                    padding: rem(10px);
+                    border-radius: rem(20px);
+                    color: #fff;
+                    font-size: rem(22px);
+                    position: absolute;
+                    right: rem(63px);
+                    top: rem(40px);
+                }
+                .icon-end {
+                    background-color: #ec374a;
+                }
+            }
+            .no-img {
+                float: left;
+                margin-top: rem(300px);
+                width: 10rem;
+                height: rem(290px);
+                .img {
+                    float: left;
+                    width: rem(230px);
+                    height: rem(183px);
+                    background: url(../image/no-list.png)center center no-repeat;
+                    background-size: rem(230px) rem(183px);
+                    margin-left: rem(245px);
+                }
+                span {
+                    width: 10rem;
+                    text-align: center;
+                    float: left;
+                    color: #7c8389;
+                }
+            }
+        }
+    }
+
+    [data-page="details"] {
+        width: 10rem;
+        height: 100%;
+        background-color: #fff;
+        .btn {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            font-size: rem(36px);
+            color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 10;
+        }
+        .red {
+            background: url(../image/hong-banner.jpg)center center no-repeat;
+            background-size: 10rem rem(112px);
+        }
+        .blue {
+            background: url(../image/lan-banner.jpg)center center no-repeat;
+            background-size: 10rem rem(112px);
+        }
+        .hui {
+            background: url(../image/hui-banner.jpg)center center no-repeat;
+            background-size: 10rem rem(112px);
+        }
+        .br {
+            width: 10rem;
+            height: rem(25px);
+            background-color: #f5f6f8;
+        }
+        .headbar {
+            width: 10reml;
+            height: rem(112px);
+            line-height: rem(112px);
+            text-align: center;
+            font-size: rem(46px);
+            color: #fff;
+            margin-bottom: rem(30px);
+        }
+        .part1 {
+            width: rem(720px);
+            margin-left: rem(30px);
+            font-size: rem(30px);
+            margin-bottom: rem(22px);
+            .line {
+                width: rem(720px);
+                float: left;
+                min-height: rem(60px);
+                line-height: rem(60px);
+                .left {
+                    width: rem(180px);
+                    float: left;
+                }
+                .right {
+                    float: left;
+                    width: rem(470px);
+                    min-height: rem(60px);
+                    line-height: rem(60px);
+                    margin-bottom: rem(20px);
+                }
+            }
+        }
+        .part2 {
+            width: 10rem;
+            position: relative;
+            i {
+                width: rem(10px);
+                height: rem(30px);
+                position: absolute;
+                left: rem(30px);
+                top: rem(30px);
+            }
+            .blue {
+                background-color: #3663f2;
+            }
+            h1 {
+                font-size: rem(30px);
+                color: #000;
+                position: absolute;
+                left: rem(55px);
+                top: rem(25px);
+            }
+            .tab {
+                float: left;
+                width: rem(690px);
+                margin-top: rem(90px);
+                margin-left: rem(30px);
+                margin-bottom: rem(28px);
+                td {
+                    width: rem(345px);
+                    position: relative;
+                    font-size: rem(28px);
+                    height: rem(80px);
+                    line-height: rem(80px);
+                    border: 1px solid #e3e9ed;
+                    text-align: center;
+                    .icon-1 {
+                        width: rem(24px);
+                        height: rem(28px);
+                        background: url(../image/canyudingdan.png)center center no-repeat;
+                        background-size: rem(24px) rem(28px);
+                        position: absolute;
+                        left: rem(80px);
+                        top: rem(26px);
+                    }
+                    .icon-2 {
+                        width: rem(28px);
+                        height: rem(25px);
+                        background: url(../image/zongjiliushui.png)center center no-repeat;
+                        background-size: rem(28px) rem(25px);
+                        position: absolute;
+                        left: rem(80px);
+                        top: rem(28px);
+                    }
+                }
+            }
+        }
+        .part3 {
+            width: 10rem;
+            position: relative;
+            i {
+                width: rem(10px);
+                height: rem(30px);
+                position: absolute;
+                left: rem(30px);
+                top: rem(30px);
+            }
+            .blue {
+                background-color: #3663f2;
+            }
+            h1 {
+                font-size: rem(30px);
+                color: #000;
+                position: absolute;
+                left: rem(55px);
+                top: rem(25px);
+            }
+            .tab {
+                float: left;
+                width: rem(690px);
+                margin-top: rem(90px);
+                margin-left: rem(30px);
+                margin-bottom: rem(160px);
+                td {
+                    width: rem(230px);
+                    position: relative;
+                    font-size: rem(28px);
+                    height: rem(80px);
+                    line-height: rem(80px);
+                    border: 1px solid #e3e9ed;
+                    text-align: center;
+                    .icon-1 {
+                        width: rem(26px);
+                        height: rem(26px);
+                        background: url(../image/icon-date.png)center center no-repeat;
+                        background-size: rem(26px) rem(26px);
+                        position: absolute;
+                        left: rem(50px);
+                        top: rem(26px);
+                    }
+                    .icon-2 {
+                        width: rem(20px);
+                        height: rem(26px);
+                        background: url(../image/icon-list.png)center center no-repeat;
+                        background-size: rem(20px) rem(26px);
+                        position: absolute;
+                        left: rem(25px);
+                        top: rem(28px);
+                    }
+                    .icon-3 {
+                        width: rem(27px);
+                        height: rem(26px);
+                        background: url(../image/icon-money.png)center center no-repeat;
+                        background-size: rem(27px) rem(26px);
+                        position: absolute;
+                        left: rem(20px);
+                        top: rem(28px);
+                    }
+                    .icon-bb {
+                        left: rem(50px);
+                    }
+                    .icon-cc {
+                        left: rem(50px);
+                    }
+                }
+            }
+        }
+    } // [data-page="fanquandetails"] {
+    //     width: 10rem;
+    //     height: 100%;
+    //     background-color: #fff;
+    //     .btn {
+    //         width: 10rem;
+    //         height: rem(98px);
+    //         line-height: rem(98px);
+    //         text-align: center;
+    //         font-size: rem(36px);
+    //         background-color: #3663f2;
+    //         color: #fff;
+    //         position: fixed;
+    //         left: 0;
+    //         bottom: 0;
+    //     }
+    //     .br {
+    //         width: 10rem;
+    //         height: rem(25px);
+    //         background-color: #f5f6f8;
+    //     }
+    //     .headbar {
+    //         width: 10reml;
+    //         height: rem(112px);
+    //         line-height: rem(112px);
+    //         text-align: center;
+    //         font-size: rem(46px);
+    //         color: #fff;
+    //         margin-bottom: rem(30px);
+    //     }
+    //     .red {
+    //         background: url(../image/hong-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .blue {
+    //         background: url(../image/lan-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .hui {
+    //         background: url(../image/hui-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .part1 {
+    //         width: rem(720px);
+    //         margin-left: rem(30px);
+    //         font-size: rem(30px);
+    //         margin-bottom: rem(22px);
+    //         .line {
+    //             width: rem(720px);
+    //             line-height: rem(35px);
+    //             .left {
+    //                 width: rem(150px);
+    //                 float: left;
+    //             }
+    //             .right {
+    //                 float: left;
+    //                 width: rem(570px);
+    //                 margin-bottom: rem(20px);
+    //             }
+    //         }
+    //     }
+    //     .part2 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(28px);
+    //             td {
+    //                 width: rem(345px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(24px);
+    //                     height: rem(28px);
+    //                     background: url(../image/canyudingdan.png)center center no-repeat;
+    //                     background-size: rem(24px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(28px);
+    //                     height: rem(25px);
+    //                     background: url(../image/zongjiliushui.png)center center no-repeat;
+    //                     background-size: rem(28px) rem(25px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .part3 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(160px);
+    //             td {
+    //                 width: rem(230px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(26px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-date.png)center center no-repeat;
+    //                     background-size: rem(26px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(20px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-list.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(28px);
+    //                 }
+    //                 .icon-3 {
+    //                     width: rem(27px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-money.png)center center no-repeat;
+    //                     background-size: rem(27px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // [data-page="fanwudetails"] {
+    //     width: 10rem;
+    //     height: 100%;
+    //     background-color: #fff;
+    //     .btn {
+    //         width: 10rem;
+    //         height: rem(98px);
+    //         line-height: rem(98px);
+    //         text-align: center;
+    //         font-size: rem(36px);
+    //         background-color: #3663f2;
+    //         color: #fff;
+    //         position: fixed;
+    //         left: 0;
+    //         bottom: 0;
+    //     }
+    //     .br {
+    //         width: 10rem;
+    //         height: rem(25px);
+    //         background-color: #f5f6f8;
+    //     }
+    //     .headbar {
+    //         width: 10reml;
+    //         height: rem(112px);
+    //         line-height: rem(112px);
+    //         text-align: center;
+    //         font-size: rem(46px);
+    //         color: #fff;
+    //         margin-bottom: rem(30px);
+    //     }
+    //     .red {
+    //         background: url(../image/hong-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .blue {
+    //         background: url(../image/lan-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .hui {
+    //         background: url(../image/hui-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .part1 {
+    //         width: rem(720px);
+    //         margin-left: rem(30px);
+    //         font-size: rem(30px);
+    //         margin-bottom: rem(22px);
+    //         .line {
+    //             width: rem(720px);
+    //             line-height: rem(35px);
+    //             .left {
+    //                 width: rem(150px);
+    //                 float: left;
+    //             }
+    //             .right {
+    //                 float: left;
+    //                 width: rem(570px);
+    //                 margin-bottom: rem(20px);
+    //             }
+    //         }
+    //     }
+    //     .part2 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(28px);
+    //             td {
+    //                 width: rem(345px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(20px);
+    //                     height: rem(28px);
+    //                     background: url(../image/d1.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(20px);
+    //                     height: rem(28px);
+    //                     background: url(../image/d3.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .part3 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(160px);
+    //             td {
+    //                 width: rem(230px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(26px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-date.png)center center no-repeat;
+    //                     background-size: rem(26px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(20px);
+    //                     height: rem(28px);
+    //                     background: url(../image/d2.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(28px);
+    //                 }
+    //                 .icon-3 {
+    //                     width: rem(20px);
+    //                     height: rem(28px);
+    //                     background: url(../image/d4.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(10px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // [data-page="hongbaodetails"] {
+    //     width: 10rem;
+    //     height: 100%;
+    //     background-color: #fff;
+    //     .btn {
+    //         width: 10rem;
+    //         height: rem(98px);
+    //         line-height: rem(98px);
+    //         text-align: center;
+    //         font-size: rem(36px);
+    //         background-color: #3663f2;
+    //         color: #fff;
+    //         position: fixed;
+    //         left: 0;
+    //         bottom: 0;
+    //     }
+    //     .br {
+    //         width: 10rem;
+    //         height: rem(25px);
+    //         background-color: #f5f6f8;
+    //     }
+    //     .headbar {
+    //         width: 10reml;
+    //         height: rem(112px);
+    //         line-height: rem(112px);
+    //         text-align: center;
+    //         font-size: rem(46px);
+    //         color: #fff;
+    //         margin-bottom: rem(30px);
+    //     }
+    //     .red {
+    //         background: url(../image/hong-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .blue {
+    //         background: url(../image/lan-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .hui {
+    //         background: url(../image/hui-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .part1 {
+    //         width: rem(720px);
+    //         margin-left: rem(30px);
+    //         font-size: rem(30px);
+    //         margin-bottom: rem(22px);
+    //         .line {
+    //             width: rem(720px);
+    //             line-height: rem(35px);
+    //             .left {
+    //                 width: rem(150px);
+    //                 float: left;
+    //             }
+    //             .right {
+    //                 float: left;
+    //                 width: rem(570px);
+    //                 margin-bottom: rem(20px);
+    //             }
+    //         }
+    //     }
+    //     .part2 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(28px);
+    //             td {
+    //                 width: rem(345px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(26px);
+    //                     height: rem(28px);
+    //                     background: url(../image/hongbao1.png)center center no-repeat;
+    //                     background-size: rem(26px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(26px);
+    //                     height: rem(28px);
+    //                     background: url(../image/hongbao2.png)center center no-repeat;
+    //                     background-size: rem(26px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .part3 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(160px);
+    //             td {
+    //                 width: rem(230px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(26px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-date.png)center center no-repeat;
+    //                     background-size: rem(26px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(20px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-list.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(30px);
+    //                     top: rem(28px);
+    //                 }
+    //                 .icon-3 {
+    //                     width: rem(27px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-money.png)center center no-repeat;
+    //                     background-size: rem(27px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(25px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // [data-page="zhekoudetails"] {
+    //     width: 10rem;
+    //     height: 100%;
+    //     background-color: #fff;
+    //     .btn {
+    //         width: 10rem;
+    //         height: rem(98px);
+    //         line-height: rem(98px);
+    //         text-align: center;
+    //         font-size: rem(36px);
+    //         background-color: #3663f2;
+    //         color: #fff;
+    //         position: fixed;
+    //         left: 0;
+    //         bottom: 0;
+    //     }
+    //     .br {
+    //         width: 10rem;
+    //         height: rem(25px);
+    //         background-color: #f5f6f8;
+    //     }
+    //     .headbar {
+    //         width: 10reml;
+    //         height: rem(112px);
+    //         line-height: rem(112px);
+    //         text-align: center;
+    //         font-size: rem(46px);
+    //         color: #fff;
+    //         margin-bottom: rem(30px);
+    //     }
+    //     .red {
+    //         background: url(../image/hong-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .blue {
+    //         background: url(../image/lan-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .hui {
+    //         background: url(../image/hui-banner.jpg)center center no-repeat;
+    //         background-size: 10rem rem(112px);
+    //     }
+    //     .part1 {
+    //         width: rem(720px);
+    //         margin-left: rem(30px);
+    //         font-size: rem(30px);
+    //         margin-bottom: rem(22px);
+    //         .line {
+    //             width: rem(720px);
+    //             line-height: rem(35px);
+    //             .left {
+    //                 width: rem(150px);
+    //                 float: left;
+    //             }
+    //             .right {
+    //                 float: left;
+    //                 width: rem(570px);
+    //                 margin-bottom: rem(20px);
+    //             }
+    //         }
+    //     }
+    //     .part2 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(28px);
+    //             td {
+    //                 width: rem(345px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(24px);
+    //                     height: rem(28px);
+    //                     background: url(../image/canyudingdan.png)center center no-repeat;
+    //                     background-size: rem(24px) rem(28px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(28px);
+    //                     height: rem(25px);
+    //                     background: url(../image/zongjiliushui.png)center center no-repeat;
+    //                     background-size: rem(28px) rem(25px);
+    //                     position: absolute;
+    //                     left: rem(80px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     .part3 {
+    //         width: 10rem;
+    //         position: relative;
+    //         i {
+    //             width: rem(10px);
+    //             height: rem(30px);
+    //             position: absolute;
+    //             left: rem(30px);
+    //             top: rem(30px);
+    //         }
+    //         .blue {
+    //             background-color: #3663f2;
+    //         }
+    //         h1 {
+    //             font-size: rem(30px);
+    //             color: #000;
+    //             position: absolute;
+    //             left: rem(55px);
+    //             top: rem(25px);
+    //         }
+    //         .tab {
+    //             float: left;
+    //             width: rem(690px);
+    //             margin-top: rem(90px);
+    //             margin-left: rem(30px);
+    //             margin-bottom: rem(160px);
+    //             td {
+    //                 width: rem(230px);
+    //                 position: relative;
+    //                 font-size: rem(28px);
+    //                 height: rem(80px);
+    //                 line-height: rem(80px);
+    //                 border: 1px solid #e3e9ed;
+    //                 text-align: center;
+    //                 .icon-1 {
+    //                     width: rem(26px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-date.png)center center no-repeat;
+    //                     background-size: rem(26px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(26px);
+    //                 }
+    //                 .icon-2 {
+    //                     width: rem(20px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-list.png)center center no-repeat;
+    //                     background-size: rem(20px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(28px);
+    //                 }
+    //                 .icon-3 {
+    //                     width: rem(27px);
+    //                     height: rem(26px);
+    //                     background: url(../image/icon-money.png)center center no-repeat;
+    //                     background-size: rem(27px) rem(26px);
+    //                     position: absolute;
+    //                     left: rem(50px);
+    //                     top: rem(28px);
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    [data-page="setactivity"] {
+        .at {
+            width: rem(720px);
+            height: rem(140px);
+            margin-left: rem(30px);
+            position: relative;
+            border-bottom: 1px solid #e5e6e8;
+            h1 {
+                font-size: rem(32px);
+                position: absolute;
+                left: 0;
+                top: rem(30px);
+                color: #000;
+            }
+            span {
+                font-size: rem(24px);
+                position: absolute;
+                left: 0;
+                top: rem(78px);
+                color: #798092;
+            }
+            a {
+                width: rem(88px);
+                height: rem(55px);
+                color: #3258eb;
+                border-radius: rem(40px);
+                border: 2px solid #3258eb;
+                position: absolute;
+                right: rem(34px);
+                top: rem(40px);
+                text-align: center;
+                line-height: rem(55px);
+            }
+        }
+    }

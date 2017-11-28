@@ -1,0 +1,10 @@
+﻿.vs
+.vscode
+
+dist
+node_modules
+rev
+package-lock.json
+*.log
+
+build
