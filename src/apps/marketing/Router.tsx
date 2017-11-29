@@ -45,7 +45,7 @@ class Page extends React.Component<PageProps, {}>{
         (this.refs.wrap as any).innerHTML = '';
         this.props.page && this.props.page.render && this.props.page.render(this.props.params);
     }
-    
+
     render() {
         return (<div ref='wrap' className="wrap" data-page={this.props.page ? this.props.page.name || '' : ''} ></div>);
     }
@@ -61,7 +61,7 @@ class Router extends React.Component<{}>{
         return (<HashRouter>
             <Switch>
                 <Route path='/details/:id' render={ctx => <Page page={HomeDetails} params={ctx.match.params} />} />
-                <Route path='/setactivity' render={() => <Page page={SetActivityPage} />} />
+                <Route path='/setactivity' component={SetActivityPage} />
                 <Route path='/setmanjian' render={() => <Page page={SetManJian} />} />
                 <Route path='/setfanquan' render={() => <Page page={SetFanQuan} />} />
                 <Route path='/setfanwu' render={() => <Page page={SetFanWu} />} />
