@@ -44,6 +44,7 @@ export default {
     init(options) {
 
         if (options.enableUI) {
+            
             enableUI = true;
             var src2 = '//webapi.amap.com/ui/1.0/main-async.js';
             var oS2 = document.createElement('script');

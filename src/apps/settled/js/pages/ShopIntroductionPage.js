@@ -1,6 +1,6 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js'; 
+import '../lib-bridge.js';
 
 let bridge = window.lib.bridge;
 
@@ -14,6 +14,7 @@ function showIndex() {
     var district_id;
 
     var html = "";
+
     html += '<header><span></span></header>' +
         '<section>' +
         '<div class="title"><i></i><span>店铺介绍</span></div>' +
@@ -104,6 +105,9 @@ function showIndex() {
                     province_id = data.selectedValue[0];
                     city_id = data.selectedValue[1];
                     district_id = data.selectedValue[2];
+                    PageExtends.province_id = province_id;
+                    PageExtends.city_id = city_id;
+                    PageExtends.district_id = district_id;
                 }
             }
         });

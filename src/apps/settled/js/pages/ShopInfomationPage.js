@@ -22,11 +22,11 @@ function showIndex() {
         ' <div class="line">' +
         '     <h1>门店电话</h1><input type="number" placeholder="请输入门店电话" id="shop-phone" value="' + PageExtends.shopPhone + '"/>' +
         ' </div>' +
-        ' <div class="line">' +
-        '     <h1>店铺地址</h1><input type="text" placeholder="请输入店铺地址" id="shop-address" value="' + PageExtends.address + '"/>' +
-        ' </div>' +
+        // ' <div class="line">' +
+        // '     <h1>店铺地址</h1><input type="text" placeholder="请输入店铺地址" id="shop-address" value="' + PageExtends.address + '"/>' +
+        // ' </div>' +
         ' <div class="line pick-address">' +
-        '     <h1>定位地址</h1><i></i><span>' + PageExtends.pickAddress + '</span>' +
+        '     <h1>详细地址</h1><i></i><span>' + PageExtends.pickAddress + '</span>' +
         ' </div>' +
         ' <div class="line pick-time">' +
         '     <h1>营业时间</h1><i></i><span>' + PageExtends.time + '</span>' +
