@@ -271,7 +271,7 @@ function start() {
         end = end.getTime() / 1000;
 
         var pick_type = $('#pick-type').text();
-        var num = $('#num-input').val();
+        var num_input = $('#num-input').val();
 
         if (!st || !end) {
             bridge.dialog({
@@ -323,13 +323,16 @@ function start() {
 
         var mark = {};
 
-
-        if (num == "") num = "不限";
+        if (num_input == "") {
+            mark["limitNum"] = "不限";
+        }
+        else {
+            mark["limitNum"] = Number(num_input).toFixed(0);
+        }
 
         if (pick_type == "按活动价") {
             let money = $('.price-input').val();
             mark["productActType"] = "按活动价";
-            mark["limitNum"] = num;
             mark["activityPrice"] = (parseInt(money)) * 100;
             mark["productId"] = PageExtends.larry2.productId;
             mark["productName"] = PageExtends.name;
@@ -337,7 +340,6 @@ function start() {
             var money = $('.price-input').val();
             var zhekou = $('.zhekou-input').val();
             mark["productActType"] = "按折扣价";
-            mark["limitNum"] = num;
             mark["discountPrice"] = parseInt(money) * 100;
             mark["discountScope"] = Number(zhekou).toFixed(2);
             mark["productId"] = PageExtends.larry2.productId;
@@ -537,8 +539,8 @@ function resetStart(data) {
         });
     })
 
-     //点击选择面向用户
-     $('#pick-channel').on('click', function () {
+    //点击选择面向用户
+    $('#pick-channel').on('click', function () {
         var $this = $(this);
         bridge.picker({
             title: "面向用户",
@@ -639,7 +641,7 @@ function resetStart(data) {
         end = end.getTime() / 1000;
 
         var pick_type = $('#pick-type').text();
-        var num = $('#num-input').val();
+        var num_input = $('#num-input').val();
 
         if (!st || !end) {
             bridge.dialog({
@@ -691,12 +693,16 @@ function resetStart(data) {
 
         var mark = {};
 
-        if (num == "") num = "不限";
+        if (num_input == "") {
+            mark["limitNum"] = "不限";
+        }
+        else {
+            mark["limitNum"] = Number(num_input).toFixed(0);
+        }
 
         if (pick_type == "按活动价") {
             let money = $('.price-input').val();
             mark["productActType"] = "按活动价";
-            mark["limitNum"] = num;
             mark["activityPrice"] = (parseInt(money)) * 100;
             mark["productId"] = PageExtends.larry2.productId;
             mark["productName"] = PageExtends.name;
@@ -704,7 +710,6 @@ function resetStart(data) {
             var money = $('.price-input').val();
             var zhekou = $('.zhekou-input').val();
             mark["productActType"] = "按折扣价";
-            mark["limitNum"] = num;
             mark["discountPrice"] = parseInt(money) * 100;
             mark["discountScope"] = Number(zhekou).toFixed(2);
             mark["productId"] = PageExtends.larry2.productId;

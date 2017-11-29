@@ -48,7 +48,7 @@ function start() {
  
  <div class="l-label">
  <div class="left fl">发券数量</div>
- <div class="right fr"><input type="number" class="num-input" placeholder="在此输入数量" id="num-input">张</div>
+ <div class="right fr"><input type="number" class="num-input" placeholder="在此输入数量，默认不限" value="" id="num-input"></div>
  </div>
  </div>
  
@@ -62,7 +62,7 @@ function start() {
  <div class="l-label">
  <div class="left fl">面向用户</div>
  <div class="right fr">
-     <span id="pick-user">请设置面向用户</span>
+     <span id="pick-user">未设置</span>
      <i></i>
  </div>
  </div>
@@ -350,18 +350,6 @@ function start() {
             return;
         };
 
-        if (num_input == "") {
-            bridge.dialog({
-                title: "提示",
-                content: "请输入数量",
-                type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
-                buttons: [{
-                    text: 'ok'
-                }]
-            });
-            return;
-        };
-
         if (pick_channel == "未设置") {
             bridge.dialog({
                 title: "提示",
@@ -386,14 +374,22 @@ function start() {
             return;
         }
 
+
+
         let obj1: any = {};
         let arr: any[] = [];
+        if (num_input == "") {
+            obj1["couponNum"] = "不限";
+        }
+        else {
+            obj1["couponNum"] = Number(num_input).toFixed(0);
+        }
         obj1["discountAmount"] = Number(reduce_input).toFixed(0);
         obj1["fullAmount"] = Number(add_input).toFixed(0);
         obj1["grantWay"] = grantWay;
         obj1["couponType"] = "满减券";
         obj1["limitDate"] = limitDate;
-        obj1["couponNum"] = Number(num_input).toFixed(0);
+
         arr.push(obj1);
 
         let obj2 = {
@@ -777,18 +773,6 @@ function resetStart(data) {
             return;
         };
 
-        if (num_input == "") {
-            bridge.dialog({
-                title: "提示",
-                content: "请输入数量",
-                type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
-                buttons: [{
-                    text: 'ok'
-                }]
-            });
-            return;
-        };
-
         if (pick_channel == "未设置") {
             bridge.dialog({
                 title: "提示",
@@ -815,12 +799,18 @@ function resetStart(data) {
 
         let obj1: any = {};
         let arr: any[] = [];
+
+        if (num_input == "") {
+            obj1["couponNum"] = "不限";
+        }
+        else {
+            obj1["couponNum"] = Number(num_input).toFixed(0);
+        }
         obj1["discountAmount"] = Number(reduce_input).toFixed(0);
         obj1["fullAmount"] = Number(add_input).toFixed(0);
         obj1["grantWay"] = grantWay;
         obj1["couponType"] = "满减券";
         obj1["limitDate"] = limitDate;
-        obj1["couponNum"] = Number(num_input).toFixed(0);
         arr.push(obj1);
 
         let obj2 = {

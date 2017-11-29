@@ -32,12 +32,12 @@ function headBar(t1, t2, t) {
 }
 
 function FQFn(data: any) {
+    console.log(data);
     var exampleId = data.activityId;
     var h = "";
     var timestamp = (new Date().getTime() / 1000);
     var st = data.startTime;
     var ed = data.endTime;
-    var arr1 = ['仅限店内', '仅限店外', '店内店外'];
     var data2 = data.marketingMeta.returnTicket;
     if (typeof data2 == "string") {
         data2 = JSON.parse(data.marketingMeta.returnTicket);
@@ -70,10 +70,7 @@ function FQFn(data: any) {
             <div class="left">发券数量：</div>
             <div class="right">`+ data2[0].couponNum + `张</div>
         </div>
-        <div class="line">
-            <div class="left">发放途径：</div>
-            <div class="right">`+ arr1[data2[0].grantWay] + `</div>
-        </div>
+     
         <div class="line">
             <div class="left">有效期限：</div>
             <div class="right">领券后`+ data2[0].limitDate + `</div>
