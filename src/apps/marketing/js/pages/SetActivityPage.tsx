@@ -4,10 +4,7 @@ import '../../sass/HomePage.scss';
 
 export default class SetActivityPage extends React.Component<{}> {
 
-    render() {
-
-        console.log(window.location);
-
+    render() { 
         const ActCreatorItem = (props: { name: string, href: string }) => {
             return (<div className="at">
                 <h1>{props.name}</h1>
