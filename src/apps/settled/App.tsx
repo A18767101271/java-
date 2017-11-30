@@ -3,8 +3,10 @@ import Router from './Router';
 import AMapLoader from '../../assets/libs/AMapLoader.js';
 import SardineJSBridge from '../../assets/libs/sardine-bridge';
 import PageExtends from './js/PageExtends.js';
+import FastClick from 'fastclick';
 import './sass/App.scss';
 import './js/console.log';
+FastClick.attach(window.document.body);
 
 interface AppProps {
     // initArgs: InitAppArgs;
