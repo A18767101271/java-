@@ -1,8 +1,9 @@
 import React from 'react';
 import Router from './Router';
 import AMapLoader from '../../assets/libs/AMapLoader.js';
-import { SMPBridge } from '../../assets/libs/lib-smp/jsbridge';
+import SardineJSBridge from '../../assets/libs/sardine-bridge';
 import PageExtends from './js/PageExtends.js';
+import './sass/App.scss';
 import './js/console.log';
 
 interface AppProps {
@@ -28,8 +29,8 @@ class App extends React.Component<AppProps, {}>{
 
 
     componentWillMount() {
-        SMPBridge.ready(function () {
-            SMPBridge.getLocation({
+        SardineJSBridge.ready(function () {
+            SardineJSBridge.getLocation({
                 complete: function (data) {
                     // console.log(data);
                     PageExtends.clientLocation = data.longitude + ',' + data.latitude;

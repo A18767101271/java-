@@ -1,4 +1,6 @@
-import { SMP, ApiError, ApiRequestOptions } from '../assets/libs/lib-smp/core';
+import SardineApiClient from '../assets/libs/sardine-api';
+import ApiRequestOptions from '../assets/libs/sardine-api/ApiRequestOptions';
+import ApiError from '../assets/libs/sardine-api/ApiError';
 
 function checkStatus(request: ApiRequestOptions) {
 
@@ -79,7 +81,7 @@ export default function request(api: string, ver: string, data?: any, needLogin?
             reject({ error, resp });
         };
 
-        SMP.request(req);
+        SardineApiClient.request(req);
 
     }).then(checkStatus(req));
 

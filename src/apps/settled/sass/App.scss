@@ -108,7 +108,8 @@ a:hover {
     float: right;
 }
 
-#app {
+#app,
+.wrap {
     height: 100%;
 }
 
@@ -124,4 +125,3 @@ a:hover {
 .clearfix {
     zoom: 1;
 }
-
