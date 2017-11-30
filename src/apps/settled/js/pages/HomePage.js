@@ -7,20 +7,19 @@ let bridge = lib.bridge;
 function showIndex() {
     $('.wrap').empty();
     var data = PageExtends.Info;
-
+    console.log(data);
     var arry = ['已录入', '审核中', '审核失败', '审核通过'];
-
     var html = "";
 
     if (!data.shopName) {
-        html += `<div class="list list-two">
+        html += `<div class="list list-two" data-id="0" data-href="#/modifyshopintro">
         <i class="active-no"></i>
             <h1>店铺基本信息</h1>
             <span>待完善</span>
             <em></em>
             </div>`
     } else {
-        html += `<div class="list list-two">
+        html += `<div class="list list-two" data-id="` + data.baseInfoStatus + `" data-href="#/modifyshopintro">
         <i class="active` + data.baseInfoStatus + `"></i>
                  <h1>店铺基本信息</h1>
                  <span>` + arry[data.baseInfoStatus] + `</span>
@@ -29,14 +28,14 @@ function showIndex() {
     }
 
     if (!data.telephone) {
-        html += `<div class="list list-one">
+        html += `<div class="list list-one" data-id="0" data-href="#/modifyshopinfo">
         <i class="active-no"></i>
          <h1>店铺介绍信息</h1>
          <span>待完善</span>
          <em></em>
      </div>`
     } else {
-        html += `<div class="list list-one">
+        html += `<div class="list list-one" data-id="` + data.introductionInfoStatus + `" data-href="#/modifyshopinfo">
         <i class="active` + data.introductionInfoStatus + `"></i>
                  <h1>店铺介绍信息</h1>
                  <span>` + arry[data.introductionInfoStatus] + `</span>
@@ -45,14 +44,14 @@ function showIndex() {
     }
 
     if (!data.idCardName) {
-        html += `<div class="list list-three">
+        html += `<div class="list list-three" data-id="0" data-href="#/modifyqinfo">
         <i class="active-no"></i>
          <h1>店铺资质</h1>
          <span>待完善</span>
          <em></em>
      </div>`
     } else {
-        html += `<div class="list list-three">
+        html += `<div class="list list-three" data-id="` + data.credentialsInfoStatus + `" data-href="#/modifyqinfo">
         <i class="active` + data.credentialsInfoStatus + `"></i>
                  <h1>店铺资质</h1>
                  <span>` + arry[data.credentialsInfoStatus] + `</span>
@@ -77,20 +76,12 @@ function showIndex() {
     }
 
     $('.list').on('click', function () {
-        var $this = $(this);
-        if ($this.hasClass('list-one')) {
+        var id = $(this).data('id');
+        var href = $(this).data('href');
+        if (id == 0 || id == 2) {
             PageExtends.state = data.introductionInfoStatus;
-            window.location.href = "#/modifyshopinfo";
+            window.location.href = href;
         }
-        if ($this.hasClass('list-two')) {
-            PageExtends.state = data.baseInfoStatus;
-            window.location.href = "#/modifyshopintro";
-        }
-        if ($this.hasClass('list-three')) {
-            PageExtends.state = data.credentialsInfoStatus;
-            window.location.href = "#/modifyqinfo";
-        }
-
     });
 
     $('.btn-go').on('click', function () {
@@ -147,7 +138,6 @@ export default {
 
         var obj = {};
         obj.success = function (data) {
-
             PageExtends.Info = data.data;
             if (data.success == false) {
                 window.location.href = "#/ready";
@@ -155,9 +145,7 @@ export default {
                 showIndex();
             }
         }
-        obj.error = function (data) {
-            console.log(data)
-        }
+        obj.error = function (data) {}
         PageExtends.API.storeFormSingleGet(obj);
 
     }

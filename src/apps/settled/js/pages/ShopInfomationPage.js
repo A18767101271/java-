@@ -1,6 +1,6 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js'; 
+import '../lib-bridge.js';
 
 let bridge = lib.bridge;
 

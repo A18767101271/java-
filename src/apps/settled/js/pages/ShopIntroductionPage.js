@@ -105,9 +105,7 @@ function showIndex() {
                     province_id = data.selectedValue[0];
                     city_id = data.selectedValue[1];
                     district_id = data.selectedValue[2];
-                    PageExtends.province_id = province_id;
-                    PageExtends.city_id = city_id;
-                    PageExtends.district_id = district_id;
+
                 }
             }
         });

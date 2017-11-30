@@ -972,20 +972,52 @@ textarea {
         width: 10rem;
         height: 100%;
         position: relative;
-        .btn {
-            width: rem(170px);
-            height: rem(70px);
-            line-height: rem(70px);
-            text-align: center;
-            background-color: #0a63fd;
-            color: #fff;
-            position: fixed;
-            left: 50%;
-            bottom: rem(152px);
-            margin-left: rem(-85px);
-            z-index: 100;
-            border-radius: rem(30px);
-            font-size: rem(30px);
+        .flow-input {
+            width: rem(710px);
+            height: rem(196px);
+            position: absolute;
+            left: rem(20px);
+            bottom: rem(20px);
+            z-index: 10;
+            background-color: #fff;
+            font-size: rem(28px);
+            .input-1 {
+                width: 100%;
+                height: rem(98px);
+                line-height: rem(98px);
+                border-bottom: 1px solid #e5e6e8;
+                background: url(../image/qiu_03.jpg)rem(27px) rem(43px) no-repeat;
+                background-size: rem(12px) rem(12px);
+                h1,
+                .input-area {
+                    float: left;
+                }
+                h1 {
+                    margin-left: rem(50px);
+                    margin-right: rem(20px);
+                }
+            }
+            .input-2 {
+                width: 100%;
+                height: rem(98px);
+                line-height: rem(98px);
+                border-bottom: 1px solid #e5e6e8;
+                background: url(../image/qiu_06.jpg)rem(27px) rem(43px) no-repeat;
+                background-size: rem(12px) rem(12px);
+                h1,
+                .input-address {
+                    float: left;
+                }
+                h1 {
+                    margin-left: rem(50px);
+                    margin-right: rem(20px);
+                }
+                .input-address {
+                    width: rem(500px);
+                    font-size: rem(24px);
+                    margin-top: rem(35px);
+                }
+            }
         }
     }
 }

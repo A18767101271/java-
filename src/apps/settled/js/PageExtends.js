@@ -50,7 +50,7 @@ var extObj = {
                 ver: '1.0',
                 needLogin: true,
                 success: function (data, data2) {
-console.log(data2);
+
                     success && success(data);
                 },
                 error: function (res, data) {

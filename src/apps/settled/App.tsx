@@ -4,6 +4,7 @@ import AMapLoader from '../../assets/libs/AMapLoader.js';
 import { SMPBridge } from '../../assets/libs/lib-smp/jsbridge';
 import PageExtends from './js/PageExtends.js';
 import './js/console.log';
+import './sass/App.scss';
 
 interface AppProps {
     // initArgs: InitAppArgs;
