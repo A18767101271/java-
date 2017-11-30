@@ -56,7 +56,7 @@ module.exports = {
 
 
   entry: {
-     
+
     settled: [
 
       require.resolve('./polyfills'),
@@ -73,7 +73,14 @@ module.exports = {
       './src/apps/marketing/index.tsx'
 
     ],
-     
+    dashboard: [
+
+      require.resolve('./polyfills'),
+
+
+      './src/apps/dashboard/index.tsx'
+
+    ],
   },
   output: {
     // The build folder.
@@ -236,7 +243,7 @@ module.exports = {
   },
   plugins: [
 
-     
+
 
 
     new HtmlWebpackPlugin({
@@ -276,7 +283,25 @@ module.exports = {
         minifyURLs: true,
       },
     }),
-     
+    new HtmlWebpackPlugin({
+      filename: 'dashboard/index.html',
+      inject: true,
+      template: './src/apps/dashboard/index.html',
+      chunks: ['dashboard'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+
 
     // Makes some environment variables available to the JS code, for example:
     // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
