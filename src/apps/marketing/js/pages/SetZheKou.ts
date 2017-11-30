@@ -1,11 +1,12 @@
 import '../../sass/SetHomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js';
+ 
 import '../console.log.js';
 import PromotionApis from '../../../../services/promotion-apis';
 import { HashUrl } from '../../../../assets/libs/hash-router';
 
-const bridge = (window as any).lib.bridge;
+import bridge from '../../../../assets/libs/sardine-bridge';
+
 const Swiper = (window as any).Swiper;
 const $ = (window as any).$;
 

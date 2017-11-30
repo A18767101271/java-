@@ -1,9 +1,10 @@
 import PromotionApis from '../../../../services/promotion-apis';
-import '../lib-bridge.js';
+ 
 import '../console.log.js';
 import moment from 'moment';
 
-let bridge = (window as any).lib.bridge;
+import bridge from '../../../../assets/libs/sardine-bridge';
+
 const $ = (window as any).$;
 
 

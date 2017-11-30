@@ -1,6 +1,6 @@
 import '../../sass/HomePage.scss';
 import PromotionApis from '../../../../services/promotion-apis';
-import '../lib-bridge.js';
+ 
 import '../console.log.js';
 import moment from 'moment';
 

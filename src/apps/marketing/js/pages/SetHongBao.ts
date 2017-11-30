@@ -1,10 +1,11 @@
 import '../../sass/SetHomePage.scss';
 import PromotionApis from '../../../../services/promotion-apis';
-import '../lib-bridge.js';
+ 
 import '../console.log.js';
 import { HashUrl } from '../../../../assets/libs/hash-router';
 
-const bridge = (window as any).lib.bridge;
+import bridge from '../../../../assets/libs/sardine-bridge';
+
 const $ = (window as any).$;
 
 function start() {

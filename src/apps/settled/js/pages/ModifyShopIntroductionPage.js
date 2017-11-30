@@ -1,9 +1,9 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js'; 
+ 
 import geoData from '../../../../assets/libs/geo-data-areas';
 
-let bridge = window.lib.bridge;
+import bridge from '../../../../assets/libs/sardine-bridge';
 
 function showPass() {
     var item = PageExtends.Info;

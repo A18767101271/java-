@@ -1,9 +1,7 @@
 import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js';
-
-let bridge = lib.bridge;
-
+import bridge from '../../../../assets/libs/sardine-bridge';
+ 
 function showIndex() {
     $('.wrap').empty();
     var data = PageExtends.Info;

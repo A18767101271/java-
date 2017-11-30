@@ -1,8 +1,7 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js'; 
+import bridge from '../../../../assets/libs/sardine-bridge';
 
-let bridge = lib.bridge;
 var localId = [];
 
 function showIndex() {

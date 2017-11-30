@@ -183,7 +183,7 @@ export default class SardineJSBridge {
             showProgress: opt.showProgress
         }, opt);
     }
-    dialog(opt: { title?: string, content: string, type: 'alert' | 'confirm', buttons?: Array<{ text: string, type: 'default' | 'primary' }> } & BridgeInvokeCallbackOptions) {
+    dialog(opt: { title?: string, content: string, type: 'alert' | 'confirm', buttons?: Array<{ text: string, type?: 'default' | 'primary' }> } & BridgeInvokeCallbackOptions) {
         bridgeInvoke(this.options, 'dialog', {
             title: opt.title,
             content: opt.content,

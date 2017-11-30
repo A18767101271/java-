@@ -1,9 +1,9 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js'; 
+ 
 import AMapLoader from '../../../../assets/libs/AMapLoader.js';
 
-let bridge = lib.bridge;
+import bridge from '../../../../assets/libs/sardine-bridge';
 
 function showPass(locat) {
     var arry = ['先吃后付', '先付后吃'];
