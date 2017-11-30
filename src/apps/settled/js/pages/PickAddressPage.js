@@ -83,7 +83,6 @@ export default {
             bridge.onOptionMenuClick((data) => {
                 PageExtends.address = $('.input-area').text() + $('.input-address').val();
                 PageExtends.store_location = PageExtends.location;
-                console.log(PageExtends.address);
                 window.history.go(-1);
             });
         })

@@ -178,7 +178,7 @@ function showNoPass() {
         obj.second_business_time = PageExtends.second_business_time || data.secondBusinessTime;
         obj.is_open_all_hours = is_all;
         obj.business_model = PageExtends.pickType || data.businessModel;
-        
+
         if (!PageExtends.serverId) {
             obj.resource_count = 0;
         } else {
@@ -263,8 +263,6 @@ function showNoPass() {
 
             return;
         }
-
-
 
         obj.success = function (data) {
 
