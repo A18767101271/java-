@@ -83,7 +83,8 @@ class HomePage extends React.Component<any, HomePageState>{
     getData(type: number, status?: number) {
         this.setState({
             type: type,
-            currState: status
+            currState: status,
+            data: []
         });
         PromotionApis.getPromotionList({ storeId: 1, type, status: status != undefined ? status : 1 }).then(data => {
             //fillData(data, type);
@@ -95,7 +96,7 @@ class HomePage extends React.Component<any, HomePageState>{
 
     componentWillMount() {
         this.getData(1, 1);
-    } 
+    }
 
     render() {
 

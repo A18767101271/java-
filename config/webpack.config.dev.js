@@ -24,7 +24,7 @@ module.exports = {
   devtool: 'cheap-module-source-map',
 
   entry: {
-     
+
     settled: [
 
       require.resolve('./polyfills'),
@@ -43,7 +43,15 @@ module.exports = {
       './src/apps/marketing/index.tsx'
 
     ],
-    
+    dashboard: [
+
+      require.resolve('./polyfills'),
+
+      require.resolve('../scripts/utils/webpackHotDevClient'),
+
+      './src/apps/dashboard/index.tsx'
+
+    ],
 
   }
 
@@ -171,7 +179,7 @@ module.exports = {
   plugins: [
 
 
-    
+
     new HtmlWebpackPlugin({
       filename: 'settled/index.html',
       inject: true,
@@ -184,7 +192,12 @@ module.exports = {
       template: './src/apps/marketing/index.html',
       chunks: ['marketing']
     }),
-    
+    new HtmlWebpackPlugin({
+      filename: 'dashboard/index.html',
+      inject: true,
+      template: './src/apps/dashboard/index.html',
+      chunks: ['dashboard']
+    }),
 
     new webpack.NamedModulesPlugin(),
 

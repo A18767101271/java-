@@ -1,8 +1,11 @@
 import React from 'react';
 import Router from './Router';
+import FastClick from 'fastclick';
 import './sass/App.scss';
 
 import './js/console.log';
+
+FastClick.attach(window.document.body);
 
 interface AppProps {
     // initArgs: InitAppArgs;
