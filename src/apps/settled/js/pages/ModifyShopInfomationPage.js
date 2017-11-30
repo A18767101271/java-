@@ -1,14 +1,16 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js';
 import AMapLoader from '../../../../assets/libs/AMapLoader.js';
-
-let bridge = lib.bridge;
+import bridge from '../../../../assets/libs/sardine-bridge';
 
 function showNoPass() {
 
     var is_all;
+
+    if (!PageExtends.Info) return;
+
     var data = PageExtends.Info;
+    var arr = ['', '先吃后付', '先付后吃'];
 
     if (!data.telephone) {
         PageExtends.shopPhone = PageExtends.shopPhone || '';
@@ -17,10 +19,10 @@ function showNoPass() {
         PageExtends.time = PageExtends.time || "请选择";
         PageExtends.text1 = PageExtends.text1 || '请上传';
     } else {
-        var arry = ['先吃后付', '先付后吃'];
+
         PageExtends.shopPhone = PageExtends.shopPhone || data.telephone;
         PageExtends.address = PageExtends.address || data.address;
-        PageExtends.pickType = PageExtends.pickType || arry[data.businessModel - 1];
+        PageExtends.pickType = PageExtends.pickType || data.businessModel;
         PageExtends.text1 = '已上传';
 
         if (data.isOpenAllHours == true) {
@@ -85,7 +87,7 @@ function showNoPass() {
         '     <h1>营业时间</h1><i></i><span>' + PageExtends.time + '</span>' +
         ' </div>' +
         ' <div class="line pick-type">' +
-        '     <h1>营收模式</h1><i></i><span>' + PageExtends.pickType + '</span>' +
+        '     <h1>营收模式</h1><i></i><span>' + arr[PageExtends.pickType] + '</span>' +
         ' </div>' +
         ' <div class="line upload">' +
         '     <h1>店铺门脸照</h1><i></i><span>' + PageExtends.text1 + '</span>' +
@@ -96,14 +98,6 @@ function showNoPass() {
 
     $('.wrap').append(html);
 
-    $('.pick-address').on('click', function () {
-        PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
-        PageExtends.time = $('.pick-time span').text();
-        PageExtends.pickType = $('.pick-type span').text();
-        PageExtends.text1 = $('.upload span').text();
-        window.location.href = "#/pickaddress";
-    })
 
     //选择营收模式
     $('.pick-type').on('click', function () {
@@ -128,7 +122,7 @@ function showNoPass() {
             //defaultValue: ['3'], //可选 默认值 数组长度和选择器列数对应
             complete: function (data) {
                 if (data.resultCode == "success") {
-                    PageExtends.is_type = data.selectedValue[0];
+                    PageExtends.pickType = data.selectedValue[0];
                     $this.find('span').text(data.resultText);
                     $this.addClass('finished');
                 }
@@ -136,13 +130,20 @@ function showNoPass() {
         });
     });
 
+    $('.pick-address').on('click', function () {
+        PageExtends.shopPhone = $('#shop-phone').val();
+        PageExtends.address = $('#shop-address').val();
+        PageExtends.time = $('.pick-time span').text();
+        PageExtends.text1 = $('.upload span').text();
+        window.location.href = "#/pickaddress";
+    })
+
 
     $('.upload').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
         PageExtends.address = $('#shop-address').val();
         PageExtends.pickAddress = $('.pick-address span').text();
         PageExtends.time = $('.pick-time span').text();
-        PageExtends.pickType = $('.pick-type span').text();
         window.location.href = "#/upimg";
     });
 
@@ -150,7 +151,6 @@ function showNoPass() {
         PageExtends.shopPhone = $('#shop-phone').val();
         PageExtends.address = $('#shop-address').val();
         PageExtends.pickAddress = $('.pick-address span').text();
-        PageExtends.pickType = $('.pick-type span').text();
         PageExtends.text1 = $('.upload span').text();
         window.location.href = "#/picktime";
     });
@@ -169,7 +169,6 @@ function showNoPass() {
             is_all = false;
         }
 
-
         var obj = {};
         obj.form_id = PageExtends.Info.formId;
         obj.telephone = phone;
@@ -178,7 +177,8 @@ function showNoPass() {
         obj.first_business_time = PageExtends.first_business_time || data.firstBusinessTime;
         obj.second_business_time = PageExtends.second_business_time || data.secondBusinessTime;
         obj.is_open_all_hours = is_all;
-        obj.business_model = PageExtends.is_type || data.businessModel;
+        obj.business_model = PageExtends.pickType || data.businessModel;
+        
         if (!PageExtends.serverId) {
             obj.resource_count = 0;
         } else {

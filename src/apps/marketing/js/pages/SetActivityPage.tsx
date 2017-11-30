@@ -1,10 +1,10 @@
 import React from 'react';
-import { SMPBridge } from '../../../../assets/libs/lib-smp/jsbridge';
+import SardineJSBridge from '../../../../assets/libs/sardine-bridge';
 import '../../sass/HomePage.scss';
 
 export default class SetActivityPage extends React.Component<{}> {
 
-    render() { 
+    render() {
         const ActCreatorItem = (props: { name: string, href: string }) => {
             return (<div className="at">
                 <h1>{props.name}</h1>
@@ -14,8 +14,8 @@ export default class SetActivityPage extends React.Component<{}> {
                     if (url[0] === '#') {
                         url = window.location.origin + window.location.pathname + url;
                     }
-                    SMPBridge.ready(() => {
-                        SMPBridge.open({ url: url });
+                    SardineJSBridge.ready(() => {
+                        SardineJSBridge.open({ url: url });
                     });
                 }}>新建</a>
             </div>);

@@ -1,46 +1,11 @@
 ﻿import '../../sass/HomePage.scss';
 import PageExtends from '../PageExtends.js';
-import '../lib-bridge.js'; 
 import geoData from '../../../../assets/libs/geo-data-areas';
+import bridge from '../../../../assets/libs/sardine-bridge';
 
-let bridge = window.lib.bridge;
-
-function showPass() {
-    var item = PageExtends.Info;
-    var proName, disName, cityName;
-
-    geoData.forEach(function (province) {
-        if (province.adcode == item.provinceId) {
-            proName = province.name;
-            province.districts.forEach(function (city) {
-                if (city.adcode == item.cityId) {
-                    cityName = city.fullname;
-                    city.districts.forEach(function (dis) {
-                        if (dis.adcode == item.districtId) {
-                            disName = dis.name;
-                        }
-                    })
-                }
-            });
-        }
-    });
-
-    var html = "";
-    if (PageExtends.state == 1) {
-        html += '<div class="pick-1"><div class="head-bar"><h1>审核中...</h1><span>2-3个工作日内给您答复</span></div>'
-    } else {
-        html += '<div class="pick-1"><div class="head-bar passing"><h1>审核通过</h1></div>'
-    }
-
-    html += '<div class="line title"><h1>店铺介绍</h1></div>' +
-        '<div class="line"><h1>店铺名称</h1><span>' + item.shopName + '</span></div>' +
-        '<div class="line"><h1>行业类型</h1><span>' + item.categoryName + '-' + item.subCategoryName + '</span></div>' +
-        '<div class="line"><h1>店铺区域</h1><span>' + proName + '-' + cityName + '-' + disName + '</span></div></div>'
-
-    $('.wrap').append(html);
-}
-
-function showNoPass(data) {
+function showNoPass() {
+    if (!PageExtends.Info) return;
+    var data = PageExtends.Info;
 
     var sub_category_id = data.subCategoryId || '';
     var sub_category_name = data.subCategoryName || '';
@@ -48,6 +13,7 @@ function showNoPass(data) {
     var city_id = data.cityId || '';
     var district_id = data.districtId || '';
     var form_id = data.formId | '';
+    
     var proName, disName, cityName;
 
     geoData.forEach(function (province) {
@@ -101,38 +67,38 @@ function showNoPass(data) {
                 type: 'items', //表示自定义输入数据
                 depth: 1,
                 items: [{
-                    text: '快餐小吃',
-                    value: 11,
-                    //disabled: true // 禁用，可以看见但不可选择
-                },
-                {
-                    text: '主题特色',
-                    value: 12
-                },
-                {
-                    text: '甜点饮品',
-                    value: 13
-                },
-                {
-                    text: '中餐宴请',
-                    value: 14
-                },
-                {
-                    text: '火锅烧烤',
-                    value: 15
-                },
-                {
-                    text: '品茶会客',
-                    value: 16
-                },
-                {
-                    text: '西餐日韩',
-                    value: 17
-                },
-                {
-                    text: '夜市宵夜',
-                    value: 18
-                }
+                        text: '快餐小吃',
+                        value: 11,
+                        //disabled: true // 禁用，可以看见但不可选择
+                    },
+                    {
+                        text: '主题特色',
+                        value: 12
+                    },
+                    {
+                        text: '甜点饮品',
+                        value: 13
+                    },
+                    {
+                        text: '中餐宴请',
+                        value: 14
+                    },
+                    {
+                        text: '火锅烧烤',
+                        value: 15
+                    },
+                    {
+                        text: '品茶会客',
+                        value: 16
+                    },
+                    {
+                        text: '西餐日韩',
+                        value: 17
+                    },
+                    {
+                        text: '夜市宵夜',
+                        value: 18
+                    }
                 ]
             },
             complete: function (data) {
@@ -247,25 +213,10 @@ function showNoPass(data) {
     });
 }
 
-
 export default {
     name: 'modifyshopintroduction',
     render: function () {
-
-        if (PageExtends.state == 1 || PageExtends.state == 3) {
-            showPass();
-        } else {
-            // bridge.ready(function () {
-            //     bridge.getLocation({
-            //         complete: function (data) {
-            //             var client_location = data.longitude + ',' + data.latitude;
-            showNoPass(PageExtends.Info);
-            //         }
-            //     });
-            // });
-        }
-
-
+        showNoPass();
     }
 
 }
