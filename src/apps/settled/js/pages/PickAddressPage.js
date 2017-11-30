@@ -40,9 +40,9 @@ function showHtml(data) {
           <div class="input-2"><h1>详细地址</h1><input type="text" class="input-address" placeholder="请填写详情地址，如街道名称，门牌号等"></div>
           </div>
           </div>`;
-    
+
     $('.wrap').append(h);
-    
+
     $('.btn').on('click', function () {
         window.history.go(-1);
     })
@@ -92,40 +92,40 @@ export default {
             showHtml(data);
 
             AMapLoader.ready(() => {
-                
-                 map = new AMap.Map('container', {
-                     zoom: 16,
-                     scrollWheel: false,
-                     resizeEnale: true,
-                 })
-               
-                 AMapUI.loadUI(['misc/PositionPicker'], function (PositionPicker) {
-     
-                     var positionPicker = new PositionPicker({
-                         mode: 'dragMap',
-                         map: map
-                     });
-     
-                     positionPicker.on('success', function (positionResult) {
-                         PageExtends.store_location = positionResult.position.lng + ',' + positionResult.position.lat;
-                     });
-     
-                     positionPicker.on('fail', function (positionResult) { });
-     
-                     var onModeChange = function (e) {
-                         positionPicker.setMode(e.target.value)
-                     }
-     
-                     positionPicker.start();
-     
-                 });
-     
-             });
+
+                map = new AMap.Map('container', {
+                    zoom: 16,
+                    scrollWheel: false,
+                    resizeEnale: true,
+                })
+
+                AMapUI.loadUI(['misc/PositionPicker'], function (PositionPicker) {
+
+                    var positionPicker = new PositionPicker({
+                        mode: 'dragMap',
+                        map: map
+                    });
+
+                    positionPicker.on('success', function (positionResult) {
+                        PageExtends.store_location = positionResult.position.lng + ',' + positionResult.position.lat;
+                    });
+
+                    positionPicker.on('fail', function (positionResult) {});
+
+                    var onModeChange = function (e) {
+                        positionPicker.setMode(e.target.value)
+                    }
+
+                    positionPicker.start();
+
+                });
+
+            });
         }
-        obj.error = function (data) { };
+        obj.error = function (data) {};
         PageExtends.API.storeFormSingleGet(obj);
 
-      
+
 
 
     }

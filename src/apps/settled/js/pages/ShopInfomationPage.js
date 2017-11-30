@@ -5,6 +5,7 @@ import bridge from '../../../../assets/libs/sardine-bridge';
 function showIndex() {
 
     var is_all;
+    var arr = ['', '先吃后付', '先付后吃'];
 
     PageExtends.shopPhone = PageExtends.shopPhone || "";
     PageExtends.address = PageExtends.address || "";
@@ -24,13 +25,13 @@ function showIndex() {
         // '     <h1>店铺地址</h1><input type="text" placeholder="请输入店铺地址" id="shop-address" value="' + PageExtends.address + '"/>' +
         // ' </div>' +
         ' <div class="line pick-address">' +
-        '     <h1>详细地址</h1><i></i><span>' + PageExtends.pickAddress + '</span>' +
+        '     <h1>详细地址</h1><i></i><span>' + PageExtends.address + '</span>' +
         ' </div>' +
         ' <div class="line pick-time">' +
         '     <h1>营业时间</h1><i></i><span>' + PageExtends.time + '</span>' +
         ' </div>' +
         ' <div class="line pick-type">' +
-        '     <h1>营收模式</h1><i></i><span>' + PageExtends.pickType + '</span>' +
+        '     <h1>营收模式</h1><i></i><span>' + arr[PageExtends.pickType] + '</span>' +
         ' </div>' +
         ' <div class="line upload">' +
         '     <h1>店铺门脸照</h1><i></i><span>' + PageExtends.text1 + '</span>' +
@@ -39,7 +40,6 @@ function showIndex() {
         '<button class="btn-go" data-href="#/qinfo">下一步</button>'
 
     $('.wrap').append(html);
-
 
     $('.pick-address').on('click', function () {
         PageExtends.shopPhone = $('#shop-phone').val();

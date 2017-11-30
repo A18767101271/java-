@@ -188,8 +188,6 @@ function showIndex() {
 
 }
 
-
-
 export default {
     name: 'shopintroduction',
     render: function () {

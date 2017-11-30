@@ -2,6 +2,7 @@
 import PageExtends from '../PageExtends.js';
 import bridge from '../../../../assets/libs/sardine-bridge';
 
+
 function showPass() {
     var data = PageExtends.Info;
     var html = "";
@@ -217,11 +218,20 @@ function showNoPass() {
                 PageExtends.Id1 = '';
                 PageExtends.Id2 = '';
                 PageExtends.Id3 = '';
+            } else {
+                bridge.dialog({
+                    title: "提示",
+                    content: data.desc,
+                    type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
+                    buttons: [{
+                        text: 'ok'
+                    }],
+                });
             }
         };
 
         obj.error = function (data) {
-            console.log(data);
+            // console.log(data);
         }
         PageExtends.API.storeFormCredentialsSave(obj);
     })

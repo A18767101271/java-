@@ -13,7 +13,7 @@ function showNoPass() {
     var city_id = data.cityId || '';
     var district_id = data.districtId || '';
     var form_id = data.formId | '';
-    
+
     var proName, disName, cityName;
 
     geoData.forEach(function (province) {
@@ -31,7 +31,6 @@ function showNoPass() {
             });
         }
     });
-
 
     var html = "";
 
@@ -193,20 +192,19 @@ function showNoPass() {
         obj.success = function (data) {
             if (data.success == true) {
                 window.location.href = "#/";
+            } else {
+                bridge.dialog({
+                    title: "提示",
+                    content: data.desc,
+                    type: "alert", 
+                    buttons: [{
+                        text: 'ok'
+                    }],
+                });
             }
         }
 
-        obj.error = function (data) {
-            console.log(data);
-            bridge.dialog({
-                title: "提示2",
-                content: "data.desc",
-                type: "alert",
-                buttons: [{
-                    text: 'ok'
-                }],
-            });
-        }
+        obj.error = function (data) {};
 
         PageExtends.API.storeFormIntroductionSave(obj);
 

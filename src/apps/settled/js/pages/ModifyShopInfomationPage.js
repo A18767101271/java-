@@ -273,6 +273,15 @@ function showNoPass() {
                     PageExtends.pickAddress = '';
                     PageExtends.pickType = '';
                     PageExtends.serverId = '';
+                } else {
+                    bridge.dialog({
+                        title: "提示",
+                        content: data.desc,
+                        type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
+                        buttons: [{
+                            text: 'ok'
+                        }],
+                    });
                 }
             },
             obj.error = function (data) {
