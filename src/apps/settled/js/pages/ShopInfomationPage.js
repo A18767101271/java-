@@ -8,8 +8,7 @@ function showIndex() {
     var arr = ['', '先吃后付', '先付后吃'];
 
     PageExtends.shopPhone = PageExtends.shopPhone || "";
-    PageExtends.address = PageExtends.address || "";
-    PageExtends.pickAddress = PageExtends.pickAddress || "请选择";
+    PageExtends.address = PageExtends.address || "请选择";
     PageExtends.pickType = PageExtends.pickType || "请选择";
     PageExtends.time = PageExtends.time || "请选择";
     PageExtends.text1 = PageExtends.text1 || '请上传';
@@ -21,9 +20,6 @@ function showIndex() {
         ' <div class="line">' +
         '     <h1>门店电话</h1><input type="number" placeholder="请输入门店电话" id="shop-phone" value="' + PageExtends.shopPhone + '"/>' +
         ' </div>' +
-        // ' <div class="line">' +
-        // '     <h1>店铺地址</h1><input type="text" placeholder="请输入店铺地址" id="shop-address" value="' + PageExtends.address + '"/>' +
-        // ' </div>' +
         ' <div class="line pick-address">' +
         '     <h1>详细地址</h1><i></i><span>' + PageExtends.address + '</span>' +
         ' </div>' +
@@ -40,15 +36,6 @@ function showIndex() {
         '<button class="btn-go" data-href="#/qinfo">下一步</button>'
 
     $('.wrap').append(html);
-
-    $('.pick-address').on('click', function () {
-        PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
-        PageExtends.time = $('.pick-time span').text();
-        PageExtends.pickType = $('.pick-type span').text();
-        PageExtends.text1 = $('.upload span').text();
-        window.location.href = "#/pickaddress";
-    })
 
     //选择营收模式
     $('.pick-type').on('click', function () {
@@ -74,7 +61,7 @@ function showIndex() {
             complete: function (data) {
 
                 if (data.resultCode == "success") {
-                    PageExtends.is_type = data.selectedValue[0];
+                    PageExtends.pickType = data.selectedValue[0];
                     $this.find('span').text(data.resultText);
                     $this.addClass('finished');
                 }
@@ -82,21 +69,23 @@ function showIndex() {
         });
     });
 
+    $('.pick-address').on('click', function () {
+        PageExtends.shopPhone = $('#shop-phone').val();
+        PageExtends.time = $('.pick-time span').text();
+        PageExtends.text1 = $('.upload span').text();
+        window.location.href = "#/pickaddress";
+    })
 
     $('.upload').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
         PageExtends.address = $('#shop-address').val();
-        PageExtends.pickAddress = $('.pick-address span').text();
         PageExtends.time = $('.pick-time span').text();
-        PageExtends.pickType = $('.pick-type span').text();
         window.location.href = "#/upimg";
     });
 
     $('.pick-time').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
         PageExtends.address = $('#shop-address').val();
-        PageExtends.pickAddress = $('.pick-address span').text();
-        PageExtends.pickType = $('.pick-type span').text();
         PageExtends.text1 = $('.upload span').text();
         window.location.href = "#/picktime";
 
@@ -123,7 +112,7 @@ function showIndex() {
         obj.first_business_time = PageExtends.first_business_time;
         obj.second_business_time = PageExtends.second_business_time;
         obj.is_open_all_hours = is_all;
-        obj.business_model = PageExtends.is_type;
+        obj.business_model = PageExtends.pickType;
         obj.resource_count = 1;
         obj.resource_uids = PageExtends.serverId;
 

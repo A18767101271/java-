@@ -81,9 +81,9 @@ export default {
                 }]
             });
             bridge.onOptionMenuClick((data) => {
+                console.log(data);
                 PageExtends.address = $('.input-area').text() + $('.input-address').val();
                 PageExtends.store_location = PageExtends.location;
-                window.history.go(-1);
             });
         })
 
