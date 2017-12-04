@@ -9,7 +9,7 @@ function showIndex() {
 
     PageExtends.shopPhone = PageExtends.shopPhone || "";
     PageExtends.address = PageExtends.address || "请选择";
-    PageExtends.pickType = PageExtends.pickType || "请选择";
+    PageExtends.pickType = arr[PageExtends.pickType] || "请选择";
     PageExtends.time = PageExtends.time || "请选择";
     PageExtends.text1 = PageExtends.text1 || '请上传';
 
@@ -76,27 +76,28 @@ function showIndex() {
         window.location.href = "#/pickaddress";
     })
 
+
     $('.upload').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
+        PageExtends.pickAddress = $('.pick-address span').text();
         PageExtends.time = $('.pick-time span').text();
         window.location.href = "#/upimg";
     });
 
     $('.pick-time').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
+        PageExtends.pickAddress = $('.pick-address span').text();
         PageExtends.text1 = $('.upload span').text();
         window.location.href = "#/picktime";
-
     });
 
 
     $('.btn-go').on('click', function () {
 
         var phone = $('#shop-phone').val();
-        var address = $('#shop-address').val();
+        var address = $('.pick-address span').text();
         var pick_time = $('.pick-time span').text();
+        var pick_img = $('.upload span').text();
 
         if (pick_time == "24小时") {
             is_all = true;
@@ -105,7 +106,7 @@ function showIndex() {
         }
 
         var obj = {};
-        obj.form_id = PageExtends.formId;
+        obj.form_id = PageExtends.Info.formId;
         obj.telephone = phone;
         obj.address = address;
         obj.store_location = PageExtends.store_location;
@@ -113,8 +114,13 @@ function showIndex() {
         obj.second_business_time = PageExtends.second_business_time;
         obj.is_open_all_hours = is_all;
         obj.business_model = PageExtends.pickType;
-        obj.resource_count = 1;
-        obj.resource_uids = PageExtends.serverId;
+
+        if (!PageExtends.serverId) {
+            obj.resource_count = 0;
+        } else {
+            obj.resource_count = 1;
+            obj.resource_uids = PageExtends.serverId;
+        }
 
         if (!phone) {
             bridge.dialog({
@@ -142,7 +148,7 @@ function showIndex() {
             return;
         }
 
-        if (!PageExtends.store_location) {
+        if (!obj.store_location) {
             bridge.dialog({
                 title: "提示",
                 content: '请选择定位地址',
@@ -155,7 +161,7 @@ function showIndex() {
             return;
         }
 
-        if (!PageExtends.first_business_time) {
+        if (!obj.first_business_time) {
             bridge.dialog({
                 title: "提示",
                 content: '请选择营业时间',
@@ -168,7 +174,7 @@ function showIndex() {
             return;
         }
 
-        if (!PageExtends.is_type) {
+        if (!obj.business_model) {
             bridge.dialog({
                 title: "提示",
                 content: '请选择营业模式',
@@ -181,7 +187,7 @@ function showIndex() {
             return;
         }
 
-        if (!PageExtends.serverId) {
+        if (pick_img != "已上传") {
             bridge.dialog({
                 title: "提示",
                 content: '请上传店铺门脸照',
@@ -194,16 +200,27 @@ function showIndex() {
             return;
         }
 
-        console.log(obj);
-
         obj.success = function (data) {
 
                 if (data.success == true) {
-                    window.location.href = "#/qinfo";
+                    window.location.href = "#/";
+                    PageExtends.shopPhone = '';
+                    PageExtends.pickAddress = '';
+                    PageExtends.pickType = '';
+                    PageExtends.serverId = '';
+                } else {
+                    bridge.dialog({
+                        title: "提示",
+                        content: data.desc,
+                        type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
+                        buttons: [{
+                            text: 'ok'
+                        }],
+                    });
                 }
             },
             obj.error = function (data) {
-                console.log(data);
+
             }
         PageExtends.API.storeFormBaseSave(obj);
     })

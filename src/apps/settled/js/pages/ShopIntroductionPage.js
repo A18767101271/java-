@@ -84,6 +84,7 @@ function showIndex() {
 
     //选择省市区
     $('.pick-provin').on('click', function () {
+        console.log(1);
         var $this = $(this);
         bridge.picker({
             title: "省市区",

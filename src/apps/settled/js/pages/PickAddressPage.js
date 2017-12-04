@@ -81,9 +81,25 @@ export default {
                 }]
             });
             bridge.onOptionMenuClick((data) => {
-                console.log(data);
-                PageExtends.address = $('.input-area').text() + $('.input-address').val();
-                PageExtends.store_location = PageExtends.location;
+                if (data.buttonIndex == 0) {
+                    if ($('.input-address').val() == "") {
+                        bridge.dialog({
+                            title: "提示",
+                            content: "请输入详细地址！",
+                            type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
+                            buttons: [{
+                                text: 'ok'
+                            }],
+                        });
+                    } else {
+                        PageExtends.address = $('.input-area').text() + ' ' + $('.input-address').val();
+                        PageExtends.store_location = PageExtends.location;
+                        bridge.hideOptionMenu();
+                        window.history.go(-1);
+                    }
+
+                }
+
             });
         })
 

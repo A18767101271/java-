@@ -132,7 +132,6 @@ function showNoPass() {
 
     $('.pick-address').on('click', function () {
         PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
         PageExtends.time = $('.pick-time span').text();
         PageExtends.text1 = $('.upload span').text();
         window.location.href = "#/pickaddress";
@@ -141,7 +140,6 @@ function showNoPass() {
 
     $('.upload').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
         PageExtends.pickAddress = $('.pick-address span').text();
         PageExtends.time = $('.pick-time span').text();
         window.location.href = "#/upimg";
@@ -149,7 +147,6 @@ function showNoPass() {
 
     $('.pick-time').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
-        PageExtends.address = $('#shop-address').val();
         PageExtends.pickAddress = $('.pick-address span').text();
         PageExtends.text1 = $('.upload span').text();
         window.location.href = "#/picktime";
@@ -159,7 +156,7 @@ function showNoPass() {
     $('.btn-go').on('click', function () {
 
         var phone = $('#shop-phone').val();
-        var address = $('#shop-address').val();
+        var address = $('.pick-address span').text();
         var pick_time = $('.pick-time span').text();
         var pick_img = $('.upload span').text();
 
@@ -269,7 +266,6 @@ function showNoPass() {
                 if (data.success == true) {
                     window.location.href = "#/";
                     PageExtends.shopPhone = '';
-                    PageExtends.address = '';
                     PageExtends.pickAddress = '';
                     PageExtends.pickType = '';
                     PageExtends.serverId = '';

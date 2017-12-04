@@ -1,6 +1,6 @@
 import '../../sass/HomePage.scss';
 
-import PromotionApis from '../../../../services/promotion-apis';
+import PromotionApis, { GetPromotionListData } from '../../../../services/promotion-apis';
 import React from 'react';
 import classNames from 'classNames';
 import moment from 'moment';
@@ -63,7 +63,7 @@ const MarketItem = (props: { data: any, type: number }) => {
 }
 
 interface HomePageState {
-    data?: any[],
+    data?: GetPromotionListData,
     type: number,
     currState?: number,
     toolToggle: boolean
@@ -83,14 +83,19 @@ class HomePage extends React.Component<any, HomePageState>{
     getData(type: number, status?: number) {
         this.setState({
             type: type,
-            currState: status,
-            data: []
+            currState: status
         });
-        PromotionApis.getPromotionList({ storeId: 1, type, status: status != undefined ? status : 1 }).then(data => {
-            //fillData(data, type);
+        PromotionApis.getPromotionList({ storeId: 1, type, status: status != undefined ? status : 1, pageNumber: 0, pageSize: 999 }).then(data => {
+            console.log(data);
             this.setState({
                 data: data
             });
+        }).catch(err => {
+            if (err.ret == "fail.27004") {
+                this.setState({
+                    data: undefined
+                });
+            }
         });
     }
 
@@ -103,10 +108,10 @@ class HomePage extends React.Component<any, HomePageState>{
 
         const marketItemList = () => {
 
-            if (this.state.data && this.state.data.length > 0) {
+            if (this.state.data && this.state.data.content.length > 0) {
                 let res: any[] = [];
 
-                this.state.data.forEach(p => {
+                this.state.data.content.forEach(p => {
                     res.push(<MarketItem key={p.activityId} data={p} type={this.state.type || 0} ></MarketItem>)
                 });
 

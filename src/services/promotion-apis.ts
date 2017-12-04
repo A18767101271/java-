@@ -4,6 +4,8 @@ interface GetPromotionListRequest {
     storeId: number;
     status: number;
     type: number;
+    pageNumber: number;
+    pageSize: number;
 }
 
 interface GetPromotionDetailRequest {
@@ -34,6 +36,22 @@ interface PromotionInstanceClose {
     instanceId: number;
 }
 
+export interface GetPromotionListData {
+    content: {
+        activityId: number,
+        endTime: number,
+        marketNum: number,
+        name: string,
+        startTime: number,
+        status: number,
+        type: number,
+        marktingMap: any
+    }[],
+    currentPage: number,
+    totalElements: number,
+    totalPages: number
+}
+
 export const PromotionApis = {
 
     getPromotionList(req: GetPromotionListRequest) {
@@ -43,17 +61,17 @@ export const PromotionApis = {
             {
                 store_id: req.storeId,
                 status: req.status,
-                type: req.type
+                type: req.type,
+                page_number: req.pageNumber,
+                page_size: req.pageSize
             },
             true
         ).then(data => {
-            return data;
+            return data as GetPromotionListData;
         }).catch(err => {
-            if (err.ret === 'fail.27004') {
-                return [];
-            } else {
+            //
                 throw err;
-            }
+            //}
         });
     },
 
