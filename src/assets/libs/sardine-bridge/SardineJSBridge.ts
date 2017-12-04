@@ -73,14 +73,12 @@ function bridgeInvoke(options: SardineJSBridgeOptions, action: string, params?: 
 function bridgeEventOn(_options: SardineJSBridgeOptions, eventName: string, callback: (data?: any) => void) {
     var core = getBridgeCore();
     if (core) {
-
         core.on(
             eventName,
             function (data) {
                 onBridgeEventCallback(eventName, data, callback);
             }
         );
-
     } else {
         onBridgeEventError(eventName, 'BridgeUninitialized');
     }
