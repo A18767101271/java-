@@ -1,66 +1,37 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { FormData } from '../../services/settled-apis';
 
+import HomePage from './js/pages/HomePage';
+import ReadyPage from './js/pages/ReadyPage';
+import QualificationInformationPage from './js/pages/QualificationInformationPage';
+import ShopInfomationPage from './js/pages/ShopInfomationPage';
+import ShopIntroductionPage from './js/pages/ShopIntroductionPage';
+import SuccessPage from './js/pages/SuccessPage';
 
-
-import HomePage from './js/pages/HomePage.js';
-import ReadyPage from './js/pages/ReadyPage.js';
-import QualificationInformationPage from './js/pages/QualificationInformationPage.js';
-import ShopInfomationPage from './js/pages/ShopInfomationPage.js';
-import ShopIntroductionPage from './js/pages/ShopIntroductionPage.js';
-import SuccessPage from './js/pages/SuccessPage.js';
-import UploadBusinessPage from './js/pages/UploadBusinessPage.js';
-import UploadIdCardPage from './js/pages/UploadIdCardPage.js';
-import UploadShopImgPage from './js/pages/UploadShopImgPage.js';
-import PickTimePage from './js/pages/PickTimePage.js';
-import PickAddressPage from './js/pages/PickAddressPage.js';
-import ModifyShopInfomationPage from './js/pages/ModifyShopInfomationPage.js';
-import ModifyShopIntroductionPage from './js/pages/ModifyShopIntroductionPage.js';
-import ModifyQualificationInformationPage from './js/pages/ModifyQualificationInformationPage.js';
-
-interface PageProps {
-    page: {
-        name: string;
-        render: () => void;
-    };
-}
-
-class Page extends React.Component<PageProps, {}>{
-
-    componentDidMount() {
-        this.props.page && this.props.page.render && this.props.page.render();
+class Router extends React.Component<{
+    onReloadForm: () => void;
+    formData?: FormData,
+    clientLocation?: {
+        lng: number,
+        lat: number
     }
-    componentDidUpdate() {
-        (this.refs.wrap as any).innerHTML = '';
-        this.props.page && this.props.page.render && this.props.page.render();
-    }
-    render() {
-        return (<div ref='wrap' className="wrap" data-page={this.props.page ? this.props.page.name || '' : ''} ></div>);
-    }
-
-}
-
-class Router extends React.Component<{}>{
+}, {}>{
 
 
     render() {
 
         return (<HashRouter>
             <Switch>
-                <Route path='/ready' render={() => <Page page={ReadyPage} />} />
-                <Route path='/qinfo' render={() => <Page page={QualificationInformationPage} />} />
-                <Route path='/shopinfo' render={() => <Page page={ShopInfomationPage} />} />
-                <Route path='/shopintro' render={() => <Page page={ShopIntroductionPage} />} />
-                <Route path='/success' render={() => <Page page={SuccessPage} />} />
-                <Route path='/upbusin' render={() => <Page page={UploadBusinessPage} />} />
-                <Route path='/upcard' render={() => <Page page={UploadIdCardPage} />} />
-                <Route path='/upimg' render={() => <Page page={UploadShopImgPage} />} />
-                <Route path='/picktime' render={() => <Page page={PickTimePage} />} />
-                <Route path='/pickaddress' render={() => <Page page={PickAddressPage} />} />
-                <Route path='/modifyshopinfo' render={() => <Page page={ModifyShopInfomationPage} />} />
-                <Route path='/modifyshopintro' render={() => <Page page={ModifyShopIntroductionPage} />} />
-                <Route path='/modifyqinfo' render={() => <Page page={ModifyQualificationInformationPage} />} />
-                <Route path='/' render={() => <Page page={HomePage} />} />
+                <Route path='/ready' component={ReadyPage} />
+                <Route path='/qinfo' render={() => <QualificationInformationPage formData={this.props.formData} />} />
+                <Route path='/shopinfo' render={() => <ShopInfomationPage formData={this.props.formData} />} />
+                <Route path='/shopintro' render={() => <ShopIntroductionPage clientLocation={this.props.clientLocation} formData={this.props.formData} />} />
+                <Route path='/success' render={() => <SuccessPage />} />
+
+                <Route path='/home' render={() => <HomePage onReloadForm={() => this.props.onReloadForm()} formData={this.props.formData} />} />
+
+                <Redirect to='/home' />
             </Switch>
         </HashRouter>);
 

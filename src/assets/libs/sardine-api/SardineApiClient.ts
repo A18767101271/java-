@@ -80,6 +80,7 @@ export default class SardineApiClient {
         var success = opt.success || function () { };
         var error = opt.error || function () { };
 
+        const self = this;
         function nologin(data: any) {
 
             var res: ApiError = {
@@ -88,7 +89,8 @@ export default class SardineApiClient {
                 msg: '授权无效或未登录',
                 req: opt,
                 api: api,
-                v: ver
+                v: ver,
+                resp: data
             };
             if (data.requestId)
                 res.rid = data.requestId;
@@ -96,7 +98,7 @@ export default class SardineApiClient {
             error(res, data);
 
             if (opt.needLogin) {
-                this.goLogin();
+                self.goLogin();
             }
 
         };
@@ -119,7 +121,8 @@ export default class SardineApiClient {
                 msg: data.desc || '未知错误',
                 api: api,
                 v: ver,
-                req: opt
+                req: opt,
+                resp: data
             };
             if (data.requestId)
                 res.rid = data.requestId;

@@ -1,4 +1,4 @@
-
+import Container from './container';
 const sdkver = '1.1.3';
 
 let jsBridgeInited: boolean = false;
@@ -89,25 +89,16 @@ function onBridgeEventCallback(_eventName: string, data: any | undefined, callba
     call(data);
 }
 
-interface Container {
-    isJsBridge: boolean;
-}
+
 
 function hasBridgeCore() {
     return !!getBridgeCore();
 }
 
-const container: Container = function () {
-    let ua = navigator.userAgent.toLowerCase();
-    let hasUA = -1 != ua.indexOf("kukujsbridge");
-    let isJsBridge = hasBridgeCore() || hasUA;
-    return {
-        isJsBridge: isJsBridge
-    }
-}();
 
 
-if (container.isJsBridge) {
+
+if (Container.isJsBridge) {
 
     function bridgeReady() {
         jsBridgeInited = true;
@@ -129,7 +120,7 @@ if (container.isJsBridge) {
 
 export default class SardineJSBridge {
     version: string = sdkver;
-    container: Container = container;
+    container = Container;
 
     options: SardineJSBridgeOptions;
 
