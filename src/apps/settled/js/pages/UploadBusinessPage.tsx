@@ -133,12 +133,12 @@ export default class UploadIdCardPage extends React.Component<UploadIdCardPagePr
         function showUpload() {
             if (self.state.imgSrc) {
                 return <div className="upload">
+                <span className="s-tip">点击图片区域，可重新上传图片</span>
                     <img className="img-small" src={self.state.imgSrc} />
                 </div>
             } else {
                 return <div className="upload" onClick={() => self.onUpload()}>
-                    <div className="img"></div>
-                    <span>点击该区域上传图片</span>
+                    <div className="img"></div>                
                 </div >
             }
 

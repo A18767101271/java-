@@ -192,13 +192,14 @@ export default class UploadIdCardPage extends React.Component<UploadIdCardPagePr
 
         function Upload(props: { className?: string, name: string, src?: string, id: number }) {
             if (props.src) {
-                return <div className={classNames("upload", props.className)}>
+                return <div className={classNames("upload noborder", props.className)}>
+                   <span className="s-tip">点击重新上传</span>
                     <img className="img-small" src={props.src} />
+                    <em>{props.name}</em>
                 </div>
             } else {
                 return <div className="upload" onClick={() => self.onUpload(props.id)}>
                     <div className="img"></div>
-                    <span>点击该区域上传图片</span>
                     <em>{props.name}</em>
                 </div >
             }

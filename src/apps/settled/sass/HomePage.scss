@@ -698,28 +698,33 @@ textarea {
         width: rem(690px);
         height: rem(475px);
         margin: 0 auto;
-        border: 2px dashed #e2e2e2;
-        border-radius: rem(10px);
+        background-color: #d2d5da;
         position: relative;
         .img-small {
             width: rem(690px);
             height: rem(475px);
         }
-        .img {
-            position: absolute;
-            width: rem(80px);
-            height: rem(80px);
-            background: url(../image/add_03.jpg)center center no-repeat;
-            background-size: 100%;
-            left: rem(305px);
-            top: rem(169px);
-        }
-        span {
-            float: left;
+        .s-tip {
+            width: rem(690px);
+            height: rem(60px);
+            line-height: rem(60px);
+            font-size: rem(20px);
             text-align: center;
-            color: #5fadff;
-            margin-top: rem(287px);
-            margin-left: rem(224px);
+            color: #fff;
+            background-color: #000;
+            opacity: .8;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+        .img {
+            width: rem(120px);
+            height: rem(130px);
+            background: url(../image/pick-upldate.jpg)center center no-repeat;
+            background-size: rem(120px) rem(130px);
+            position: absolute;
+            left: rem(284px);
+            top: rem(171px);
         }
     }
     p {
@@ -751,10 +756,23 @@ textarea {
         width: rem(330px);
         height: rem(228px);
         float: left;
-        border: 2px dashed #e2e2e2;
+        border: 1px dashed #e2e2e2;
         border-radius: rem(10px);
         position: relative;
         margin-left: rem(30px);
+        .s-tip {
+            width: rem(330px);
+            height: rem(55px);
+            line-height: rem(55px);
+            font-size: rem(20px);
+            text-align: center;
+            color: #fff;
+            background-color: #000;
+            opacity: .8;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
         .img-small {
             width: rem(330px);
             height: rem(228px);
@@ -764,20 +782,10 @@ textarea {
             width: rem(38px);
             height: rem(38px);
             left: 50%;
-            top: rem(60px);
+            top: rem(90px);
             margin-left: rem(-19px);
             background: url(../image/add_03.jpg)center center no-repeat;
             background-size: 100%;
-        }
-        span {
-            font-size: rem(24px);
-            width: rem(216px);
-            position: absolute;
-            text-align: center;
-            color: #5fadff;
-            top: rem(140px);
-            left: 50%;
-            margin-left: rem(-108px);
         }
         em {
             position: absolute;
@@ -785,6 +793,9 @@ textarea {
             left: 50%;
             margin-left: rem(-40px);
         }
+    }
+    .noborder {
+        border: none;
     }
     .tip {
         float: left;
