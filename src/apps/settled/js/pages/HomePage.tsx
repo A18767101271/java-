@@ -97,35 +97,9 @@ export default class HomePage extends React.Component<HomePageProps>{
         let arry = ['已录入', '审核中', '审核失败', '审核通过'];
 
         function Item1() {
-            if (data.baseInfoStatus) {
-                return <div className="list list-two" onClick={() => {
-                    window.location.href = '#/shopintro';
-                }}>
-                    <i className={"active" + data.baseInfoStatus}></i>
-                    <h1>店铺基本信息</h1>
-                    <span>{arry[data.baseInfoStatus]}</span>
-                    <em></em>
-                </div>
-            } else {
-                const isfull = self.isBaseFull();
-                return <div className="list list-two" onClick={() => {
-                    window.location.href = '#/shopintro';
-                }}>
-                    <i className={classNames({
-                        "active-no": !isfull,
-                        "active0": isfull,
-                    })}></i>
-                    <h1>店铺基本信息</h1>
-                    <span>{isfull ? '已录入' : '待完善'}</span>
-                    <em></em>
-                </div>
-            }
-        }
-
-        function Item2() {
             if (data.introductionInfoStatus) {
                 return <div className="list list-one" onClick={() => {
-                    window.location.href = '#/shopinfo';
+                    window.location.href = '#/shopintro';
                 }}>
                     <i className={"active" + data.introductionInfoStatus}></i>
                     <h1>店铺介绍信息</h1>
@@ -136,13 +110,39 @@ export default class HomePage extends React.Component<HomePageProps>{
             } else {
                 const isfull = self.isIntroductionFull();
                 return <div className="list list-one" onClick={() => {
-                    window.location.href = '#/shopinfo';
+                    window.location.href = '#/shopintro';
                 }}>
                     <i className={classNames({
                         "active-no": !isfull,
                         "active0": isfull,
                     })}></i>
                     <h1>店铺介绍信息</h1>
+                    <span>{isfull ? '已录入' : '待完善'}</span>
+                    <em></em>
+                </div>
+            }
+        }
+
+        function Item2() {
+            if (data.baseInfoStatus) {
+                return <div className="list list-two" onClick={() => {
+                    window.location.href = '#/shopinfo';
+                }}>
+                    <i className={"active" + data.baseInfoStatus}></i>
+                    <h1>店铺基本信息</h1>
+                    <span>{arry[data.baseInfoStatus]}</span>
+                    <em></em>
+                </div>
+            } else {
+                const isfull = self.isBaseFull();
+                return <div className="list list-two" onClick={() => {
+                    window.location.href = '#/shopinfo';
+                }}>
+                    <i className={classNames({
+                        "active-no": !isfull,
+                        "active0": isfull,
+                    })}></i>
+                    <h1>店铺基本信息</h1>
                     <span>{isfull ? '已录入' : '待完善'}</span>
                     <em></em>
                 </div>
@@ -178,12 +178,18 @@ export default class HomePage extends React.Component<HomePageProps>{
             }
         }
 
-
+        const allowSubmit = data.baseInfoStatus === 0 ||
+            data.baseInfoStatus === 2 ||
+            data.credentialsInfoStatus === 0 ||
+            data.credentialsInfoStatus === 2 ||
+            data.introductionInfoStatus === 0 ||
+            data.introductionInfoStatus === 2;
+            
         return (<div className="wrap" data-page='home'  >
             <Item1 />
             <Item2 />
             <Item3 />
-            {data.baseInfoStatus === 0 || data.baseInfoStatus === 2 ? <button className="btn-go" onClick={() => this.onSubmit()}>提交审核</button> : undefined}
+            {allowSubmit ? <button className="btn-go" onClick={() => this.onSubmit()}>提交审核</button> : undefined}
         </div>);
 
     }

@@ -33,6 +33,10 @@ class ShopInfomationPage extends React.Component<ShopInfomationPageProps, {
     };
     logoUid?: string;
     logoSrc?: string;
+
+    baseInfoStatus?: number;
+    baseInfoFailReason?: string;
+ 
 }> {
 
     inSubmit: boolean = false;
@@ -48,6 +52,11 @@ class ShopInfomationPage extends React.Component<ShopInfomationPageProps, {
             window.location.replace('#/home');
             return;
         }
+
+        this.setState({
+            baseInfoFailReason: form.baseInfoFailReason,
+            baseInfoStatus: form.baseInfoStatus
+        })
 
         this.onShopTelChange(form.telephone || '');
 
@@ -307,6 +316,7 @@ class ShopInfomationPage extends React.Component<ShopInfomationPageProps, {
         }];
 
         return <div className="wrap" data-page='shopinfo'>
+            {this.state.baseInfoStatus === 2 ? <div className="pick-2"><div className="head-bar"><h1>审核失败</h1><span>{this.state.baseInfoFailReason}</span></div></div> : undefined}
             <section>
                 <div className="title"><i></i><span>店铺信息</span></div>
                 <div className="line">
