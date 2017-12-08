@@ -30,18 +30,19 @@ export default class HomePage extends React.Component<HomePageProps>{
 
     onSubmit() {
 
-        if (this.inSubmit) return;
-        this.inSubmit = true;
-        let self = this;
-
         if (!this.props.formData) {
             return;
         }
 
+        if (this.inSubmit) return;
+        this.inSubmit = true;
+        let self = this;
+  
         let form = this.props.formData;
 
         if (!(this.isBaseFull() && this.isIntroductionFull() && this.isCredentialsFull())) {
             Modal.alert('提示', '尚未填写完整');
+            this.inSubmit = false;
             return;
         }
         Toast.loading('加载中', 30);
