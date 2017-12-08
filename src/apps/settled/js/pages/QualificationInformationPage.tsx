@@ -459,7 +459,7 @@ export default class QualificationInformationPage extends React.Component<Qualif
                 <span className='h11'>营业执照</span><i></i><span>{this.state.businessLicencePicUrl ? '已上传' : '未设置'}</span>
             </div>
         </section>
-            <button className="btn-go" onClick={() => this.onSubmit()}>提交</button></div>);
+            <button className="btn-go" onClick={() => this.onSubmit()}>保存</button></div>);
 
     }
 

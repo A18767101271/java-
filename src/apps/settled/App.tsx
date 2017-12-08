@@ -5,7 +5,7 @@ import SardineJSBridge from '../../assets/libs/sardine-bridge';
 
 import FastClick from 'fastclick';
 import './sass/App.scss';
-import { Toast } from 'antd-mobile';
+import { Toast, Modal } from 'antd-mobile';
 
 import SettledApis, { FormData } from '../../services/settled-apis';
 
@@ -44,7 +44,6 @@ class App extends React.Component<AppProps, {
     onReloadForm() {
         Toast.loading('加载中', 30);
         let self = this;
-
         self.setState({
             formData: undefined
         }, () => {
@@ -53,8 +52,13 @@ class App extends React.Component<AppProps, {
                     formData: d
                 }, () => {
                     Toast.hide();
-
                 });
+            }).catch(err => {
+                Toast.hide();
+                if (err.ret === 'fail.27007') {
+                    return;
+                }
+                Modal.alert('提示', err.msg);
             })
         });
 
@@ -73,21 +77,23 @@ class App extends React.Component<AppProps, {
                 if (d.baseInfoStatus == 1) {
                     window.location.replace('#/success');
                 }
-                if (!window.location.hash || window.location.hash.length < 3) {
+                if (!window.location.hash || window.location.hash.length < 3) {                   
                     window.location.replace('#/home');
                 }
             });
         }).catch(err => {
-            if (err.ret === 'fail.27007') {
+            Toast.hide(); 
+            if (err.ret === 'fail.27007') { 
                 this.setState({
                     inited: true,
-                }, () => {
-                    if (!window.location.hash || window.location.hash.length < 3) {
+                }, () => { 
+                    if (!window.location.hash || window.location.hash.length < 3) { 
                         window.location.replace('#/ready');
                     }
                 });
                 return;
             }
+            Modal.alert('提示', err.msg);
         });
         let self = this;
         SardineJSBridge.ready(function () {

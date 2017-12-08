@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { FormData } from '../../services/settled-apis';
 
 import HomePage from './js/pages/HomePage';
@@ -31,7 +31,6 @@ class Router extends React.Component<{
 
                 <Route path='/home' render={() => <HomePage onReloadForm={() => this.props.onReloadForm()} formData={this.props.formData} />} />
 
-                <Redirect to='/home' />
             </Switch>
         </HashRouter>);
 
