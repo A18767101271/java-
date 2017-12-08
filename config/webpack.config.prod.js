@@ -156,7 +156,7 @@ module.exports = {
               options: {
 
                 presets: ['es2015', 'react'],
-
+                plugins: ["transform-runtime"],
                 compact: true,
               },
             },
@@ -174,7 +174,7 @@ module.exports = {
             options: {
 
               presets: ['es2015'],
-
+              plugins: ["transform-runtime"],
               compact: true,
             },
           },

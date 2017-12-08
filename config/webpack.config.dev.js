@@ -27,7 +27,7 @@ module.exports = {
 
     settled: [
 
-      require.resolve('./polyfills'),
+     // require.resolve('./polyfills'),
 
       require.resolve('../scripts/utils/webpackHotDevClient'),
 
@@ -36,7 +36,7 @@ module.exports = {
     ],
     marketing: [
 
-      require.resolve('./polyfills'),
+     // require.resolve('./polyfills'),
 
       require.resolve('../scripts/utils/webpackHotDevClient'),
 
@@ -45,7 +45,7 @@ module.exports = {
     ],
     dashboard: [
 
-      require.resolve('./polyfills'),
+     // require.resolve('./polyfills'),
 
       require.resolve('../scripts/utils/webpackHotDevClient'),
 
