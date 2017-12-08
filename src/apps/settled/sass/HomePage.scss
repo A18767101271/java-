@@ -380,19 +380,19 @@ textarea {
         line-height: rem(88px);
         border-bottom: 1px solid #f5f5f5;
         overflow: hidden;
-        h1 {
+        .h11 {
             float: left;
             color: #3f3f3f;
             margin-left: rem(24px);
         }
         i,
-        span,
+        .sp,
         input {
             float: right;
             margin-right: rem(24px);
             color: #b2b2b2;
         }
-        span {
+        .sp {
             width: rem(500px);
             overflow: hidden;
             text-align: right;
@@ -478,19 +478,19 @@ textarea {
         line-height: rem(88px);
         border-bottom: 1px solid #f5f5f5;
         overflow: hidden;
-        h1 {
+        .h11 {
             float: left;
             color: #3f3f3f;
             margin-left: rem(24px);
         }
         i,
-        span,
+        .sp,
         input {
             float: right;
             margin-right: rem(24px);
             color: #b2b2b2;
         }
-        span {
+        .sp {
             width: rem(500px);
             overflow: hidden;
             text-align: right;
@@ -573,7 +573,7 @@ textarea {
         background-color: #fff;
         line-height: rem(88px);
         border-bottom: 1px solid #f5f5f5;
-        h1 {
+        .h11 {
             float: left;
             margin-left: rem(24px);
         }
@@ -766,10 +766,13 @@ textarea {
         display: block;
         margin: 0 auto;
     }
-    img {
+    .img {
+        margin: 0 auto;
         width: rem(88px);
         height: rem(88px);
         margin-bottom: rem(30px);
+        background: url('../image/yes-tip_03.jpg') no-repeat top center;
+        background-size: rem(88px) rem(88px);
     }
     h1 {
         font-size: rem(32px);
@@ -968,6 +971,16 @@ textarea {
 }
 
 [data-page="pickaddress"] {
+    .enter-btn {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        z-index: 10;
+        width: rem(100px);
+        height: rem(60px);
+        background-color: #fff;
+        border: 1px solid #e3e3e3;
+    }
     .map {
         width: 10rem;
         height: 100%;
@@ -988,11 +1001,11 @@ textarea {
                 border-bottom: 1px solid #e5e6e8;
                 background: url(../image/qiu_03.jpg)rem(27px) rem(43px) no-repeat;
                 background-size: rem(12px) rem(12px);
-                h1,
+                .h11,
                 .input-area {
                     float: left;
                 }
-                h1 {
+                .h11 {
                     margin-left: rem(50px);
                     margin-right: rem(20px);
                 }
@@ -1004,11 +1017,11 @@ textarea {
                 border-bottom: 1px solid #e5e6e8;
                 background: url(../image/qiu_06.jpg)rem(27px) rem(43px) no-repeat;
                 background-size: rem(12px) rem(12px);
-                h1,
+                .h11,
                 .input-address {
                     float: left;
                 }
-                h1 {
+                .h11 {
                     margin-left: rem(50px);
                     margin-right: rem(20px);
                 }

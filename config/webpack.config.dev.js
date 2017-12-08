@@ -27,7 +27,7 @@ module.exports = {
 
     settled: [
 
-     // require.resolve('./polyfills'),
+      // require.resolve('./polyfills'),
 
       require.resolve('../scripts/utils/webpackHotDevClient'),
 
@@ -36,7 +36,7 @@ module.exports = {
     ],
     marketing: [
 
-     // require.resolve('./polyfills'),
+      // require.resolve('./polyfills'),
 
       require.resolve('../scripts/utils/webpackHotDevClient'),
 
@@ -45,7 +45,7 @@ module.exports = {
     ],
     dashboard: [
 
-     // require.resolve('./polyfills'),
+      // require.resolve('./polyfills'),
 
       require.resolve('../scripts/utils/webpackHotDevClient'),
 
@@ -110,6 +110,9 @@ module.exports = {
             options: {
               presets: ['react'],
               cacheDirectory: true,
+              plugins: [ 
+                ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
+              ]
             },
           },
           {
@@ -123,9 +126,11 @@ module.exports = {
           test: /\.(js)$/,
           include: paths.appSrc,
           loader: require.resolve('babel-loader'),
-          options: {
-
+          options: { 
             cacheDirectory: true,
+            plugins: [ 
+              ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
+            ]
           },
         },
 

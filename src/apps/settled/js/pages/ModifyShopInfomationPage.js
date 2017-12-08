@@ -1,6 +1,6 @@
 ﻿import '../../sass/HomePage.scss';
-import PageExtends from '../PageExtends.js';
-import AMapLoader from '../../../../assets/libs/AMapLoader.js';
+//import PageExtends from '../PageExtends.js';
+import AMapLoader from '../../../../assets/libs/amap-boot';
 import bridge from '../../../../assets/libs/sardine-bridge';
 
 function showNoPass() {

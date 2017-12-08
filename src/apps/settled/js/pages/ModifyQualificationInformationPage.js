@@ -1,5 +1,5 @@
 ﻿import '../../sass/HomePage.scss';
-import PageExtends from '../PageExtends.js';
+//import PageExtends from '../PageExtends.js';
 import bridge from '../../../../assets/libs/sardine-bridge';
 
 

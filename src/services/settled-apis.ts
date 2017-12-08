@@ -34,7 +34,7 @@ interface SaveFormIntroductionRequest {
     districtId: number,
 }
 
-interface SaveFormBaseRequest {
+export interface SaveFormBaseRequest {
     formId: number,
     telephone: string,
     address: string,
@@ -65,27 +65,78 @@ interface SaveFormBaseRequest {
     isOpenAllHours: boolean,
     businessModel: number,
     //resource_count: resource_count,
-    logoImgId: string,
+    logoImgId?: string,
 }
 
 
-interface SaveFormCredentialsRequest {
+export interface SaveFormCredentialsRequest {
     formId: number,
     idCardName: string,
     idCardNo: string,
-    idCardFrontImgId: string,
-    idCardBackImgId: string,
-    businessLicenseImgId: string,
+    idCardFrontImgId?: string,
+    idCardBackImgId?: string,
+    businessLicenseImgId?: string,
     businessLicenceName: string,
     businessLicenceNo: string,
-    businessLicenceExpiry: number
+    businessLicenceExpiry?: number
 }
 
 interface FormApprovalSubmitRequest {
     formId: number,
 }
 
+
+export interface FormData {
+    businessLicenceName?: string;
+    idCardName?: string;
+    businessModel?: number;
+    idCardNo?: string;
+    secondBusinessTime?: number[];
+    shopName: string;
+    cityId: number;
+    categoryName?: string;
+    businessLicencePicUrl?: string;
+    subCategoryName?: string;
+    credentialsInfoFailReason?: string;
+    storeLocation?: number[];
+    firstBusinessTime: number[];
+    baseInfoStatus: number;
+    logoPicUrl?: string;
+    formId: number;
+    phase: number;
+    address?: string;
+    handleTime?: number;
+    idCardBackPicUrl?: string;
+    isSignAgreement?: boolean;
+    telephone?: string;
+    subCategoryId: number;
+    provinceId: number;
+    businessLicenceNo?: string;
+    credentialsInfoStatus: number;
+    baseInfoFailReason?: string;
+    districtId: number;
+    introductionInfoFailReason?: string;
+    submitTime?: number;
+    createTime: number;
+    isOpenAllHours?: boolean;
+    clientLocation?: number[];
+    introductionInfoStatus: number;
+    categoryId: number;
+    idCardFacePicUrl?: string;
+}
+
 export const SettledApis = {
+
+    getFormDetail(req: { formId: number }) {
+        return request(
+            "kk.h5.store.form.detail.get",
+            "1.0",
+            { form_id: req.formId },
+            true
+        ).then(data => {
+            return data as FormData;
+        });
+    },
 
     getFormSingle() {
         return request(
@@ -94,7 +145,7 @@ export const SettledApis = {
             {},
             true
         ).then(data => {
-            return data;
+            return data as FormData;
         });
     },
 
@@ -166,7 +217,7 @@ export const SettledApis = {
             store_location: req.storeLocation ? req.storeLocation.lng + ',' + req.storeLocation.lat : undefined,
             is_open_all_hours: req.isOpenAllHours,
             business_model: req.businessModel,
-            resource_count: 1,
+            resource_count: req.logoImgId ? 1 : 0,
             resource_uids: req.logoImgId,
         };
 
@@ -187,7 +238,7 @@ export const SettledApis = {
                     timeNumberToString(req.firstBusinessTime.end.minutes);
             }
             if (req.secondBusinessTime) {
-                data.secondBusinessTime =
+                data.second_business_time =
                     timeNumberToString(req.secondBusinessTime.begin.hours) +
                     timeNumberToString(req.secondBusinessTime.begin.minutes) +
                     ',' +
@@ -209,20 +260,33 @@ export const SettledApis = {
 
 
     saveFormCredentials(req: SaveFormCredentialsRequest) {
+        let data: any = {
+            form_id: req.formId,
+            id_card_name: req.idCardName,
+            id_card_no: req.idCardNo,
+            business_licence_name: req.businessLicenceName,
+            business_licence_no: req.businessLicenceNo,
+            id_card_type: 1,
+            id_card_expiry: req.businessLicenceExpiry
+        };
+
+        let resourceUids: string[] = [];
+        if (req.idCardBackImgId && req.idCardFrontImgId) {
+            resourceUids.push('facePic_' + req.idCardFrontImgId);
+            resourceUids.push('backPic_' + req.idCardBackImgId);
+        }
+        if (req.businessLicenseImgId) {
+            resourceUids.push('licencePic_' + req.businessLicenseImgId);
+        }
+        data.resource_count = resourceUids.length;
+        if (resourceUids.length > 0) {
+            data.resource_uids = resourceUids.join(',');
+        }
+
         return request(
             "kk.h5.store.form.credentials.save",
             "1.0",
-            {
-                form_id: req.formId,
-                id_card_name: req.idCardName,
-                id_card_no: req.idCardNo,
-                resource_count: 3,
-                resource_uids: `${req.idCardFrontImgId},${req.idCardBackImgId},${req.businessLicenseImgId}`,
-                business_licence_name: req.businessLicenceName,
-                business_licence_no: req.businessLicenceNo,
-                id_card_type: 1,
-                id_card_expiry: req.businessLicenceExpiry
-            },
+            data,
             true
         ).then(data => {
             return data;
@@ -243,3 +307,5 @@ export const SettledApis = {
     }
 
 }
+
+export default SettledApis;

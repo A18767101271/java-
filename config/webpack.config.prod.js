@@ -59,7 +59,7 @@ module.exports = {
 
     settled: [
 
-      require.resolve('./polyfills'),
+     // require.resolve('./polyfills'),
 
 
       './src/apps/settled/index.tsx'
@@ -67,7 +67,7 @@ module.exports = {
     ],
     marketing: [
 
-      require.resolve('./polyfills'),
+     // require.resolve('./polyfills'),
 
 
       './src/apps/marketing/index.tsx'
@@ -75,7 +75,7 @@ module.exports = {
     ],
     dashboard: [
 
-      require.resolve('./polyfills'),
+     // require.resolve('./polyfills'),
 
 
       './src/apps/dashboard/index.tsx'
@@ -156,8 +156,12 @@ module.exports = {
               options: {
 
                 presets: ['es2015', 'react'],
-                plugins: ["transform-runtime"],
+                
                 compact: true,
+                plugins: [
+                  "transform-runtime",
+                  ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
+                ]
               },
             },
             {
@@ -174,8 +178,12 @@ module.exports = {
             options: {
 
               presets: ['es2015'],
-              plugins: ["transform-runtime"],
+              
               compact: true,
+              plugins: [
+                "transform-runtime",
+                ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
+              ]
             },
           },
 

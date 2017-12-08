@@ -1,8 +1,10 @@
 import SardineApiClient from '../assets/libs/sardine-api';
+
 import ApiRequestOptions from '../assets/libs/sardine-api/ApiRequestOptions';
+import ApiRequest from '../assets/libs/sardine-api/ApiRequest';
 import ApiError from '../assets/libs/sardine-api/ApiError';
 
-function checkStatus(request: ApiRequestOptions) {
+function checkStatus(request: ApiRequest) {
 
     return (data: any) => {
 
@@ -77,8 +79,8 @@ export default function request(api: string, ver: string, data?: any, needLogin?
         req.success = (_: any, resp: any) => {
             resolve(resp);
         };
-        req.error = (error: ApiError, resp?: any) => {
-            reject({ error, resp });
+        req.error = (error: ApiError, _resp?: any) => {
+            reject(error);
         };
 
         SardineApiClient.request(req);

@@ -154,9 +154,6 @@ export default {
         obj.error = function (data) {};
         PageExtends.API.storeFormSingleGet(obj);
 
-
-
-
     }
 
 }
