@@ -956,6 +956,10 @@ textarea {
         span {
             margin-left: rem(30px);
         }
+        .am-switch {
+            margin-top: rem(10px);
+            margin-right: rem(30px);
+        }
         i {
             width: rem(110px);
             height: rem(70px);
@@ -1036,27 +1040,28 @@ textarea {
 [data-page="pickaddress"] {
     .enter-btn {
         position: fixed;
-        right: 20px;
-        top: 20px;
-        z-index: 10;
+        right: rem(36px);
+        top: rem(190px);
+        z-index: 20;
         width: rem(100px);
         height: rem(60px);
-        background-color: #fff;
-        border: 1px solid #e3e3e3;
+        background-color: #f5f5f5;
+        border-radius: rem(30px);
     }
     .map {
         width: 10rem;
         height: 100%;
         position: relative;
         .flow-input {
-            width: rem(710px);
-            height: rem(196px);
+            width: 10rem;
+            height: rem(260px);
             position: absolute;
-            left: rem(20px);
-            bottom: rem(20px);
+            left: 0;
+            top: 0;
             z-index: 10;
             background-color: #fff;
             font-size: rem(28px);
+            box-shadow: 0px rem(2px) rem(10px) #000;
             .input-1 {
                 width: 100%;
                 height: rem(98px);
@@ -1077,7 +1082,6 @@ textarea {
                 width: 100%;
                 height: rem(98px);
                 line-height: rem(98px);
-                border-bottom: 1px solid #e5e6e8;
                 background: url(../image/qiu_06.jpg)rem(27px) rem(43px) no-repeat;
                 background-size: rem(12px) rem(12px);
                 .h11,

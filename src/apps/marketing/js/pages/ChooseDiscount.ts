@@ -15,14 +15,14 @@ function start(id?: number) {
 
     StoreApis.getGroupsWithProducts(obj).then(data => {
         fill(data);
-    }).catch(err => {
-        console.log(err);
+    }).catch(_err => {
+      
     });
 
 }
 
 function fill(data) {
-    console.log(data);
+   
     var arrt = {};
     var h = "";
     h += `<div class="headbar">
@@ -52,8 +52,8 @@ function fill(data) {
 
         StoreApis.getGroupsWithProducts(obj).then(data => {
             showList(data.products, arrt);
-        }).catch(err => {
-            console.log(err);
+        }).catch(_err => {
+           
         });
     })
 
@@ -96,7 +96,7 @@ function showList(data, obj) {
     $('.contain').append(h);
 
     if (PageExtends.larry2) {
-        console.log(PageExtends.larry2);
+       
         var foods = $('.contain .food');
         for (var i = 0; i < foods.length; i++) {
             if ($(foods[i]).data('id') == PageExtends.larry2.productId) {

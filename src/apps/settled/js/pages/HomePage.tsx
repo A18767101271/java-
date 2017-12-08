@@ -39,7 +39,7 @@ export default class HomePage extends React.Component<HomePageProps>{
         let self = this;
 
         let form = this.props.formData;
-
+       
         if (!(this.isBaseFull() && this.isIntroductionFull() && this.isCredentialsFull())) {
             Modal.alert('提示', '尚未填写完整');
             this.inSubmit = false;
@@ -86,7 +86,7 @@ export default class HomePage extends React.Component<HomePageProps>{
     }
 
     render() {
-
+        console.log(this.props);
         if (!this.props.formData) {
             return <div></div>;
         }
