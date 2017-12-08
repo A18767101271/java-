@@ -5,11 +5,11 @@ import bridge from '../../../../assets/libs/sardine-bridge';
 function showIndex() {
 
     var is_all;
-    var arr = ['', '先吃后付', '先付后吃'];
+    var arr = ['请选择', '先吃后付', '先付后吃'];
 
     PageExtends.shopPhone = PageExtends.shopPhone || "";
     PageExtends.address = PageExtends.address || "请选择";
-    PageExtends.pickType = arr[PageExtends.pickType] || "请选择";
+    PageExtends.pickType = PageExtends.pickType || "请选择";
     PageExtends.time = PageExtends.time || "请选择";
     PageExtends.text1 = PageExtends.text1 || '请上传';
 
@@ -76,7 +76,6 @@ function showIndex() {
         window.location.href = "#/pickaddress";
     })
 
-
     $('.upload').on("click", function () {
         PageExtends.shopPhone = $('#shop-phone').val();
         PageExtends.pickAddress = $('.pick-address span').text();
@@ -114,6 +113,8 @@ function showIndex() {
         obj.second_business_time = PageExtends.second_business_time;
         obj.is_open_all_hours = is_all;
         obj.business_model = PageExtends.pickType;
+
+        console.log(obj);
 
         if (!PageExtends.serverId) {
             obj.resource_count = 0;
@@ -201,9 +202,9 @@ function showIndex() {
         }
 
         obj.success = function (data) {
-
+                console.log(data);
                 if (data.success == true) {
-                    window.location.href = "#/";
+                    window.location.href = "#/qinfo";
                     PageExtends.shopPhone = '';
                     PageExtends.pickAddress = '';
                     PageExtends.pickType = '';

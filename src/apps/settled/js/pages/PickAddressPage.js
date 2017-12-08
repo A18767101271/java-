@@ -4,8 +4,6 @@ import AMapLoader from '../../../../assets/libs/AMapLoader.js';
 import geoData from '../../../../assets/libs/geo-data-areas';
 import bridge from '../../../../assets/libs/sardine-bridge';
 
-
-
 let map = null;
 
 
@@ -93,9 +91,24 @@ export default {
                         });
                     } else {
                         PageExtends.address = $('.input-area').text() + ' ' + $('.input-address').val();
-                        PageExtends.store_location = PageExtends.location;
-                        bridge.hideOptionMenu();
-                        window.history.go(-1);
+                        if (!PageExtends.location) {
+                            bridge.dialog({
+                                title: "提示",
+                                content: "请输入正确地址！",
+                                type: "alert", //可选【alert，confirm】，窗体类型，默认为 alert
+                                buttons: [{
+                                    text: 'ok'
+                                }],
+                            });
+
+                        } else {
+                            PageExtends.store_location = PageExtends.location;
+                            bridge.hideOptionMenu();
+                            window.history.go(-1);
+                        }
+
+                        console.log(PageExtends.location);
+
                     }
 
                 }

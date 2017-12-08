@@ -10,7 +10,7 @@ function showNoPass() {
     if (!PageExtends.Info) return;
 
     var data = PageExtends.Info;
-    var arr = ['', '先吃后付', '先付后吃'];
+    var arr = ['请选择', '先吃后付', '先付后吃'];
 
     if (!data.telephone) {
         PageExtends.shopPhone = PageExtends.shopPhone || '';
