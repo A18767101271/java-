@@ -31,6 +31,8 @@ class ShopIntroductionPage extends React.Component<ShopIntroductionPageProps, {
     subCategoryName?: string;
     shopName?: string;
 
+    introductionStatus?: number;
+    introductionFailReason?: string;
 
 }> {
 
@@ -44,6 +46,11 @@ class ShopIntroductionPage extends React.Component<ShopIntroductionPageProps, {
     componentWillMount() {
         if (this.props.formData) {
             const d = this.props.formData;
+   
+            this.setState({
+                introductionStatus: d.introductionInfoStatus,
+                introductionFailReason: d.introductionInfoFailReason
+            })
             this.onShopCityChange(d.provinceId, d.cityId, d.districtId);
             this.onShopNameChange(d.shopName);
             this.onShopCategoryChange(d.subCategoryId);
@@ -211,13 +218,16 @@ class ShopIntroductionPage extends React.Component<ShopIntroductionPageProps, {
     render() {
 
         return (<div className="wrap" data-page='shopintroduction' >
+            {this.state.introductionStatus === 2 ? <div className="pick-2"><div className="head-bar">
+                <h1>审核未通过</h1><span>{this.state.introductionFailReason}</span></div></div> : undefined}
             <section>
                 <div className="title"><i></i><span>店铺介绍</span></div>
 
                 <Picker title="选择地区"
                     data={GeoData}
                     cols={3}
-                    value={this.state.provinceId && this.state.cityId && this.state.districtId ? [this.state.provinceId, this.state.cityId, this.state.districtId] : undefined}
+                    value={this.state.provinceId && this.state.cityId && this.state.districtId ?
+                        [this.state.provinceId, this.state.cityId, this.state.districtId] : undefined}
                     onOk={vals => {
                         if (vals && vals.length === 3) {
                             this.onShopCityChange(vals[0], vals[1], vals[2]);
@@ -225,14 +235,17 @@ class ShopIntroductionPage extends React.Component<ShopIntroductionPageProps, {
                     }}
                 >
                     <div className="line pick-provin">
-                        <span className="h11">店铺区域</span><i></i><span className="sp">{this.state.districtName ? this.state.provinceName + '/' + this.state.cityName + '/' + this.state.districtName : '请选择'}</span>
+                        <span className="h11">店铺区域</span><i></i>
+                        <span className="sp">{this.state.districtName ?
+                            this.state.provinceName + '/' + this.state.cityName + '/' + this.state.districtName : '请选择'}</span>
                     </div>
                 </Picker>
 
                 <div className="line">
-                    <span className="h11">店铺名称</span><input type="text" placeholder="请输入店铺名称" className="t-input" value={this.state.shopName || ''} onChange={(e) => {
-                        this.onShopNameChange(e.target.value);
-                    }} />
+                    <span className="h11">店铺名称</span><input type="text" placeholder="请输入店铺名称"
+                        className="t-input" value={this.state.shopName || ''} onChange={(e) => {
+                            this.onShopNameChange(e.target.value);
+                        }} />
                 </div>
 
                 <Picker title="行业类别"

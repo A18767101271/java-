@@ -44,23 +44,24 @@ class App extends React.Component<AppProps, {
     onReloadForm() {
         Toast.loading('加载中', 30);
         let self = this;
-        self.setState({
-            formData: undefined
-        }, () => {
-            SettledApis.getFormSingle().then(d => {
-                self.setState({
-                    formData: d
-                }, () => {
-                    Toast.hide();
-                });
-            }).catch(err => {
+
+        SettledApis.getFormSingle().then(d => {
+            self.setState({
+                formData: d
+            }, () => {
                 Toast.hide();
-                if (err.ret === 'fail.27007') {
-                    return;
-                }
-                Modal.alert('提示', err.msg);
-            })
-        });
+            });
+        }).catch(err => { 
+            self.setState({
+                formData: undefined
+            });
+            Toast.hide();
+            if (err.ret === 'fail.27007') {
+                return;
+            }
+            Modal.alert('提示', err.msg);
+        })
+
 
 
     }
@@ -77,17 +78,17 @@ class App extends React.Component<AppProps, {
                 if (d.baseInfoStatus == 1) {
                     window.location.replace('#/success');
                 }
-                if (!window.location.hash || window.location.hash.length < 3) {                   
+                if (!window.location.hash || window.location.hash.length < 3) {
                     window.location.replace('#/home');
                 }
             });
         }).catch(err => {
-            Toast.hide(); 
-            if (err.ret === 'fail.27007') { 
+            Toast.hide();
+            if (err.ret === 'fail.27007') {
                 this.setState({
                     inited: true,
-                }, () => { 
-                    if (!window.location.hash || window.location.hash.length < 3) { 
+                }, () => {
+                    if (!window.location.hash || window.location.hash.length < 3) {
                         window.location.replace('#/ready');
                     }
                 });
