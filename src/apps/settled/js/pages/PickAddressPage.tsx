@@ -98,7 +98,7 @@ export default class PickAddressPage extends React.Component<PickAddressPageProp
                     map.setZoom(13);
                 });
             }
- 
+
             AMapUI.loadUI(['misc/PositionPicker'], function (PositionPicker) {
 
                 const positionPicker = new PositionPicker({
@@ -133,20 +133,18 @@ export default class PickAddressPage extends React.Component<PickAddressPageProp
 
         return (<div className="wrap" data-page='pickaddress'>
             <button className='enter-btn' onClick={() => { this.onSubmit(); }} >确定</button>
-            <div id="container" className="map"  >
-                <div className="flow-input">
-                    <div className="input-1"><span className="h11">店铺区域</span><span className="input-area">{addressName}</span></div>
-                    <div className="input-2"><span className="h11">详细地址</span><input
-                        type="text"
-                        className="input-address"
-                        placeholder="请填写详情地址，如街道名称，门牌号等"
-                        value={this.state.address || ''}
-                        onChange={(e) => { this.onAddressChange(e.target.value); }}
-                    /></div>
-                </div>
+            <div className="flow-input">
+                <div className="input-1"><span className="h11">店铺区域</span><span className="input-area">{addressName}</span></div>
+                <div className="input-2"><span className="h11">详细地址</span><input
+                    type="text"
+                    className="input-address"
+                    placeholder="请填写详情地址，如街道名称，门牌号等"
+                    value={this.state.address || ''}
+                    onChange={(e) => { this.onAddressChange(e.target.value); }}
+                /></div>
             </div>
+            <div id="container" className="map"  ></div>
         </div>);
     }
 
 }
- 

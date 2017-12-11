@@ -1059,57 +1059,65 @@ textarea {
         background-color: #f5f5f5;
         border-radius: rem(30px);
     }
-    .map {
+    .flow-input {
         width: 10rem;
-        height: 100%;
-        position: relative;
-        .flow-input {
-            width: 10rem;
-            height: rem(260px);
-            position: absolute;
-            left: 0;
-            top: 0;
-            z-index: 10;
-            background-color: #fff;
-            font-size: rem(28px);
-            box-shadow: 0px rem(2px) rem(10px) #000;
-            .input-1 {
-                width: 100%;
-                height: rem(98px);
-                line-height: rem(98px);
-                border-bottom: 1px solid #e5e6e8;
-                background: url(../image/qiu_03.jpg)rem(27px) rem(43px) no-repeat;
-                background-size: rem(12px) rem(12px);
-                .h11,
-                .input-area {
-                    float: left;
-                }
-                .h11 {
-                    margin-left: rem(50px);
-                    margin-right: rem(20px);
-                }
+        height: rem(260px);
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        background-color: #fff;
+        font-size: rem(28px);
+        box-shadow: 0px rem(2px) rem(10px) #000;
+        .input-1 {
+            width: 100%;
+            height: rem(98px);
+            line-height: rem(98px);
+            border-bottom: 1px solid #e5e6e8;
+            background: url(../image/qiu_03.jpg)rem(27px) rem(43px) no-repeat;
+            background-size: rem(12px) rem(12px);
+            .h11,
+            .input-area {
+                float: left;
             }
-            .input-2 {
-                width: 100%;
-                height: rem(98px);
-                line-height: rem(98px);
-                background: url(../image/qiu_06.jpg)rem(27px) rem(43px) no-repeat;
-                background-size: rem(12px) rem(12px);
-                .h11,
-                .input-address {
-                    float: left;
-                }
-                .h11 {
-                    margin-left: rem(50px);
-                    margin-right: rem(20px);
-                }
-                .input-address {
-                    width: rem(500px);
-                    font-size: rem(24px);
-                    margin-top: rem(35px);
-                }
+            .h11 {
+                margin-left: rem(50px);
+                margin-right: rem(20px);
+            }
+            .input-area {
+                width: rem(525px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
+        .input-2 {
+            width: 100%;
+            height: rem(98px);
+            line-height: rem(98px);
+            background: url(../image/qiu_06.jpg)rem(27px) rem(43px) no-repeat;
+            background-size: rem(12px) rem(12px);
+            .h11,
+            .input-address {
+                float: left;
+            }
+            .h11 {
+                margin-left: rem(50px);
+                margin-right: rem(20px);
+            }
+            .input-address {
+                width: rem(525px);
+                //font-size: rem(24px);
+                margin-top: rem(35px);
+            }
+        }
+    }
+    .map {
+        width: 10rem;
+        height: rem(1200px);
+        position: absolute;
+        left: 0;
+        bottom: 0;
     }
 }
 
