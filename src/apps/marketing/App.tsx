@@ -3,29 +3,22 @@ import Router from './Router';
 import FastClick from 'fastclick';
 import './sass/App.scss';
 
-import './js/console.log';
 
 FastClick.attach(window.document.body);
 
 interface AppProps {
-    // initArgs: InitAppArgs;
-    // init: (args: InitAppArgs) => {};
+    storeId: number
 }
 
-class App extends React.Component<AppProps, {}>{
+class App extends React.Component<AppProps>{
 
     constructor(props: AppProps) {
-        super(props);
+        super(props); 
     }
+ 
 
-    render() {
-
-        return (
-
-            <Router />
-
-        )
-
+    render() { 
+        return <Router storeId={this.props.storeId} />
     }
 }
 

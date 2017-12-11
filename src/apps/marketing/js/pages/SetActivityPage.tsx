@@ -2,9 +2,10 @@ import React from 'react';
 import SardineJSBridge from '../../../../assets/libs/sardine-bridge';
 import '../../sass/HomePage.scss';
 
-export default class SetActivityPage extends React.Component<{}> {
+export default class SetActivityPage extends React.Component<{ storeId: number }> {
 
     render() {
+        const shopId = this.props.storeId;
         const ActCreatorItem = (props: { name: string, href: string }) => {
             return (<div className="at">
                 <h1>{props.name}</h1>
@@ -12,8 +13,8 @@ export default class SetActivityPage extends React.Component<{}> {
                 <a href='javascript:;' onClick={() => {
                     let url = props.href;
                     if (url[0] === '#') {
-                        url = window.location.origin + window.location.pathname + url;
-                    }
+                        url = window.location.origin + window.location.pathname + url + '?shopid=' + shopId;
+                    } 
                     SardineJSBridge.ready(() => {
                         SardineJSBridge.open({ url: url });
                     });

@@ -12,7 +12,6 @@ import SetZheKou from './js/pages/SetZheKou';
 import SetHongBao from './js/pages/SetHongBao';
 import ChooseDiscount from './js/pages/ChooseDiscount';
 import ChooseReturn from './js/pages/ChooseReturn';
-import RecordPage from './js/pages/RecordPage';
 // export default {
 //     "/": HomePage,
 //     "/details/:id": HomeDetails,
@@ -54,14 +53,14 @@ class Page extends React.Component<PageProps, {}>{
 
 
 
-class Router extends React.Component<{}>{
+class Router extends React.Component<{ storeId: number }>{
 
 
     render() {
         return (<HashRouter>
             <Switch>
                 <Route path='/details/:id' render={ctx => <Page page={HomeDetails} params={ctx.match.params} />} />
-                <Route path='/setactivity' component={SetActivityPage} />
+                <Route path='/setactivity' render={() => <SetActivityPage storeId={this.props.storeId} />} />
                 <Route path='/setmanjian' render={() => <Page page={SetManJian} />} />
                 <Route path='/setfanquan' render={() => <Page page={SetFanQuan} />} />
                 <Route path='/setfanwu' render={() => <Page page={SetFanWu} />} />
@@ -69,8 +68,8 @@ class Router extends React.Component<{}>{
                 <Route path='/sethongbao' render={() => <Page page={SetHongBao} />} />
                 <Route path='/choosediscount' render={() => <Page page={ChooseDiscount} />} />
                 <Route path='/choosereturn' render={() => <Page page={ChooseReturn} />} />
-                <Route path='/record' render={() => <Page page={RecordPage} />} />
-                <Route path='/' component={HomePage} />
+                <Route path='/record' render={() => <HomePage storeId={this.props.storeId} limitStatus={2} />} />
+                <Route path='/' render={() => <HomePage storeId={this.props.storeId} />} />
             </Switch>
         </HashRouter>);
 

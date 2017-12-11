@@ -1,6 +1,5 @@
 import PromotionApis from '../../../../services/promotion-apis';
- 
-import '../console.log.js';
+  
 import moment from 'moment';
 
 import bridge from '../../../../assets/libs/sardine-bridge';
@@ -31,7 +30,7 @@ function headBar(t1, t2, t) {
 }
 
 function MJFn(data: any) {
-    console.log(data);
+   
     var exampleId = data.activityId;
     var h = "";
     var timestamp = (new Date().getTime() / 1000);

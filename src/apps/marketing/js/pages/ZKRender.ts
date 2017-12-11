@@ -1,6 +1,5 @@
 import PromotionApis from '../../../../services/promotion-apis';
- 
-import '../console.log.js';
+  
 import moment from 'moment';
 
 import bridge from '../../../../assets/libs/sardine-bridge';

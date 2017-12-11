@@ -4,9 +4,13 @@
         @return $px / $baseFontSize * 1rem;
     }
 
-    [data-page="home"] {
+    [data-page="home"].wrap {
         height: 100%;
         background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
         .headbar {
             width: 10rem;
             height: rem(98px);
@@ -70,7 +74,6 @@
         .toolbar {
             width: 10rem;
             height: rem(80px);
-            overflow: hidden;
             .btn {
                 float: left;
                 width: rem(106px);
@@ -92,6 +95,9 @@
             }
         }
         .contain {
+            flex: 1;
+            overflow: hidden scroll;
+            -webkit-overflow-scrolling: touch;
             .list {
                 width: rem(720px);
                 height: rem(138px);

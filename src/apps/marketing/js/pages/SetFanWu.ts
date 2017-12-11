@@ -1,7 +1,6 @@
 import '../../sass/SetHomePage.scss';
 import PageExtends from '../PageExtends.js';
- 
-import '../console.log.js';
+  
 import { HashUrl } from '../../../../assets/libs/hash-router';
 
 import bridge from '../../../../assets/libs/sardine-bridge';

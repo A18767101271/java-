@@ -36,17 +36,19 @@ interface PromotionInstanceClose {
     instanceId: number;
 }
 
+export interface PromotionListItemData {
+    activityId: number,
+    endTime: number,
+    marketNum: number,
+    name: string,
+    startTime: number,
+    status: number,
+    type: number,
+    marktingMap: any
+}
+
 export interface GetPromotionListData {
-    content: {
-        activityId: number,
-        endTime: number,
-        marketNum: number,
-        name: string,
-        startTime: number,
-        status: number,
-        type: number,
-        marktingMap: any
-    }[],
+    content: PromotionListItemData[],
     currentPage: number,
     totalElements: number,
     totalPages: number
@@ -70,7 +72,7 @@ export const PromotionApis = {
             return data as GetPromotionListData;
         }).catch(err => {
             //
-                throw err;
+            throw err;
             //}
         });
     },

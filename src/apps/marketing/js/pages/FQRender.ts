@@ -1,6 +1,6 @@
 import PromotionApis from '../../../../services/promotion-apis';
 import bridge from '../../../../assets/libs/sardine-bridge';
-import '../console.log.js';
+ 
 import moment from 'moment';
  
 const $ = (window as any).$;
