@@ -1,6 +1,7 @@
 import React from 'react';
 import SardineJSBridge from '../../../../assets/libs/sardine-bridge';
 import '../../sass/HomePage.scss';
+import Container from '../../../../assets/libs/sardine-bridge/container';
 
 export default class SetActivityPage extends React.Component<{ storeId: number }> {
 
@@ -14,10 +15,14 @@ export default class SetActivityPage extends React.Component<{ storeId: number }
                     let url = props.href;
                     if (url[0] === '#') {
                         url = window.location.origin + window.location.pathname + url + '?shopid=' + shopId;
-                    } 
-                    SardineJSBridge.ready(() => {
-                        SardineJSBridge.open({ url: url });
-                    });
+                    }
+                    if (Container.isJsBridge) {
+                        SardineJSBridge.ready(() => {
+                            SardineJSBridge.open({ url: url });
+                        });
+                    } else {
+                        window.location.href = url;
+                    }
                 }}>新建</a>
             </div>);
         }

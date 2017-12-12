@@ -65,7 +65,7 @@ class Router extends React.Component<{ storeId: number }>{
                 <Route path='/setfanquan' render={() => <Page page={SetFanQuan} />} />
                 <Route path='/setfanwu' render={() => <Page page={SetFanWu} />} />
                 <Route path='/setzhekou' render={() => <Page page={SetZheKou} />} />
-                <Route path='/sethongbao' render={() => <Page page={SetHongBao} />} />
+                <Route path='/sethongbao' render={() => <SetHongBao storeId={this.props.storeId} />} />
                 <Route path='/choosediscount' render={() => <Page page={ChooseDiscount} />} />
                 <Route path='/choosereturn' render={() => <Page page={ChooseReturn} />} />
                 <Route path='/record' render={() => <HomePage storeId={this.props.storeId} limitStatus={2} />} />

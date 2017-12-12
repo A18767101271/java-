@@ -19,7 +19,7 @@ interface GetPromotionInstanceRecord {
     activityId: number;
 }
 
-interface PromotionInstanceAdd {
+export interface PromotionInstanceAdd {
     storeId: number;
     name: string;
     startTime: number;
