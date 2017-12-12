@@ -1207,25 +1207,47 @@
     //     }
     // }
     [data-page="setactivity"] {
+        background-color: #fff;
         .at {
             width: rem(720px);
-            height: rem(140px);
             margin-left: rem(30px);
-            position: relative;
             border-bottom: 1px solid #e5e6e8;
+            position: relative;
             h1 {
+                float: left;
+                width: rem(550px);
+                margin-top: rem(30px);
                 font-size: rem(32px);
-                position: absolute;
-                left: 0;
-                top: rem(30px);
                 color: #000;
+                text-indent: rem(42px);
+                &.h-mj {
+                    background: url(../image/i-j.png) 0 rem(5px) no-repeat;
+                    background-size: rem(30px) rem(30px);
+                }
+                &.h-fq {
+                    background: url(../image/i-q.png) 0 rem(5px) no-repeat;
+                    background-size: rem(30px) rem(30px);
+                }
+                &.h-hb {
+                    background: url(../image/i-h.png) 0 rem(5px) no-repeat;
+                    background-size: rem(30px) rem(30px);
+                }
+                &.h-zk {
+                    background: url(../image/i-z.png) 0 rem(5px) no-repeat;
+                    background-size: rem(30px) rem(30px);
+                }
+                &.h-zp {
+                    background: url(../image/i-s.png) 0 rem(5px) no-repeat;
+                    background-size: rem(30px) rem(30px);
+                }
             }
             span {
+                float: left;
+                width: rem(550px);
+                margin-top: rem(12px);
                 font-size: rem(24px);
-                position: absolute;
-                left: 0;
-                top: rem(78px);
-                color: #798092;
+                color: #a1a1a5;
+                margin-bottom: rem(27px);
             }
             a {
                 width: rem(88px);
@@ -1235,7 +1257,7 @@
                 border: 2px solid #3258eb;
                 position: absolute;
                 right: rem(34px);
-                top: rem(40px);
+                top: rem(54px);
                 text-align: center;
                 line-height: rem(55px);
             }
