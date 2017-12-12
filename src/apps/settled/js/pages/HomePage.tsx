@@ -40,7 +40,7 @@ export default class HomePage extends React.Component<HomePageProps>{
 
         let form = this.props.formData;
        
-        if (!(this.isBaseFull() && this.isIntroductionFull() && this.isCredentialsFull())) {
+        if (!(this.isIntroductionFull() && this.isBaseFull() && this.isCredentialsFull())) {
             Modal.alert('提示', '尚未填写完整');
             this.inSubmit = false;
             return;
@@ -57,7 +57,7 @@ export default class HomePage extends React.Component<HomePageProps>{
         });
     }
 
-    isBaseFull() {
+    isIntroductionFull() {
         if (!this.props.formData) {
             return false;
         }
@@ -66,7 +66,7 @@ export default class HomePage extends React.Component<HomePageProps>{
         return !!(data.cityId && data.provinceId && data.districtId && data.subCategoryId && data.categoryId && data.shopName);
     }
 
-    isIntroductionFull() {
+    isBaseFull() {
         if (!this.props.formData) {
             return false;
         }
@@ -86,7 +86,7 @@ export default class HomePage extends React.Component<HomePageProps>{
     }
 
     render() {
-        console.log(this.props);
+     
         if (!this.props.formData) {
             return <div></div>;
         }
