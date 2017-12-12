@@ -965,7 +965,7 @@ export default class SetHongBao extends React.Component<SetHongBaoProps, {
     componentWillMount() {
         let url = UParams();
         if (url.id) {
-            PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => { 
+            PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => {
 
                 if (data.limitUser || data.limitUser === 0) {
                     this.setState({ limitUser: parseInt(data.limitUser) });
@@ -983,7 +983,7 @@ export default class SetHongBao extends React.Component<SetHongBaoProps, {
                         if (d.grantWay) {
                             this.setState({ grantWay: parseInt(d.grantWay) });
                         }
-                 
+
                         if (d.limitDate || d.limitDate === 0) {
                             this.setState({ limitDate: parseInt(d.limitDate) });
                         }
@@ -994,7 +994,7 @@ export default class SetHongBao extends React.Component<SetHongBaoProps, {
                     }
                 }
             })
-        } 
+        }
     }
 
     onSubmit() {
@@ -1050,13 +1050,14 @@ export default class SetHongBao extends React.Component<SetHongBaoProps, {
                 discountAmount: this.state.discountAmount,
                 fullAmount: this.state.fullAmount,
                 grantWay: this.state.grantWay,
-                limitDate: this.state.limitDate
+                limitDate: this.state.limitDate,
+                couponNum: this.state.couponNum ? this.state.couponNum : 'maxValue'
             }])
         };
         Toast.loading('加载中', 30);
-        PromotionApis.promotionInstanceAdd(req).then(data => {
+        PromotionApis.promotionInstanceAdd(req).then(_data => {
             Toast.hide();
-            console.log(data);
+            Modal.alert('提示', '创建活动成功', [{ text: '确定', onPress: () => { window.location.replace('#/?shopid=' + this.props.storeId) } }]);
         }).catch(err => {
             console.log(err);
             Toast.hide();
