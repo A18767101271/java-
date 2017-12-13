@@ -61,7 +61,7 @@ class Router extends React.Component<{ storeId: number }>{
             <Switch>
                 <Route path='/details/:id' render={ctx => <Page page={HomeDetails} params={ctx.match.params} />} />
                 <Route path='/setactivity' render={() => <SetActivityPage storeId={this.props.storeId} />} />
-                <Route path='/setmanjian' render={() => <Page page={SetManJian} />} />
+                <Route path='/setmanjian' render={() => <SetManJian shopId={this.props.storeId} />} />
                 <Route path='/setfanquan' render={() => <Page page={SetFanQuan} />} />
                 <Route path='/setfanwu' render={() => <Page page={SetFanWu} />} />
                 <Route path='/setzhekou' render={() => <Page page={SetZheKou} />} />

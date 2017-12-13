@@ -456,7 +456,7 @@ export default class PickTimePage extends React.Component<PickTimePageProps, {
                     let e2 = times[j].endHours * 100 + times[j].endMinutes;
 
                     if (s1 == s2 || e1 == e2 || (s1 < s2 && e1 > s2) ||
-                        (s1 < e2 && e1 > e2) || (s1 < s2 && e1 > e2) || (s1 > s2 && e1 < e2)) {
+                        (s1 < e2 && e1 > e2) || (s1 < s2 && e1 > e2) || (s1 > s2 && e1 < e2) || e2 >= (s1 + 2400)) {
                         Modal.alert('提示', '营业时间不能重叠');
                         return;
                     }
