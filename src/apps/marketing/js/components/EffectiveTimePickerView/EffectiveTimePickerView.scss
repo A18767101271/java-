@@ -1,325 +1,321 @@
-$baseFontSize: 75px !default;  
+$baseFontSize: 75px !default;
 @function rem($px) {
     @return $px / $baseFontSize * 1rem;
 }
 
- .EffectiveTimePickerView {
-     background-color: #fff;
-     .lay {
-         width: 10rem;
-         height: rem(1250px);
-         overflow: scroll;
-         position: fixed;
-         left: 0;
-         top: 0;
-         background-color: #fff;
-         .row-ad,
-         .row-time {
-             width: rem(720px);
-             height: rem(90px);
-             line-height: rem(90px);
-             margin-left: rem(30px);
-             border-bottom: 2px solid #f3f3f3;
-             h1 {
-                 float: left;
-             }
-             .btn {
-                 float: right;
-                 margin-top: rem(24px);
-                 margin-right: rem(30px);
-                 width: rem(44px);
-                 height: rem(44px);
-                 
-             }
-             
-             .btn-2 {
-                 float: right; //margin-top: rem(20px);
-                 width: rem(131px);
-                 height: rem(88px);
-                 
-             }
-             
-             span {
-                 float: right;
-                 font-size: rem(28px);
-                 color: #a0a0a2;
-             }
-         }
-         .row-line {
-             width: rem(720px);
-             height: rem(90px);
-             line-height: rem(90px);
-             margin-left: rem(30px);
-             text-align: center;
-             border-bottom: 2px solid #f3f3f3;
-         }
-         .br {
-             width: 10rem;
-             height: rem(22px);
-             background-color: #f5f6f8;
-         }
-         .row-2 {
-             width: 10rem;
-             height: rem(88px);
-             line-height: rem(88px);
-             text-align: center;
-             position: relative;
-             border-bottom: 2px dotted #e5e6e8;
-             border-top: 2px dotted #e5e6e8;
-             margin-bottom: rem(150px);
-             i {
-                 width: rem(36px);
-                 height: rem(40px);
-                 background: url(./image/Add.png)center center no-repeat;
-                 background-size: rem(36px) rem(40px);
-                 position: absolute;
-                 left: rem(260px);
-                 top: rem(25px);
-             }
-         }
-         .btn-yes {
-             width: 10rem;
-             height: rem(98px);
-             line-height: rem(98px);
-             text-align: center;
-             font-size: rem(36px);
-             background-color: #3562f3;
-             color: #949494;
-             color: #fff;
-             position: fixed;
-             left: 0;
-             bottom: 0;
-         }
-         .pop {
-             position: fixed;
-             width: 100%;
-             height: 100%;
-             left: 0;
-             top: 0;
-             z-index: 100;
-             .shadow {
-                 width: 10rem;
-                 height: 100%;
-                 background-color: #000;
-                 opacity: .3;
-                 position: fixed;
-                 left: 0;
-                 top: 0;
-             }
-             .pop-contain {
-                 width: 10rem;
-                 height: rem(385px);
-                 overflow: hidden;
-                 background-color: #fff;
-                 position: absolute;
-                 bottom: 0;
-                 left: 0;
-                 border-top: 1px solid #b1b1b3;
-                 .pop-head {
-                     height: rem(87px);
-                     line-height: rem(87px);
-                     background-color: #f6f6f8;
-                     .title {
-                         font-size: rem(30px);
-                         color: #0e7bf4;
-                     }
-                     .lf {
-                         float: left;
-                         margin-left: rem(32px);
-                     }
-                     .lr {
-                         float: right;
-                         margin-right: rem(32px);
-                     }
-                 }
-                 .sw-1 {
-                     font-size: rem(30px);
-                     position: absolute;
-                     left: rem(124px);
-                     top: rem(122px);
-                 }
-                 .sw-2 {
-                     font-size: rem(30px);
-                     position: absolute;
-                     right: rem(124px);
-                     top: rem(122px);
-                 }
-                 .swiper-container1,
-                 .swiper-container2 {
-                     width: rem(375px);
-                     height: rem(220px);
-                     position: absolute;
-                     overflow: hidden;
-                     .swiper-slide {
-                         height: rem(70px);
-                         text-align: center;
-                         line-height: rem(70px);
-                         font-size: rem(30px);
-                         color: #a6a6a6;
-                     }
-                     .swiper-slide-active {
-                         border-bottom: 1px solid #e2e2e2;
-                         border-top: 1px solid #e2e2e2;
-                         color: #404040;
-                     }
-                 }
-                 .swiper-container1 {
-                     left: 0;
-                     top: rem(166px);
-                 }
-                 .swiper-container2 {
-                     right: 0;
-                     top: rem(166px);
-                 }
-             }
-         }
-     }
-     .l-label {
-         width: rem(720px);
-         height: rem(88px);
-         line-height: rem(88px);
-         margin-left: rem(30px);
-         border-bottom: 2px solid #f3f4f6;
-         .right {
-             margin-right: rem(30px);
-             input {
-                 width: rem(450px);
-                 text-align: right;
-             }
-             .money-input {
-                 width: rem(200px);
-                 text-align: center;
-             }
-             i {
-                 width: rem(15px);
-                 height: rem(25px);
-                 background: url(./image/icon_jiantou_right_03.jpg)center center no-repeat;
-                 background-size: rem(15px) rem(25px);
-                 float: right;
-                 margin-top: rem(32px);
-                 margin-left: rem(25px);
-             }
-             span {
-                 color: #a0a0a2;
-                 margin-left: rem(5px);
-             }
-             .distt {
-                 color: #000;
-             }
-         }
-     }
-     .l-label-place {
-         width: rem(720px);
-         height: rem(140px);
-         line-height: rem(88px);
-         margin-left: rem(30px);
-         border-bottom: 2px solid #f3f4f6;
-         position: relative;
-         span {
-             font-size: rem(28px);
-             position: absolute;
-             left: 0;
-             bottom: 0;
-             color: #a0a0a2;
-         }
-         .right {
-             height: rem(88px);
-             margin-right: rem(30px);
-             input {
-                 width: rem(500px);
-                 text-align: right;
-             }
-             .money-input {
-                 width: rem(200px);
-                 text-align: center;
-                 color: #000;
-             }
-             i {
-                 width: rem(15px);
-                 height: rem(25px);
-                 background: url(./image/icon_jiantou_right_03.jpg)center center no-repeat;
-                 background-size: rem(15px) rem(25px);
-                 float: right;
-                 margin-top: rem(32px);
-                 margin-left: rem(25px);
-             }
-             .distt {
-                 color: #000;
-             }
-         }
-     }
-     .l-title {
-         width: 10rem;
-         height: rem(88px);
-         background-color: #f5f6f8;
-         line-height: rem(88px);
-         i {
-             width: rem(29px);
-             height: rem(29px);
-             float: left;
-             
-             margin-left: rem(30px);
-             margin-top: rem(30px);
-             margin-right: rem(20px);
-         }
-     }
-     .l-manjian {
-         border-bottom: rem(15px) solid #f5f6f8;
-     }
-     .l-btn {
-         width: 10rem;
-         height: rem(88px);
-         line-height: rem(88px);
-         text-align: center;
-         position: relative;
-         border-bottom: 2px dotted #e5e6e8;
-         border-top: 2px dotted #e5e6e8;
-         i {
-             width: rem(36px);
-             height: rem(40px);
-             background: url(./image/Add.png)center center no-repeat;
-             background-size: rem(36px) rem(40px);
-             position: absolute;
-             left: rem(300px);
-             top: rem(25px);
-         }
-     }
-     .l-foot {
-         height: rem(88px);
-         line-height: rem(88px);
-         border-bottom: 2px solid #f3f4f6;
-         h1 {
-             float: left;
-             margin-left: rem(30px);
-             margin-right: rem(10px);
-         }
-         em {
-             font-size: rem(25px);
-             color: #3a7dff;
-         }
-         .btn {
-             float: right; //margin-top: rem(20px);
-             width: rem(131px);
-             height: rem(88px);
-            
-         }
-         
-     }
-     .btn-yes {
-         width: 10rem;
-         height: rem(98px);
-         line-height: rem(98px);
-         text-align: center;
-         font-size: rem(36px);
-         background-color: #dedede;
-         color: #949494;
-         color: #fff;
-         position: fixed;
-         left: 0;
-         bottom: 0;
-     }
-     .dis {
-         background-color: #3663f2;
-         color: #fff;
-     }
- }
+.EffectiveTimePickerView {
+    background-color: #fff;
+    .lay {
+        width: 10rem;
+        height: rem(1250px);
+        overflow: scroll;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #fff;
+        .row-ad,
+        .row-time {
+            width: rem(720px);
+            height: rem(90px);
+            line-height: rem(90px);
+            margin-left: rem(30px);
+            border-bottom: 2px solid #f3f3f3;
+            h1 {
+                float: left;
+                font-size: rem(30px);
+            }
+            .am-checkbox-wrapper {
+                float: right;
+                margin-top: rem(24px);
+                margin-right: rem(30px);
+                width: rem(44px);
+                height: rem(44px);
+            }
+            .am-switch {
+                float: right;
+                margin-top: rem(20px);
+                width: rem(131px);
+                height: rem(88px);
+                margin-left: rem(20px)
+            }
+            span {
+                float: right;
+                font-size: rem(28px);
+                color: #a0a0a2;
+            }
+        }
+        .row-line {
+            width: rem(720px);
+            height: rem(90px);
+            line-height: rem(90px);
+            margin-left: rem(30px);
+            text-align: center;
+            border-bottom: 2px solid #f3f3f3;
+        }
+        .br {
+            width: 10rem;
+            height: rem(22px);
+            background-color: #f5f6f8;
+        }
+        .row-2 {
+            width: 10rem;
+            height: rem(88px);
+            line-height: rem(88px);
+            text-align: center;
+            position: relative;
+            border-bottom: 2px dotted #e5e6e8;
+            border-top: 2px dotted #e5e6e8;
+            margin-bottom: rem(150px);
+            i {
+                width: rem(36px);
+                height: rem(40px);
+                background: url(./image/Add.png)center center no-repeat;
+                background-size: rem(36px) rem(40px);
+                position: absolute;
+                left: rem(260px);
+                top: rem(25px);
+            }
+        }
+        .btn-yes {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            font-size: rem(36px);
+            background-color: #3562f3;
+            color: #949494;
+            color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+        .pop {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 100;
+            .shadow {
+                width: 10rem;
+                height: 100%;
+                background-color: #000;
+                opacity: .3;
+                position: fixed;
+                left: 0;
+                top: 0;
+            }
+            .pop-contain {
+                width: 10rem;
+                height: rem(385px);
+                overflow: hidden;
+                background-color: #fff;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                border-top: 1px solid #b1b1b3;
+                .pop-head {
+                    height: rem(87px);
+                    line-height: rem(87px);
+                    background-color: #f6f6f8;
+                    .title {
+                        font-size: rem(30px);
+                        color: #0e7bf4;
+                    }
+                    .lf {
+                        float: left;
+                        margin-left: rem(32px);
+                    }
+                    .lr {
+                        float: right;
+                        margin-right: rem(32px);
+                    }
+                }
+                .sw-1 {
+                    font-size: rem(30px);
+                    position: absolute;
+                    left: rem(124px);
+                    top: rem(122px);
+                }
+                .sw-2 {
+                    font-size: rem(30px);
+                    position: absolute;
+                    right: rem(124px);
+                    top: rem(122px);
+                }
+                .swiper-container1,
+                .swiper-container2 {
+                    width: rem(375px);
+                    height: rem(220px);
+                    position: absolute;
+                    overflow: hidden;
+                    .swiper-slide {
+                        height: rem(70px);
+                        text-align: center;
+                        line-height: rem(70px);
+                        font-size: rem(30px);
+                        color: #a6a6a6;
+                    }
+                    .swiper-slide-active {
+                        border-bottom: 1px solid #e2e2e2;
+                        border-top: 1px solid #e2e2e2;
+                        color: #404040;
+                    }
+                }
+                .swiper-container1 {
+                    left: 0;
+                    top: rem(166px);
+                }
+                .swiper-container2 {
+                    right: 0;
+                    top: rem(166px);
+                }
+            }
+        }
+    }
+    .l-label {
+        width: rem(720px);
+        height: rem(88px);
+        line-height: rem(88px);
+        margin-left: rem(30px);
+        border-bottom: 2px solid #f3f4f6;
+        .right {
+            margin-right: rem(30px);
+            input {
+                width: rem(450px);
+                text-align: right;
+            }
+            .money-input {
+                width: rem(200px);
+                text-align: center;
+            }
+            i {
+                width: rem(15px);
+                height: rem(25px);
+                background: url(./image/icon_jiantou_right_03.jpg)center center no-repeat;
+                background-size: rem(15px) rem(25px);
+                float: right;
+                margin-top: rem(32px);
+                margin-left: rem(25px);
+            }
+            span {
+                color: #a0a0a2;
+                margin-left: rem(5px);
+            }
+            .distt {
+                color: #000;
+            }
+        }
+    }
+    .l-label-place {
+        width: rem(720px);
+        height: rem(140px);
+        line-height: rem(88px);
+        margin-left: rem(30px);
+        border-bottom: 2px solid #f3f4f6;
+        position: relative;
+        span {
+            font-size: rem(28px);
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            color: #a0a0a2;
+        }
+        .right {
+            height: rem(88px);
+            margin-right: rem(30px);
+            input {
+                width: rem(500px);
+                text-align: right;
+            }
+            .money-input {
+                width: rem(200px);
+                text-align: center;
+                color: #000;
+            }
+            i {
+                width: rem(15px);
+                height: rem(25px);
+                background: url(./image/icon_jiantou_right_03.jpg)center center no-repeat;
+                background-size: rem(15px) rem(25px);
+                float: right;
+                margin-top: rem(32px);
+                margin-left: rem(25px);
+            }
+            .distt {
+                color: #000;
+            }
+        }
+    }
+    .l-title {
+        width: 10rem;
+        height: rem(88px);
+        background-color: #f5f6f8;
+        line-height: rem(88px);
+        i {
+            width: rem(29px);
+            height: rem(29px);
+            float: left;
+            margin-left: rem(30px);
+            margin-top: rem(30px);
+            margin-right: rem(20px);
+        }
+    }
+    .l-manjian {
+        border-bottom: rem(15px) solid #f5f6f8;
+    }
+    .l-btn {
+        width: 10rem;
+        height: rem(88px);
+        line-height: rem(88px);
+        text-align: center;
+        position: relative;
+        border-bottom: 2px dotted #e5e6e8;
+        border-top: 2px dotted #e5e6e8;
+        i {
+            width: rem(36px);
+            height: rem(40px);
+            background: url(./image/Add.png)center center no-repeat;
+            background-size: rem(36px) rem(40px);
+            position: absolute;
+            left: rem(300px);
+            top: rem(25px);
+        }
+    }
+    .l-foot {
+        height: rem(88px);
+        line-height: rem(88px);
+        border-bottom: 2px solid #f3f4f6;
+        h1 {
+            float: left;
+            margin-left: rem(30px);
+            margin-right: rem(10px);
+        }
+        em {
+            font-size: rem(25px);
+            color: #3a7dff;
+        }
+        .btn {
+            float: right; //margin-top: rem(20px);
+            width: rem(131px);
+            height: rem(88px);
+        }
+    }
+    .btn-yes {
+        width: 10rem;
+        height: rem(98px);
+        line-height: rem(98px);
+        text-align: center;
+        font-size: rem(36px);
+        background-color: #dedede;
+        color: #949494;
+        color: #fff;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+    }
+    .dis {
+        background-color: #3663f2;
+        color: #fff;
+    }
+}
