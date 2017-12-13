@@ -178,7 +178,7 @@ export const SettledApis = {
                 province_id: req.provinceId,
                 city_id: req.cityId,
                 district_id: req.districtId,
-                client_location: req.clientLocation ? req.clientLocation.lng + ',' + req.clientLocation.lat : undefined,
+                client_location: req.clientLocation && req.clientLocation.lng && req.clientLocation.lat ? req.clientLocation.lng + ',' + req.clientLocation.lat : undefined,
                 is_sign_agreement: false
             },
             true

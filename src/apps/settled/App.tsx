@@ -99,7 +99,7 @@ class App extends React.Component<AppProps, {
         let self = this;
         SardineJSBridge.ready(function () {
             SardineJSBridge.getLocation({
-                complete: function (data) {
+                success: function (data) {
                     // console.log(data);
                     // PageExtends.clientLocation = data.longitude + ',' + data.latitude;
 
