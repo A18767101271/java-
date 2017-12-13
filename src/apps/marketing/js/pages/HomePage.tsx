@@ -26,7 +26,7 @@ const MarketItem = (props: { data: any, type: number, shopId: number }) => {
     }
 
     function getRightTime() {
-        if (st <= timestamp && ed > timestamp) {
+        if (dt.status === 1 && st <= timestamp && ed > timestamp) {
             if ((ed - timestamp) > 259200) {
                 return <div className="icon icon-ing">进行中</div>;
             } else {
@@ -34,7 +34,7 @@ const MarketItem = (props: { data: any, type: number, shopId: number }) => {
                 return <div className="icon icon-start">剩余{n}天</div>;
             }
 
-        } else if (st > timestamp) {
+        } else if (dt.status === 1 && st > timestamp) {
             if ((st - timestamp) > 259200) {
                 return <div className="icon icon-end">{moment(st * 1000).format('YYYY.MM.DD')}开启</div>;
             } else {

@@ -3,6 +3,8 @@ import PromotionApis from '../../../../services/promotion-apis';
 import moment from 'moment';
 
 import bridge from '../../../../assets/libs/sardine-bridge';
+import UParams from '../../../../assets/libs/uparams';
+
 const $ = (window as any).$;
 
 function headBar(t1, t2, t) {
@@ -133,7 +135,8 @@ function MJFn(data: any) {
     })
 
     $('.btn-reset').on('click', function () {
-        window.location.href = "#/setmanjian?id=" + exampleId;
+        let parms = UParams();
+        window.location.href = "#/setmanjian?id=" + exampleId + '&shopid=' + parms.shopid; 
     })
 
     PromotionApis.getPromotionInstanceRecord({

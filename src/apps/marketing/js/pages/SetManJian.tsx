@@ -3,6 +3,7 @@ import '../../sass/SetHomePage.scss';
 import { Switch, DatePicker, Picker, Modal, Toast } from 'antd-mobile';
 import classNames from 'classNames';
 import moment from 'moment';
+import UParams from '../../../../assets/libs/uparams';
 
 import EffectiveTimePickerView from '../components/EffectiveTimePickerView';
 import EffectiveTimePickerValue from '../components/EffectiveTimePickerView/EffectiveTimePickerValue';
@@ -54,6 +55,54 @@ export default class SetManJian extends React.Component<SetManJianProps, {
             lineCount: 1,
             agree: false,
             dialogOpen: false
+        }
+    }
+
+    componentWillMount() {
+        let url = UParams();
+        if (url.id) {
+            PromotionApis.getPromotionDetail({ storeId: this.props.shopId, activityId: url.id }).then(data => {
+                if (data.limitUser || data.limitUser === 0) {
+                    this.setState({ limitUser: parseInt(data.limitUser) });
+                }
+                if (data.marketingMeta && data.marketingMeta.fullReduction) {
+                    let arr = data.marketingMeta.fullReduction;
+                    if (arr instanceof Array && arr.length > 0) {
+                        let lines = arr.sort((a, b) => a.fullAmount - b.fullAmount);
+                        let linesObj: any = {};
+                        lines.forEach((p, idx) => {
+                            linesObj['line' + (idx + 1)] = { f: (p.fullAmount / 100), r: (p.discountAmount / 100) }
+                        });
+                        this.setState({
+                            lines: linesObj,
+                            lineCount: lines.length
+                        });
+                    }
+                }
+                if (data.meta && data.meta.limitSpans && data.meta.limitSpans.spans) {
+                    let arr = data.meta.limitSpans.spans;
+                    if (arr instanceof Array && arr.length > 0) {
+
+                        this.setState({
+                            times: arr.map(p => {
+                                let days = p.l;
+                                let is24th = false;
+                                let s = p.s.split(':');
+                                let e = p.e.split(':');
+                                let time = {
+                                    beginHours: parseInt(s[0]),
+                                    beginMinutes: parseInt(s[1]),
+                                    endHours: parseInt(e[0]),
+                                    endMinutes: parseInt(e[1])
+                                };
+                                let v: EffectiveTimePickerValue = { days, is24th, time };
+                                return v;
+                            })
+                        });
+
+                    }
+                }
+            })
         }
     }
 
@@ -135,7 +184,7 @@ export default class SetManJian extends React.Component<SetManJianProps, {
 
 
         const name = lines.map(p => '满' + p.f + '减' + p.r).join(',');
- 
+
         let req: PromotionInstanceAdd = {
             storeId: this.props.shopId,
             name: name,
@@ -146,15 +195,7 @@ export default class SetManJian extends React.Component<SetManJianProps, {
             marketingMeta: JSON.stringify(lines.map(p => { return { fullAmount: parseInt((p.f * 100) + ''), discountAmount: parseInt((p.r * 100) + '') } })),
             meta: JSON.stringify({
                 spans: form.times.map(p => {
-                    const l: number[] = [];
-                    p.day1 && l.push(1);
-                    p.day2 && l.push(2);
-                    p.day3 && l.push(3);
-                    p.day4 && l.push(4);
-                    p.day5 && l.push(5);
-                    p.day6 && l.push(6);
-                    p.day7 && l.push(7);
-
+                    const l = p.days;
                     let s = '00:00';
                     let e = '23:59';
                     const fm = (v: number) => { return v < 10 ? '0' + v : v + '' }
@@ -244,12 +285,12 @@ export default class SetManJian extends React.Component<SetManJianProps, {
         }
 
         return <div className='wrap' data-page='setmanjian'>
-            <div className="l-label">
+            {/* <div className="l-label">
                 <div className="left fl">活动标题</div>
                 <div className="right fr">
                     <input type="text" placeholder="请输入活动标题" />
                 </div>
-            </div>
+            </div> */}
             <DatePicker
                 mode="date"
                 value={this.state.beginDate}
@@ -341,7 +382,7 @@ export default class SetManJian extends React.Component<SetManJianProps, {
     render() {
 
         if (this.state.dialogOpen) {
-            return <EffectiveTimePickerView onEnter={p => this.setState({ dialogOpen: false, times: p })} />
+            return <EffectiveTimePickerView value={this.state.times} onChange={p => this.setState({ dialogOpen: false, times: p })} />
         } else {
             return this.mainRender();
         }

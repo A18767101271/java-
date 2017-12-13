@@ -6,7 +6,8 @@ import './EffectiveTimePickerView.scss';
 
 
 interface EffectiveTimePickerViewProps {
-    onEnter?: (result: EffectiveTimePickerValue[]) => void
+    onChange?: (result: EffectiveTimePickerValue[]) => void;
+    value?: EffectiveTimePickerValue[];
 }
 
 export function formatTimeText(beginHours: number, beginMinutes: number, endHours: number, endMinutes: number) {
@@ -31,17 +32,34 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
     constructor(props: EffectiveTimePickerViewProps) {
         super(props);
 
-        this.state = {
-            dayChecked1: true,
-            dayChecked2: true,
-            dayChecked3: true,
-            dayChecked4: true,
-            dayChecked5: true,
-            dayChecked6: true,
-            dayChecked7: true,
-            allDay: true,
-            times: []
+        if (props.value && props.value.filter(p => p.time).length > 0) {
+            this.state = {
+                dayChecked1: !!props.value[0].days.filter(p => p == 1).length,
+                dayChecked2: !!props.value[0].days.filter(p => p == 2).length,
+                dayChecked3: !!props.value[0].days.filter(p => p == 3).length,
+                dayChecked4: !!props.value[0].days.filter(p => p == 4).length,
+                dayChecked5: !!props.value[0].days.filter(p => p == 5).length,
+                dayChecked6: !!props.value[0].days.filter(p => p == 6).length,
+                dayChecked7: !!props.value[0].days.filter(p => p == 7).length,
+                allDay: false,
+                times: props.value.map(p => {
+                    return p.time as { beginHours: number, beginMinutes: number, endHours: number, endMinutes: number };
+                })
+            }
+        } else {
+            this.state = {
+                dayChecked1: true,
+                dayChecked2: true,
+                dayChecked3: true,
+                dayChecked4: true,
+                dayChecked5: true,
+                dayChecked6: true,
+                dayChecked7: true,
+                allDay: true,
+                times: []
+            }
         }
+
     }
 
     onDayChecked(dayIndex: number, checked: boolean) {
@@ -112,33 +130,32 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
             }
         }
 
+        let days: number[] = [];
+
+        form.dayChecked1 && days.push(1);
+        form.dayChecked2 && days.push(2);
+        form.dayChecked3 && days.push(3);
+        form.dayChecked4 && days.push(4);
+        form.dayChecked5 && days.push(5);
+        form.dayChecked6 && days.push(6);
+        form.dayChecked7 && days.push(0);
+
+
         let result: EffectiveTimePickerValue[] = form.allDay ?
             [{
-                day1: form.dayChecked1,
-                day2: form.dayChecked2,
-                day3: form.dayChecked3,
-                day4: form.dayChecked4,
-                day5: form.dayChecked5,
-                day6: form.dayChecked6,
-                day7: form.dayChecked7,
+                days,
                 is24th: true,
             }]
             :
             form.times.map(p => {
                 return {
-                    day1: form.dayChecked1,
-                    day2: form.dayChecked2,
-                    day3: form.dayChecked3,
-                    day4: form.dayChecked4,
-                    day5: form.dayChecked5,
-                    day6: form.dayChecked6,
-                    day7: form.dayChecked7,
+                    days,
                     is24th: false,
                     time: p
                 }
             });
 
-        this.props.onEnter && this.props.onEnter(result);
+        this.props.onChange && this.props.onChange(result);
     }
 
     render() {
