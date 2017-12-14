@@ -112,7 +112,7 @@ class ShopIntroductionPage extends React.Component<ShopIntroductionPageProps, {
             });
         }
 
-    }
+    }                     
 
 
     onSubmit() {
