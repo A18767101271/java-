@@ -25,7 +25,7 @@ class App extends React.Component<AppProps, {
         lat: number
     }
 }>{
-
+    isGoBindPhone: boolean = false;
     constructor(props: AppProps) {
         super(props);
 
@@ -74,6 +74,7 @@ class App extends React.Component<AppProps, {
             if (!d.phoneConfirmed) {
                 let thisurl = window.location.origin + window.location.pathname + window.location.hash;
                 let url = 'http://h5.tenv.mttstudio.net/sardine/bindmoblie/#/new?redirect=' + encodeURIComponent(thisurl);
+                this.isGoBindPhone = true;
                 window.location.replace(url);
             }
         });
@@ -84,6 +85,8 @@ class App extends React.Component<AppProps, {
                 inited: true,
                 formData: d
             }, () => {
+                if (self.isGoBindPhone)
+                    return;
                 Toast.hide();
                 if (d.baseInfoStatus == 1) {
                     window.location.replace('#/success');
@@ -98,6 +101,8 @@ class App extends React.Component<AppProps, {
                 this.setState({
                     inited: true,
                 }, () => {
+                    if (self.isGoBindPhone)
+                        return;
                     if (!window.location.hash || window.location.hash.length < 3) {
                         window.location.replace('#/ready');
                     }
