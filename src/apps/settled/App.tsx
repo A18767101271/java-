@@ -72,7 +72,9 @@ class App extends React.Component<AppProps, {
 
         AccountApis.getSimpleInfo().then(d => {
             if (!d.phoneConfirmed) {
-                window.location.href = 'http://h5.tenv.mttstudio.net/sardine/bindmoblie/#/new';
+                let thisurl = window.location.origin + window.location.pathname + window.location.hash;
+                let url = 'http://h5.tenv.mttstudio.net/sardine/bindmoblie/#/new?redirect=' + encodeURIComponent(thisurl);
+                window.location.replace(url);
             }
         });
 
