@@ -20,6 +20,20 @@ interface GetDetailWithProducts {
     tableId?: number
 }
 
+export interface GetPagingWithDistance {
+    cityId: number,
+    districtId?: number,
+    lng?: number,
+    lat?: number,
+    sortType?: "default" | "distance" | "sales" | "consumption",
+    page: number,
+    pageSize: number,
+    categoryId?: number,
+    distance?: number,
+    minConsumption?: number,
+    maxConsumption?: number
+}
+
 export interface GetDetailWithProductsData {
     storeId: number,
     merchantName: string,
@@ -48,7 +62,84 @@ export interface GetDetailWithProductsData {
     }>,
 }
 
+export interface GetShopDetailData {
+    merchantName: string;
+    subCategoryName: string;
+    consumption?: number;
+    latitude: number;
+    longitude: number;
+    address: string;
+    picUrlArray?: string[];
+    logoPicUrl?: string;
+    is24th: boolean;
+    firstCloseTime?: string;
+    firstOpenTime?: string;
+    secondCloseTime?: string;
+    secondOpenTime?: string;
+    telephone?: string;
+    activityInstanceDTOs?: { id: number; name: string }[];
+    
+    advanceBespeakDays?: number;
+    advanceBespeakNum?: number;
+    bespeakSwitch?: boolean;
+}
+
+export interface GetPagingWithDistanceData {
+    areaInfo: {
+        adcode: string,
+        name: string
+    }[]
+    storeCategoryInfo: {
+        id: number,
+        name: string,
+        subStoreCategory: {
+            id: number,
+            name: string
+        }[]
+    }[]
+    content: {
+        storeId: number,
+        subCategoryId: number,
+        subCategoryName: string,
+        merchantName: string,
+        desc: string,
+        distance?: number,
+        mixConsumption?: number,
+        consumption?: number,
+        logoPicUrl?: string,
+        activityInstanceDTOs?: {
+            id: number,
+            name: string,
+            type: number
+        }[]
+    }[]
+}
+
+
 export const StoreApis = {
+
+    getPagingWithDistance(req: GetPagingWithDistance) {
+        return request(
+            "kk.h5.merchant.store.pagingwithdistance.get",
+            "1.0",
+            {
+                city_code: req.cityId,
+                district_code: req.districtId,
+                lon: req.lng,
+                lat: req.lat,
+                sort_type: req.sortType || 'default',
+                page: req.page,
+                page_size: req.pageSize,
+                category_id: req.categoryId,
+                distance: req.distance,
+                min_consumption: req.minConsumption,
+                maxConsumption: req.maxConsumption
+            },
+            false
+        ).then(data => {
+            return data as GetPagingWithDistanceData;
+        });
+    },
 
     getDetail(req: GetDetailRequest) {
         return request(
@@ -59,7 +150,7 @@ export const StoreApis = {
             },
             false
         ).then(data => {
-            return data;
+            return data as GetShopDetailData;
         });
     },
 

@@ -9,7 +9,12 @@ export interface GetDishesAndItemsData {
     id: number,
     state: number,
     items: Array<{
-        id: number
+        id: number,
+        num: number,
+        price: number,
+        produtName: string,
+        totalItemAmount: number,
+        productId: number
     }>
 }
 

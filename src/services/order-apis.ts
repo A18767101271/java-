@@ -4,7 +4,7 @@ export interface DirectPayPreviewData {
     storeId: number;
     storeName: string;
     storePic: string;
-    tableId: number
+    tableId: number;
     tableName: string;
     isStoreNewUser: boolean;
     isPlatformNewUser: boolean;
@@ -44,8 +44,37 @@ export interface OrderCreateRequest {
     activitys: OrderCreateActivity[];
 }
 
-export const OrderApis = {
+export interface GetOrderListData {
+    currentPage: number;
+    totalElements: number;
+    totalPages: number;
+    content: {
+        id: number;
+        title?: string;
+        totalAmount: number;
+        realTotalAmount: number;
+        payTime: number;
+        closeTime: number;
+        payStatus: number;
+        createTime: number;
+        orderPicUrl?: string;
+    }[]
+}
 
+export const OrderApis = {
+    getOrderList(req: { page: number, pageSize: number }) {
+        return request(
+            "kk.h5.account.simpleinfo.getorderlist",
+            "1.0",
+            {
+                page: req.page,
+                page_size: req.pageSize
+            },
+            true
+        ).then(data => {
+            return data as GetOrderListData;
+        });
+    },
     directPayPreview(req: DirectPayPreviewRequest) {
         return request(
             "kk.h5.order.directpay.preview",
@@ -71,7 +100,7 @@ export const OrderApis = {
                 no_discount_amount: req.noDiscountAmount,
                 point: req.point,
                 balance: req.balance,
-                pay_channel: req.payChannel, 
+                pay_channel: req.payChannel,
                 order_type: req.orderType,
                 coupons: JSON.stringify(req.coupons || []),
                 activitys: JSON.stringify(req.activitys || [])
@@ -83,5 +112,7 @@ export const OrderApis = {
     }
 
 }
+
+export default OrderApis
 
 

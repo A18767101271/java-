@@ -8,6 +8,7 @@ import './sass/App.scss';
 import { Toast, Modal } from 'antd-mobile';
 
 import SettledApis, { FormData } from '../../services/settled-apis';
+import AccountApis from '../../services/account-apis';
 
 FastClick.attach(window.document.body);
 
@@ -51,7 +52,7 @@ class App extends React.Component<AppProps, {
             }, () => {
                 Toast.hide();
             });
-        }).catch(err => { 
+        }).catch(err => {
             self.setState({
                 formData: undefined
             });
@@ -68,6 +69,13 @@ class App extends React.Component<AppProps, {
 
     componentWillMount() {
         Toast.loading('加载中', 30);
+
+        AccountApis.getSimpleInfo().then(d => {
+            if (!d.phoneConfirmed) {
+                window.location.href = 'http://h5.tenv.mttstudio.net/sardine/bindmoblie/#/new';
+            }
+        });
+
         SettledApis.getFormSingle().then(d => {
             //console.log(d);
             this.setState({

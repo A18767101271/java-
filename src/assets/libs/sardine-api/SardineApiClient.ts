@@ -12,6 +12,7 @@ export class LoginInfo {
     userId?: number;
     userNick?: string;
     isError?: boolean;
+    phoneConfirmed?: boolean;
 }
 
 
@@ -148,7 +149,8 @@ export default class SardineApiClient {
                     let user: LoginInfo = {
                         isLogin: true,
                         userId: data.response.data.accountId,
-                        userNick: data.response.data.nickName
+                        userNick: data.response.data.nickName,
+                        phoneConfirmed: data.response.data.phoneConfirmed
                     }
                     userInfo = user;
                     callback(user, data);
