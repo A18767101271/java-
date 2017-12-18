@@ -205,14 +205,14 @@ export default class SetHongBao extends React.Component<SetHongBaoProps, {
 
         let req: PromotionInstanceAdd = {
             storeId: this.props.storeId,
-            name: '满' + this.state.fullAmount + '减' + this.state.discountAmount + '优惠券',
+            name: '满' + (this.state.fullAmount * 100).toFixed(2) + '减' + (this.state.discountAmount * 100).toFixed(2) + '优惠券',
             startTime: moment(this.state.beginDate).unix(),
             endTime: moment(this.state.endDate).unix(),
             marketingType: 5,
             limitUser: this.state.limitUser,
             marketingMeta: JSON.stringify([{
-                discountAmount: parseInt((this.state.discountAmount * 100) + ''),
-                fullAmount: parseInt((this.state.fullAmount * 100) + ''),
+                discountAmount: (this.state.discountAmount * 100).toFixed(2),
+                fullAmount: (this.state.fullAmount * 100).toFixed(2),
                 grantWay: this.state.grantWay,
                 limitDate: this.state.limitDate,
                 couponNum: this.state.couponNum ? this.state.couponNum : 'maxValue'

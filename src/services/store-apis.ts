@@ -78,7 +78,7 @@ export interface GetShopDetailData {
     secondOpenTime?: string;
     telephone?: string;
     activityInstanceDTOs?: { id: number; name: string }[];
-    
+
     advanceBespeakDays?: number;
     advanceBespeakNum?: number;
     bespeakSwitch?: boolean;
@@ -113,6 +113,21 @@ export interface GetPagingWithDistanceData {
             type: number
         }[]
     }[]
+}
+
+export interface GetGroupsWithProductsData {
+    productGroups: {
+        id: number;
+        name: string;
+    }[]
+    products: {
+        id: number;
+        logoPicUrl: string;
+        name: string;
+        customGroupId: number;
+        realPrice: number;
+    }[]
+
 }
 
 
@@ -171,7 +186,7 @@ export const StoreApis = {
             },
             true
         ).then(data => {
-            return data;
+            return data as GetGroupsWithProductsData;
         });
 
     },

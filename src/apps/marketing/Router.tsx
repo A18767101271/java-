@@ -11,7 +11,7 @@ import SetFanWu from './js/pages/SetFanWu';
 import SetZheKou from './js/pages/SetZheKou';
 import SetHongBao from './js/pages/SetHongBao';
 import ChooseDiscount from './js/pages/ChooseDiscount';
-import ChooseReturn from './js/pages/ChooseReturn';
+
 // export default {
 //     "/": HomePage,
 //     "/details/:id": HomeDetails,
@@ -63,13 +63,12 @@ class Router extends React.Component<{ storeId: number }>{
                 <Route path='/setactivity' render={() => <SetActivityPage storeId={this.props.storeId} />} />
                 <Route path='/setmanjian' render={() => <SetManJian shopId={this.props.storeId} />} />
                 <Route path='/setfanquan' render={() => <Page page={SetFanQuan} />} />
-                <Route path='/setfanwu' render={() => <Page page={SetFanWu} />} />
+                <Route path='/setfanwu' render={() => <SetFanWu storeId={this.props.storeId} />} />
                 <Route path='/setzhekou' render={() => <Page page={SetZheKou} />} />
                 <Route path='/sethongbao' render={() => <SetHongBao storeId={this.props.storeId} />} />
                 <Route path='/choosediscount' render={() => <Page page={ChooseDiscount} />} />
-                <Route path='/choosereturn' render={() => <Page page={ChooseReturn} />} />
                 <Route path='/record' render={() => <HomePage storeId={this.props.storeId} limitStatus={2} />} />
-                <Route path='/' render={() => <HomePage storeId={this.props.storeId} />} />
+                <Route path='/' exact render={() => <HomePage storeId={this.props.storeId} />} />
             </Switch>
         </HashRouter>);
 
