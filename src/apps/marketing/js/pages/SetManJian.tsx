@@ -121,8 +121,6 @@ export default class SetManJian extends React.Component<SetManJianProps, {
 
     }
 
-
-
     onSubmit() {
         let form = this.state;
 
@@ -157,7 +155,6 @@ export default class SetManJian extends React.Component<SetManJianProps, {
             }
         }
 
-
         if (lines.length < 1) {
             Modal.alert('提示', '请输入满减金额');
             return;
@@ -181,7 +178,6 @@ export default class SetManJian extends React.Component<SetManJianProps, {
             Modal.alert('提示', '循环周期无效');
             return;
         }
-
 
         const name = lines.map(p => '满' + p.f + '减' + p.r).join(',');
 
@@ -220,9 +216,6 @@ export default class SetManJian extends React.Component<SetManJianProps, {
         });
 
     }
-
-
-
 
     mainRender() {
 
@@ -377,7 +370,6 @@ export default class SetManJian extends React.Component<SetManJianProps, {
             <button className={classNames("btn-yes", { 'dis': this.state.agree })} disabled={!this.state.agree} onClick={() => this.onSubmit()}>保存</button>
         </div>
     }
-
 
     render() {
 

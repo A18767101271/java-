@@ -137,7 +137,7 @@ class ShopInfomationPage extends React.Component<ShopInfomationPageProps, {
         this.backToMain();
     }
 
-    onBusinessModelChange(val: number) {
+      onBusinessModelChange(val: number) {
         if (val === 1 || val === 2) {
             this.setState({
                 businessModel: val
