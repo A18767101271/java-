@@ -1,6 +1,7 @@
 import { Utils, JsonpFailResponse } from './utils';
 import ApiRequestOptions from './ApiRequestOptions';
 import ApiError from './ApiError';
+import Container from '../sardine-bridge/container';
 
 const sdkver = '4.0.1';
 let isGoingToLogin = false;
@@ -197,8 +198,11 @@ export default class SardineApiClient {
         if (isGoingToLogin)
             return;
         isGoingToLogin = true;
-        var url = generateLoginUrl(this.options);
-        location.href = url;
+
+        if (!Container.isJsBridge) {
+            var url = generateLoginUrl(this.options);
+            location.href = url;
+        }
     }
     isLogin(callback?: (isLogin: boolean | null, raw: any) => void): boolean | undefined {
         if (callback) {
