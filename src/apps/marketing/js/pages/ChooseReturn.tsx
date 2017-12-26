@@ -69,6 +69,8 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
         this.props.onEnter && this.props.onEnter(this.getSelectedItems());
     }
 
+
+    
     render() {
         let self = this;
         const data = this.state.data;

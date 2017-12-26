@@ -1,9 +1,11 @@
 import PromotionApis from '../../../../services/promotion-apis';
 import bridge from '../../../../assets/libs/sardine-bridge';
- 
+
+
 import moment from 'moment';
- 
+
 const $ = (window as any).$;
+
 
 
 function headBar(t1, t2, t) {
@@ -13,6 +15,7 @@ function headBar(t1, t2, t) {
             h += `<div class="headbar blue">活动进行中</div>
                   <button class="btn blue btn-end">提前终止</button>`
         } else {
+            1
             var n = Math.ceil((t2 - t) / 86400);
             h += `<div class="headbar red">剩余` + n + `天</div>
             <button class="btn red btn-end">提前终止</button>`
@@ -51,7 +54,7 @@ function FQFn(data: any) {
     h += `<div class="part1 clearfix">
         <div class="line">
             <div class="left">返券类型：</div>
-            <div class="right">满` + data2[0].fullAmount + `减` + data2[0].discountAmount + `</div>
+            <div class="right">满` + data2[0].fullAmount / 100 + `减` + data2[0].discountAmount / 100 + `</div>
         </div>
         <div class="line">
             <div class="left">活动日期：</div>
@@ -71,9 +74,15 @@ function FQFn(data: any) {
         </div>
      
         <div class="line">
-            <div class="left">有效期限：</div>
-            <div class="right">领券后`+ data2[0].limitDate + `</div>
-        </div>
+            <div class="left">有效期限：</div>`
+    if (data2[0].limitDate == 0) {
+        h += `<div class="right">当天</div>`
+    }
+    else {
+        h += `<div class="right">领券后` + data2[0].limitDate + `天</div>`
+    }
+
+    h += `</div>
     </div>
     <div class="br"></div>`
 

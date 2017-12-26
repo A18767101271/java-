@@ -1,37 +1,12 @@
-import React from 'react';
-import { DatePicker, Picker, Switch, Modal, Toast } from 'antd-mobile';
-import classNames from 'classNames';
-import moment from 'moment';
-import ChooseReturn from './ChooseReturn';
 import '../../sass/SetHomePage.scss';
 import PromotionApis, { PromotionInstanceAdd } from '../../../../services/promotion-apis';
+import UParams from '../../../../assets/libs/uparams';
+import { DatePicker, Picker, Switch, Modal, Toast } from 'antd-mobile';
+import React from 'react';
+import classNames from 'classNames';
+import moment from 'moment';
 
 const data1 = [{
-    label: '全部用户',
-    value: 0,
-},
-{
-    label: '门店新用户',
-    value: 3
-},
-{
-    label: '门店老用户',
-    value: 2
-}];
-
-const data2 = [{
-    label: '店内店外',
-    value: 3
-}, {
-    label: '仅限店内',
-    value: 1,
-},
-{
-    label: '仅限店外',
-    value: 2
-}];
-
-const data3 = [{
     label: '当天',
     value: 0,
 }, {
@@ -96,37 +71,65 @@ const data3 = [{
 }];
 
 
-interface SetFanWuProps {
+interface SetFanQuanProps {
     storeId: number
 }
 
-class SetFanWu extends React.Component<SetFanWuProps, {
+export default class SetFanQuan extends React.Component<SetFanQuanProps, {
     beginDate?: Date;
     endDate?: Date;
-
-    grantWay?: number;
-    limitDate?: number;
-    limitUser?: number;
-
+    discountAmount?: number;
+    fullAmount?: number;
     couponNum?: number;
+    grantCondition?: number;
+    limitDate?: number;
 
-    selected?: { id: number, num: number, name?: string }[]
-
-    chooseFoods: boolean;
 
     agree: boolean;
-}> {
+}>{
 
-    constructor(props: SetFanWuProps) {
+    constructor(props: SetFanQuanProps) {
         super(props);
         this.state = {
             beginDate: moment().startOf('day').toDate(),
-            chooseFoods: false,
             agree: false
         };
     }
 
+    componentWillMount() {
+
+        let url = UParams();
+        if (url.id) {
+            PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => {
+
+                if (data.marketingMeta && data.marketingMeta.returnTicket) {
+                    let arr = JSON.parse(data.marketingMeta.returnTicket);
+                    if (arr instanceof Array && arr.length > 0) {
+                        let d = arr[0];
+
+                        if (d.fullAmount && d.discountAmount) {
+                            this.setState({ fullAmount: d.fullAmount / 100, discountAmount: d.discountAmount / 100 });
+                        }
+
+                        if (d.limitDate || d.limitDate === 0) {
+                            this.setState({ limitDate: parseInt(d.limitDate) });
+                        }
+
+                        if (d.grantCondition) {
+                            this.setState({ grantCondition: parseInt(d.grantCondition) });
+                        }
+
+                        if (d.couponNum) {
+                            this.setState({ couponNum: parseInt(d.couponNum) });
+                        }
+                    }
+                }
+            })
+        }
+    }
+
     onSubmit() {
+
         if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
             Modal.alert('提示', '开始时间无效');
             return;
@@ -137,11 +140,15 @@ class SetFanWu extends React.Component<SetFanWuProps, {
             return;
         }
 
-        if (!this.state.selected || this.state.selected.length < 1) {
-            Modal.alert('提示', '未设置赠送商品');
+        if (!this.state.fullAmount || isNaN(this.state.fullAmount) || this.state.fullAmount <= 0) {
+            Modal.alert('提示', '满金额无效');
             return;
         }
 
+        if (!this.state.discountAmount || isNaN(this.state.discountAmount) || this.state.discountAmount <= 0 || this.state.discountAmount >= this.state.fullAmount) {
+            Modal.alert('提示', '减金额无效');
+            return;
+        }
 
         if (this.state.couponNum) {
             if (this.state.couponNum < 0) {
@@ -149,13 +156,9 @@ class SetFanWu extends React.Component<SetFanWuProps, {
                 return;
             }
         }
-        if (this.state.limitUser === undefined) {
-            Modal.alert('提示', '面向用户无效');
-            return;
-        }
 
-        if (this.state.grantWay === undefined) {
-            Modal.alert('提示', '发放途径无效');
+        if (!this.state.grantCondition || isNaN(this.state.grantCondition) || this.state.grantCondition <= 0) {
+            Modal.alert('提示', '发放条件无效');
             return;
         }
 
@@ -164,17 +167,20 @@ class SetFanWu extends React.Component<SetFanWuProps, {
             return;
         }
 
+
+
         let req: PromotionInstanceAdd = {
             storeId: this.props.storeId,
-            name: this.state.selected.map(p => p.name + 'x' + p.num).join() + '兑换券',
+            name: '【满' + this.state.fullAmount + '减' + this.state.discountAmount + '】',
             startTime: moment(this.state.beginDate).unix(),
             endTime: moment(this.state.endDate).unix(),
-            marketingType: 4,
-            limitUser: this.state.limitUser,
+            marketingType: 3,
+
             marketingMeta: JSON.stringify([{
-                products: this.state.selected.map(p => { return { productId: p.id, productName: p.name, productNum: p.num } }),
-                grantWay: this.state.grantWay,
+                discountAmount: parseInt((this.state.discountAmount * 100) + ''),
+                fullAmount: parseInt((this.state.fullAmount * 100) + ''),
                 limitDate: this.state.limitDate,
+                grantCondition: this.state.grantCondition,
                 couponNum: this.state.couponNum ? this.state.couponNum : 'maxValue'
             }])
         };
@@ -191,9 +197,16 @@ class SetFanWu extends React.Component<SetFanWuProps, {
         return { success: true, msg: 'ok' };
     }
 
-    mainRender() {
-        return <div className='wrap' data-page='setfanwu' >
 
+    render() {
+        return (<div className='wrap' data-page='setfanquan' >
+
+            <div className="l-label">
+                <div className="left fl">优惠券类型</div>
+                <div className="right fr">
+                    <span className="distt">满减券</span>
+                </div>
+            </div>
 
             <DatePicker
                 mode="date"
@@ -233,19 +246,31 @@ class SetFanWu extends React.Component<SetFanWuProps, {
                 </div>
             </DatePicker>
 
-
-            <div className="l-label clearfix" onClick={() => this.setState({ chooseFoods: true })}>
-                <div className="left fl">赠送商品</div>
-                <div className="right fr"><span className="span-goods">{this.state.selected && this.state.selected.length > 0 ? '已设置' : '请选择商品项目'}</span><i></i></div>
+            <div className="l-title">
+                <i></i>
+                <span>优惠信息</span>
             </div>
 
+            <div className="l-manjian">
+                <div className="l-label">
+                    <div className="left fl">满</div>
+                    <div className="right fr"><input type="text" placeholder="在此输入金额" className="man-input" value={this.state.fullAmount || ''} onChange={e => this.setState({ fullAmount: parseFloat(e.target.value) })} />元</div>
+                </div>
+                <div className="l-label">
+                    <div className="left fl">减</div>
+                    <div className="right fr"><input type="text" placeholder="在此输入金额" className="jian-input" value={this.state.discountAmount || ''} onChange={e => this.setState({ discountAmount: parseFloat(e.target.value) })} />元</div>
 
+                </div>
+            </div>
 
             <div className="l-label">
-                <div className="left fl">发放数量</div>
-                <div className="right fr">
-                    <input type="text" className="num-input" placeholder="在此输入数量，默认不限" value={this.state.couponNum || ''} onChange={e => this.setState({ couponNum: parseInt(e.target.value) })} />
-                </div>
+                <div className="left fl">发放条件</div>
+                <div className="right fr"><span>订单满</span><input type="text" className="money-input" value={this.state.grantCondition || ''} onChange={e => this.setState({ grantCondition: parseFloat(e.target.value) })} /><span>元</span></div>
+            </div>
+
+            <div className="l-label">
+                <div className="left fl">发券数量</div>
+                <div className="right fr"><input type="text" className="num-input" placeholder="在此输入数量，默认不限" value={this.state.couponNum || ''} onChange={e => this.setState({ couponNum: parseInt(e.target.value) })} /></div>
             </div>
 
             <div className="l-title">
@@ -255,36 +280,6 @@ class SetFanWu extends React.Component<SetFanWuProps, {
 
             <Picker
                 data={data1}
-                cols={1}
-                title="面向用户"
-                value={this.state.limitUser ? [this.state.limitUser] : undefined}
-                onOk={vals => { if (vals && vals.length == 1) { this.setState({ limitUser: vals[0] }) } }}
-            >
-                <div className="l-label">
-                    <div className="left fl">面向用户</div>
-                    <div className="right fr">
-                        <span id="pick-user">{(data1.find(p => p.value == this.state.limitUser) || { label: '未设置' }).label}</span>
-                        <i></i>
-                    </div>
-                </div>
-            </Picker>
-            <Picker
-                data={data2}
-                cols={1}
-                title="发放途径"
-                value={this.state.grantWay ? [this.state.grantWay] : undefined}
-                onOk={vals => { if (vals && vals.length == 1) { this.setState({ grantWay: vals[0] }) } }}
-            >
-                <div className="l-label">
-                    <div className="left fl">发放途径</div>
-                    <div className="right fr">
-                        <span id="pick-channel">{(data2.find(p => p.value == this.state.grantWay) || { label: '未设置' }).label}</span>
-                        <i></i>
-                    </div>
-                </div>
-            </Picker>
-            <Picker
-                data={data3}
                 title="有效期限"
                 cols={1}
                 value={this.state.limitDate ? [this.state.limitDate] : undefined}
@@ -293,7 +288,7 @@ class SetFanWu extends React.Component<SetFanWuProps, {
                 <div className="l-label">
                     <div className="left fl">有效期限</div>
                     <div className="right fr">
-                        <span id="pick-time">{(data3.find(p => { return p.value == this.state.limitDate }) || { label: '未设置' }).label}</span>
+                        <span id="pick-time">{(data1.find(p => { return p.value == this.state.limitDate }) || { label: '未设置' }).label}</span>
                         <i></i>
                     </div>
                 </div>
@@ -305,21 +300,9 @@ class SetFanWu extends React.Component<SetFanWuProps, {
                 <Switch checked={this.state.agree} onChange={e => this.setState({ agree: e })} />
             </div>
             <button className={classNames("btn-yes", { 'dis': this.state.agree })} disabled={!this.state.agree} onClick={() => this.onSubmit()}>保存</button>
-        </div >
+
+        </div>)
     }
 
-    render() {
-        if (this.state.chooseFoods) {
-            return <ChooseReturn storeId={this.props.storeId} onEnter={selected => {
-                this.setState({
-                    selected: selected,
-                    chooseFoods: false
-                });
-            }} />
-        } else {
-            return this.mainRender();
-        }
-    }
-}
+};
 
-export default SetFanWu;
