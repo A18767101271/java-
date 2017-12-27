@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import classNames from 'classNames';
 import StoreApis, { GetGroupsWithProductsData } from '../../../../services/store-apis';
@@ -7,6 +5,8 @@ import '../../sass/SetHomePage.scss';
 
 interface ChooseReturnProps {
     storeId: number;
+    type: string;
+    selected: any;
     onEnter?: (selected: { id: number, num: number, name: string }[]) => void;
 }
 
@@ -28,19 +28,27 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
             pageNumber: 0,
             pageSize: 999,
         }).then(data => {
-            console.log(data);
             this.setState({ data: data });
         });
+
+        if (this.props.selected) {
+            this.setState({
+                selected: this.props.selected
+            })
+        }
+
     }
 
 
     onItemAdd(id: number, num: number) {
         let s = this.state.selected.find(p => p.id === id);
+
         if (s) {
             s.num += num;
         } else {
             s = { id, num };
             this.state.selected.push(s);
+
         }
         if (s.num < 0) {
             s.num = 0;
@@ -69,7 +77,10 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
         this.props.onEnter && this.props.onEnter(this.getSelectedItems());
     }
 
+
+
     render() {
+
         let self = this;
         const data = this.state.data;
 

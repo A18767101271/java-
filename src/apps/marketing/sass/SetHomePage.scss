@@ -203,16 +203,11 @@
                 font-size: rem(25px);
                 color: #3a7dff;
             }
-            .btn {
-                float: right; //margin-top: rem(20px);
+            .am-switch {
+                float: right;
+                margin-top: rem(20px);
                 width: rem(131px);
                 height: rem(88px);
-                background: url(../image/yy_icon_03.jpg)center center no-repeat;
-                background-size: rem(131px) rem(88px);
-            }
-            .btn.active {
-                background: url(../image/yy_icon_05.jpg)center center no-repeat;
-                background-size: rem(131px) rem(88px);
             }
         }
         .btn-yes {
@@ -782,16 +777,11 @@
                 font-size: rem(25px);
                 color: #3a7dff;
             }
-            .btn {
-                float: right; //margin-top: rem(20px);
+            .am-switch {
+                float: right;
+                margin-top: rem(20px);
                 width: rem(131px);
                 height: rem(88px);
-                background: url(../image/yy_icon_03.jpg)center center no-repeat;
-                background-size: rem(131px) rem(88px);
-            }
-            .btn.active {
-                background: url(../image/yy_icon_05.jpg)center center no-repeat;
-                background-size: rem(131px) rem(88px);
             }
         }
         .btn-yes {
