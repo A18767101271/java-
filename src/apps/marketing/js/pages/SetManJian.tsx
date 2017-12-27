@@ -221,9 +221,6 @@ export default class SetManJian extends React.Component<SetManJianProps, {
 
         let self = this;
 
-
-
-
         function Line(id: number) {
             let line = self.state.lines['line' + id] as { f?: number; r?: number; };
             if (!line) {
