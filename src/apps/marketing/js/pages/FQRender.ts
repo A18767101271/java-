@@ -6,8 +6,6 @@ import moment from 'moment';
 
 const $ = (window as any).$;
 
-
-
 function headBar(t1, t2, t) {
     var h = "";
     if (t1 <= t && t < t2) {
@@ -58,7 +56,7 @@ function FQFn(data: any) {
         </div>
         <div class="line">
             <div class="left">活动日期：</div>
-            <div class="right">` + moment(st * 1000).format('YYYY-MM-DD') + `~` + moment(ed * 1000).format('YYYY-MM-DD') + `</div>
+            <div class="right">` + moment(st * 1000).format('YYYY.MM.DD') + `~` + moment(ed * 1000).format('YYYY.MM.DD') + `</div>
         </div>
         <div class="line">
             <div class="left">创建日期：</div>

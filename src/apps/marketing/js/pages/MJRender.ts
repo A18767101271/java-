@@ -1,5 +1,5 @@
 import PromotionApis from '../../../../services/promotion-apis';
-  
+
 import moment from 'moment';
 
 import bridge from '../../../../assets/libs/sardine-bridge';
@@ -32,14 +32,14 @@ function headBar(t1, t2, t) {
 }
 
 function MJFn(data: any) {
-   
+    console.log(data);
     var exampleId = data.activityId;
     var h = "";
     var timestamp = (new Date().getTime() / 1000);
     var st = data.startTime;
     var ed = data.endTime;
     var day = "";
-    var arr1 = ['全部用户', '', '', '门店新用户', '门店老用户'];
+    var arr1 = ['全部用户', '', '门店新用户', '门店老用户'];
     var arr2 = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
     var time = "";
 
@@ -136,7 +136,7 @@ function MJFn(data: any) {
 
     $('.btn-reset').on('click', function () {
         let parms = UParams();
-        window.location.href = "#/setmanjian?id=" + exampleId + '&shopid=' + parms.shopid; 
+        window.location.href = "#/setmanjian?id=" + exampleId + '&shopid=' + parms.shopid;
     })
 
     PromotionApis.getPromotionInstanceRecord({

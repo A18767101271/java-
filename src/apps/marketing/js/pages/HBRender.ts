@@ -43,8 +43,8 @@ function HBFn(data: any) {
     if (typeof data2 == "string") {
         data2 = JSON.parse(data.marketingMeta.redPacket);
     }
-    var arr1 = ['仅限店内', '仅限店外', '店内店外'];
-    var arr2 = ['全部用户', '', '', '门店新用户', '门店老用户'];
+    var arr1 = ['', '仅限店内', '仅限店外', '店内店外'];
+    var arr2 = ['全部用户', '', '门店新用户', '门店老用户'];
 
     if (data.status == 2) {
         h += `<div class="headbar red">已结束</div>
@@ -79,9 +79,16 @@ function HBFn(data: any) {
             <div class="right">`+ arr1[data2[0].grantWay] + `</div>
         </div>
         <div class="line">
-            <div class="left">有效期限：</div>
-            <div class="right">领券后`+ data2[0].limitDate + `日</div>
-        </div>
+            <div class="left">有效期限：</div>`
+
+    if (data2[0].limitDate == 0) {
+        h += `<div class="right">当天</div>`
+    }
+    else {
+        h += `<div class="right">领券后` + data2[0].limitDate + `天</div>`
+    }
+
+    h += `</div>
     </div>
     <div class="br"></div>`
 
