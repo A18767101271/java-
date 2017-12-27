@@ -111,7 +111,7 @@ class SetFanWu extends React.Component<SetFanWuProps, {
 
     couponNum?: number;
 
-    selected?: { id: number, num: number, name?: string }[]
+    selected?: { id: number, num: number, name?: string, price?: number }[]
 
     chooseFoods: boolean;
 

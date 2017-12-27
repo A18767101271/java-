@@ -645,16 +645,11 @@
                 font-size: rem(25px);
                 color: #3a7dff;
             }
-            .btn {
-                float: right; //margin-top: rem(20px);
+            .am-switch {
+                float: right;
+                margin-top: rem(20px);
                 width: rem(131px);
                 height: rem(88px);
-                background: url(../image/yy_icon_03.jpg)center center no-repeat;
-                background-size: rem(131px) rem(88px);
-            }
-            .btn.active {
-                background: url(../image/yy_icon_05.jpg)center center no-repeat;
-                background-size: rem(131px) rem(88px);
             }
         }
         .btn-yes {
@@ -1014,6 +1009,16 @@
                 top: 0;
             }
         }
+        .t-tip2 {
+            float: left;
+            width: 10rem;
+            font-size: rem(28px);
+            position: relative;
+            height: rem(80px);
+            line-height: rem(80px);
+            text-align: center;
+            color: #a4a5a9;
+        }
         .contain {
             float: left;
             width: 10rem;
@@ -1111,6 +1116,19 @@
                             font-size: rem(28px);
                             overflow: hidden;
                         }
+                    }
+                    .btn-rad {
+                        width: rem(44px);
+                        height: rem(44px);
+                        background: url(../image/Unchecked.png)center center no-repeat;
+                        background-size: rem(44px) rem(44px);
+                        position: absolute;
+                        right: rem(19px);
+                        top: rem(79px);
+                    }
+                    .btn-rad.active {
+                        background: url(../image/checkmark.png)center center no-repeat;
+                        background-size: rem(44px) rem(44px);
                     }
                 }
             }
