@@ -69,12 +69,17 @@ function FQFn(data: any) {
             <div class="right">订单满`+ data2[0].grantCondition + `元</div>
         </div>
         <div class="line">
-            <div class="left">发券数量：</div>
-            <div class="right">`+ data2[0].couponNum + `张</div>
-        </div>
-     
-        <div class="line">
-            <div class="left">有效期限：</div>`
+            <div class="left">发券数量：</div>`
+    if (data2[0].couponNum == 'maxValue') {
+        h += `<div class="right">不限</div>`
+    }
+    else {
+        h += `<div class="right" > ` + data2[0].couponNum + `张 </div>`
+    }
+
+    h += `</div>
+        <div class="line" >
+            <div class="left" > 有效期限：</div>`
     if (data2[0].limitDate == 0) {
         h += `<div class="right">当天</div>`
     }

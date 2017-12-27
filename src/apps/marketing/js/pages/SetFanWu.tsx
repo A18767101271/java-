@@ -1,5 +1,6 @@
 import React from 'react';
 import { DatePicker, Picker, Switch, Modal, Toast } from 'antd-mobile';
+import UParams from '../../../../assets/libs/uparams';
 import classNames from 'classNames';
 import moment from 'moment';
 import ChooseReturn from './ChooseReturn';
@@ -126,6 +127,44 @@ class SetFanWu extends React.Component<SetFanWuProps, {
         };
     }
 
+
+    componentWillMount() {
+
+        let url = UParams();
+        if (url.id) {
+            PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => {
+
+                if (data.marketingMeta && data.marketingMeta.returnProduct) {
+                    let arr = JSON.parse(data.marketingMeta.returnProduct);
+                    if (arr instanceof Array && arr.length > 0) {
+                        let d = arr[0];
+
+                        if (d.grantWay) {
+                            this.setState({ grantWay: parseInt(d.grantWay) });
+                        }
+
+                        if (d.limitDate || d.limitDate === 0) {
+                            this.setState({ limitDate: parseInt(d.limitDate) });
+                        }
+
+                        if (d.limitUser) {
+                            this.setState({ limitUser: parseInt(d.limitUser) });
+                        }
+
+                        if (d.couponNum) {
+                            this.setState({ couponNum: parseInt(d.couponNum) });
+                        }
+
+                        if (d.products && d.products.length > 0) {
+                            this.setState({ selected: d.products });
+                        }
+                    }
+                }
+            })
+        }
+    }
+
+
     onSubmit() {
         if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
             Modal.alert('提示', '开始时间无效');
@@ -194,7 +233,6 @@ class SetFanWu extends React.Component<SetFanWuProps, {
     mainRender() {
         return <div className='wrap' data-page='setfanwu' >
 
-
             <DatePicker
                 mode="date"
                 value={this.state.beginDate}
@@ -238,8 +276,6 @@ class SetFanWu extends React.Component<SetFanWuProps, {
                 <div className="left fl">赠送商品</div>
                 <div className="right fr"><span className="span-goods">{this.state.selected && this.state.selected.length > 0 ? '已设置' : '请选择商品项目'}</span><i></i></div>
             </div>
-
-
 
             <div className="l-label">
                 <div className="left fl">发放数量</div>
@@ -309,8 +345,9 @@ class SetFanWu extends React.Component<SetFanWuProps, {
     }
 
     render() {
+
         if (this.state.chooseFoods) {
-            return <ChooseReturn storeId={this.props.storeId} onEnter={selected => {
+            return <ChooseReturn selected={this.state.selected} type={'fanwu'} storeId={this.props.storeId} onEnter={selected => {
                 this.setState({
                     selected: selected,
                     chooseFoods: false
