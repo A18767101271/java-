@@ -1,8 +1,7 @@
 import PromotionApis from '../../../../services/promotion-apis';
-
 import moment from 'moment';
-
 import bridge from '../../../../assets/libs/sardine-bridge';
+import UParams from '../../../../assets/libs/uparams';
 
 const $ = (window as any).$;
 
@@ -158,7 +157,8 @@ function ZKFn(data: any) {
     })
 
     $('.btn-reset').on('click', function () {
-        window.location.href = "#/setzhekou?id=" + exampleId;
+        let parms = UParams();
+        window.location.href = "#/setzhekou?id=" + exampleId + '&shopid=' + parms.shopid;;
     })
 
     PromotionApis.getPromotionInstanceRecord({

@@ -1,8 +1,7 @@
 import PromotionApis from '../../../../services/promotion-apis';
 import bridge from '../../../../assets/libs/sardine-bridge';
-
-
 import moment from 'moment';
+import UParams from '../../../../assets/libs/uparams';
 
 const $ = (window as any).$;
 
@@ -128,7 +127,8 @@ function FQFn(data: any) {
     })
 
     $('.btn-reset').on('click', function () {
-        window.location.href = "#/setfanquan?id=" + exampleId;
+        let parms = UParams();
+        window.location.href = "#/setfanquan?id=" + exampleId + '&shopid=' + parms.shopid;
     })
 
     PromotionApis.getPromotionInstanceRecord({

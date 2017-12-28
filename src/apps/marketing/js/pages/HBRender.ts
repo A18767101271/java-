@@ -1,13 +1,9 @@
 import PromotionApis from '../../../../services/promotion-apis';
-
 import moment from 'moment';
-
 import bridge from '../../../../assets/libs/sardine-bridge';
-
 import UParams from '../../../../assets/libs/uparams';
 
 const $ = (window as any).$;
-
 
 function headBar(t1, t2, t) {
     var h = "";
@@ -34,6 +30,9 @@ function headBar(t1, t2, t) {
 }
 
 function HBFn(data: any) {
+
+    console.log(data);
+
     var exampleId = data.activityId;
     var h = "";
     var timestamp = (new Date().getTime() / 1000);
@@ -44,7 +43,7 @@ function HBFn(data: any) {
         data2 = JSON.parse(data.marketingMeta.redPacket);
     }
     var arr1 = ['', '仅限店内', '仅限店外', '店内店外'];
-    var arr2 = ['全部用户', '', '门店新用户', '门店老用户'];
+    var arr2 = ['全部用户', '', '门店老用户', '门店新用户'];
 
     if (data.status == 2) {
         h += `<div class="headbar red">已结束</div>
@@ -63,12 +62,19 @@ function HBFn(data: any) {
             <div class="right">`+ moment(data.gmtCreate * 1000).format('YYYY.MM.DD') + `</div>
         </div>
         <div class="line">
-            <div class="left">发放数量：</div>
-            <div class="right">`+ data2[0].couponNum + `个</div>
-        </div>
+            <div class="left">发放数量：</div>`
+
+    if (data2[0].couponNum == 'maxValue') {
+        h += `<div class="right">不限</div>`
+    }
+    else {
+        h += `<div class="right" > ` + data2[0].couponNum + `张 </div>`
+    }
+
+    h += ` </div>
         <div class="line">
             <div class="left">发放奖励：</div>
-            <div class="right">满`+ data2[0].fullAmount + `减` + data2[0].discountAmount + `优惠券</div>
+            <div class="right">`+ data.name + `</div>
         </div>
         <div class="line">
             <div class="left">面向用户：</div>
@@ -95,6 +101,11 @@ function HBFn(data: any) {
     $('.wrap').append(h);
 
     $('.btn-end').on('click', function () {
+
+        // PromotionApis.promotionInstanceClose({
+        //     storeId: 1,
+        //     instanceId: exampleId}).then(_data=>{ window.location.href = "#/";})
+
         bridge.dialog({
             title: "提示",
             content: "您确认提前终止该项活动？",

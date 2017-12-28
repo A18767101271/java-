@@ -101,9 +101,9 @@ export default class SetFanQuan extends React.Component<SetFanQuanProps, {
         let url = UParams();
         if (url.id) {
             PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => {
-
+                console.log(1, data);
                 if (data.marketingMeta && data.marketingMeta.returnTicket) {
-                    let arr = JSON.parse(data.marketingMeta.returnTicket);
+                    let arr = data.marketingMeta.returnTicket;
                     if (arr instanceof Array && arr.length > 0) {
                         let d = arr[0];
 
