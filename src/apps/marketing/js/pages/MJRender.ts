@@ -1,9 +1,8 @@
 import PromotionApis from '../../../../services/promotion-apis';
-  
 import moment from 'moment';
-
 import bridge from '../../../../assets/libs/sardine-bridge';
 import UParams from '../../../../assets/libs/uparams';
+
 
 const $ = (window as any).$;
 
@@ -32,14 +31,14 @@ function headBar(t1, t2, t) {
 }
 
 function MJFn(data: any) {
-   
+    console.log(data);
     var exampleId = data.activityId;
     var h = "";
     var timestamp = (new Date().getTime() / 1000);
     var st = data.startTime;
     var ed = data.endTime;
     var day = "";
-    var arr1 = ['全部用户', '', '', '门店新用户', '门店老用户'];
+    var arr1 = ['全部用户', '', '门店新用户', '门店老用户'];
     var arr2 = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
     var time = "";
 
@@ -80,7 +79,7 @@ function MJFn(data: any) {
         </div>
         <div class="line">
             <div class="left">优惠信息：</div>
-            <div class="right">` + data.desc + `</div>
+            <div class="right">` + data.name + `</div>
         </div>
         <div class="line">
             <div class="left">面向用户：</div>
@@ -100,6 +99,11 @@ function MJFn(data: any) {
     $('.wrap').append(h);
 
     $('.btn-end').on('click', function () {
+
+        // PromotionApis.promotionInstanceClose({
+        //     storeId: 1,
+        //     instanceId: exampleId}).then(_data=>{ window.location.href = "#/";})
+
         bridge.dialog({
             title: "提示",
             content: "您确认提前终止该项活动？",
@@ -136,7 +140,7 @@ function MJFn(data: any) {
 
     $('.btn-reset').on('click', function () {
         let parms = UParams();
-        window.location.href = "#/setmanjian?id=" + exampleId + '&shopid=' + parms.shopid; 
+        window.location.href = "#/setmanjian?id=" + exampleId + '&shopid=' + parms.shopid;
     })
 
     PromotionApis.getPromotionInstanceRecord({

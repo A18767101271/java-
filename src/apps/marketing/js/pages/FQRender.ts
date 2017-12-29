@@ -1,12 +1,9 @@
 import PromotionApis from '../../../../services/promotion-apis';
 import bridge from '../../../../assets/libs/sardine-bridge';
-
-
 import moment from 'moment';
+import UParams from '../../../../assets/libs/uparams';
 
 const $ = (window as any).$;
-
-
 
 function headBar(t1, t2, t) {
     var h = "";
@@ -58,7 +55,7 @@ function FQFn(data: any) {
         </div>
         <div class="line">
             <div class="left">活动日期：</div>
-            <div class="right">` + moment(st * 1000).format('YYYY-MM-DD') + `~` + moment(ed * 1000).format('YYYY-MM-DD') + `</div>
+            <div class="right">` + moment(st * 1000).format('YYYY.MM.DD') + `~` + moment(ed * 1000).format('YYYY.MM.DD') + `</div>
         </div>
         <div class="line">
             <div class="left">创建日期：</div>
@@ -130,7 +127,8 @@ function FQFn(data: any) {
     })
 
     $('.btn-reset').on('click', function () {
-        window.location.href = "#/setfanquan?id=" + exampleId;
+        let parms = UParams();
+        window.location.href = "#/setfanquan?id=" + exampleId + '&shopid=' + parms.shopid;
     })
 
     PromotionApis.getPromotionInstanceRecord({

@@ -93,9 +93,6 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
         let self = this;
         const data = this.state.data;
 
-
-        console.log(this.state.selected);
-
         if (!data) {
             return <p>加载中</p>
         }
@@ -148,7 +145,7 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
                             <h1>{p.name}</h1>
                             <h2>￥{p.realPrice / 100}</h2>
                             <span className="span-tip">{(data.productGroups.find(t => t.id == p.customGroupId) || { name: '' }).name}</span>
-                            <div className='btn-rad'></div>
+                            <div className={classNames('btn-rad', { 'active': this.state.selected[0] && (this.state.selected[0].id == p.id) })}></div>
                         </div>
                     </div>
                 );

@@ -1,5 +1,4 @@
 import '../../sass/HomePage.scss';
-
 import PromotionApis, { GetPromotionListData } from '../../../../services/promotion-apis';
 import React from 'react';
 import classNames from 'classNames';

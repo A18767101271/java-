@@ -62,6 +62,9 @@ export default class SetManJian extends React.Component<SetManJianProps, {
         let url = UParams();
         if (url.id) {
             PromotionApis.getPromotionDetail({ storeId: this.props.shopId, activityId: url.id }).then(data => {
+
+                console.log(1, data);
+
                 if (data.limitUser || data.limitUser === 0) {
                     this.setState({ limitUser: parseInt(data.limitUser) });
                 }

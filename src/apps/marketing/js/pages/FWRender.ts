@@ -1,8 +1,7 @@
 import PromotionApis from '../../../../services/promotion-apis';
- 
 import moment from 'moment';
-
 import bridge from '../../../../assets/libs/sardine-bridge';
+import UParams from '../../../../assets/libs/uparams';
 
 const $ = (window as any).$;
 
@@ -37,8 +36,8 @@ function FWFn(data: any) {
     var timestamp = (new Date().getTime() / 1000);
     var st = data.startTime;
     var ed = data.endTime;
-    var arr1 = ['仅限店内', '仅限店外', '店内店外'];
-    var arr2 = ['门店新用户', '门店老用户', '全部用户'];
+    var arr1 = ['', '仅限店内', '仅限店外', '店内店外'];
+    var arr2 = ['全部用户', '', '门店老用户', '门店新用户'];
     var data2 = data.marketingMeta.returnProduct;
     if (typeof data2 == "string") {
         data2 = JSON.parse(data.marketingMeta.returnProduct);
@@ -79,9 +78,16 @@ function FWFn(data: any) {
             <div class="right">`+ arr2[data.limitUser] + `</div>
         </div>
         <div class="line">
-        <div class="left">有效期限：</div>
-        <div class="right">领券后`+ data2[0].limitDate + `</div>
-    </div>
+        <div class="left">有效期限：</div>`
+
+    if (data2[0].limitDate == 0) {
+        h += `<div class="right">当天</div>`
+    }
+    else {
+        h += `<div class="right">领券后` + data2[0].limitDate + `天</div>`
+    }
+
+    h += `</div>
     </div>
     <div class="br"></div>`
 
@@ -123,7 +129,8 @@ function FWFn(data: any) {
     })
 
     $('.btn-reset').on('click', function () {
-        window.location.href = "#/setfanwu?id=" + exampleId;
+        let parms = UParams();
+        window.location.href = "#/setfanwu?id=" + exampleId + '&shopid=' + parms.shopid;;
     })
 
     PromotionApis.getPromotionInstanceRecord({

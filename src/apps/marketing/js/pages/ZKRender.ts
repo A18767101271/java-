@@ -1,8 +1,7 @@
 import PromotionApis from '../../../../services/promotion-apis';
-  
 import moment from 'moment';
-
 import bridge from '../../../../assets/libs/sardine-bridge';
+import UParams from '../../../../assets/libs/uparams';
 
 const $ = (window as any).$;
 
@@ -38,7 +37,7 @@ function ZKFn(data: any) {
     var timestamp = (new Date().getTime() / 1000);
     var st = data.startTime;
     var ed = data.endTime;
-    var arr1 = ['全部用户', '', '', '门店新用户', '门店老用户'];
+    var arr1 = ['全部用户', '', '门店新用户', '门店老用户'];
     var arr2 = ['', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
     var data2 = data.marketingMeta.singlePromotion;
     if (typeof data2 == "string") {
@@ -158,7 +157,8 @@ function ZKFn(data: any) {
     })
 
     $('.btn-reset').on('click', function () {
-        window.location.href = "#/setzhekou?id=" + exampleId;
+        let parms = UParams();
+        window.location.href = "#/setzhekou?id=" + exampleId + '&shopid=' + parms.shopid;;
     })
 
     PromotionApis.getPromotionInstanceRecord({

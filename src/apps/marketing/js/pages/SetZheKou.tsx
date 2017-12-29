@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../sass/SetHomePage.scss';
 import { DatePicker, Picker, Switch, Modal, Toast } from 'antd-mobile';
-// import UParams from '../../../../assets/libs/uparams';
+//import UParams from '../../../../assets/libs/uparams';
 import classNames from 'classNames';
 import moment from 'moment';
 import ChooseReturn from './ChooseReturn';
@@ -71,6 +71,35 @@ class SetZheKou extends React.Component<SetZheKouProps, {
 
         };
     }
+
+    // componentWillMount() {
+
+    //     let url = UParams();
+    //     if (url.id) {
+    //         PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => {
+
+    //             if (data.marketingMeta && data.marketingMeta.returnProduct) {
+    //                 let arr = JSON.parse(data.marketingMeta.returnProduct);
+    //                 if (arr instanceof Array && arr.length > 0) {
+    //                     let d = arr[0];
+
+    //                     if (d.limitUser) {
+    //                         this.setState({ limitUser: parseInt(d.limitUser) });
+    //                     }
+
+    //                     if (d.limitNum) {
+    //                         this.setState({ limitNum: parseInt(d.limitNum) });
+    //                     }
+
+    //                     if (d.products && d.products.length > 0) {
+    //                         this.setState({ selected: d.products });
+    //                     }
+    //                 }
+    //             }
+    //         })
+    //     }
+    // }
+
 
     onSubmit() {
 
