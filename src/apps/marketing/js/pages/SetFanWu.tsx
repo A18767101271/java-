@@ -133,9 +133,11 @@ class SetFanWu extends React.Component<SetFanWuProps, {
         let url = UParams();
         if (url.id) {
             PromotionApis.getPromotionDetail({ storeId: this.props.storeId, activityId: url.id }).then(data => {
+                console.log(data);
+                this.setState({ limitUser: parseInt(data.limitUser) });
 
                 if (data.marketingMeta && data.marketingMeta.returnProduct) {
-                    let arr = JSON.parse(data.marketingMeta.returnProduct);
+                    let arr = data.marketingMeta.returnProduct;
                     if (arr instanceof Array && arr.length > 0) {
                         let d = arr[0];
 
@@ -145,10 +147,6 @@ class SetFanWu extends React.Component<SetFanWuProps, {
 
                         if (d.limitDate || d.limitDate === 0) {
                             this.setState({ limitDate: parseInt(d.limitDate) });
-                        }
-
-                        if (d.limitUser) {
-                            this.setState({ limitUser: parseInt(d.limitUser) });
                         }
 
                         if (d.couponNum) {
@@ -231,6 +229,7 @@ class SetFanWu extends React.Component<SetFanWuProps, {
     }
 
     mainRender() {
+
         return <div className='wrap' data-page='setfanwu' >
 
             <DatePicker

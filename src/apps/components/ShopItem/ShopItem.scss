@@ -1,0 +1,163 @@
+$baseFontSize: 72px !default;
+// pixels to rem
+@function rem($px) {
+    @return $px / $baseFontSize * 1rem;
+}
+
+.shop-item {
+    width: rem(660px);
+    margin-left: rem(30px);
+    padding-top: rem(24px);
+}
+
+.shop-info {
+    width: 100%;
+    height: rem(150px);
+    overflow: hidden;
+    .logo-container {
+        float: left;
+        width: rem(120px);
+        height: rem(120px);
+        margin-right: rem(30px);
+        .logo-main {
+            width: rem(120px);
+            height: rem(120px);
+            .logo-logo {
+                width: rem(120px);
+                height: rem(120px);
+            }
+        }
+    }
+    .info-main {
+        float: left;
+        width: rem(510px);
+        height: rem(150px);
+        position: relative;
+        .shopname {
+            width: rem(400px);
+            height: rem(40px);
+            font-size: rem(34px);
+            color: #404040;
+            position: absolute;
+            left: 0;
+            top: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .moneylimit {
+            font-size: rem(24px);
+            color: #666;
+            position: absolute;
+            left: 0;
+            bottom: rem(24px);
+        }
+        .icon-wrap {
+            font-size: rem(14px);
+            text-align: center;
+            padding: rem(4px) rem(4px);
+            color: #fff;
+            background-color: #fd6f6e;
+            border-radius: rem(10px);
+            position: absolute;
+            right: 0;
+            top: rem(10px);
+        }
+        .distance-wrap {
+            font-size: rem(22px);
+            color: #666;
+            position: absolute;
+            right: 0;
+            bottom: rem(25px);
+        }
+        .intro-wrap {
+            font-size: rem(24px);
+            color: #a5a5a5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            -o-text-overflow: ellipsis;
+            white-space: nowrap;
+            width: rem(510px);
+            display: block;
+            position: absolute;
+            left: 0;
+            top: rem(52px);
+        }
+    }
+}
+
+.activity-wrap {
+    width: rem(510px);
+    float: right;
+    border-top: rem(2px) solid #f0f0f0;
+    position: relative;
+    .dashedline {
+        position: absolute;
+        right: 0;
+        top: rem(20px);
+        background: url(./image/xl-3.jpg) right center no-repeat;
+        background-size: rem(18px) rem(9px);
+        padding-right: rem(25px);
+        font-size: rem(24px);
+        color: #a5a5a5;
+        &.active {
+            background: none;
+        }
+    }
+    .activities {
+        width: rem(510px);
+        height: rem(50px);
+        line-height: rem(50px);
+        font-size: rem(24px);
+        margin-top: rem(10px);
+        color: #666;
+        overflow: hidden;
+        .act-row {
+            width: 100%;
+            height: rem(50px);
+            line-height: rem(50px);
+            .icon-wrap {
+                float: left;
+                margin-top: rem(10px);
+                margin-right: rem(5px);
+                width: rem(30px);
+                height: rem(30px);
+            }
+        }
+    }
+    .activities.active {
+        height: 100%;
+    }
+    .shop-photos {
+        width: rem(510px);
+        height: rem(276px);
+        margin-top: rem(10px);
+        .shops {
+            width: rem(160px);
+            height: rem(276px);
+            float: left;
+            margin: 0 rem(5px);
+            .shops-img {
+                width: rem(160px);
+                height: rem(160px);
+            }
+            .shops-h1 {
+                font-size: rem(26px);
+                width: rem(160px);
+                height: rem(37px);
+                line-height: rem(37px);
+                overflow: hidden;
+                text-align: center;
+            }
+            .shops-h2 {
+                font-size: rem(22px);
+                width: rem(160px);
+                height: rem(37px);
+                line-height: rem(37px);
+                overflow: hidden;
+                text-align: center;
+                color: #ff8181;
+            }
+        }
+    }
+}

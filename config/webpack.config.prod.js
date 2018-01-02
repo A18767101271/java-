@@ -59,7 +59,7 @@ module.exports = {
 
     settled: [
 
-     // require.resolve('./polyfills'),
+      // require.resolve('./polyfills'),
 
 
       './src/apps/settled/index.tsx'
@@ -67,7 +67,7 @@ module.exports = {
     ],
     marketing: [
 
-     // require.resolve('./polyfills'),
+      // require.resolve('./polyfills'),
 
 
       './src/apps/marketing/index.tsx'
@@ -75,10 +75,19 @@ module.exports = {
     ],
     dashboard: [
 
-     // require.resolve('./polyfills'),
+      // require.resolve('./polyfills'),
 
 
       './src/apps/dashboard/index.tsx'
+
+    ],
+
+    coupons: [
+
+      // require.resolve('./polyfills'),
+
+
+      './src/apps/coupons/index.tsx'
 
     ],
   },
@@ -156,7 +165,7 @@ module.exports = {
               options: {
 
                 presets: ['es2015', 'react'],
-                
+
                 compact: true,
                 plugins: [
                   "transform-runtime",
@@ -178,7 +187,7 @@ module.exports = {
             options: {
 
               presets: ['es2015'],
-              
+
               compact: true,
               plugins: [
                 "transform-runtime",
@@ -296,6 +305,25 @@ module.exports = {
       inject: true,
       template: './src/apps/dashboard/index.html',
       chunks: ['dashboard'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'coupons/index.html',
+      inject: true,
+      template: './src/apps/coupons/index.html',
+      chunks: ['coupons'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,

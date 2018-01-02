@@ -53,6 +53,16 @@ module.exports = {
 
     ],
 
+    coupons: [
+
+      // require.resolve('./polyfills'),
+
+      require.resolve('../scripts/utils/webpackHotDevClient'),
+
+      './src/apps/coupons/index.tsx'
+
+    ],
+
   }
 
 
@@ -110,7 +120,7 @@ module.exports = {
             options: {
               presets: ['react'],
               cacheDirectory: true,
-              plugins: [ 
+              plugins: [
                 ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
               ]
             },
@@ -126,9 +136,9 @@ module.exports = {
           test: /\.(js)$/,
           include: paths.appSrc,
           loader: require.resolve('babel-loader'),
-          options: { 
+          options: {
             cacheDirectory: true,
-            plugins: [ 
+            plugins: [
               ["import", { libraryName: "antd-mobile", style: "css" }] // `style: true` 会加载 less 文件
             ]
           },
@@ -202,6 +212,13 @@ module.exports = {
       inject: true,
       template: './src/apps/dashboard/index.html',
       chunks: ['dashboard']
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'coupons/index.html',
+      inject: true,
+      template: './src/apps/coupons/index.html',
+      chunks: ['coupons']
     }),
 
     new webpack.NamedModulesPlugin(),

@@ -1,0 +1,12 @@
+.activity-line {
+    display: flex;
+    align-items: center;
+    font-size: .293333rem;
+   
+    .activity-title {
+        flex: 1;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}

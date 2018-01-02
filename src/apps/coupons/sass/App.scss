@@ -1,0 +1,142 @@
+@charset "UTF-8";
+$baseFontSize: 75px !default;
+// pixels to rem
+@function rem($px) {
+    @return $px / $baseFontSize * 1rem;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*,
+::after,
+::before {
+    box-sizing: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body,
+ul,
+ol,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+form,
+fieldset,
+table,
+td,
+img,
+div,
+dl,
+dt,
+dd,
+input {
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+body {
+    font-size: rem(26px);
+}
+
+body,
+html {
+    height: 100%;
+}
+
+html {
+    font-family: 'Helvetica Neue', Tahoma, Arial, PingFangSC-Regular, 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-font-smoothing: antialiased;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    text-size-adjust: none;
+}
+
+img {
+    border: none;
+}
+
+li {
+    list-style: none;
+}
+
+input,
+select,
+textarea,
+button {
+    outline: none;
+    border: none;
+    background: none;
+    margin: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+#app {
+    height: 100%;
+}
+
+
+/*清浮动*/
+
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.clearfix {
+    zoom: 1;
+}
+
+.wrap {
+    font-size: rem(32px);
+    height: 100%;
+    position: relative;
+}
