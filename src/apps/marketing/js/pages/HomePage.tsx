@@ -3,8 +3,6 @@ import PromotionApis, { GetPromotionListData } from '../../../../services/promot
 import React from 'react';
 import classNames from 'classNames';
 import moment from 'moment';
-
-
 import { Toast, Modal } from 'antd-mobile';
 
 
@@ -46,11 +44,6 @@ const MarketItem = (props: { data: any, type: number, shopId: number }) => {
         }
     }
 
-    // if (dt.vStatus == 2) {
-    //     return (<div></div>);
-    // }
-    // else {
-
     return (<div className="list" onClick={() => { window.location.href = "#/details/" + props.data.activityId + '?shopid=' + props.shopId; }}  >
         <i></i>
         <h1>{props.data.activityId + '#' + dt.name}</h1>
@@ -58,8 +51,7 @@ const MarketItem = (props: { data: any, type: number, shopId: number }) => {
         <span className="time-text">{moment(st * 1000).format('YYYY-MM-DD')}~{moment(ed * 1000).format('YYYY-MM-DD')}</span>
         {getRightTime()}
     </div>);
-    //}
-
+    
 }
 
 interface HomePageProps {
