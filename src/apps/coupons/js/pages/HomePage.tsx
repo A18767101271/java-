@@ -1,29 +1,21 @@
 import '../../sass/HomePage.scss';
-import PromotionApis, { GetPromotionListData } from '../../../../services/promotion-apis';
+//import PromotionApis, { GetPromotionListData } from '../../../../services/promotion-apis';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
 // import classNames from 'classNames';
 // import moment from 'moment';
-import { Toast, Modal } from 'antd-mobile';
-
-
+//import { Toast, Modal } from 'antd-mobile';
 
 const { Header, Content } = Layout;
 
 interface HomePageProps {
     storeId: number,
-    limitStatus?: number
 }
 
 interface HomePageState {
-    data?: GetPromotionListData,
-    currType: number,
-    currState: number,
-    toolToggle: boolean,
-    enableToggleBar: boolean,
+    //data?: GetPromotionListData,
     pageNumber: number,
     pageSize: number,
-    loadstate?: boolean
 }
 
 
@@ -34,14 +26,8 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
         // let params = UParams();
 
-        let limitStatus = props.limitStatus;
-
         this.state = {
             //storeId: props.storeId,
-            toolToggle: false,
-            enableToggleBar: limitStatus === undefined,
-            currState: limitStatus === undefined ? 1 : limitStatus,
-            currType: 1,
             pageNumber: 0,
             pageSize: 10
         };
@@ -49,78 +35,10 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
     }
 
-    getData(type: number, status: number, pageNumber?: number) {
-        Toast.loading('载入中', 30);
-        let self = this;
 
-        const pageSize = this.state.pageSize;
-
-        const pNumber = pageNumber != undefined ? pageNumber : 0;
-
-        this.setState({
-            currType: type,
-            currState: status,
-            pageNumber: pNumber,
-            pageSize: pageSize,
-            loadstate: false
-        }, () => {
-
-            PromotionApis.getPromotionList({ storeId: this.props.storeId, type, status, pageNumber: self.state.pageNumber, pageSize: pageSize }).then(data => {
-
-                const loadstate = data.currentPage == data.totalPages || (data.content && data.content.length == 0) ? true : undefined
-
-                if (pNumber == 0) {
-                    this.setState({
-                        data: data,
-                        loadstate: loadstate
-                    });
-                }
-                else {
-                    if (this.state.data) {
-                        data.content = this.state.data.content.concat(data.content);
-                    }
-                    this.setState({
-                        data: data,
-                        loadstate: loadstate
-                    });
-                }
-
-                Toast.hide();
-
-            }).catch(err => {
-                if (pNumber == 0) {
-                    this.setState({
-                        data: undefined
-                    });
-                }
-                Toast.hide();
-                if (err.ret == "fail.27004") {
-                    this.setState({
-                        loadstate: true
-                    });
-                } else {
-                    Modal.alert('提示', err.msg);
-                }
-            });
-
-        });
-
-
-    }
 
     componentWillMount() {
-        this.getData(this.state.currType, this.state.currState);
-    }
 
-    onScroll() {
-        let tar = window.document.getElementById('wrapper') as HTMLDivElement;
-        let scroll = window.document.getElementById('scroller') as HTMLDivElement;
-
-        if (tar.scrollTop + tar.clientHeight > scroll.clientHeight - 20) {
-            if (this.state.loadstate === undefined) {
-                this.getData(this.state.currType, this.state.currState, this.state.pageNumber + 1)
-            }
-        }
     }
 
     render() {
@@ -132,8 +50,50 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
             <Layout>
                 <Header title='卡券管理' />
                 <Content>
-                    <div className="wrap" data-page='home'>
-                        1
+                    <div className="wrap clearfix" data-page='home'>
+
+                        <div className='card card-ping-1'>
+                            <div className='icon'></div>
+                            <div className='y-left'></div>
+                            <div className='y-right'></div>
+                            <div className='line'></div>
+                            <div className='name'>什么什么凭证券</div>
+                            <div className='number'>31659854545</div>
+                            <div className='text-0'>此次是商品内容</div>
+                            <div className='text-1'>此次是服务内容</div>
+                            <div className='text-2'>创建时间:2018.02.01 10:20</div>
+                            <div className='text-3'>有效期:2018.02.01 - 2018.02.10</div>
+                            <div className='text-4'>未发放</div>
+                        </div>
+
+                        <div className='card card-dai-2'>
+                            <div className='icon'></div>
+                            <div className='stamp stamp-1'></div>
+                            <div className='y-left'></div>
+                            <div className='y-right'></div>
+                            <div className='line'></div>
+                            <div className='name'>什么什么代金券</div>
+                            <div className='number'>31659854545</div>
+                            <div className='text-2'>创建时间:2018.02.01 10:20</div>
+                            <div className='text-3'>有效期:2018.02.01 - 2018.02.10</div>
+                            <div className='text-4'>未发放</div>
+                            <div className='text-5'>￥<em>9999</em></div>
+                        </div>
+
+                        <div className='card card-man-1'>
+                            <div className='icon'></div>
+                            <div className='y-left'></div>
+                            <div className='y-right'></div>
+                            <div className='line'></div>
+                            <div className='name'>什么什么满减券</div>
+                            <div className='number'>31659854545</div>
+                            <div className='text-1'>消费满100元可用</div>
+                            <div className='text-2'>创建时间:2018.02.01 10:20</div>
+                            <div className='text-3'>有效期:2018.02.01 - 2018.02.10</div>
+                            <div className='text-4'>未发放</div>
+                            <div className='text-5'>￥<em>9999</em></div>
+                        </div>
+                    
                     </div>
 
                 </Content>

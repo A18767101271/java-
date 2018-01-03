@@ -5,7 +5,6 @@ import '../../sass/SetHomePage.scss';
 
 interface ChooseReturnProps {
     storeId: number;
-    type: string;
     selected: any;
     onEnter?: (selected: { id: number, num: number, name?: string, price?: number }[]) => void;
 }
@@ -99,8 +98,6 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
 
         const showProducts = () => {
 
-            console.log(this.state.selected);
-
             let products = data.products && data.products.length ? data.products : [];
             if (self.state.groupId) {
                 products = products.filter(p => self.state.groupId == p.customGroupId);
@@ -131,31 +128,6 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
 
         }
 
-        const showProducts2 = () => {
-            let products = data.products && data.products.length ? data.products : [];
-            if (self.state.groupId) {
-                products = products.filter(p => self.state.groupId == p.customGroupId);
-            }
-
-            if (products.length > 0) {
-                return products.map(p =>
-                    <div key={p.id} className="food" onClick={() => this.onSelected(p.id, p.name, p.realPrice, 1)}>
-                        <div className="left fl">
-                            <img src={p.logoPicUrl} className="img" />
-                        </div>
-                        <div className="right fr">
-                            <h1>{p.name}</h1>
-                            <h2>￥{p.realPrice / 100}</h2>
-                            <span className="span-tip">{(data.productGroups.find(t => t.id == p.customGroupId) || { name: '' }).name}</span>
-                            <div className={classNames('btn-rad', { 'active': this.state.selected[0] && (this.state.selected[0].id == p.id) })}></div>
-                        </div>
-                    </div>
-                );
-            } else {
-                return <div className='no-tip'><div className='img'></div><p>暂无商品</p></div>
-            }
-        }
-
         return <div className='wrap' data-page='choosereturn' >
             <div className="headbar">
                 <span
@@ -170,18 +142,18 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
                 >{p.name}</span>)}
             </div>
 
-            {this.props.type == 'fanwu' ? <div className="t-tip">
+            {<div className="t-tip">
                 <h1>已选</h1>
                 <div className="food-point">
                     {this.getSelectedItems().map(p => <span key={p.id} className="tt-span">{p.name}x{p.num}</span>)}
                 </div>
 
                 <div className="btn-xiala"></div>
-            </div> : <div className='t-tip2'>只可选择一件商品</div>}
+            </div>}
 
 
             <div className="contain">
-                {this.props.type == 'fanwu' ? showProducts() : showProducts2()}
+                {showProducts()}
             </div>
 
             <button className="btn-yes" onClick={() => this.onEnter()}>确定</button>

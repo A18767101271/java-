@@ -1,5 +1,5 @@
 @charset "UTF-8";
-$baseFontSize: 72px !default;
+$baseFontSize: 75px !default;
 // pixels to rem
 @function rem($px) {
     @return $px / $baseFontSize * 1rem;
@@ -9,17 +9,17 @@ $baseFontSize: 72px !default;
     width: 10rem;
     height: rem(88px);
     overflow: hidden;
-    background-color: #ffda44;
+    background-color: #fff;
     line-height: rem(88px);
     text-align: center;
-    font-size: rem(32px);
     position: fixed;
     left: 0;
     top: 0;
     z-index: 10;
+    border-bottom: rem(2px) solid #e2e3e4;
     .app-header-title {
         font-size: rem(36px);
-        color: #4e5661;
+        color: #1f2427;
     }
     .back-btn {
         position: absolute;
@@ -27,7 +27,19 @@ $baseFontSize: 72px !default;
         top: 0;
         width: rem(80px);
         height: rem(88px);
-        background: url(./image/zzz_03.jpg)rem(30px) rem(27px) no-repeat;
-        background-size: rem(19px) rem(35px);
+        background: url(./image/i-left.png)rem(30px) rem(27px) no-repeat;
+        background-size: rem(19px) rem(33px);
+    }
+    .add-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: rem(80px);
+        height: rem(88px);
+        background: url(./image/i-add.png)rem(18px) rem(29px) no-repeat;
+        background-size: rem(32px) rem(32px);
+    }
+    .add-hide {
+        display: none;
     }
 }
