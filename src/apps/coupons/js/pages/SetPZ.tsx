@@ -193,8 +193,7 @@ class SetPZ extends React.Component<SetPZProps, {
             return;
         }
 
-
-
+        window.location.href = '#/choose/?type=new';
 
     }
 

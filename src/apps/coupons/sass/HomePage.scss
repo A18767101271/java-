@@ -342,6 +342,7 @@
         }
     }
 
+    [data-page="setmj"],
     [data-page="setdj"] {
         background-color: #f5f6f8;
         padding-bottom: rem(190px);
@@ -416,5 +417,203 @@
             bottom: 0;
             left: 0;
             font-size: rem(30px);
+        }
+    }
+
+    [data-page="details"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .headbar {
+            width: 10rem;
+            height: rem(88px);
+            line-height: rem(88px);
+            background-color: #fff;
+            margin-bottom: rem(15px);
+            .btn {
+                font-size: rem(30px);
+            }
+            .btn.active {
+                color: #1186ed;
+                background: url(../image/bottom-line_03.jpg) center bottom no-repeat;
+                background-size: rem(48px) rem(3px);
+            }
+            .btn-1 {
+                float: left;
+                margin-left: rem(160px);
+            }
+            .btn-2 {
+                float: right;
+                margin-right: rem(160px);
+            }
+        }
+        .content {
+            width: 10rem;
+            padding-bottom: rem(120px);
+        }
+        .card {
+            width: rem(720px);
+            margin: 0 rem(15px) 0 rem(15px);
+            min-height: rem(600px);
+            background-color: #fff;
+            border-radius: rem(15px);
+            position: relative;
+            padding-top: rem(184px);
+            padding-bottom: rem(40px);
+            .c-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                top: rem(135px);
+                left: rem(-15px);
+            }
+            .c-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                top: rem(135px);
+                right: rem(-15px);
+            }
+            .c-icon {
+                width: rem(53px);
+                height: rem(53px);
+                position: absolute;
+                left: rem(189px);
+                top: rem(36px);
+            }
+            .icon-pz {
+                background: url(../image/i-ping.png)center center no-repeat;
+                background-size: rem(53px) rem(53px);
+            }
+            .c-name {
+                font-size: rem(34px);
+                color: #000;
+                font-weight: bold;
+                position: absolute;
+                left: rem(258px);
+                top: rem(44px);
+            }
+            .c-number {
+                font-size: rem(24px);
+                color: #cfcfcf;
+                position: absolute;
+                left: rem(277px);
+                top: rem(97px);
+            }
+            .row {
+                width: 100%;
+                height: rem(34px);
+                line-height: rem(34px);
+                margin-bottom: rem(40px);
+                font-size: rem(34px);
+                .left {
+                    margin-left: rem(30px);
+                    color: #959595;
+                }
+                .right {
+                    margin-right: rem(30px);
+                }
+            }
+            .row-2 {
+                width: 100%;
+                font-size: rem(34px);
+                .left {
+                    margin-left: rem(30px);
+                    color: #959595;
+                }
+                .right {
+                    margin-right: rem(30px);
+                    .item {
+                        width: rem(380px);
+                        height: rem(34px);
+                        line-height: rem(34px);
+                        text-align: right;
+                        margin-bottom: rem(40px);
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                    .text {
+                        width: rem(500px);
+                        text-align: right;
+                    }
+                }
+            }
+        }
+        .list {
+            width: 10rem;
+            height: rem(200px);
+            background-color: #fff;
+            background-image: url(../image/i-qizi.png);
+            background-repeat: no-repeat;
+            background-position: rem(42px) rem(38px);
+            background-size: rem(44px) rem(46px);
+            position: relative;
+            .name {
+                font-size: rem(34px);
+                color: #000;
+                position: absolute;
+                left: rem(120px);
+                top: rem(37px);
+            }
+            .i-1 {
+                font-size: rem(24px);
+                color: #157efe;
+                padding: rem(4px) rem(8px);
+                border: 1px solid #157efe;
+                position: absolute;
+                left: rem(120px);
+                top: rem(90px);
+            }
+            .num {
+                font-size: rem(24px);
+                color: #000;
+                position: absolute;
+                left: rem(243px);
+                top: rem(93px);
+            }
+            .time {
+                font-size: rem(24px);
+                color: #969696;
+                position: absolute;
+                left: rem(120px);
+                top: rem(140px);
+            }
+            .line {
+                width: rem(630px);
+                border-bottom: 1px solid #e5e5e5;
+                position: absolute;
+                left: rem(120px);
+                bottom: 0;
+            }
+        }
+        .btn-del {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 5rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            color: #1785ff;
+            background-color: #fff;
+            border-top: 1px solid #d1d1d3;
+        }
+        .btn-push {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 5rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            background-color: #1785ff;
+            color: #fff;
+            border-top: 1px solid #d1d1d3;
         }
     }

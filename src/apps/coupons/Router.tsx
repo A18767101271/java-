@@ -6,6 +6,7 @@ import AddPage from './js/pages/AddPage';
 import SetPZ from './js/pages/SetPZ';
 import SetDJ from './js/pages/SetDJ';
 import SetMJ from './js/pages/SetMJ';
+import CardDetails from './js/pages/CardDetails';
 
 class Router extends React.Component<{ storeId: number }>{
 
@@ -17,6 +18,7 @@ class Router extends React.Component<{ storeId: number }>{
                 <Route path='/setpz' render={() => <SetPZ storeId={this.props.storeId} />} />
                 <Route path='/setdj' render={() => <SetDJ storeId={this.props.storeId} />} />
                 <Route path='/setmj' render={() => <SetMJ storeId={this.props.storeId} />} />
+                <Route path='/details' render={() => <CardDetails storeId={this.props.storeId} />} />
             </Switch>
         </HashRouter>);
 

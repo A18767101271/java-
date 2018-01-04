@@ -52,7 +52,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
                 <Content>
                     <div className="wrap clearfix" data-page='home'>
 
-                        <div className='card card-ping-1'>
+                        <div className='card card-ping-1' onClick={() => window.location.href = '#/details/?id=1?shopid=' + this.props.storeId}>
                             <div className='icon'></div>
                             <div className='y-left'></div>
                             <div className='y-right'></div>
@@ -66,7 +66,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
                             <div className='text-4'>未发放</div>
                         </div>
 
-                        <div className='card card-dai-2'>
+                        <div className='card card-dai-2' onClick={() => window.location.href = '#/details/?id=2?shopid=' + this.props.storeId}>
                             <div className='icon'></div>
                             <div className='stamp stamp-1'></div>
                             <div className='y-left'></div>
@@ -80,7 +80,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
                             <div className='text-5'>￥<em>9999</em></div>
                         </div>
 
-                        <div className='card card-man-1'>
+                        <div className='card card-man-1' onClick={() => window.location.href = '#/details/?id=3?shopid=' + this.props.storeId}>
                             <div className='icon'></div>
                             <div className='y-left'></div>
                             <div className='y-right'></div>
@@ -93,11 +93,11 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
                             <div className='text-4'>未发放</div>
                             <div className='text-5'>￥<em>9999</em></div>
                         </div>
-                    
+
                     </div>
 
-                </Content>
-            </Layout>);
+                </Content >
+            </Layout >);
     }
 
 
