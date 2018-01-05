@@ -111,7 +111,7 @@ class CardDetails extends React.Component<CardDetailsProps, {
 
         const BtnPush = () => {
             return (
-                <div className='btn-push'>立即发布</div>
+                <div className='btn-push' onClick={() => window.location.href = '#/choose?type=2?shopid=' + this.props.storeId}>立即发布</div>
             )
         }
 

@@ -56,8 +56,6 @@
                 position: absolute;
                 right: rem(33px);
                 bottom: rem(27px);
-            }
-            .stamp-1 {
                 background: url(../image/i-over.png)center center no-repeat;
                 background-size: rem(151px) rem(116px);
             }
@@ -98,6 +96,9 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                span {
+                    margin-right: rem(5px);
+                }
             }
             .text-1 {
                 float: left;
@@ -143,21 +144,18 @@
                 }
             }
         }
-        .card-ping-1 {
+        .card-ping {
             height: rem(340px);
             .icon {
                 background: url(../image/i-ping-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
-        }
-        .card-ping-2 {
-            height: rem(340px);
-            .icon {
+            .icon.over {
                 background: url(../image/i-ping-2.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
         }
-        .card-dai-1 {
+        .card-dai {
             .number {
                 margin-bottom: rem(55px);
             }
@@ -165,24 +163,17 @@
                 background: url(../image/i-dai-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
-        }
-        .card-dai-2 {
-            .number {
-                margin-bottom: rem(55px);
-            }
-            .icon {
+            .icon.over {
                 background: url(../image/i-dai-2.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
         }
-        .card-man-1 {
+        .card-man {
             .icon {
                 background: url(../image/i-man-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
-        }
-        .card-man-2 {
-            .icon {
+            .icon.over {
                 background: url(../image/i-man-2.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
@@ -615,5 +606,490 @@
             background-color: #1785ff;
             color: #fff;
             border-top: 1px solid #d1d1d3;
+        }
+    }
+
+    [data-page='choose'] {
+        font-size: rem(24px);
+        background-color: #fff;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .headbar {
+            width: 10rem;
+            height: rem(200px);
+            margin-bottom: rem(45px);
+            .img {
+                width: rem(140px);
+                height: rem(138px);
+                background: url(../image/i-success.png)center center no-repeat;
+                background-size: rem(140px) rem(138px);
+                float: left;
+                margin-left: rem(309px);
+                margin-bottom: rem(30px);
+            }
+            .t-1 {
+                float: left;
+                width: 10rem;
+                text-align: center;
+                font-size: rem(24px);
+            }
+        }
+        .t-2 {
+            font-size: rem(30px);
+            width: 10rem;
+            height: rem(30px);
+            line-height: rem(30px);
+            color: #000;
+            text-indent: rem(30px);
+            margin-bottom: rem(45px);
+        }
+        .setion {
+            .list {
+                width: 10rem;
+                height: rem(190px);
+                line-height: rem(190px);
+                border-bottom: 1px solid #e3e9ed;
+                .left {
+                    margin-left: rem(197px);
+                }
+                .right {
+                    width: rem(16px);
+                    height: 100%;
+                    margin-right: rem(35px);
+                    background: url(../image/i-right.png) center rem(80px) no-repeat;
+                    background-size: rem(16px) rem(25px);
+                }
+            }
+            .l-1 {
+                background: url(../image/type-1.png)rem(35px) rem(40px) no-repeat;
+                background-size: rem(120px) rem(120px);
+            }
+            .l-2 {
+                background: url(../image/type-2.png)rem(35px) rem(40px) no-repeat;
+                background-size: rem(120px) rem(120px);
+            }
+            .l-3 {
+                background: url(../image/type-3.png)rem(35px) rem(40px) no-repeat;
+                background-size: rem(120px) rem(120px);
+            }
+        }
+        .btn {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            background-color: #1784ff;
+            font-size: rem(32px);
+            color: #fff;
+        }
+    }
+
+    [data-page='selfcard'] {
+        background-color: #f5f5f5;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .row {
+            width: 10rem;
+            height: rem(88px);
+            line-height: rem(88px);
+            background-color: #fff;
+            font-size: rem(30px);
+            .left {
+                margin-left: rem(30px);
+            }
+            .right {
+                margin-right: rem(30px);
+                input {
+                    width: rem(450px);
+                    text-align: right;
+                }
+                span {
+                    padding-right: rem(40px);
+                    background: url(../image/i-right.png) right center no-repeat;
+                    background-size: rem(16px) rem(25px);
+                }
+            }
+        }
+        .btn {
+            width: 5rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            float: left;
+            position: fixed;
+            bottom: 0;
+        }
+        .btn-1 {
+            background-color: #fff;
+            color: #1784ff;
+            left: 0;
+        }
+        .btn-2 {
+            right: 0;
+            background-color: #1784ff;
+            color: #fff;
+        }
+        .card {
+            font-size: rem(24px);
+            width: rem(690px);
+            height: rem(300px);
+            background-color: #fff;
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            margin-bottom: rem(20px);
+            position: relative;
+            .y-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                left: rem(-15px);
+            }
+            .y-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                right: rem(-15px);
+            }
+            .line {
+                width: rem(644px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(23px);
+                bottom: rem(65px);
+            }
+            .icon {
+                width: rem(104px);
+                height: rem(106px);
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .stamp {
+                width: rem(151px);
+                height: rem(116px);
+                position: absolute;
+                right: rem(33px);
+                bottom: rem(27px);
+            }
+            .stamp-1 {
+                background: url(../image/i-over.png)center center no-repeat;
+                background-size: rem(151px) rem(116px);
+            }
+            .name {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(34px);
+                font-size: rem(32px);
+                color: #000;
+                font-weight: bold;
+                width: rem(450px);
+                height: rem(32px);
+                line-height: rem(32px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .number {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(16px);
+                width: rem(450px);
+                height: rem(22px);
+                line-height: rem(22px);
+                font-size: rem(22px);
+                color: #7d7f80;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-0 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(30px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-1 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-2 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-3 {
+                position: absolute;
+                left: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-4 {
+                position: absolute;
+                right: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-5 {
+                position: absolute;
+                right: rem(67px);
+                top: rem(89px);
+                color: #ef3434;
+                font-size: rem(36px);
+                em {
+                    font-size: rem(70px);
+                    font-style: normal;
+                }
+            }
+        }
+        .card-ping-1 {
+            height: rem(340px);
+            .icon {
+                background: url(../image/i-ping-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-dai-1 {
+            .number {
+                margin-bottom: rem(55px);
+            }
+            .icon {
+                background: url(../image/i-dai-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-man-1 {
+            .icon {
+                background: url(../image/i-man-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+    }
+
+    [data-page="choosecard"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .card {
+            font-size: rem(24px);
+            width: rem(690px);
+            height: rem(300px);
+            background-color: #fff;
+            float: left;
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            position: relative;
+            .y-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                left: rem(-15px);
+            }
+            .y-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                right: rem(-15px);
+            }
+            .line {
+                width: rem(644px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(23px);
+                bottom: rem(65px);
+            }
+            .icon {
+                width: rem(104px);
+                height: rem(106px);
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .stamp {
+                width: rem(151px);
+                height: rem(116px);
+                position: absolute;
+                right: rem(33px);
+                bottom: rem(27px);
+            }
+            .stamp-1 {
+                background: url(../image/i-over.png)center center no-repeat;
+                background-size: rem(151px) rem(116px);
+            }
+            .name {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(34px);
+                font-size: rem(32px);
+                color: #000;
+                font-weight: bold;
+                width: rem(450px);
+                height: rem(32px);
+                line-height: rem(32px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .number {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(16px);
+                width: rem(450px);
+                height: rem(22px);
+                line-height: rem(22px);
+                font-size: rem(22px);
+                color: #7d7f80;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-0 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(30px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-1 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-2 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-3 {
+                position: absolute;
+                left: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-4 {
+                position: absolute;
+                right: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-5 {
+                position: absolute;
+                right: rem(67px);
+                top: rem(89px);
+                color: #ef3434;
+                font-size: rem(36px);
+                em {
+                    font-size: rem(70px);
+                    font-style: normal;
+                }
+            }
+        }
+        .card-ping-1 {
+            height: rem(340px);
+            .icon {
+                background: url(../image/i-ping-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-dai-1 {
+            .number {
+                margin-bottom: rem(55px);
+            }
+            .icon {
+                background: url(../image/i-dai-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-man-1 {
+            .icon {
+                background: url(../image/i-man-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .empty {
+            font-size: rem(34px);
+            width: rem(690px);
+            height: rem(300px);
+            line-height: rem(300px);
+            text-align: center;
+            background-color: #fff;
+            float: left;
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            position: relative;
+            background-image: url(../image/i-add.png);
+            background-repeat: no-repeat;
+            background-position: rem(230px) rem(135px);
+            background-size: rem(32px) rem(32px);
+            .y-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                left: rem(-15px);
+            }
+            .y-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                right: rem(-15px);
+            }
+            .line {
+                width: rem(644px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(23px);
+                bottom: rem(65px);
+            }
         }
     }

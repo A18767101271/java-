@@ -1,8 +1,8 @@
 import '../../sass/HomePage.scss';
-//import PromotionApis, { GetPromotionListData } from '../../../../services/promotion-apis';
+import CouponApis, { CouponDefineList } from '../../../../services/coupon-apis';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
-// import classNames from 'classNames';
+import classNames from 'classNames';
 // import moment from 'moment';
 //import { Toast, Modal } from 'antd-mobile';
 
@@ -13,7 +13,7 @@ interface HomePageProps {
 }
 
 interface HomePageState {
-    //data?: GetPromotionListData,
+    data?: CouponDefineList,
     pageNumber: number,
     pageSize: number,
 }
@@ -24,12 +24,9 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
     constructor(props: HomePageProps) {
         super(props);
 
-        // let params = UParams();
-
         this.state = {
-            //storeId: props.storeId,
             pageNumber: 0,
-            pageSize: 10
+            pageSize: 999
         };
 
 
@@ -39,60 +36,86 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
     componentWillMount() {
 
+        CouponApis.CouponDefineList({ store_id: this.props.storeId, page_size: this.state.pageSize, page_number: this.state.pageNumber }).then(data => {
+            this.setState({ data: data });
+        })
+
     }
 
     render() {
-        //const shopId = this.props.storeId;
+
+        const self = this;
+
+        console.log(this.state.data);
+
+        const CardPZ = (props: { item: any, status: number }) => {
+            const pros = props.item.products;
+            return (
+                <div className='card card-ping' onClick={() => window.location.href = '#/details/?id=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
+                    <div className={classNames('icon', { 'over': props.status === 1 })}></div>
+                    {props.status === 1 ? <div className='stamp'></div> : undefined}
+                    <div className='y-left'></div>
+                    <div className='y-right'></div>
+                    <div className='line'></div>
+                    <div className='name'>{props.item.name}</div>
+                    <div className='number'>{props.item.couponNum}</div>
+                    <div className='text-0'>{pros && pros.length > 0 ? pros.map(s => <span key={s.id}>{s.productName + 'x' + s.num}</span>) : undefined}</div>
+                    {props.item.products[0].isServer ? <div className='text-1'>{props.item.products[0].serverContent}</div> : undefined}
+                    <div className='text-2'>创建时间:{props.item.gmtCreate}</div>
+                    <div className='text-3'>{props.item.limitEnableTime ? '有效期:' + props.item.limitEnableTime : '领券' + props.item.afterReceiveEnableDay + '天后可用，有效期' + props.item.limitDay + '天'}</div>
+                    <div className='text-4'>{props.item.isGiveOut ? '已发放' : '未发放'}</div>
+                </div>)
+        }
+
+        const CardMJ = (props: { item: any, status: number }) => {
+            return (
+                <div className='card card-man' onClick={() => window.location.href = '#/details/?id=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
+                    <div className={classNames('icon', { 'over': props.status === 1 })}></div>
+                    {props.status === 1 ? <div className='stamp'></div> : undefined}
+                    <div className='y-left'></div>
+                    <div className='y-right'></div>
+                    <div className='line'></div>
+                    <div className='name'>{props.item.name}</div>
+                    <div className='number'>{props.item.couponNum}</div>
+                    <div className='text-1'>消费满{props.item.marketingMeta.marketMeta[0].fullAmount / 100}元可用</div>
+                    <div className='text-2'>创建时间:{props.item.gmtCreate}</div>
+                    <div className='text-3'>{props.item.limitEnableTime ? '有效期:' + props.item.limitEnableTime : '领券' + props.item.afterReceiveEnableDay + '天后可用，有效期' + props.item.limitDay + '天'}</div>
+                    <div className='text-4'>{props.item.isGiveOut ? '已发放' : '未发放'}</div>
+                    <div className='text-5'>￥<em>{props.item.marketingMeta.marketMeta[0].discountAmount / 100}</em></div>
+                </div>
+            )
+        }
+
+        const CardDJ = (props: { item: any, status: number }) => {
+            return (
+                <div className='card card-dai' onClick={() => window.location.href = '#/details/?id=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
+                    <div className={classNames('icon', { 'over': props.status === 1 })}></div>
+                    {props.status === 1 ? <div className='stamp'></div> : undefined}
+                    <div className='y-left'></div>
+                    <div className='y-right'></div>
+                    <div className='line'></div>
+                    <div className='name'>{props.item.name}</div>
+                    <div className='number'>{props.item.couponNum}</div>
+                    <div className='text-2'>创建时间:{props.item.gmtCreate}</div>
+                    <div className='text-3'>{props.item.limitEnableTime ? '有效期:' + props.item.limitEnableTime : '领券' + props.item.afterReceiveEnableDay + '天后可用，有效期' + props.item.limitDay + '天'}</div>
+                    <div className='text-4'>{props.item.isGiveOut ? '已发放' : '未发放'}</div>
+                    <div className='text-5'>￥<em></em></div>
+                </div>
+            )
+        }
 
         return (
-
 
             <Layout>
                 <Header title='卡券管理' />
                 <Content>
                     <div className="wrap clearfix" data-page='home'>
 
-                        <div className='card card-ping-1' onClick={() => window.location.href = '#/details/?id=1?shopid=' + this.props.storeId}>
-                            <div className='icon'></div>
-                            <div className='y-left'></div>
-                            <div className='y-right'></div>
-                            <div className='line'></div>
-                            <div className='name'>什么什么凭证券</div>
-                            <div className='number'>31659854545</div>
-                            <div className='text-0'>此次是商品内容</div>
-                            <div className='text-1'>此次是服务内容</div>
-                            <div className='text-2'>创建时间:2018.02.01 10:20</div>
-                            <div className='text-3'>有效期:2018.02.01 - 2018.02.10</div>
-                            <div className='text-4'>未发放</div>
-                        </div>
+                        {this.state.data && this.state.data.couponDefineDTOList && this.state.data.couponDefineDTOList.length ? this.state.data.couponDefineDTOList.map(p =>
 
-                        <div className='card card-dai-2' onClick={() => window.location.href = '#/details/?id=2?shopid=' + this.props.storeId}>
-                            <div className='icon'></div>
-                            <div className='stamp stamp-1'></div>
-                            <div className='y-left'></div>
-                            <div className='y-right'></div>
-                            <div className='line'></div>
-                            <div className='name'>什么什么代金券</div>
-                            <div className='number'>31659854545</div>
-                            <div className='text-2'>创建时间:2018.02.01 10:20</div>
-                            <div className='text-3'>有效期:2018.02.01 - 2018.02.10</div>
-                            <div className='text-4'>未发放</div>
-                            <div className='text-5'>￥<em>9999</em></div>
-                        </div>
+                            p.couponType == 1 ? <CardMJ key={p.couDefId} item={p} status={p.status} /> : p.couponType == 3 ? <CardPZ key={p.couDefId} item={p} status={p.status} /> : <CardDJ key={p.couDefId} item={p} status={p.status} />
 
-                        <div className='card card-man-1' onClick={() => window.location.href = '#/details/?id=3?shopid=' + this.props.storeId}>
-                            <div className='icon'></div>
-                            <div className='y-left'></div>
-                            <div className='y-right'></div>
-                            <div className='line'></div>
-                            <div className='name'>什么什么满减券</div>
-                            <div className='number'>31659854545</div>
-                            <div className='text-1'>消费满100元可用</div>
-                            <div className='text-2'>创建时间:2018.02.01 10:20</div>
-                            <div className='text-3'>有效期:2018.02.01 - 2018.02.10</div>
-                            <div className='text-4'>未发放</div>
-                            <div className='text-5'>￥<em>9999</em></div>
-                        </div>
+                        ) : undefined}
 
                     </div>
 
