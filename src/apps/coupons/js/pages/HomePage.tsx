@@ -123,7 +123,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
             </Layout >);
     }
 
-
 }
 
 export default HomePage;
