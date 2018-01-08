@@ -165,7 +165,7 @@ class SetPZ extends React.Component<SetPZProps, {
 
     onSubmit() {
 
-        window.location.href = '#/choose/?type=1?shopid=' + this.props.storeId;
+        window.location.href = '#/choose/?type=1?shopid=' + this.props.storeId + '?cardid=158';
 
         if (!this.state.name) {
             Modal.alert('提示', '请输入卡券名称');

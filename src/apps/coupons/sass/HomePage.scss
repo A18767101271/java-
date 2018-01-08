@@ -739,7 +739,7 @@
             background-color: #fff;
             margin-top: rem(18px);
             margin-left: rem(30px);
-            margin-bottom: rem(20px);
+            margin-bottom: rem(18px);
             position: relative;
             .y-left {
                 width: rem(30px);
@@ -779,8 +779,6 @@
                 position: absolute;
                 right: rem(33px);
                 bottom: rem(27px);
-            }
-            .stamp-1 {
                 background: url(../image/i-over.png)center center no-repeat;
                 background-size: rem(151px) rem(116px);
             }
@@ -821,6 +819,9 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
+                span {
+                    margin-right: rem(5px);
+                }
             }
             .text-1 {
                 float: left;
@@ -866,14 +867,18 @@
                 }
             }
         }
-        .card-ping-1 {
+        .card-ping {
             height: rem(340px);
             .icon {
                 background: url(../image/i-ping-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
+            .icon.over {
+                background: url(../image/i-ping-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
         }
-        .card-dai-1 {
+        .card-dai {
             .number {
                 margin-bottom: rem(55px);
             }
@@ -881,12 +886,29 @@
                 background: url(../image/i-dai-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
+            .icon.over {
+                background: url(../image/i-dai-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
         }
-        .card-man-1 {
+        .card-man {
             .icon {
                 background: url(../image/i-man-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
+            .icon.over {
+                background: url(../image/i-man-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .no-card {
+            width: rem(690px);
+            height: rem(300px);
+            background: url(../image/card-hui.png)center center no-repeat;
+            background-size: rem(690px) rem(300px);
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            margin-bottom: rem(20px);
         }
     }
 
@@ -922,6 +944,19 @@
                 bottom: rem(50px);
                 right: rem(-15px);
             }
+            .radio {
+                width: rem(32px);
+                height: rem(32px);
+                position: absolute;
+                right: rem(20px);
+                top: rem(150px);
+                background: url(../image/Unchecked.png)center center no-repeat;
+                background-size: rem(32px) rem(32px);
+                &.active {
+                    background: url(../image/checkmark.png)center center no-repeat;
+                    background-size: rem(32px) rem(32px);
+                }
+            }
             .line {
                 width: rem(644px);
                 border-bottom: rem(2px) dashed #e2e2e2;
@@ -942,8 +977,6 @@
                 position: absolute;
                 right: rem(33px);
                 bottom: rem(27px);
-            }
-            .stamp-1 {
                 background: url(../image/i-over.png)center center no-repeat;
                 background-size: rem(151px) rem(116px);
             }
@@ -1029,14 +1062,18 @@
                 }
             }
         }
-        .card-ping-1 {
+        .card-ping {
             height: rem(340px);
             .icon {
                 background: url(../image/i-ping-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
+            .icon.over {
+                background: url(../image/i-ping-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
         }
-        .card-dai-1 {
+        .card-dai {
             .number {
                 margin-bottom: rem(55px);
             }
@@ -1044,10 +1081,18 @@
                 background: url(../image/i-dai-1.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
+            .icon.over {
+                background: url(../image/i-dai-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
         }
-        .card-man-1 {
+        .card-man {
             .icon {
                 background: url(../image/i-man-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-man-2.png)center center no-repeat;
                 background-size: rem(104px) rem(106px);
             }
         }

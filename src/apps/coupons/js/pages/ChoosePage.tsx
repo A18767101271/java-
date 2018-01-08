@@ -11,6 +11,7 @@ interface AddPageProps {
 
 class AddPage extends React.Component<AddPageProps, {
     type?: number;
+    cardId?: number;
 }>{
 
     constructor(props: AddPageProps) {
@@ -26,6 +27,10 @@ class AddPage extends React.Component<AddPageProps, {
             this.setState({ type: parms.type });
         }
 
+        if (parms.cardid) {
+            this.setState({ cardId: parms.cardid });
+        }
+
     }
 
     render() {
@@ -33,7 +38,7 @@ class AddPage extends React.Component<AddPageProps, {
         const ChooseContent = () => {
             return (
                 <div className='setion'>
-                    <div className='list l-1' onClick={() => window.location.href = '#/selfcard?cardid=1?shopid=' + this.props.storeId}><div className='left fl'>自助领券</div><div className='right fr'></div></div>
+                    <div className='list l-1' onClick={() => { this.state.cardId ? window.location.href = '#/selfcard?cardid=' + this.state.cardId + '?shopid=' + this.props.storeId : window.location.href = '#/selfcard?shopid=' + this.props.storeId }}><div className='left fl'>自助领券</div><div className='right fr'></div></div>
                     <div className='list l-2'><div className='left fl'>定制发券</div><div className='right fr'></div></div>
                     <div className='list l-3'><div className='left fl'>下单返券</div><div className='right fr'></div></div>
                 </div>

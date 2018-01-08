@@ -46,8 +46,6 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
         const self = this;
 
-        console.log(this.state.data);
-
         const CardPZ = (props: { item: any, status: number }) => {
             const pros = props.item.products;
             return (
@@ -99,7 +97,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
                     <div className='text-2'>创建时间:{props.item.gmtCreate}</div>
                     <div className='text-3'>{props.item.limitEnableTime ? '有效期:' + props.item.limitEnableTime : '领券' + props.item.afterReceiveEnableDay + '天后可用，有效期' + props.item.limitDay + '天'}</div>
                     <div className='text-4'>{props.item.isGiveOut ? '已发放' : '未发放'}</div>
-                    <div className='text-5'>￥<em></em></div>
+                    <div className='text-5'>￥<em>{props.item.marketingMeta.marketMeta[0].faceAmount/100}</em></div>
                 </div>
             )
         }
