@@ -103,6 +103,8 @@ class CardDetails extends React.Component<CardDetailsProps, {
 
     render() {
 
+        let parms = UParams();
+
         const BtnDel = () => {
             return (
                 <div className='btn-del'>立即删除</div>
@@ -111,16 +113,15 @@ class CardDetails extends React.Component<CardDetailsProps, {
 
         const BtnPush = () => {
             return (
-                <div className='btn-push' onClick={() => window.location.href = '#/choose?type=2?shopid=' + this.props.storeId}>立即发布</div>
+                <div className='btn-push' onClick={() => window.location.href = '#/choose?type=2?shopid=' + this.props.storeId + '?cardid=' + parms.cardid}>立即发布</div>
             )
         }
 
-        let parms = UParams();
-        console.log(parms.id);
+
 
         return (
             <Layout>
-                <Header title='卡券配置详情' className2='add-hide' />
+                <Header title='卡券配置详情' addIsHide={true} />
                 <Content>
                     <div className="wrap clearfix" data-page='details'>
 

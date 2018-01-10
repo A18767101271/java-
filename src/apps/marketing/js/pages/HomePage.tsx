@@ -51,7 +51,7 @@ const MarketItem = (props: { data: any, type: number, shopId: number }) => {
         <span className="time-text">{moment(st * 1000).format('YYYY-MM-DD')}~{moment(ed * 1000).format('YYYY-MM-DD')}</span>
         {getRightTime()}
     </div>);
-    
+
 }
 
 interface HomePageProps {
@@ -169,6 +169,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
     render() {
         const shopId = this.props.storeId;
+        
         const marketItemList = () => {
 
             if (this.state.data && this.state.data.content.length > 0) {

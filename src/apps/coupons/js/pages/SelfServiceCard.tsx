@@ -76,6 +76,8 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
 
     onSubmit(_num) {
 
+        window.location.href = '#/selfcardlist?shopid=' + this.props.storeId;
+
         if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
             Modal.alert('提示', '开始时间无效');
             return;
@@ -159,7 +161,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
         return (
 
             <Layout>
-                <Header title='新增自助领券' className2='add-hide' />
+                <Header title='新增自助领券' addIsHide={true} />
                 <Content>
                     <div className="wrap" data-page='selfcard'>
 
@@ -239,8 +241,8 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
                                 }} /></div>
                         </div>
 
-                        <div className='btn btn-1' onClick={() => this.onSubmit(1)}>仅发布</div>
-                        <div className='btn btn-2' onClick={() => this.onSubmit(2)}>立即发布并上架</div>
+                        <div className='btn btn-1' onClick={() => this.onSubmit(1)}>保存</div>
+                        <div className='btn btn-2' onClick={() => this.onSubmit(2)}>立即发布</div>
 
                     </div>
 

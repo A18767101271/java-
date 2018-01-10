@@ -104,7 +104,7 @@ class ChooseCard extends React.Component<ChooseCardProps, {
 
         return (
             <Layout>
-                <Header title='选择卡券' className2='add-hide' />
+                <Header title='选择卡券' addIsHide={true} />
 
                 <Content>
                     <div className="wrap clearfix" data-page='choosecard'>

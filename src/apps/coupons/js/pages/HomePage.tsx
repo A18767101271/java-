@@ -49,7 +49,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
         const CardPZ = (props: { item: any, status: number }) => {
             const pros = props.item.products;
             return (
-                <div className='card card-ping' onClick={() => window.location.href = '#/details/?id=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
+                <div className='card card-ping' onClick={() => window.location.href = '#/details/?cardid=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
                     <div className={classNames('icon', { 'over': props.status === 1 })}></div>
                     {props.status === 1 ? <div className='stamp'></div> : undefined}
                     <div className='y-left'></div>
@@ -67,7 +67,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
         const CardMJ = (props: { item: any, status: number }) => {
             return (
-                <div className='card card-man' onClick={() => window.location.href = '#/details/?id=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
+                <div className='card card-man' onClick={() => window.location.href = '#/details/?cardid=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
                     <div className={classNames('icon', { 'over': props.status === 1 })}></div>
                     {props.status === 1 ? <div className='stamp'></div> : undefined}
                     <div className='y-left'></div>
@@ -86,7 +86,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
         const CardDJ = (props: { item: any, status: number }) => {
             return (
-                <div className='card card-dai' onClick={() => window.location.href = '#/details/?id=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
+                <div className='card card-dai' onClick={() => window.location.href = '#/details/?cardid=' + props.item.couDefId + '?shopid=' + self.props.storeId}>
                     <div className={classNames('icon', { 'over': props.status === 1 })}></div>
                     {props.status === 1 ? <div className='stamp'></div> : undefined}
                     <div className='y-left'></div>

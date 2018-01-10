@@ -196,7 +196,7 @@ class SetDJ extends React.Component<SetDJProps, {
         const re = /^(([1-9]\d*)|0)(\.\d{0,2}?)?$/;
         return (
             <Layout>
-                <Header title='新增代金券' className2='add-hide' />
+                <Header title='新增代金券' addIsHide={true} />
                 <Content>
                     <div className="wrap" data-page='setdj'>
 

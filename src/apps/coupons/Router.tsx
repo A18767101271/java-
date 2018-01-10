@@ -9,6 +9,7 @@ import SetMJ from './js/pages/SetMJ';
 import CardDetails from './js/pages/CardDetails';
 import ChoosePage from './js/pages/ChoosePage';
 import SelfServiceCard from './js/pages/SelfServiceCard';
+import SelfCardList from './js/pages/SelfCardList';
 
 class Router extends React.Component<{ storeId: number }>{
 
@@ -24,6 +25,7 @@ class Router extends React.Component<{ storeId: number }>{
                 <Route path='/details' render={() => <CardDetails storeId={this.props.storeId} />} />
                 <Route path='/choose' render={() => <ChoosePage storeId={this.props.storeId} />} />
                 <Route path='/selfcard' render={() => <SelfServiceCard storeId={this.props.storeId} />} />
+                <Route path='/selfcardlist' render={() => <SelfCardList storeId={this.props.storeId} />} />
 
             </Switch>
         </HashRouter>);

@@ -1138,3 +1138,119 @@
             }
         }
     }
+
+    [data-page='selfcardlist'] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .headbar {
+            width: 10rem;
+            height: rem(88px);
+            line-height: rem(88px);
+            background-color: #fff;
+            margin-bottom: rem(15px);
+            .btn {
+                font-size: rem(30px);
+                float: left;
+                width: 3.3rem;
+                text-align: center;
+            }
+            .btn.active {
+                color: #1186ed;
+                background: url(../image/bottom-line_03.jpg) center bottom no-repeat;
+                background-size: rem(48px) rem(3px);
+            }
+        }
+        .content {
+            width: 10rem;
+            padding-bottom: rem(120px);
+        }
+        .card {
+            width: 10rem;
+            height: rem(303px);
+            background: url(../image/quan-img.png)rem(18px) center no-repeat;
+            background-size: rem(713px) rem(303px);
+            position: relative;
+            font-size: rem(24px);
+            color: #989898;
+            .icon {
+                width: rem(53px);
+                height: rem(53px);
+                border-radius: 50%;
+                background-color: #1784ff;
+                color: #fff;
+                font-size: rem(36px);
+                text-align: center;
+                line-height: rem(53px);
+                position: absolute;
+                left: rem(69px);
+                top: rem(24px);
+            }
+            .status {
+                width: rem(98px);
+                height: rem(45px);
+                text-align: center;
+                line-height: rem(45px);
+                font-size: rem(24px);
+                background-color: #e7f2ff;
+                color: #1784ff;
+                position: absolute;
+                right: rem(60px);
+                top: rem(28px);
+                border-radius: rem(22px);
+            }
+            .line {
+                float: left;
+                margin-left: rem(140px);
+                width: rem(550px);
+                height: rem(30px);
+                line-height: rem(30px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .name {
+                float: left;
+                font-size: rem(30px);
+                color: #000;
+                margin-left: rem(140px);
+                margin-top: rem(32px);
+                margin-bottom: rem(15px);
+            }
+            .num {
+                float: left;
+                margin-left: rem(140px);
+                margin-bottom: rem(20px);
+            }
+            .l-1,
+            .l-2,
+            .l-3 {
+                margin-bottom: rem(6px);
+            }
+        }
+        .card.over {
+            color: #bcbcbc;
+            background: url(../image/quan-hui.png)rem(18px) center no-repeat;
+            background-size: rem(713px) rem(303px);
+            .stamp {
+                width: rem(151px);
+                height: rem(116px);
+                background: url(../image/i-down.png)center center no-repeat;
+                background-size: rem(151px) rem(116px);
+                position: absolute;
+                right: rem(57px);
+                bottom: rem(30px);
+            }
+            .icon {
+                background-color: #bcbcbc;
+            }
+            .name {
+                color: #bcbcbc;
+            }
+            .status {
+                background-color: #f8f8f8;
+                color: #c0c0c0;
+            }
+        }
+    }
