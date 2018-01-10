@@ -204,7 +204,7 @@ class SetPZ extends React.Component<SetPZProps, {
 
         return (
             <Layout>
-                <Header title='新增凭证券' addIsHide={true} />
+                <Header title='新增凭证券' />
                 <Content>
                     <div className="wrap" data-page='setpz'>
 

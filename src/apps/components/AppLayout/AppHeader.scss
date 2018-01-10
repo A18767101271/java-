@@ -39,8 +39,16 @@ $baseFontSize: 75px !default;
         background: url(./image/i-add.png)rem(18px) rem(29px) no-repeat;
         background-size: rem(32px) rem(32px);
     }
-    .add-hide {
-        display: none;
+    .edit-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: rem(120px);
+        height: rem(88px);
+        text-align: center;
+        line-height: rem(88px);
+        color: #000;
+        font-size: rem(30px);
     }
 }
 

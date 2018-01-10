@@ -26,7 +26,7 @@ class AddPage extends React.Component<AddPageProps>{
     render() {
         return (
             <Layout>
-                <Header title='新增卡券' addIsHide={true} />
+                <Header title='新增卡券'/>
                 <Content>
                     <div className="wrap clearfix" data-page='add'>
 

@@ -48,7 +48,7 @@ class AddPage extends React.Component<AddPageProps, {
 
         return (
             <Layout>
-                {this.state.type == 1 ? <Header title='' addIsHide={true} className='no-border' /> : <Header title='请选择卡券上线方式' addIsHide={true} />}
+                {this.state.type == 1 ? <Header title='' className='no-border' /> : <Header title='请选择卡券上线方式' />}
 
                 <Content>
                     <div className="wrap clearfix" data-page='choose'>

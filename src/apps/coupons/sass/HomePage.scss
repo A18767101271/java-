@@ -242,6 +242,11 @@
         background-color: #f5f6f8;
         padding-bottom: rem(190px);
         min-height: rem(1200px);
+        .am-list-item.add {
+            .am-list-brief {
+                color: blue;
+            }
+        }
         .row {
             width: 10rem;
             height: rem(88px);
@@ -1252,5 +1257,352 @@
                 background-color: #f8f8f8;
                 color: #c0c0c0;
             }
+        }
+    }
+
+    [data-page='getconfig'] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .card {
+            float: left;
+            width: rem(720px);
+            margin: rem(15px) rem(15px) 0 rem(15px);
+            height: rem(730px);
+            background-color: #fff;
+            border-radius: rem(15px);
+            position: relative;
+            padding-top: rem(210px);
+            padding-bottom: rem(40px);
+            .c-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(67px);
+                left: rem(-15px);
+            }
+            .c-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(67px);
+                right: rem(-15px);
+            }
+            .line {
+                width: rem(670px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(25px);
+                bottom: rem(80px);
+            }
+            .icon {
+                width: rem(53px);
+                height: rem(53px);
+                border-radius: 50%;
+                background-color: #1784ff;
+                color: #fff;
+                font-size: rem(36px);
+                text-align: center;
+                line-height: rem(53px);
+                position: absolute;
+                left: rem(195px);
+                top: rem(34px);
+            }
+            .name {
+                font-size: rem(34px);
+                color: #000;
+                font-weight: bold;
+                position: absolute;
+                left: rem(258px);
+                top: rem(44px);
+            }
+            .number {
+                font-size: rem(24px);
+                color: #cfcfcf;
+                position: absolute;
+                left: rem(277px);
+                top: rem(97px);
+            }
+            .status {
+                width: rem(98px);
+                height: rem(45px);
+                text-align: center;
+                line-height: rem(45px);
+                font-size: rem(24px);
+                background-color: #e7f2ff;
+                color: #1784ff;
+                position: absolute;
+                left: rem(305px);
+                top: rem(140px);
+                border-radius: rem(22px);
+            }
+            .row {
+                width: 100%;
+                height: rem(34px);
+                line-height: rem(34px);
+                margin-bottom: rem(40px);
+                font-size: rem(30px);
+                .left {
+                    margin-left: rem(30px);
+                    color: #959595;
+                }
+                .right {
+                    margin-right: rem(30px);
+                }
+            }
+            .btn-export {
+                width: 100%;
+                text-align: center;
+                height: rem(82px);
+                line-height: rem(82px);
+                font-size: rem(30px);
+                position: absolute;
+                left: 0;
+                bottom: 0;
+            }
+        }
+        .card.over {
+            .icon {
+                background-color: #bcbcbc;
+            }
+            .status {
+                background-color: #f8f8f8;
+                color: #c0c0c0;
+            }
+        }
+        .btn {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            background-color: #1785ff;
+            color: #fff;
+            border-top: 1px solid #d1d1d3;
+        }
+    }
+
+    [data-page='editconfig'] {
+        background-color: #f5f5f5;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        padding-top: rem(18px);
+        .row {
+            width: 10rem;
+            height: rem(88px);
+            line-height: rem(88px);
+            background-color: #fff;
+            font-size: rem(30px);
+            .left {
+                margin-left: rem(30px);
+            }
+            .right {
+                margin-right: rem(30px);
+                input {
+                    width: rem(450px);
+                    text-align: right;
+                }
+                span {
+                    padding-right: rem(40px);
+                    background: url(../image/i-right.png) right center no-repeat;
+                    background-size: rem(16px) rem(25px);
+                }
+            }
+        }
+        .btn {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            float: left;
+            position: fixed;
+            bottom: 0;
+            background-color: #1784ff;
+            color: #fff;
+            left: 0;
+        }
+        .card {
+            font-size: rem(24px);
+            width: rem(690px);
+            height: rem(300px);
+            background-color: #fff;
+            margin-left: rem(30px);
+            margin-bottom: rem(18px);
+            position: relative;
+            .y-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                left: rem(-15px);
+            }
+            .y-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                right: rem(-15px);
+            }
+            .line {
+                width: rem(644px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(23px);
+                bottom: rem(65px);
+            }
+            .icon {
+                width: rem(104px);
+                height: rem(106px);
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .stamp {
+                width: rem(151px);
+                height: rem(116px);
+                position: absolute;
+                right: rem(33px);
+                bottom: rem(27px);
+                background: url(../image/i-over.png)center center no-repeat;
+                background-size: rem(151px) rem(116px);
+            }
+            .name {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(34px);
+                font-size: rem(32px);
+                color: #000;
+                font-weight: bold;
+                width: rem(450px);
+                height: rem(32px);
+                line-height: rem(32px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .number {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(16px);
+                width: rem(450px);
+                height: rem(22px);
+                line-height: rem(22px);
+                font-size: rem(22px);
+                color: #7d7f80;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-0 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(30px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                span {
+                    margin-right: rem(5px);
+                }
+            }
+            .text-1 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-2 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-3 {
+                position: absolute;
+                left: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-4 {
+                position: absolute;
+                right: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-5 {
+                position: absolute;
+                right: rem(67px);
+                top: rem(89px);
+                color: #ef3434;
+                font-size: rem(36px);
+                em {
+                    font-size: rem(70px);
+                    font-style: normal;
+                }
+            }
+        }
+        .card-ping {
+            height: rem(340px);
+            .icon {
+                background: url(../image/i-ping-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-ping-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-dai {
+            .number {
+                margin-bottom: rem(55px);
+            }
+            .icon {
+                background: url(../image/i-dai-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-dai-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-man {
+            .icon {
+                background: url(../image/i-man-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-man-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .no-card {
+            width: rem(690px);
+            height: rem(300px);
+            background: url(../image/card-hui.png)center center no-repeat;
+            background-size: rem(690px) rem(300px);
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            margin-bottom: rem(20px);
         }
     }

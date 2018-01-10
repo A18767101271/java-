@@ -50,7 +50,7 @@ class CardList extends React.Component<CardListProps, CardListState>{
         const marketItemList = () => {
             return (
                 <div>
-                    <div className='card'>
+                    <div className='card' onClick={() => window.location.href = '#/getconfig?cardid=159?shopid=' + this.props.storeId}>
                         <div className='icon'>凭</div>
                         <div className='status'>已上架</div>
                         <div className='line name'>送可乐1瓶凭证券</div>
@@ -78,7 +78,7 @@ class CardList extends React.Component<CardListProps, CardListState>{
 
         return (
             <Layout>
-                <Header title='自助领券列表' addType={true} />
+                <Header title='自助领券列表' addIsShow={true} addUrl={'selfcard'} />
                 <Content>
                     <div className="wrap clearfix" data-page='selfcardlist'>
 

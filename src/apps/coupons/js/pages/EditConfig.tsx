@@ -10,11 +10,11 @@ import ChooseCard from './ChooseCard';
 
 const { Header, Content } = Layout;
 
-interface SelfServiceCardProps {
+interface EditConfigProps {
     storeId: number,
 }
 
-class SelfServiceCard extends React.Component<SelfServiceCardProps, {
+class EditConfig extends React.Component<EditConfigProps, {
     cardList?: any;
     cardInfo?: any;
     cardId?: any;
@@ -29,7 +29,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
     isCard: boolean;
 }>{
 
-    constructor(props: SelfServiceCardProps) {
+    constructor(props: EditConfigProps) {
         super(props);
         this.state = {
             beginDate: moment().startOf('day').toDate(),
@@ -74,7 +74,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
     }
 
 
-    onSubmit(_num) {
+    onSubmit() {
 
         window.location.href = '#/selfcardlist?shopid=' + this.props.storeId;
 
@@ -93,7 +93,6 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
     mainRender() {
 
         const re = /^(([1-9]\d*)|0)(\.\d{0,2}?)?$/;
-        const data1 = ['', '满减券', '代金券', '凭证券'];
         const item1 = this.state.cardInfo;
 
         const CardPZ = (props: { item: any, status: number }) => {
@@ -152,25 +151,12 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
             )
         }
 
-        const NoCard = () => {
-            return (
-                <div className='no-card'></div>
-            )
-        }
-
         return (
 
             <Layout>
-                <Header title='新增自助领券' />
+                <Header title='领券配置编辑' />
                 <Content>
-                    <div className="wrap" data-page='selfcard'>
-
-                        <div className='row' onClick={() => this.setState({ chooseCards: true })}>
-                            <div className='left fl'>选择卡券</div>
-                            <div className='right fr'>
-                                <span>{this.state.isCard ? data1[item1.couponType] : '请选择'}</span>
-                            </div>
-                        </div>
+                    <div className="wrap" data-page='editconfig'>
 
                         {this.state.isCard ?
                             item1.couponType == 1 ?
@@ -178,7 +164,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
                                 : item1.couponType == 3 ?
                                     <CardPZ item={item1} status={item1.status} />
                                     : <CardDJ item={item1} status={item1.status} />
-                            : <NoCard />}
+                            : undefined}
 
                         <div className='row'>
                             <div className='left fl'>可领数量</div>
@@ -228,22 +214,20 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
                         </div>
 
                         <div className='row'>
-                            <div className='left fl'>设置库存量</div>
-                            <div className="right fr"><input type="text" placeholder="设置发放数量 不填写时为不限" value={this.state.setNum || ''} onChange={e => this.setState({ setNum: parseInt(e.target.value) })} /></div>
+                            <div className='left fl'>修改库存量</div>
+                            <div className="right fr"><input type="text"  value={this.state.setNum || ''} onChange={e => this.setState({ setNum: parseInt(e.target.value) })} /></div>
                         </div>
 
                         <div className='row'>
-                            <div className='left fl'>单价</div>
-                            <div className="right fr"><input type="text" placeholder="请设置单价" value={this.state.price || ''}
+                            <div className='left fl'>修改单价</div>
+                            <div className="right fr"><input type="text"  value={this.state.price || ''}
                                 onChange={e => {
                                     let result = re.test(e.target.value);
                                     if (result || !e.target.value) this.setState({ price: e.target.value });
                                 }} /></div>
                         </div>
 
-                        <div className='btn btn-1' onClick={() => this.onSubmit(1)}>保存</div>
-                        <div className='btn btn-2' onClick={() => this.onSubmit(2)}>立即发布</div>
-
+                        <div className='btn' onClick={() => this.onSubmit()}>保存</div>
                     </div>
 
                 </Content>
@@ -267,4 +251,4 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
 
 }
 
-export default SelfServiceCard;
+export default EditConfig;

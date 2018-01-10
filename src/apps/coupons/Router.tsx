@@ -10,6 +10,8 @@ import CardDetails from './js/pages/CardDetails';
 import ChoosePage from './js/pages/ChoosePage';
 import SelfServiceCard from './js/pages/SelfServiceCard';
 import SelfCardList from './js/pages/SelfCardList';
+import GetConfig from './js/pages/GetConfig';
+import EditConfig from './js/pages/EditConfig';
 
 class Router extends React.Component<{ storeId: number }>{
 
@@ -26,6 +28,9 @@ class Router extends React.Component<{ storeId: number }>{
                 <Route path='/choose' render={() => <ChoosePage storeId={this.props.storeId} />} />
                 <Route path='/selfcard' render={() => <SelfServiceCard storeId={this.props.storeId} />} />
                 <Route path='/selfcardlist' render={() => <SelfCardList storeId={this.props.storeId} />} />
+                <Route path='/getconfig' render={() => <GetConfig storeId={this.props.storeId} />} />
+                <Route path='/editconfig' render={() => <EditConfig storeId={this.props.storeId} />} />
+
 
             </Switch>
         </HashRouter>);

@@ -121,7 +121,7 @@ class CardDetails extends React.Component<CardDetailsProps, {
 
         return (
             <Layout>
-                <Header title='卡券配置详情' addIsHide={true} />
+                <Header title='卡券配置详情'/>
                 <Content>
                     <div className="wrap clearfix" data-page='details'>
 
