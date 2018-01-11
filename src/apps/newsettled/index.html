@@ -1,8 +1,12 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="email=no" />
+    <meta name="format-detection" content="address=no" />
+    <meta name="format-detection" content="date=no" />
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1" />
     <script>
         ! function () {
@@ -59,7 +63,7 @@
             }
             if (I.setAttribute("data-dpr", F), !H) {
                 if (H = J.createElement("meta"), H.setAttribute("name", "viewport"), H.setAttribute("content",
-                    "initial-scale=" + E + ", maximum-scale=" + E + ", minimum-scale=" + E + ", user-scalable=no"),
+                        "initial-scale=" + E + ", maximum-scale=" + E + ", minimum-scale=" + E + ", user-scalable=no"),
                     I.firstElementChild) {
                     I.firstElementChild.appendChild(H)
                 } else {
@@ -76,24 +80,26 @@
                 function () {
                     J.body.style.fontSize = 12 * F + "px"
                 }, !1), L(), D.dpr = N.dpr = F, D.refreshRem = L, D.rem2px = function (d) {
-                    var c = parseFloat(d) * this.rem;
-                    return "string" == typeof d && d.match(/rem$/) && (c += "px"), c
-                }, D.px2rem = function (d) {
-                    var c = parseFloat(d) / this.rem;
-                    return "string" == typeof d && d.match(/px$/) && (c += "rem"), c
-                }
+                var c = parseFloat(d) * this.rem;
+                return "string" == typeof d && d.match(/rem$/) && (c += "px"), c
+            }, D.px2rem = function (d) {
+                var c = parseFloat(d) / this.rem;
+                return "string" == typeof d && d.match(/px$/) && (c += "rem"), c
+            }
         }(window, window.lib || (window.lib = {}));
     </script>
-    <title>商家入驻</title>
+    <title></title>
 </head>
 
 <body>
 
-    <div id="app"></div>
+    <div id="app">
 
-    <!-- <script src="//cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
-    <script src="//cdn.bootcss.com/Swiper/3.4.2/js/swiper.min.js"></script> -->
+    </div>
+
+    <!-- <script src="//apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
+    <script src="//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>  -->
+
 </body>
 
 </html>

@@ -63,6 +63,16 @@ module.exports = {
 
     ],
 
+    newsettled: [
+
+      // require.resolve('./polyfills'),
+
+      require.resolve('../scripts/utils/webpackHotDevClient'),
+
+      './src/apps/newsettled/index.tsx'
+
+    ],
+
   }
 
 
@@ -219,6 +229,13 @@ module.exports = {
       inject: true,
       template: './src/apps/coupons/index.html',
       chunks: ['coupons']
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'newsettled/index.html',
+      inject: true,
+      template: './src/apps/newsettled/index.html',
+      chunks: ['newsettled']
     }),
 
     new webpack.NamedModulesPlugin(),

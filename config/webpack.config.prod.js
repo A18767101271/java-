@@ -90,6 +90,16 @@ module.exports = {
       './src/apps/coupons/index.tsx'
 
     ],
+
+    newsettled: [
+
+      // require.resolve('./polyfills'),
+
+
+      './src/apps/newsettled/index.tsx'
+
+    ],
+
   },
   output: {
     // The build folder.
@@ -324,6 +334,25 @@ module.exports = {
       inject: true,
       template: './src/apps/coupons/index.html',
       chunks: ['coupons'],
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+      },
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'newsettled/index.html',
+      inject: true,
+      template: './src/apps/newsettled/index.html',
+      chunks: ['newsettled'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,

@@ -1,0 +1,59 @@
+$baseFontSize: 72px !default;
+// pixels to rem
+@function rem($px) {
+    @return $px / $baseFontSize * 1rem;
+}
+
+.app-footer {
+    width: 10rem;
+    height: rem(98px);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    background-color: #fff;
+    border-top: rem(2px) solid #f0f0f0;
+    display: flex;
+    .app-footer-tab {
+        flex: 1;
+        height: rem(98px);
+    }
+    .a-1 {
+        background-image: url(./image/l-1.png);
+        background-repeat: no-repeat;
+        background-position: rem(170px) rem(20px);
+        background-size: rem(38px) rem(30px);
+        .tab-text {
+            float: left;
+            font-size: rem(20px);
+            color: #a5a5a5;
+            margin-left: rem(150px);
+            margin-top: rem(60px);
+        }
+    }
+    .a-2 {
+        background-image: url(./image/r-1.png);
+        background-repeat: no-repeat;
+        background-position: rem(150px) rem(16px);
+        background-size: rem(30px) rem(34px);
+        .tab-text {
+            float: left;
+            font-size: rem(20px);
+            color: #a5a5a5;
+            margin-left: rem(125px);
+            margin-top: rem(60px);
+        }
+    }
+    .a-1.active {
+        background-image: url(./image/l-2.png);
+        .tab-text {
+            color: #ffda44;
+        }
+    }
+    .a-2.active {
+        background-image: url(./image/r-2.png);
+        .tab-text {
+            color: #ffda44;
+        }
+    }
+}

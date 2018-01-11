@@ -23,12 +23,12 @@ class Router extends React.Component<{
 
         return (<HashRouter>
             <Switch>
+                
                 <Route path='/ready' component={ReadyPage} />
                 <Route path='/qinfo' render={() => <QualificationInformationPage formData={this.props.formData} />} />
                 <Route path='/shopinfo' render={() => <ShopInfomationPage formData={this.props.formData} />} />
                 <Route path='/shopintro' render={() => <ShopIntroductionPage clientLocation={this.props.clientLocation} formData={this.props.formData} />} />
                 <Route path='/success' render={() => <SuccessPage />} />
-
                 <Route path='/home' render={() => <HomePage onReloadForm={() => this.props.onReloadForm()} formData={this.props.formData} />} />
 
             </Switch>

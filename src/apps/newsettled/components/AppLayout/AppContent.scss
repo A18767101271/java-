@@ -1,0 +1,17 @@
+@charset "UTF-8";
+$baseFontSize: 75px !default;
+// pixels to rem
+@function rem($px) {
+    @return $px / $baseFontSize * 1rem;
+}
+
+.app-content {
+    border-top: rem(88px) solid transparent;
+    z-index: 1;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 10rem;
+}

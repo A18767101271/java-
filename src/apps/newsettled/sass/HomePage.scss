@@ -1,0 +1,86 @@
+﻿    @charset "UTF-8";
+    $baseFontSize: 75px !default; // pixels to rem
+    @function rem($px) {
+        @return $px / $baseFontSize * 1rem;
+    }
+
+    [data-page="home"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+    }
+
+    [data-page="shopinfo"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .my-list {
+            .am-list-item .am-list-line .am-list-extra {
+                flex-basis: 65%;
+            }
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+    }
+
+    [data-page="shopinfoname"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        padding-top: rem(20px);
+        position: relative;
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+        .row1 {
+            margin-left: rem(30px);
+            margin-top: rem(20px);
+        }
+        .row2 {
+            margin-left: rem(30px);
+            margin-top: rem(20px);
+            color: #888;
+        }
+    }
+
+    [data-page="shopinfoaddress"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        padding-top: rem(20px);
+        position: relative;
+        .my-list {
+            .am-list-item .am-list-line .am-list-extra {
+                flex-basis: 65%;
+            }
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+    }

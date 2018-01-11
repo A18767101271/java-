@@ -1,0 +1,57 @@
+@charset "UTF-8";
+$baseFontSize: 75px !default;
+// pixels to rem
+@function rem($px) {
+    @return $px / $baseFontSize * 1rem;
+}
+
+.app-header {
+    width: 10rem;
+    height: rem(88px);
+    overflow: hidden;
+    background-color: #fff;
+    line-height: rem(88px);
+    text-align: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    border-bottom: rem(2px) solid #e2e3e4;
+    .app-header-title {
+        font-size: rem(36px);
+        color: #1f2427;
+    }
+    .back-btn {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: rem(80px);
+        height: rem(88px);
+        background: url(./image/i-left.png)rem(30px) rem(27px) no-repeat;
+        background-size: rem(19px) rem(33px);
+    }
+    .add-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: rem(80px);
+        height: rem(88px);
+        background: url(./image/i-add.png)rem(18px) rem(29px) no-repeat;
+        background-size: rem(32px) rem(32px);
+    }
+    .edit-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: rem(120px);
+        height: rem(88px);
+        text-align: center;
+        line-height: rem(88px);
+        color: #000;
+        font-size: rem(30px);
+    }
+}
+
+.no-border {
+    border-bottom: none;
+}
