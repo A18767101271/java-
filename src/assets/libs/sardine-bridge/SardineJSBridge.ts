@@ -129,6 +129,7 @@ export default class SardineJSBridge {
     }
 
     ready(callback: () => void) {
+        
         if (jsBridgeInited) callback(); else readys.push(callback);
     }
 

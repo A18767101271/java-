@@ -5,7 +5,8 @@ import HomePage from './js/pages/HomePage';
 import ShopInfo from './js/pages/ShopInfo';
 
 
-class Router extends React.Component<{}>{
+class Router extends React.Component<{
+}>{
 
     render() {
         return (<HashRouter>

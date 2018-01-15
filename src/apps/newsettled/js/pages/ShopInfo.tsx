@@ -14,13 +14,15 @@ const Item = List.Item;
 
 
 interface ShopInfoProps {
-
+    data?: any;
 }
 
 class ShopInfo extends React.Component<ShopInfoProps, {
     name1?: string;
     name2?: string;
     phone?: string;
+    lng?: number;
+    lat?: number;
 }>{
 
     constructor(props: ShopInfoProps) {
@@ -92,7 +94,7 @@ class ShopInfo extends React.Component<ShopInfoProps, {
         return (
 
             <Switch>
-                <Route path='/shopinfo/address' render={() => <ShopInfoAddress />} />
+                <Route path='/shopinfo/address' render={() => <ShopInfoAddress lng={this.state.lng} lat={this.state.lat} />} />
                 <Route path='/shopinfo/name' render={() => <ShopInfoName name1={this.state.name1} name2={this.state.name2} onEnter={val => this.onLogoChange(val)} />} />
                 <Route path='/shopinfo' exact render={() => this.mainRender()} />
             </Switch>

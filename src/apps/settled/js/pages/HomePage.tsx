@@ -1,11 +1,10 @@
 import '../../sass/HomePage.scss';
 
 //import bridge from '../../../../assets/libs/sardine-bridge';
-import { FormData } from '../../../../services/settled-apis';
+import SettledApis, { FormData } from '../../../../services/settled-apis';
 import React from 'react';
 import classNames from 'classNames';
 import { Toast, Modal } from 'antd-mobile';
-import SettledApis from '../../../../services/settled-apis';
 
 interface HomePageProps {
     onReloadForm: () => void;
@@ -39,7 +38,7 @@ export default class HomePage extends React.Component<HomePageProps>{
         let self = this;
 
         let form = this.props.formData;
-       
+
         if (!(this.isIntroductionFull() && this.isBaseFull() && this.isCredentialsFull())) {
             Modal.alert('提示', '尚未填写完整');
             this.inSubmit = false;
@@ -86,7 +85,7 @@ export default class HomePage extends React.Component<HomePageProps>{
     }
 
     render() {
-     
+
         if (!this.props.formData) {
             return <div></div>;
         }
@@ -184,7 +183,7 @@ export default class HomePage extends React.Component<HomePageProps>{
             data.credentialsInfoStatus === 2 ||
             data.introductionInfoStatus === 0 ||
             data.introductionInfoStatus === 2;
-            
+
         return (<div className="wrap" data-page='home'  >
             <Item1 />
             <Item2 />

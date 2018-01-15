@@ -43,7 +43,7 @@
     "gzip-size": "^4.0.0",
     "html-webpack-plugin": "^2.30.1",
     "inquirer": "^3.2.3",
-    "is-root": "^1.0.0", 
+    "is-root": "^1.0.0",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "promise": "^8.0.1",
@@ -69,7 +69,9 @@
     "whatwg-fetch": "^2.0.3"
   },
   "dependencies": {
+    "js-cookie": "^2.2.0",
     "moment": "^2.19.2",
-    "postcss-flexbugs-fixes": "^3.2.0"
+    "postcss-flexbugs-fixes": "^3.2.0",
+    "react-amap": "^1.2.0"
   }
 }

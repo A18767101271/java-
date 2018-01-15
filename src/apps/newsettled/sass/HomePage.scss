@@ -63,8 +63,7 @@
     [data-page="shopinfoaddress"] {
         font-size: rem(24px);
         background-color: #f5f6f8;
-        padding-bottom: rem(190px);
-        min-height: rem(1250px);
+        height: rem(1200px);
         padding-top: rem(20px);
         position: relative;
         .my-list {
@@ -82,5 +81,18 @@
             position: fixed;
             left: 0;
             bottom: 0;
+        }
+        .tip {
+            background: #ffffcc;
+            width: 10rem;
+            height: rem(68px);
+            line-height: rem(68px);
+            text-align: left;
+            font-size: rem(28px);
+            text-indent: rem(24px);
+        }
+        .map {
+            width: 10rem;
+            height: rem(800px);
         }
     }

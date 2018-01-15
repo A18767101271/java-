@@ -20,7 +20,6 @@ class Router extends React.Component<{
 
 
     render() {
-
         return (<HashRouter>
             <Switch>
                 

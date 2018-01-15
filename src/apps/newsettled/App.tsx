@@ -8,15 +8,22 @@ FastClick.attach(window.document.body);
 interface AppProps {
 }
 
-class App extends React.Component<AppProps>{
+class App extends React.Component<AppProps, {
+}>{
 
     constructor(props: AppProps) {
         super(props);
+
+        this.state = {}
     }
 
 
+    componentWillMount() {
+
+    }
+
     render() {
-        return <Router />
+        return <Router />;
     }
 }
 

@@ -64,7 +64,6 @@ class App extends React.Component<AppProps, {
         })
 
 
-
     }
 
     componentWillMount() {
@@ -80,7 +79,6 @@ class App extends React.Component<AppProps, {
         });
 
         SettledApis.getFormSingle().then(d => {
-            //console.log(d);
             this.setState({
                 inited: true,
                 formData: d
@@ -112,12 +110,10 @@ class App extends React.Component<AppProps, {
             Modal.alert('提示', err.msg);
         });
         let self = this;
+
         SardineJSBridge.ready(function () {
             SardineJSBridge.getLocation({
                 success: function (data) {
-                    // console.log(data);
-                    // PageExtends.clientLocation = data.longitude + ',' + data.latitude;
-
                     self.setState({
                         clientLocation: {
                             lng: data.longitude,
@@ -128,6 +124,7 @@ class App extends React.Component<AppProps, {
                 }
             });
         });
+
     }
 
     render() {

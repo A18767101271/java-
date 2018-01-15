@@ -1,14 +1,23 @@
-import Container from '../sardine-bridge/container';
-import JWeixinBoot from '../jweixi-boot';
 import AMapBoot from '../amap-boot';
 import CitysData from '../geo-data/data-citys';
 import GeoNode from '../geo-data/GeoNode';
 
 interface LocationInfo {
-    city: GeoNode,
-    address: string,
-    latitude: number,
-    longitude: number
+    latitude: number;
+    longitude: number;
+    provinceName: string;
+    districtName: string;
+    cityName: string;
+}
+
+interface AddressInfo {
+    city: GeoNode;
+    address: string;
+}
+
+interface LocationInfo2 {
+    latitude: number;
+    longitude: number;
 }
 
 function getCityByCode(cityCode: string): GeoNode | null {
@@ -45,88 +54,111 @@ export default {
 
     getCityById: getCityById,
 
-    getLocation(): Promise<LocationInfo> {
-
+    getAddressByLocation(longitude: number, latitude: number): Promise<AddressInfo> {
         return new Promise((resolve, reject) => {
-            if (Container.isWechat) {
-
-                JWeixinBoot.ready((wx) => {
-                    wx.getLocation({
-                        type: 'gcj02',
-                        success: function (res) {
-                            let latitude = res.latitude;
-                            let longitude = res.longitude;
-                            AMapBoot.ready((AMap) => { 
-                                AMap.plugin('AMap.Geocoder', function () {
-                                    const geocoder = new AMap.Geocoder();  
-                                    geocoder.getAddress([longitude, latitude], (status, result) => {
-                                        if (status == 'complete' && result.info == "OK") { 
-                                            let city = getCityByCode(result.regeocode.addressComponent.citycode);  
-                                            if (city) { 
-                                                resolve({
-                                                    city: city,
-                                                    address: result.regeocode.formattedAddress,
-                                                    latitude: latitude,
-                                                    longitude: longitude
-                                                });
-                                            } else { 
-                                                reject();
-                                            }
-                                        } else { 
-                                            reject();
-                                        }
-                                    })
-                                });
-                            });
-                        }
-                    });
-                });
-
-            } else {
-
-
-                AMapBoot.ready((AMap) => {
-                    //let AMap = (window as any).AMap;
-
-                    let geolocation = new AMap.Geolocation({
-                        enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                        timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-                        maximumAge: 0,           //定位结果缓存0毫秒，默认：0
-                        convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
-                    });
-
-                    geolocation.getCurrentPosition(function (status, result) {
-
-                        if (status === 'complete' && result.info === 'SUCCESS') {
-
-                            //let city = getCityByCode(result.addressComponent.citycode);
-
-                            let city = getCityByCode(result.addressComponent.citycode);
+            AMapBoot.ready((AMap) => {
+                AMap.plugin('AMap.Geocoder', function () {
+                    const geocoder = new AMap.Geocoder();
+                    geocoder.getAddress([longitude, latitude], (status, result) => {
+                        if (status == 'complete' && result.info == "OK") {
+                            let city = getCityByCode(result.regeocode.addressComponent.citycode);
                             if (city) {
                                 resolve({
                                     city: city,
-                                    address: result.formattedAddress,
-                                    latitude: result.position.lat,
-                                    longitude: result.position.lng
+                                    address: result.regeocode.formattedAddress
                                 });
                             } else {
                                 reject();
                             }
-
                         } else {
-
                             reject();
-
                         }
                     })
+                });
+            });
+        });
+    },
+
+    getLocation(): Promise<LocationInfo> {
+
+        return new Promise((resolve, reject) => {
+
+            // if (!options || options.cache !== false) {
+            //     const cookieloc = Cookies.get('_geoloc');
+            //     if (cookieloc) {
+            //         let arr = cookieloc.split(',');
+            //         if (arr.length === 2) {
+            //             let lng = parseFloat(arr[0]);
+            //             let lat = parseFloat(arr[1]);
+            //             if (!isNaN(lng) && !isNaN(lng) && lng && lat) {
+            //                 resolve({
+            //                     latitude: lat,
+            //                     longitude: lng
+            //                 });
+            //                 return;
+            //             }
+            //         }
+            //     }
+            // }
 
 
+            AMapBoot.ready((AMap) => {
+                //let AMap = (window as any).AMap;
+
+                let geolocation = new AMap.Geolocation({
+                    enableHighAccuracy: true,//是否使用高精度定位，默认:true
+                    timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+                    maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+                    convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
                 });
 
-            }
+                geolocation.getCurrentPosition(function (status, result) {
+
+                    if (status === 'complete' && result.info === 'SUCCESS') {
+
+                        // let cookieExpire = new Date();
+                        // cookieExpire.setMinutes(cookieExpire.getMinutes() + 5);
+                        // Cookies.set('_geoloc', result.position.lng + ',' + result.position.lat, { expires: cookieExpire });
+
+                        resolve({
+                            latitude: result.position.lat,
+                            longitude: result.position.lng,
+                            provinceName: result.addressComponent.province,
+                            cityName: result.addressComponent.city,
+                            districtName: result.addressComponent.district
+                        });
+
+                    } else {
+
+                        reject();
+
+                    }
+                })
+
+            });
 
         });
 
+    },
+
+    getLocationByAddress(address: string): Promise<LocationInfo2> {
+        return new Promise((resolve, reject) => {
+            AMapBoot.ready((AMap) => {
+                AMap.plugin('AMap.Geocoder', function () {
+                    const geocoder = new AMap.Geocoder();
+                    geocoder.getLocation(address, (status, result) => {
+                        if (status == 'complete' && result.info == "OK") {
+                            resolve({
+                                latitude: result.geocodes[0].location.lat,
+                                longitude: result.geocodes[0].location.lng,
+                            });
+                        } else {
+                            reject();
+                        }
+                    })
+                });
+            });
+        });
     }
 
 }
