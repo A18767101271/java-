@@ -145,11 +145,16 @@ export default {
 
     },
 
-    getLocationByAddress(address: string): Promise<LocationInfo2> {
+    getLocationByAddress(address: string, cityId: number): Promise<LocationInfo2> {
+        console.log(cityId, address);
+
         return new Promise((resolve, reject) => {
             AMapBoot.ready((AMap) => {
                 AMap.plugin('AMap.Geocoder', function () {
-                    const geocoder = new AMap.Geocoder();
+                    const geocoder = new AMap.Geocoder({
+                        city: cityId,
+                        radius: 1000
+                    });
                     geocoder.getLocation(address, (status, result) => {
                         if (status == 'complete' && result.info == "OK") {
                             resolve({

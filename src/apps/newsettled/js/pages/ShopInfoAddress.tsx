@@ -192,7 +192,7 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
                 districtName: district.name
             })
 
-            GeoLocation.getLocationByAddress(province.name + city.name + district.name).then(data => {
+            GeoLocation.getLocationByAddress(province.name + city.name + district.name, city.value).then(data => {
                 this.setState({
                     lat: data.latitude,
                     lng: data.longitude
@@ -244,11 +244,9 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
     onChangeMapLocation() {
         var self = this;
 
-        if (this.state.provinceName && this.state.cityName && this.state.districtName) {
+        if (this.state.provinceName && this.state.cityName && this.state.districtName && this.state.cityId) {
             const address = this.state.provinceName + this.state.cityName + this.state.districtName + this.state.address1;
-
-            GeoLocation.getLocationByAddress(address).then(data => {
-
+            GeoLocation.getLocationByAddress(address, this.state.cityId).then(data => {
                 this.setState({
                     lng: data.longitude,
                     lat: data.latitude
