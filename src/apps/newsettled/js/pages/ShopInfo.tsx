@@ -2,15 +2,47 @@ import '../../sass/HomePage.scss';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
 import { Switch, Route } from 'react-router'
-//import classNames from 'classNames';
-// import moment from 'moment';
-import { List, InputItem, Button } from 'antd-mobile';
+import { List, InputItem, Button, Picker } from 'antd-mobile';
 import ShopInfoName from '../pages/ShopInfoName';
 import ShopInfoAddress from '../pages/ShopInfoAddress';
+import ShopDoorImg from '../pages/ShopDoorImg';
+import ShopIndoorImg from '../pages/ShopIndoorImg';
 
 const { Header, Content } = Layout;
 const Item = List.Item;
 
+const data1 = [{
+    label: '快餐小吃',
+    value: 11,
+},
+{
+    label: '主题特色',
+    value: 12
+},
+{
+    label: '甜点饮品',
+    value: 13
+},
+{
+    label: '中餐宴请',
+    value: 14
+},
+{
+    label: '火锅烧烤',
+    value: 15
+},
+{
+    label: '品茶会客',
+    value: 16
+},
+{
+    label: '西餐日韩',
+    value: 17
+},
+{
+    label: '夜市宵夜',
+    value: 18
+}];
 
 
 interface ShopInfoProps {
@@ -20,9 +52,29 @@ interface ShopInfoProps {
 class ShopInfo extends React.Component<ShopInfoProps, {
     name1?: string;
     name2?: string;
+
+    address1?: string,
+    address2?: string,
+    provinceId?: number,
+    districtId?: number,
+    cityId?: number,
+    provinceName?: string,
+    districtName?: string,
+    cityName?: string,
+    lng?: number,
+    lat?: number
+
+    categoryId?: number,
+    categoryName?: string,
+    subCategoryId?: number,
+    subCategoryName?: string,
+
     phone?: string;
-    lng?: number;
-    lat?: number;
+
+    doorImgArry?: {}[];
+
+    indoorImgArry?: {}[];
+
 }>{
 
     constructor(props: ShopInfoProps) {
@@ -40,15 +92,79 @@ class ShopInfo extends React.Component<ShopInfoProps, {
         }
     }
 
-    onLogoChange(data: { name1?: string, name2?: string }) {
-        if (data.name1) {
+    onNameChange(data: { name1?: string, name2?: string }) {
+
+        this.setState({
+            name1: data.name1,
+            name2: data.name2
+        });
+
+        this.backToMain();
+    }
+
+    onAddressChange(data: {
+        address1?: string,
+        address2?: string,
+        provinceId?: number,
+        districtId?: number,
+        cityId?: number,
+        provinceName?: string,
+        districtName?: string,
+        cityName?: string,
+        lng?: number,
+        lat?: number
+    }) {
+        this.setState({
+            address1: data.address1,
+            address2: data.address2,
+            provinceId: data.provinceId,
+            districtId: data.districtId,
+            cityId: data.cityId,
+            provinceName: data.provinceName,
+            districtName: data.districtName,
+            cityName: data.cityName,
+            lng: data.lng,
+            lat: data.lat
+        })
+
+        this.backToMain();
+    }
+
+    onShopCategoryChange(subCategoryId: number) {
+
+        let cate = data1.find(p => p.value == subCategoryId);
+        if (cate) {
             this.setState({
-                name1: data.name1,
-                name2: data.name2
+                categoryId: 1,
+                categoryName: '餐饮美食',
+                subCategoryId: cate.value,
+                subCategoryName: cate.label,
+            });
+        } else {
+            this.setState({
+                categoryId: undefined,
+                categoryName: undefined,
+                subCategoryId: undefined,
+                subCategoryName: undefined,
             });
         }
 
-        this.backToMain();
+    }
+
+    onShopDoorImgChange(data: any) {
+        if (data && data.length) {
+            this.setState({
+                doorImgArry: data
+            }, () => this.backToMain())
+        }
+    }
+
+    onShopIndoorImgChange(data: any) {
+        if (data && data.length) {
+            this.setState({
+                indoorImgArry: data
+            }, () => this.backToMain())
+        }
     }
 
     componentWillMount() {
@@ -57,6 +173,9 @@ class ShopInfo extends React.Component<ShopInfoProps, {
     mainRender() {
 
         const shopName = this.state.name1 ? (this.state.name2 ? this.state.name1 + '(' + this.state.name2 + ')' : this.state.name1) : '必填，请输入门店名称';
+        const shopAddress = this.state.address1 && this.state.provinceName && this.state.cityName && this.state.districtName ? (this.state.provinceName + this.state.cityName + this.state.districtName + this.state.address1) : '必填，请定位选择详细地址';
+
+        { console.log(this.state) };
 
         return (
             <Layout>
@@ -65,11 +184,24 @@ class ShopInfo extends React.Component<ShopInfoProps, {
                     <div className="wrap clearfix" data-page='shopinfo'>
                         <List renderHeader={() => '基本信息'} className="my-list">
                             <Item arrow={'horizontal'} extra={shopName} onClick={() => window.location.href = '#/shopinfo/name'}>门店名称</Item>
-                            <Item arrow={'horizontal'} extra={'必填，请定位选择详细地址'} onClick={() => window.location.href = '#/shopinfo/address'}>门店地址</Item>
-                            <Item arrow={'horizontal'} extra={'必填，请选择'}>经营品类</Item>
+                            <Item arrow={'horizontal'} extra={shopAddress} onClick={() => window.location.href = '#/shopinfo/address'}>门店地址</Item>
+
+                            <Picker title="经营品类"
+                                data={data1}
+                                cols={1}
+                                value={this.state.subCategoryId ? [this.state.subCategoryId] : undefined}
+                                onOk={vals => {
+                                    if (vals && vals.length === 1) {
+                                        this.onShopCategoryChange(vals[0]);
+                                    }
+                                }}
+                            >
+                                <Item arrow={'horizontal'} extra={this.state.subCategoryName || '必填,请选择'}>经营品类</Item>
+                            </Picker>
+
                             <InputItem value={this.state.phone || ''} type={'phone'} placeholder={'必填,请输入门店电话'} onChange={(e) => this.setState({ phone: (e || '').trim() })}>门店电话</InputItem>
-                            <Item arrow={'horizontal'} extra={'必填，限上传1张'}>门头照</Item>
-                            <Item arrow={'horizontal'} extra={'必填，请上传内景照2张'}>内景照</Item>
+                            <Item arrow={'horizontal'} extra={this.state.doorImgArry && this.state.doorImgArry.length ? '已上传' : '必填，限上传1张'} onClick={() => window.location.href = '#/shopinfo/door'}>门头照</Item>
+                            <Item arrow={'horizontal'} extra={this.state.indoorImgArry && this.state.indoorImgArry.length ? '已上传' + this.state.indoorImgArry.length + '张' : '必填，请上传内景照2张'} onClick={() => window.location.href = '#/shopinfo/indoor'}>内景照</Item>
                         </List>
 
                         <List renderHeader={() => '证照信息'} className="my-list">
@@ -78,7 +210,6 @@ class ShopInfo extends React.Component<ShopInfoProps, {
                             <Item arrow={'horizontal'} extra={'选填'}>经营许可证</Item>
                             <Item arrow={'horizontal'} extra={'选填'}>其他证明</Item>
                         </List>
-
 
                         <Button type="warning" className='btn-complete'>提交</Button>
 
@@ -91,11 +222,39 @@ class ShopInfo extends React.Component<ShopInfoProps, {
 
     render() {
 
+        { console.log(this.state) };
+
         return (
 
             <Switch>
-                <Route path='/shopinfo/address' render={() => <ShopInfoAddress lng={this.state.lng} lat={this.state.lat} />} />
-                <Route path='/shopinfo/name' render={() => <ShopInfoName name1={this.state.name1} name2={this.state.name2} onEnter={val => this.onLogoChange(val)} />} />
+                <Route path='/shopinfo/address' render={() => <ShopInfoAddress
+                    lng={this.state.lng}
+                    lat={this.state.lat}
+                    address1={this.state.address1}
+                    address2={this.state.address2}
+                    provinceId={this.state.provinceId}
+                    cityId={this.state.cityId}
+                    districtId={this.state.districtId}
+                    provinceName={this.state.provinceName}
+                    cityName={this.state.cityName}
+                    districtName={this.state.districtName}
+                    onEnter={val => this.onAddressChange(val)} />} />
+
+                <Route path='/shopinfo/name' render={() => <ShopInfoName
+                    name1={this.state.name1}
+                    name2={this.state.name2}
+                    onEnter={val => this.onNameChange(val)} />} />
+
+                <Route path='/shopinfo/door' render={() => <ShopDoorImg
+                    doorImgArry={this.state.doorImgArry}
+                    onEnter={val => this.onShopDoorImgChange(val)} />}
+                />} />
+
+                  <Route path='/shopinfo/indoor' render={() => <ShopIndoorImg
+                    indoorImgArry={this.state.indoorImgArry}
+                    onEnter={val => this.onShopIndoorImgChange(val)} />}
+                />} />
+
                 <Route path='/shopinfo' exact render={() => this.mainRender()} />
             </Switch>
 

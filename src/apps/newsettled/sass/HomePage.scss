@@ -31,6 +31,7 @@
             position: fixed;
             left: 0;
             bottom: 0;
+            z-index: 10;
         }
     }
 
@@ -94,5 +95,115 @@
         .map {
             width: 10rem;
             height: rem(800px);
+        }
+    }
+
+    [data-page="door"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+        .tip {
+            width: 10rem;
+            height: rem(120px);
+            line-height: rem(40px);
+            background-color: #fffada;
+            color: #808182;
+            padding: rem(24px) rem(35px);
+            font-size: rem(28px);
+        }
+        .section {
+            width: 10rem;
+            background-color: #fff;
+            position: relative;
+            margin-bottom: rem(24px);
+            padding-bottom: rem(40px);
+            .text {
+                font-size: rem(24px);
+                position: absolute;
+                right: rem(25px);
+                bottom: rem(27px);
+            }
+        }
+        .section-2 {
+            width: 10rem;
+            height: rem(560px);
+            background-color: #fff;
+            .text {
+                width: 10rem;
+                height: rem(64px);
+                text-align: center;
+                line-height: rem(64px);
+                font-size: rem(28px);
+            }
+            .sample-img {
+                width: 10rem;
+                height: rem(500px);
+                background: url(../image/sample-1.jpg)center center no-repeat;
+                background-size: 10rem rem(500px);
+            }
+        }
+    }
+
+    [data-page="indoor"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+        .tip {
+            width: 10rem;
+            height: rem(120px);
+            line-height: rem(40px);
+            background-color: #fffada;
+            color: #808182;
+            padding: rem(24px) rem(35px);
+            font-size: rem(28px);
+        }
+        .section {
+            width: 10rem;
+            background-color: #fff;
+            position: relative;
+            margin-bottom: rem(24px);
+            padding-bottom: rem(40px);
+            .text {
+                font-size: rem(24px);
+                position: absolute;
+                right: rem(25px);
+                bottom: rem(27px);
+            }
+        }
+        .section-2 {
+            width: 10rem;
+            height: rem(620px);
+            background-color: #fff;
+            .text {
+                width: 10rem;
+                height: rem(64px);
+                text-align: center;
+                line-height: rem(64px);
+                font-size: rem(28px);
+            }
+            .sample-img {
+                width: 10rem;
+                height: rem(500px);
+                background: url(../image/sample-2.jpg)center center no-repeat;
+                background-size: 10rem rem(560px);
+            }
         }
     }

@@ -2,7 +2,7 @@ import '../../sass/HomePage.scss';
 import React from 'react';
 import GeoLocation from '../../../../assets/libs/geo-location';
 import Layout from '../../components/AppLayout';
-import { List, Picker, InputItem, Button, Toast } from 'antd-mobile';
+import { List, Picker, InputItem, Button, Toast, Modal } from 'antd-mobile';
 import AMapLoader from '../../../../assets/libs/amap-boot';
 import GeoData from '../GeoData';
 
@@ -10,17 +10,36 @@ const { Header, Content } = Layout;
 const Item = List.Item;
 
 interface ShopInfoAddressProps {
-    lng?: number;
-    lat?: number;
-    // onEnter?: (data: { lng?: number, lat?: number }) => void;
+    address1?: string,
+    address2?: string,
+    provinceId?: number,
+    districtId?: number,
+    cityId?: number,
+    provinceName?: string,
+    districtName?: string,
+    cityName?: string,
+    lng?: number,
+    lat?: number,
+    onEnter?: (data: {
+        address1?: string,
+        address2?: string,
+        provinceId?: number,
+        districtId?: number,
+        cityId?: number,
+        provinceName?: string,
+        districtName?: string,
+        cityName?: string,
+        lng?: number,
+        lat?: number
+    }) => void;
 }
 
 AMapLoader.init({
     key: 'da6e01841845f5535ef161f1c7e0425d',
     plugins: [
         'AMap.Geolocation',
-        'AMap.CitySearch',
-        'AMap.Geocoder'
+        'AMap.Geocoder',
+        'AMap.PlaceSearch'
     ],
     enableUI: true
 });
@@ -52,27 +71,11 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
         };
     }
 
-    setLocation(lng: number, lat: number) {
-        this.setState({
-            lat: lat,
-            lng: lng
-        });
-
-    }
-
     onPositionPick(lng: number, lat: number, _address: string) {
         this.setState({
             lng: lng,
             lat: lat
         });
-    }
-
-    onPositionName(provinceName: string, cityName: string, districtName: string) {
-        this.setState({
-            provinceName: provinceName,
-            cityName: cityName,
-            districtName: districtName
-        })
     }
 
     componentDidMount() {
@@ -81,9 +84,18 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
         if (this.props.lng && this.props.lat) {
             self.setState({
                 lng: this.props.lng,
-                lat: this.props.lat
-            })
+                lat: this.props.lat,
+                address1: this.props.address1,
+                address2: this.props.address2,
+                provinceId: this.props.provinceId,
+                districtId: this.props.districtId,
+                cityId: this.props.cityId,
+                provinceName: this.props.provinceName,
+                districtName: this.props.districtName,
+                cityName: this.props.cityName,
+            }, () => self.onLoadMap())
         }
+
         else {
 
             GeoLocation.getLocation().then(local => {
@@ -91,6 +103,7 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
                     lng: local.longitude,
                     lat: local.latitude
                 }, () => {
+                    self.onLoadMap();
                     self.getProvince(local.provinceName, local.cityName, local.districtName);
                 })
             }).catch(err => {
@@ -114,7 +127,7 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
                 zoom: 16
             };
 
-            { this.state.lng && this.state.lat ? opt.center = [this.state.lng, this.state.lat] : undefined };
+            opt.center = [this.state.lng, this.state.lat];
 
             let map = new AMap.Map('container', opt);
 
@@ -186,8 +199,6 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
                 }, () => self.onLoadMap());
             })
 
-
-
         } else {
             this.setState({
                 provinceId: undefined,
@@ -202,7 +213,53 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
     }
 
     onComplete() {
-        // this.props.onEnter && this.props.onEnter({ name1: this.state.name1, name2: this.state.name2 });
+
+        if (!this.state.provinceId) {
+            Modal.alert('提示', '选择省市区');
+            return;
+        }
+
+        if (!this.state.address1) {
+            Modal.alert('提示', '输入详细地址');
+            return;
+        }
+
+        this.props.onEnter && this.props.onEnter({
+
+            address1: this.state.address1,
+            address2: this.state.address2,
+            provinceId: this.state.provinceId,
+            districtId: this.state.districtId,
+            cityId: this.state.cityId,
+            provinceName: this.state.provinceName,
+            districtName: this.state.districtName,
+            cityName: this.state.cityName,
+            lng: this.state.lng,
+            lat: this.state.lat
+
+        });
+
+    }
+
+    onChangeMapLocation() {
+        var self = this;
+
+        if (this.state.provinceName && this.state.cityName && this.state.districtName) {
+            const address = this.state.provinceName + this.state.cityName + this.state.districtName + this.state.address1;
+
+            GeoLocation.getLocationByAddress(address).then(data => {
+
+                this.setState({
+                    lng: data.longitude,
+                    lat: data.latitude
+                }, () => self.onLoadMap())
+            })
+        }
+        else {
+            return;
+        }
+
+
     }
 
     render() {
@@ -212,7 +269,6 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
                 <Header title='门店地址' />
                 <Content>
                     <div className="wrap clearfix" data-page='shopinfoaddress'>
-
                         <List className='my-list'>
                             <Picker title="选择地区"
                                 data={GeoData}
@@ -229,16 +285,15 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
 
                             </Picker>
 
-                            <InputItem placeholder={'必填，须写清楚道路及门牌号'} >详细地址</InputItem>
-                            <InputItem placeholder={'选填，输入附近标志性建筑物'} >附近地标</InputItem>
+                            <InputItem value={this.state.address1 || ''} placeholder={'必填，须写清楚道路及门牌号'} onChange={(e) => this.setState({ address1: e.trim() })} onBlur={() => this.onChangeMapLocation()} >详细地址</InputItem>
+                            <InputItem value={this.state.address2 || ''} placeholder={'选填，输入附近标志性建筑物'} onChange={(e) => this.setState({ address2: e.trim() })}>附近地标</InputItem>
 
                         </List>
 
                         <div className='tip'>请在地图上标出门店地址，方便顾客准确导航到店。</div>
 
-                        <div className='map' id="container">
+                        <div className='map' id="container"></div>
 
-                        </div>
                         <Button type="warning" className='btn-complete' onClick={() => this.onComplete()}>完成</Button>
 
                     </div>

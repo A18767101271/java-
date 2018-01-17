@@ -20,6 +20,10 @@ interface LocationInfo2 {
     longitude: number;
 }
 
+interface searchResult {
+    result: any;
+}
+
 function getCityByCode(cityCode: string): GeoNode | null {
 
     for (let p of CitysData) {
@@ -156,6 +160,29 @@ export default {
                             reject();
                         }
                     })
+                });
+            });
+        });
+    },
+
+    placeSearch(cityId: number, address: string): Promise<searchResult> {
+        return new Promise((resolve, _reject) => {
+            AMapBoot.ready((AMap) => {
+                AMap.service('AMap.PlaceSearch', function () {
+
+                    const placeSearch = new AMap.PlaceSearch({ //构造地点查询类
+                        pageSize: 5,
+                        pageIndex: 1,
+                        city: cityId, //城市
+                        map: AMap,
+                    });
+
+                    placeSearch.search(address, function (status, _result) {
+                        resolve({
+                            result: status
+                        });
+                    });
+
                 });
             });
         });
