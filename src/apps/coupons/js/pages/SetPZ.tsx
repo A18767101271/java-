@@ -10,6 +10,8 @@ import PickTimePage from './PickTimePage';
 
 const Item = List.Item;
 
+const data3 = ['', '周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+
 const data2 = [{
     label: '1天',
     value: 1,
@@ -204,6 +206,15 @@ class SetPZ extends React.Component<SetPZProps, {
 
 
     mainRender() {
+
+        let avaCycle = '';
+
+        if (this.state.bizTimes && this.state.bizTimes.length) {
+            this.state.bizTimes[0].days.map(p => { avaCycle += data3[p] + ',' })
+        }
+
+
+
         return (
             <div className="wrap" data-page='setpz'>
 
@@ -264,6 +275,15 @@ class SetPZ extends React.Component<SetPZProps, {
                                 window.location.href = '#/setpz/picktime';
                             }}>可用时间</Item>
 
+                            {this.state.bizTimes && this.state.bizTimes.length ?
+                                <div>
+                                    <Item extra={avaCycle} wrap={true}>每周可用周期</Item>
+
+                                </div>
+                                :
+                                undefined
+
+                            }
 
 
                         </div> :
