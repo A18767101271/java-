@@ -4,6 +4,15 @@
         @return $px / $baseFontSize * 1rem;
     }
 
+    .wrap {
+        .am-list-item .am-list-line .am-list-extra {
+            flex-basis: 65%;
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+    }
+
     [data-page="home"] {
         font-size: rem(24px);
         background-color: #f5f6f8;
@@ -240,11 +249,19 @@
 
     [data-page="setpz"] {
         background-color: #f5f6f8;
-        padding-bottom: rem(190px);
         min-height: rem(1200px);
-        .am-list-item.add {
-            .am-list-brief {
-                color: blue;
+        .upload {
+            width: 10rem;
+            height: rem(380px);
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .img-coupon {
+                width: rem(690px);
+                height: rem(320px);
+                background: url(../image/img_nor_peizhitupain.png)center center no-repeat;
+                background-size: rem(690px) rem(320px);
             }
         }
         .row {
@@ -294,47 +311,36 @@
             }
             .text-2 {
                 float: left;
-                font-size: rem(24px);
+                font-size: rem(22px);
                 color: #1d87eb;
             }
         }
         .headbar.i-time {
-            background: url(../image/i-time.png) rem(30px) rem(21px) no-repeat;
-            background-size: rem(28px) rem(28px);
+            background: url(../image/icon_shijianpeizhi.png) rem(30px) rem(21px) no-repeat;
+            background-size: rem(30px) rem(30px);
         }
         .headbar.i-laba {
-            background: url(../image/i-laba.png) rem(30px) rem(21px) no-repeat;
-            background-size: rem(28px) rem(28px);
+            background: url(../image/icon_youhuishehzi.png) rem(30px) rem(21px) no-repeat;
+            background-size: rem(30px) rem(30px);
         }
-        .section {
-            width: 10rem;
-            background-color: #fff;
-            padding-bottom: rem(20px);
-            border-bottom: rem(2px) solid #f2f2f2;
-            .list {
-                width: 10rem;
-                height: rem(50px);
-                padding-right: rem(30px);
-                line-height: rem(50px);
-                font-size: rem(24px);
-                text-align: right;
-                color: #1d87eb;
-            }
+        .headbar.i-other {
+            background: url(../image/icon_qitashehzi.png) rem(30px) rem(21px) no-repeat;
+            background-size: rem(30px) rem(30px);
         }
         .am-list-item {
-            font-size: rem(24px);
+            .am-button {
+                color: #a1a0a5;
+                background-color: #fff;
+                border: 1px solid #a1a0a5;
+            }
+            .am-button.active {
+                color: #108ee9;
+                background-color: #fff;
+                border: 1px solid #108ee9;
+            }
         }
         .btn-submit {
-            width: 10rem;
-            height: rem(98px);
-            line-height: rem(98px);
-            background-color: #1785ff;
-            color: #fff;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            font-size: rem(30px);
+            margin-top: rem(50px);
         }
     }
 
@@ -1604,5 +1610,160 @@
             margin-top: rem(18px);
             margin-left: rem(30px);
             margin-bottom: rem(20px);
+        }
+    }
+
+    [data-page="picktime"] {
+        background-color: #fff;
+        .pop {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            .shadow {
+                width: 10rem;
+                height: 100%;
+                background-color: #000;
+                opacity: .3;
+                position: fixed;
+                left: 0;
+                top: 0;
+            }
+            .pop-contain {
+                width: 10rem;
+                height: rem(385px);
+                overflow: hidden;
+                background-color: #fff;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                border-top: 1px solid #b1b1b3;
+                .pop-head {
+                    height: rem(87px);
+                    line-height: rem(87px);
+                    background-color: #f6f6f8;
+                    .title {
+                        font-size: rem(30px);
+                        color: #0e7bf4;
+                    }
+                    .lf {
+                        float: left;
+                        margin-left: rem(32px);
+                    }
+                    .lr {
+                        float: right;
+                        margin-right: rem(32px);
+                    }
+                }
+                .sw-1 {
+                    font-size: rem(30px);
+                    position: absolute;
+                    left: rem(124px);
+                    top: rem(122px);
+                }
+                .sw-2 {
+                    font-size: rem(30px);
+                    position: absolute;
+                    right: rem(124px);
+                    top: rem(122px);
+                }
+                .swiper-container1,
+                .swiper-container2 {
+                    width: rem(375px);
+                    height: rem(220px);
+                    position: absolute;
+                    overflow: hidden;
+                    .swiper-slide {
+                        height: rem(70px);
+                        text-align: center;
+                        line-height: rem(70px);
+                        font-size: rem(30px);
+                        color: #a6a6a6;
+                    }
+                    .swiper-slide-active {
+                        border-bottom: 1px solid #e2e2e2;
+                        border-top: 1px solid #e2e2e2;
+                        color: #404040;
+                    }
+                }
+                .swiper-container1 {
+                    left: 0;
+                    top: rem(166px);
+                }
+                .swiper-container2 {
+                    right: 0;
+                    top: rem(166px);
+                }
+            }
+        }
+        .head {
+            height: rem(80px);
+            line-height: rem(80px);
+            font-size: rem(30px);
+            span {
+                margin-left: rem(30px);
+            }
+            .am-switch {
+                margin-top: rem(10px);
+                margin-right: rem(30px);
+            }
+         
+        }
+        .le {
+            background-color: #fafbfd;
+            width: 10rem;
+            height: rem(20px);
+        }
+        .s-1,
+        .s-2 {
+            width: 10rem;
+            height: rem(188px);
+            .h {
+                height: rem(66px);
+                span {
+                    margin-left: rem(30px);
+                    margin-top: rem(30px);
+                }
+              
+            }
+            .pick {
+                width: 10rem;
+                height: rem(122px);
+                text-align: center;
+                font-size: rem(44px);
+                color: #d5d4d9;
+            }
+        }
+        .active {
+            .h {
+                .icon-i {
+                    width: rem(29px);
+                    height: rem(23px);
+                    background: url(../image/gou_03.jpg)center center no-repeat;
+                    background-size: 100%;
+                    margin-right: rem(30px);
+                    margin-top: rem(30px);
+                }
+            }
+            .pick {
+                height: rem(122px);
+                text-align: center;
+                font-size: rem(44px);
+                color: #3162eb;
+            }
+        }
+        .btn-go {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 10rem;
+            height: rem(88px);
+            background-color: #335ff3;
+            text-align: center;
+            line-height: rem(88px);
+            font-size: rem(28px);
+            color: #fff;
         }
     }

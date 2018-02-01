@@ -66,6 +66,16 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
     constructor(props: ShopInfoAddressProps) {
         super(props);
         this.state = {
+            provinceId: props.provinceId,
+            districtId: props.districtId,
+            cityId: props.cityId,
+            provinceName: props.provinceName,
+            districtName: props.districtName,
+            cityName: props.cityName,
+            lng: props.lng,
+            lat: props.lat,
+            address1: props.address1,
+            address2: props.address2,
             amapkey: 'da6e01841845f5535ef161f1c7e0425d',
             version: '1.4.0',
         };
@@ -79,25 +89,16 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
     }
 
     componentDidMount() {
+
+        Toast.loading('加载中', 0, undefined, true);
+
         let self = this;
 
         if (this.props.lng && this.props.lat) {
-            self.setState({
-                lng: this.props.lng,
-                lat: this.props.lat,
-                address1: this.props.address1,
-                address2: this.props.address2,
-                provinceId: this.props.provinceId,
-                districtId: this.props.districtId,
-                cityId: this.props.cityId,
-                provinceName: this.props.provinceName,
-                districtName: this.props.districtName,
-                cityName: this.props.cityName,
-            }, () => self.onLoadMap())
+            self.onLoadMap();
         }
 
         else {
-
             GeoLocation.getLocation().then(local => {
                 self.setState({
                     lng: local.longitude,
@@ -114,7 +115,7 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
     }
 
     onLoadMap() {
-        Toast.loading('加载中');
+
         let self = this;
 
         AMapLoader.ready(() => {
@@ -143,8 +144,10 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
                 });
 
                 positionPicker.start();
-                Toast.hide();
+
             });
+
+            Toast.hide();
 
         });
     }
@@ -177,6 +180,9 @@ class ShopInfoAddress extends React.Component<ShopInfoAddressProps, {
     }
 
     onShopCityChange(provinceId: number, cityId: number, districtId: number) {
+
+        Toast.loading('加载中', 0, undefined, true);
+
         let self = this;
         let province = GeoData.find(p => p.value == provinceId);
         let city = province ? province.children.find(p => p.value == cityId) : undefined;

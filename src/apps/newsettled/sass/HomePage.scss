@@ -207,3 +207,130 @@
             }
         }
     }
+
+    [data-page="license"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .my-list {
+            .am-list-item .am-list-line .am-list-extra {
+                flex-basis: 65%;
+            }
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 10;
+        }
+        .tip {
+            width: 10rem;
+            height: rem(80px);
+            line-height: rem(40px);
+            background-color: #fffada;
+            color: #808182;
+            padding: rem(24px) rem(35px);
+            font-size: rem(28px);
+        }
+        .section {
+            width: 10rem;
+            background-color: #fff;
+            position: relative;
+            padding-bottom: rem(40px);
+            .text {
+                font-size: rem(24px);
+                position: absolute;
+                right: rem(25px);
+                bottom: rem(27px);
+            }
+        }
+    }
+
+    [data-page="authorized"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+        .tip {
+            width: 10rem;
+            height: rem(120px);
+            line-height: rem(40px);
+            background-color: #fffada;
+            color: #808182;
+            padding: rem(24px) rem(35px);
+            font-size: rem(28px);
+        }
+        .section {
+            width: 10rem;
+            background-color: #fff;
+            position: relative;
+            margin-bottom: rem(24px);
+            padding-bottom: rem(40px);
+            .text {
+                font-size: rem(24px);
+                position: absolute;
+                right: rem(25px);
+                bottom: rem(27px);
+            }
+        }
+    }
+
+    [data-page="permit"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .my-list {
+            .am-list-item .am-list-line .am-list-extra {
+                flex-basis: 65%;
+            }
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+        .am-button.btn-complete {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 10;
+        }
+        .tip {
+            width: 10rem;
+            height: rem(160px);
+            line-height: rem(40px);
+            background-color: #fffada;
+            color: #808182;
+            padding: rem(24px) rem(35px);
+            font-size: rem(28px);
+        }
+        .section {
+            width: 10rem;
+            background-color: #fff;
+            position: relative;
+            padding-bottom: rem(40px);
+            .text {
+                font-size: rem(24px);
+                position: absolute;
+                right: rem(25px);
+                bottom: rem(27px);
+            }
+        }
+    }

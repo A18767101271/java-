@@ -18,7 +18,6 @@ interface HomePageState {
     pageSize: number,
 }
 
-
 class HomePage extends React.Component<HomePageProps, HomePageState>{
 
     constructor(props: HomePageProps) {
@@ -28,11 +27,7 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
             pageNumber: 0,
             pageSize: 999
         };
-
-
     }
-
-
 
     componentWillMount() {
 

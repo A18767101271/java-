@@ -22,18 +22,13 @@ class ShopInfoName extends React.Component<ShopInfoNameProps, {
 
     constructor(props: ShopInfoNameProps) {
         super(props);
-        this.state = {};
+        this.state = {
+            name1: props.name1,
+            name2: props.name2
+        };
     }
 
     componentWillMount() {
-
-        if (this.props.name1) {
-            this.setState({
-                name1: this.props.name1,
-                name2: this.props.name2
-            })
-        }
-
     }
 
     onComplete() {

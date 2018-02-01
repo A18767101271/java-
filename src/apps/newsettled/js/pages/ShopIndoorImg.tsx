@@ -16,7 +16,9 @@ class ShopIndoorImg extends React.Component<ShopIndoorImgProps, {
 
     constructor(props: ShopIndoorImgProps) {
         super(props);
-        this.state = {}
+        this.state = {
+            data: props.indoorImgArry
+        }
     }
 
     onChange = (files) => {
@@ -26,13 +28,6 @@ class ShopIndoorImg extends React.Component<ShopIndoorImgProps, {
     }
 
     componentWillMount() {
-
-        if (this.props.indoorImgArry && this.props.indoorImgArry.length) {
-            this.setState({
-                data: this.props.indoorImgArry
-            })
-        }
-
     }
 
     onSubmit() {

@@ -1,12 +1,15 @@
 import '../../sass/HomePage.scss';
 import React from 'react';
-import Layout from '../../../../apps/components/AppLayout';
+import Layout from '../../components/AppLayout';
 import { Switch, Route } from 'react-router'
 import { List, InputItem, Button, Picker } from 'antd-mobile';
 import ShopInfoName from '../pages/ShopInfoName';
 import ShopInfoAddress from '../pages/ShopInfoAddress';
 import ShopDoorImg from '../pages/ShopDoorImg';
 import ShopIndoorImg from '../pages/ShopIndoorImg';
+import BusinessLicense from '../pages/BusinessLicense';
+import Authorized from '../pages/Authorized';
+import BusinessPermit from '../pages/BusinessPermit';
 
 const { Header, Content } = Layout;
 const Item = List.Item;
@@ -74,6 +77,18 @@ class ShopInfo extends React.Component<ShopInfoProps, {
     doorImgArry?: {}[];
 
     indoorImgArry?: {}[];
+
+    licenseImgArry?: {}[];
+    isLong?: boolean;
+    useTime?: Date;
+    regNumber?: string;
+    wordName?: string;
+
+    authorizedImgArry?: {}[];
+
+    permitImgArry?: {}[];
+    isLong2?: boolean;
+    useTime2?: Date;
 
 }>{
 
@@ -167,6 +182,36 @@ class ShopInfo extends React.Component<ShopInfoProps, {
         }
     }
 
+    onLicenseChange(data: any, info: any) {
+        if (data && data.length) {
+            this.setState({
+                licenseImgArry: data,
+                isLong: info.isLong,
+                useTime: info.useTime,
+                regNumber: info.regNumber,
+                wordName: info.wordName
+            }, () => this.backToMain())
+        }
+    }
+
+    onAuthorizedImgChange(data: any) {
+        if (data && data.length) {
+            this.setState({
+                authorizedImgArry: data
+            }, () => this.backToMain())
+        }
+    }
+
+    onPermitChange(data: any, info: any) {
+        if (data && data.length) {
+            this.setState({
+                permitImgArry: data,
+                isLong2: info.isLong2,
+                useTime2: info.useTime2,
+            }, () => this.backToMain())
+        }
+    }
+
     componentWillMount() {
     }
 
@@ -174,8 +219,6 @@ class ShopInfo extends React.Component<ShopInfoProps, {
 
         const shopName = this.state.name1 ? (this.state.name2 ? this.state.name1 + '(' + this.state.name2 + ')' : this.state.name1) : '必填，请输入门店名称';
         const shopAddress = this.state.address1 && this.state.provinceName && this.state.cityName && this.state.districtName ? (this.state.provinceName + this.state.cityName + this.state.districtName + this.state.address1) : '必填，请定位选择详细地址';
-
-        { console.log(this.state) };
 
         return (
             <Layout>
@@ -205,9 +248,9 @@ class ShopInfo extends React.Component<ShopInfoProps, {
                         </List>
 
                         <List renderHeader={() => '证照信息'} className="my-list">
-                            <Item arrow={'horizontal'} extra={'必填，请上传'}>营业执照</Item>
-                            <Item arrow={'horizontal'} extra={'执照字号名称与实名不一致时必填'} wrap={true}>授权函</Item>
-                            <Item arrow={'horizontal'} extra={'选填'}>经营许可证</Item>
+                            <Item arrow={'horizontal'} extra={this.state.licenseImgArry && this.state.licenseImgArry.length ? '已上传' : '必填，限上传1张'} onClick={() => window.location.href = '#/shopinfo/license'}>营业执照</Item>
+                            <Item arrow={'horizontal'} extra={this.state.authorizedImgArry && this.state.authorizedImgArry.length ? '已上传' : '执照字号名称与实名不一致时必填'} onClick={() => window.location.href = '#/shopinfo/authorized'} wrap={true}>授权函</Item>
+                            <Item arrow={'horizontal'} extra={this.state.permitImgArry && this.state.permitImgArry.length ? '已上传' : '必填，限上传1张'} onClick={() => window.location.href = '#/shopinfo/permit'}>经营许可证</Item>
                             <Item arrow={'horizontal'} extra={'选填'}>其他证明</Item>
                         </List>
 
@@ -253,6 +296,27 @@ class ShopInfo extends React.Component<ShopInfoProps, {
                   <Route path='/shopinfo/indoor' render={() => <ShopIndoorImg
                     indoorImgArry={this.state.indoorImgArry}
                     onEnter={val => this.onShopIndoorImgChange(val)} />}
+                />} />
+
+                  <Route path='/shopinfo/license' render={() => <BusinessLicense
+                    licenseImgArry={this.state.licenseImgArry}
+                    isLong={this.state.isLong}
+                    useTime={this.state.useTime}
+                    regNumber={this.state.regNumber}
+                    wordName={this.state.wordName}
+                    onEnter={(val, val2) => this.onLicenseChange(val, val2)} />}
+                />} />
+
+                   <Route path='/shopinfo/authorized' render={() => <Authorized
+                    authorizedImgArry={this.state.authorizedImgArry}
+                    onEnter={val => this.onAuthorizedImgChange(val)} />}
+                />} />
+
+                   <Route path='/shopinfo/permit' render={() => <BusinessPermit
+                    permitImgArry={this.state.permitImgArry}
+                    isLong2={this.state.isLong2}
+                    useTime2={this.state.useTime2}
+                    onEnter={(val, val2) => this.onPermitChange(val, val2)} />}
                 />} />
 
                 <Route path='/shopinfo' exact render={() => this.mainRender()} />

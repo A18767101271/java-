@@ -1,23 +1,23 @@
 import '../../sass/HomePage.scss';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
-import { Button, ImagePicker, Modal } from 'antd-mobile';
+import { Button, ImagePicker, Modal, List } from 'antd-mobile';
 
 const { Header, Content } = Layout;
 
-interface ShopDoorImgProps {
-    doorImgArry?: any;
+interface AuthorizedProps {
+    authorizedImgArry?: any;
     onEnter?: (data: { uid?: string, url?: string }[]) => void;
 }
 
-class ShopDoorImg extends React.Component<ShopDoorImgProps, {
+class Authorized extends React.Component<AuthorizedProps, {
     data?: { url: string, uid: string }[]
 }>{
 
-    constructor(props: ShopDoorImgProps) {
+    constructor(props: AuthorizedProps) {
         super(props);
         this.state = {
-            data: props.doorImgArry
+            data: props.authorizedImgArry
         }
     }
 
@@ -47,11 +47,11 @@ class ShopDoorImg extends React.Component<ShopDoorImgProps, {
         return (
 
             <Layout>
-                <Header title='门头照' />
+                <Header title='授权函' />
                 <Content>
-                    <div className="wrap clearfix" data-page='door'>
+                    <div className="wrap clearfix" data-page='authorized'>
 
-                        <div className='tip'>门头照：需露出实体店的完整店名，且与本次开店填写的门店名称一致，有疑问可看下列示例图</div>
+                        <div className='tip'>当您非营业执照法人时，需要上传授权函。授权函格式见下方示例，请下载模板，按提示上传授权函。</div>
                         <div className='section'>
 
                             <ImagePicker
@@ -63,10 +63,11 @@ class ShopDoorImg extends React.Component<ShopDoorImgProps, {
                             <div className='text'>需上传1张图片</div>
                         </div>
 
-                        <div className='section-2'>
-                            <div className='text'>门头照示例图</div>
-                            <div className='sample-img'></div>
-                        </div>
+                        <List renderHeader={() => '授权函中的身份证须原文件，请下载模板，按照模板示例填写，并保证图片清晰无水印。个体户的授权签名可免授权公司盖章。'} className='my-list'>
+
+                        </List>
+
+
                         <Button type="warning" className='btn-complete' onClick={() => this.onSubmit()}>完成</Button>
                     </div>
 
@@ -76,4 +77,4 @@ class ShopDoorImg extends React.Component<ShopDoorImgProps, {
 
 }
 
-export default ShopDoorImg;
+export default Authorized;
