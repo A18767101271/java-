@@ -247,7 +247,9 @@
         }
     }
 
-    [data-page="setpz"] {
+    [data-page="setpz"],
+    [data-page="setmj"],
+    [data-page="setdj"] {
         background-color: #f5f6f8;
         min-height: rem(1200px);
         .upload {
@@ -262,42 +264,6 @@
                 height: rem(320px);
                 background: url(../image/img_nor_peizhitupain.png)center center no-repeat;
                 background-size: rem(690px) rem(320px);
-            }
-        }
-        .row {
-            width: 10rem;
-            height: rem(88px);
-            line-height: rem(88px);
-            background-color: #fff;
-            .left {
-                margin-left: rem(30px);
-            }
-            .right {
-                margin-right: rem(30px);
-                input {
-                    text-align: right;
-                }
-                span {
-                    padding-right: rem(40px);
-                    background: url(../image/i-right.png) right center no-repeat;
-                    background-size: rem(16px) rem(25px);
-                }
-            }
-            .btn-1,
-            .btn-2 {
-                float: left;
-                width: rem(240px);
-                height: rem(60px);
-                text-align: center;
-                line-height: rem(60px);
-                border: 1px solid #cacaca;
-                border-radius: rem(10px);
-                margin-left: rem(30px);
-                font-size: rem(28px);
-                &.active {
-                    border: 1px solid #2387f7;
-                    color: #2387f7;
-                }
             }
         }
         .headbar {
@@ -342,83 +308,11 @@
         .btn-submit {
             margin-top: rem(50px);
         }
-    }
-
-    [data-page="setmj"],
-    [data-page="setdj"] {
-        background-color: #f5f6f8;
-        padding-bottom: rem(190px);
-        min-height: rem(1200px);
-        .row {
-            width: 10rem;
-            height: rem(88px);
-            line-height: rem(88px);
-            background-color: #fff;
-            .left {
-                margin-left: rem(30px);
+        .am-list-item.list {
+            .am-list-content {
+                color: #1186ed;
+                font-size: rem(22px);
             }
-            .right {
-                margin-right: rem(30px);
-                input {
-                    text-align: right;
-                }
-                span {
-                    padding-right: rem(40px);
-                    background: url(../image/i-right.png) right center no-repeat;
-                    background-size: rem(16px) rem(25px);
-                }
-            }
-            .btn-1,
-            .btn-2 {
-                float: left;
-                width: rem(240px);
-                height: rem(60px);
-                text-align: center;
-                line-height: rem(60px);
-                border: 1px solid #cacaca;
-                border-radius: rem(10px);
-                margin-left: rem(30px);
-                font-size: rem(28px);
-                &.active {
-                    border: 1px solid #2387f7;
-                    color: #2387f7;
-                }
-            }
-        }
-        .headbar {
-            width: 10rem;
-            height: rem(70px);
-            line-height: rem(70px);
-            .text-1 {
-                float: left;
-                margin-left: rem(77px);
-                margin-right: rem(10px);
-            }
-            .text-2 {
-                float: left;
-                font-size: rem(24px);
-                color: #1d87eb;
-            }
-        }
-        .headbar.i-time {
-            background: url(../image/i-time.png) rem(30px) rem(21px) no-repeat;
-            background-size: rem(28px) rem(28px);
-        }
-        .headbar.i-laba {
-            background: url(../image/i-laba.png) rem(30px) rem(21px) no-repeat;
-            background-size: rem(28px) rem(28px);
-        }
-        .btn-submit {
-            width: 10rem;
-            height: rem(98px);
-            line-height: rem(98px);
-            background-color: #1785ff;
-            color: #fff;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            font-size: rem(30px);
         }
     }
 
@@ -1709,7 +1603,6 @@
                 margin-top: rem(10px);
                 margin-right: rem(30px);
             }
-         
         }
         .le {
             background-color: #fafbfd;
@@ -1726,7 +1619,6 @@
                     margin-left: rem(30px);
                     margin-top: rem(30px);
                 }
-              
             }
             .pick {
                 width: 10rem;

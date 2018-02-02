@@ -5,7 +5,7 @@ import '../../sass/SetHomePage.scss';
 
 interface ChooseReturnProps {
     storeId: number;
-    selected: any;
+    selected?: { id: number, num: number, name?: string, price?: number }[];
     onEnter?: (selected: { id: number, num: number, name?: string, price?: number }[]) => void;
 }
 
@@ -17,7 +17,9 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
 
     constructor(props: ChooseReturnProps) {
         super(props);
-        this.state = { selected: [] };
+        this.state = {
+            selected: props.selected ? props.selected : []
+        };
     }
 
     componentWillMount() {

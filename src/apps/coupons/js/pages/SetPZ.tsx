@@ -7,6 +7,7 @@ import bridge from '../../../../assets/libs/sardine-bridge';
 import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
 import PickTimePage from './PickTimePage';
+import ChooseReturn from './ChooseReturn';
 
 const Item = List.Item;
 
@@ -106,6 +107,10 @@ class SetPZ extends React.Component<SetPZProps, {
     beginDate?: Date;
     endDate?: Date;
 
+    realAmount?: number;
+
+    limitAmount?: number;
+
     remarks?: string;
     useNotice?: string;
 
@@ -155,8 +160,6 @@ class SetPZ extends React.Component<SetPZProps, {
 
     onSubmit() {
 
-        window.location.href = '#/choose/?type=1?shopid=' + this.props.storeId + '?cardid=158';
-
         if (!this.state.name) {
             Modal.alert('提示', '请输入卡券名称');
             return;
@@ -204,16 +207,32 @@ class SetPZ extends React.Component<SetPZProps, {
         }, () => this.backToMain())
     }
 
+    onSelected(selected?: { id: number, num: number, price?: number, name?: string }[]) {
+        this.setState({
+            selected: selected
+        }, () => this.backToMain())
+    }
+
+
+    formatTimeText(beginHours: number, beginMinutes: number, endHours: number, endMinutes: number) {
+        const tnum = (v: number) => { return v < 10 ? '0' + v : v + '' }
+        console.log(tnum(endHours), tnum(endMinutes))
+        return tnum(beginHours) + ':' + tnum(beginMinutes) + '-' + tnum(endHours) + ':' + tnum(endMinutes) + ',';
+    }
 
     mainRender() {
 
         let avaCycle = '';
+        let timeCycle = '';
 
         if (this.state.bizTimes && this.state.bizTimes.length) {
-            this.state.bizTimes[0].days.map(p => { avaCycle += data3[p] + ',' })
+            this.state.bizTimes[0].days.map(p => { avaCycle += data3[p] + ',' });
+            this.state.bizTimes.map(p => {
+                if (p.time) {
+                    timeCycle += this.formatTimeText(p.time.beginHours, p.time.beginMinutes, p.time.endHours, p.time.endMinutes);
+                }
+            })
         }
-
-
 
         return (
             <div className="wrap" data-page='setpz'>
@@ -272,13 +291,13 @@ class SetPZ extends React.Component<SetPZProps, {
                             </Picker>
 
                             <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                                window.location.href = '#/setpz/picktime';
+                                window.location.href = '#/setpz/picktime?shopid=' + this.props.storeId;
                             }}>可用时间</Item>
 
                             {this.state.bizTimes && this.state.bizTimes.length ?
                                 <div>
-                                    <Item extra={avaCycle} wrap={true}>每周可用周期</Item>
-
+                                    <Item extra={avaCycle.substring(0, avaCycle.length - 1)} wrap={true} className={'list'}>每周可用周期</Item>
+                                    <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
                                 </div>
                                 :
                                 undefined
@@ -315,21 +334,45 @@ class SetPZ extends React.Component<SetPZProps, {
                                 <Item extra={this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >结束日期</Item>
                             </DatePicker>
 
+                            <Picker
+                                data={data1}
+                                cols={1}
+                                title=""
+                                value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
+                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
+                            >
+                                <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
+                            </Picker>
+
+                            <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
+                                window.location.href = '#/setpz/picktime?shopid=' + this.props.storeId;
+                            }}>可用时间</Item>
+
+                            {this.state.bizTimes && this.state.bizTimes.length ?
+                                <div>
+                                    <Item extra={avaCycle.substring(0, avaCycle.length - 1)} className={'list'} wrap={true}>每周可用周期</Item>
+                                    <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
+                                </div>
+                                :
+                                undefined
+
+                            }
+
                         </div>}
                 </List>
 
                 <div className='headbar i-laba'>
                     <div className='text-1'>优惠设置</div>
-                    <div className='text-2'>"商品内容"与"服务内容"至少填写一个</div>
+                    <div className='text-2'>("商品内容"与"服务内容"至少填写一个)</div>
                 </div>
 
                 <List>
-                    <Item extra={'请选择'} arrow={'horizontal'} >商品内容</Item>
+                    <Item extra={this.state.selected && this.state.selected.length ? '已选择' : '请选择'} arrow={'horizontal'} onClick={() => window.location.href = '#setpz/choosereturn?shopid=' + this.props.storeId}>商品内容</Item>
                 </List>
 
                 {this.state.selected && this.state.selected.length > 0 ?
-                    <div className='section clearfix'>
-                        {this.state.selected.map(p => <div key={p.id} className="list">{p.name}x{p.num}</div>)}
+                    <div>
+                        {this.state.selected.map(p => <Item key={p.id} extra={'x' + p.num} wrap={true} className={'list'}>{p.name}</Item>)}
                     </div> : undefined
                 }
 
@@ -348,7 +391,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 </div>
 
                 <List>
-                    <Item extra={'请选择'} arrow={'horizontal'} >选择可用店铺</Item>
+                    <Item extra={'请选择,默认通用'} arrow={'horizontal'} >选择可用店铺</Item>
                 </List>
 
                 <List renderHeader={() => '使用须知'}>
@@ -385,6 +428,14 @@ class SetPZ extends React.Component<SetPZProps, {
                     data={this.state.bizTimes ? this.state.bizTimes : undefined}
                     onEnter={value => {
                         this.onTimesChange(value);
+                    }}
+                />} />
+
+                <Route path='/setpz/choosereturn' render={() => <ChooseReturn
+                    storeId={this.props.storeId}
+                    selected={this.state.selected ? this.state.selected : undefined}
+                    onEnter={value => {
+                        this.onSelected(value);
                     }}
                 />} />
 

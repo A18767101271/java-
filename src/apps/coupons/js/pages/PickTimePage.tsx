@@ -12,7 +12,7 @@ interface EffectiveTimePickerViewProps {
 
 export function formatTimeText(beginHours: number, beginMinutes: number, endHours: number, endMinutes: number) {
     const tnum = (v: number, ish: boolean) => { return ish && v >= 24 ? '次日' + (v - 24) : v < 10 ? '0' + v : v + '' }
-    return tnum(beginHours, true) + ':' + tnum(beginMinutes, false) + '-' + tnum(endHours, true) + ':' + tnum(endMinutes, false);
+    return tnum(beginHours, true) + ':' + tnum(beginMinutes, false) + '~' + tnum(endHours, true) + ':' + tnum(endMinutes, false);
 }
 
 export default class EffectiveTimePickerView extends React.Component<EffectiveTimePickerViewProps, {
@@ -80,37 +80,6 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
                 times: []
             }
         }
-
-        // if (props.data && props.data.filter(p => p.time).length > 0) {
-        //     this.state = {
-        //         dayChecked1: !!props.data[0].days.filter(p => p == 1).length,
-        //         dayChecked2: !!props.data[0].days.filter(p => p == 2).length,
-        //         dayChecked3: !!props.data[0].days.filter(p => p == 3).length,
-        //         dayChecked4: !!props.data[0].days.filter(p => p == 4).length,
-        //         dayChecked5: !!props.data[0].days.filter(p => p == 5).length,
-        //         dayChecked6: !!props.data[0].days.filter(p => p == 6).length,
-        //         dayChecked7: !!props.data[0].days.filter(p => p == 7).length,
-        //         allDay: false,
-        //         times: props.data.map(p => {
-        //             return p.time as { beginHours: number, beginMinutes: number, endHours: number, endMinutes: number };
-        //         })
-        //     }
-        // }
-
-        // else {
-        //     this.state = {
-        //         dayChecked1: false,
-        //         dayChecked2: false,
-        //         dayChecked3: false,
-        //         dayChecked4: false,
-        //         dayChecked5: false,
-        //         dayChecked6: false,
-        //         dayChecked7: false,
-        //         allDay: false,
-        //         times: []
-        //     }
-        // }
-
     }
 
     onDayChecked(dayIndex: number, checked: boolean) {
@@ -130,7 +99,6 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
     }
 
     onAddTimeline(beginHours: number, beginMinutes: number, endHours: number, endMinutes: number) {
-        // console.log(beginHours, beginMinutes, endHours, endMinutes);
         this.state.times.push({ beginHours, beginMinutes, endHours, endMinutes });
         this.setState({
             times: this.state.times
