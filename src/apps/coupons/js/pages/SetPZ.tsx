@@ -1,4 +1,4 @@
-import '../../sass/HomePage.scss';
+import '../../sass/SetPage.scss';
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import classNames from 'classNames';
@@ -6,8 +6,10 @@ import moment from 'moment';
 import bridge from '../../../../assets/libs/sardine-bridge';
 import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
+import CouponApis, { CouponCreate } from '../../../../services/coupon-apis';
 import PickTimePage from './PickTimePage';
 import ChooseReturn from './ChooseReturn';
+import ChooseShop from './ChooseShop';
 
 const Item = List.Item;
 
@@ -103,9 +105,12 @@ class SetPZ extends React.Component<SetPZProps, {
     logoPic?: { uid?: string, url: string }[];
     effectiveTime?: number;
     validityTime?: number;
-    validityType?: number;
+    validityType: number;
     beginDate?: Date;
     endDate?: Date;
+
+    storeIds?: number[];
+    isAllStore: boolean;
 
     realAmount?: number;
 
@@ -124,6 +129,7 @@ class SetPZ extends React.Component<SetPZProps, {
     constructor(props: SetPZProps) {
         super(props);
         this.state = {
+            isAllStore: true,
             merchantId: props.storeId,
             couponType: 3,
             validityType: 1,
@@ -160,34 +166,131 @@ class SetPZ extends React.Component<SetPZProps, {
 
     onSubmit() {
 
+        let obj = {} as CouponCreate;
+
+        obj.merchantId = this.props.storeId;
+        obj.couponType = this.state.couponType;
+        obj.validityType = this.state.validityType;
+
         if (!this.state.name) {
             Modal.alert('提示', '请输入卡券名称');
             return;
         }
+        else {
+            obj.name = this.state.name;
+        }
+
+        if (this.state.logoPic && this.state.logoPic.length) {
+            obj.logoPicUrl = this.state.logoPic[0].url;
+        }
+
+        if (this.state.remarks) {
+            obj.remarks = this.state.remarks;
+        }
+
+        if (this.state.useNotice) {
+            obj.useNotice = this.state.useNotice;
+        }
+
+        if (this.state.isAllStore) {
+            obj.isAllStore = 1;
+        }
+        else {
+            obj.isAllStore = 0;
+            obj.storeIds = this.state.storeIds
+        }
+
+
+        if (!this.state.effectiveTime) {
+            Modal.alert('提示', '请选择生效期');
+            return;
+        }
+        else {
+            obj.effectiveTime = this.state.effectiveTime;
+        }
+
+        if (!this.state.bizTimes || !this.state.bizTimes.length) {
+            Modal.alert('提示', '请选择可用周期');
+            return;
+        }
+        else {
+            obj.marketingMeta = JSON.stringify([{
+                spans: this.state.bizTimes && this.state.bizTimes.map(p => {
+                    const l = p.days;
+                    let s = '00:00';
+                    let e = '23:59';
+                    const fm = (v: number) => { return v < 10 ? '0' + v : v + '' }
+                    if (!p.is24th && p.time) {
+                        s = fm(p.time.beginHours) + ':' + fm(p.time.beginMinutes);
+                        e = fm(p.time.endHours) + ':' + fm(p.time.endMinutes);
+                    }
+                    return { s, e, l };
+                })
+            }])
+        }
 
         if (this.state.validityType == 2) {
+
             if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
                 Modal.alert('提示', '开始时间无效');
                 return;
+            }
+            else {
+                obj.validityStartTime = moment(this.state.beginDate).unix();
             }
 
             if (!this.state.endDate || this.state.endDate <= this.state.beginDate) {
                 Modal.alert('提示', '结束时间无效');
                 return;
             }
+            else {
+                obj.validityEndTime = moment(this.state.endDate).unix();
+            }
+
         }
+
         else {
 
-            if (!this.state.effectiveTime || !this.state.validityTime) {
-                Modal.alert('提示', '请选择时间');
+            if (!this.state.validityTime || !this.state.validityTime) {
+                Modal.alert('提示', '请选择有效期');
                 return;
+            }
+            else {
+                obj.validityTime = this.state.validityTime;
             }
         }
 
-        if ((!this.state.selected || !this.state.selected.length) && (!this.state.serviceContent)) {
+
+        if (this.state.selected && this.state.selected.length && this.state.serviceContent) {
+            obj.couponProducts = JSON.stringify([
+                this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } }),
+                { "productId": 0, "serviceContent": this.state.serviceContent }]);
+        }
+
+        else if ((!this.state.selected || !this.state.selected.length) && this.state.serviceContent) {
+            obj.couponProducts = JSON.stringify([{ "productId": 0, "serviceContent": this.state.serviceContent }]);
+        }
+
+        else if ((this.state.selected && this.state.selected.length) && !this.state.serviceContent) {
+            obj.couponProducts = JSON.stringify([
+                this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } })
+            ]);
+        }
+
+        else {
             Modal.alert('提示', '请选择商品项目或服务内容');
             return;
         }
+
+        console.log(obj);
+
+        CouponApis.CouponDefineCreate(obj).then((data) => {
+            console.log(data);
+        })
+
+
+
+
     }
 
     backToMain() {
@@ -218,6 +321,14 @@ class SetPZ extends React.Component<SetPZProps, {
         const tnum = (v: number) => { return v < 10 ? '0' + v : v + '' }
         console.log(tnum(endHours), tnum(endMinutes))
         return tnum(beginHours) + ':' + tnum(beginMinutes) + '-' + tnum(endHours) + ':' + tnum(endMinutes) + ',';
+    }
+
+
+    onChooseShop(data: number[], data2: boolean) {
+        this.setState({
+            storeIds: data,
+            isAllStore: data2
+        }, () => this.backToMain())
     }
 
     mainRender() {
@@ -391,7 +502,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 </div>
 
                 <List>
-                    <Item extra={'请选择,默认通用'} arrow={'horizontal'} >选择可用店铺</Item>
+                    <Item extra={this.state.isAllStore ? '默认全店铺通用' : '已选择' + (this.state.storeIds && this.state.storeIds.length) + '家店铺'} arrow={'horizontal'} onClick={() => window.location.href = '#/setpz/chooseshop?shopid=' + this.props.storeId}>选择可用店铺</Item>
                 </List>
 
                 <List renderHeader={() => '使用须知'}>
@@ -412,7 +523,7 @@ class SetPZ extends React.Component<SetPZProps, {
                         onChange={e => this.setState({ remarks: e })} />
                 </List>
 
-                <Button type={'primary'} className={'btn-submit'}>保存</Button>
+                <Button type={'primary'} className={'btn-submit'} onClick={() => this.onSubmit()}>保存</Button>
 
             </div>
         )
@@ -428,6 +539,15 @@ class SetPZ extends React.Component<SetPZProps, {
                     data={this.state.bizTimes ? this.state.bizTimes : undefined}
                     onEnter={value => {
                         this.onTimesChange(value);
+                    }}
+                />} />
+
+                <Route path='/setpz/chooseshop' render={() => <ChooseShop
+                    storeId={this.props.storeId}
+                    data={this.state.storeIds}
+                    allChoose={this.state.isAllStore}
+                    onEnter={(val1: number[], val2: boolean) => {
+                        this.onChooseShop(val1, val2);
                     }}
                 />} />
 

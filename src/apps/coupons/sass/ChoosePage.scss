@@ -1,0 +1,532 @@
+﻿    @charset "UTF-8";
+    $baseFontSize: 75px !default; // pixels to rem
+    @function rem($px) {
+        @return $px / $baseFontSize * 1rem;
+    }
+
+    .wrap {
+        .am-list-item .am-list-line .am-list-extra {
+            flex-basis: 65%;
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+    }
+
+    [data-page='choose'] {
+        font-size: rem(24px);
+        background-color: #fff;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .headbar {
+            width: 10rem;
+            height: rem(200px);
+            margin-bottom: rem(45px);
+            .img {
+                width: rem(140px);
+                height: rem(138px);
+                background: url(../image/i-success.png)center center no-repeat;
+                background-size: rem(140px) rem(138px);
+                float: left;
+                margin-left: rem(309px);
+                margin-bottom: rem(30px);
+            }
+            .t-1 {
+                float: left;
+                width: 10rem;
+                text-align: center;
+                font-size: rem(24px);
+            }
+        }
+        .t-2 {
+            font-size: rem(30px);
+            width: 10rem;
+            height: rem(30px);
+            line-height: rem(30px);
+            color: #000;
+            text-indent: rem(30px);
+            margin-bottom: rem(45px);
+        }
+        .setion {
+            .list {
+                width: 10rem;
+                height: rem(190px);
+                line-height: rem(190px);
+                border-bottom: 1px solid #e3e9ed;
+                .left {
+                    margin-left: rem(197px);
+                }
+                .right {
+                    width: rem(16px);
+                    height: 100%;
+                    margin-right: rem(35px);
+                    background: url(../image/i-right.png) center rem(80px) no-repeat;
+                    background-size: rem(16px) rem(25px);
+                }
+            }
+            .l-1 {
+                background: url(../image/type-1.png)rem(35px) rem(40px) no-repeat;
+                background-size: rem(120px) rem(120px);
+            }
+            .l-2 {
+                background: url(../image/type-2.png)rem(35px) rem(40px) no-repeat;
+                background-size: rem(120px) rem(120px);
+            }
+            .l-3 {
+                background: url(../image/type-3.png)rem(35px) rem(40px) no-repeat;
+                background-size: rem(120px) rem(120px);
+            }
+        }
+        .btn {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            background-color: #1784ff;
+            font-size: rem(32px);
+            color: #fff;
+        }
+    }
+
+    [data-page="choosecard"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        padding-bottom: rem(190px);
+        min-height: rem(1250px);
+        .card {
+            font-size: rem(24px);
+            width: rem(690px);
+            height: rem(300px);
+            background-color: #fff;
+            float: left;
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            position: relative;
+            .y-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                left: rem(-15px);
+            }
+            .y-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                right: rem(-15px);
+            }
+            .radio {
+                width: rem(32px);
+                height: rem(32px);
+                position: absolute;
+                right: rem(20px);
+                top: rem(150px);
+                background: url(../image/Unchecked.png)center center no-repeat;
+                background-size: rem(32px) rem(32px);
+                &.active {
+                    background: url(../image/checkmark.png)center center no-repeat;
+                    background-size: rem(32px) rem(32px);
+                }
+            }
+            .line {
+                width: rem(644px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(23px);
+                bottom: rem(65px);
+            }
+            .icon {
+                width: rem(104px);
+                height: rem(106px);
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .stamp {
+                width: rem(151px);
+                height: rem(116px);
+                position: absolute;
+                right: rem(33px);
+                bottom: rem(27px);
+                background: url(../image/i-over.png)center center no-repeat;
+                background-size: rem(151px) rem(116px);
+            }
+            .name {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(34px);
+                font-size: rem(32px);
+                color: #000;
+                font-weight: bold;
+                width: rem(450px);
+                height: rem(32px);
+                line-height: rem(32px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .number {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(16px);
+                width: rem(450px);
+                height: rem(22px);
+                line-height: rem(22px);
+                font-size: rem(22px);
+                color: #7d7f80;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-0 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(30px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-1 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-2 {
+                float: left;
+                margin-left: rem(45px);
+                margin-top: rem(15px);
+                width: rem(450px);
+                height: rem(24px);
+                line-height: rem(24px);
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            .text-3 {
+                position: absolute;
+                left: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-4 {
+                position: absolute;
+                right: rem(45px);
+                bottom: rem(23px);
+            }
+            .text-5 {
+                position: absolute;
+                right: rem(67px);
+                top: rem(89px);
+                color: #ef3434;
+                font-size: rem(36px);
+                em {
+                    font-size: rem(70px);
+                    font-style: normal;
+                }
+            }
+        }
+        .card-ping {
+            height: rem(340px);
+            .icon {
+                background: url(../image/i-ping-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-ping-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-dai {
+            .number {
+                margin-bottom: rem(55px);
+            }
+            .icon {
+                background: url(../image/i-dai-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-dai-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .card-man {
+            .icon {
+                background: url(../image/i-man-1.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+            .icon.over {
+                background: url(../image/i-man-2.png)center center no-repeat;
+                background-size: rem(104px) rem(106px);
+            }
+        }
+        .empty {
+            font-size: rem(34px);
+            width: rem(690px);
+            height: rem(300px);
+            line-height: rem(300px);
+            text-align: center;
+            background-color: #fff;
+            float: left;
+            margin-top: rem(18px);
+            margin-left: rem(30px);
+            position: relative;
+            background-image: url(../image/i-add.png);
+            background-repeat: no-repeat;
+            background-position: rem(230px) rem(135px);
+            background-size: rem(32px) rem(32px);
+            .y-left {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                left: rem(-15px);
+            }
+            .y-right {
+                width: rem(30px);
+                height: rem(30px);
+                background-color: #f5f6f8;
+                border-radius: 50%;
+                position: absolute;
+                bottom: rem(50px);
+                right: rem(-15px);
+            }
+            .line {
+                width: rem(644px);
+                border-bottom: rem(2px) dashed #e2e2e2;
+                position: absolute;
+                left: rem(23px);
+                bottom: rem(65px);
+            }
+        }
+    }
+
+    [data-page="choosereturn"] {
+        background-color: #f5f6f8;
+        font-size: rem(28px);
+        .headbar {
+            height: rem(80px);
+            background-color: #fff;
+            overflow: scroll;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            white-space: nowrap;
+            .btn {
+                display: inline-table;
+                vertical-align: middle;
+                height: rem(80px);
+                text-align: center;
+                line-height: rem(80px);
+                color: #7c8c99;
+                font-size: rem(28px);
+                margin: 0 rem(45px);
+            }
+            .btn.active {
+                color: #4777f3;
+                border-bottom: rem(4px) solid #4777f3;
+            }
+        }
+        .t-tip {
+            float: left;
+            width: 10rem;
+            font-size: rem(28px);
+            position: relative;
+            min-height: rem(80px);
+            margin-bottom: rem(20px);
+            h1 {
+                float: left;
+                width: rem(80px);
+                height: rem(37px);
+                background-color: #4a7ff1;
+                border-radius: rem(10px);
+                margin-left: rem(30px);
+                margin-right: rem(20px);
+                margin-top: rem(23px);
+                color: #fff;
+                text-align: center;
+                line-height: rem(37px);
+            }
+            .food-point {
+                float: left;
+                width: rem(530px);
+                margin-top: rem(25px);
+                font-size: rem(26px);
+                .tt-span {
+                    margin: 0 rem(10px);
+                }
+            }
+            .btn-xiala {
+                width: rem(80px);
+                height: rem(80px);
+                background: url(../image/icon-xiala_03.jpg)rem(30px) rem(33px) no-repeat;
+                background-size: rem(20px) rem(15px);
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+        .t-tip2 {
+            float: left;
+            width: 10rem;
+            font-size: rem(28px);
+            position: relative;
+            height: rem(80px);
+            line-height: rem(80px);
+            text-align: center;
+            color: #a4a5a9;
+        }
+        .contain {
+            float: left;
+            width: 10rem;
+            background-color: #f5f6f8;
+            padding-bottom: rem(100px);
+            .food {
+                width: rem(690px);
+                height: rem(200px);
+                overflow: hidden;
+                margin: 0 auto;
+                background-color: #fff;
+                margin-bottom: rem(22px);
+                .left {
+                    width: rem(200px);
+                    height: rem(200px);
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .right {
+                    width: rem(490px);
+                    height: rem(200px);
+                    position: relative;
+                    overflow: hidden;
+                    h1 {
+                        float: left;
+                        color: #000;
+                        margin-left: rem(30px);
+                        margin-top: rem(28px);
+                        margin-right: rem(10px);
+                    }
+                    h2 {
+                        color: #ff3635;
+                        position: absolute;
+                        left: rem(30px);
+                        top: rem(126px);
+                    }
+                    h3 {
+                        color: #626262;
+                        position: absolute;
+                        left: rem(30px);
+                        top: rem(78px);
+                    }
+                    .span-tip {
+                        float: left;
+                        font-size: rem(24px);
+                        text-align: center;
+                        background-color: #fe492c;
+                        padding: rem(2px) rem(15px);
+                        margin-top: rem(28px);
+                        color: #fff;
+                        border-radius: rem(20px);
+                    }
+                    .area {
+                        width: rem(280px);
+                        height: rem(80px);
+                        overflow: hidden;
+                        position: absolute;
+                        right: rem(10px);
+                        bottom: rem(10px);
+                        .btn {
+                            width: rem(80px);
+                            height: rem(80px);
+                            float: right;
+                        }
+                        .btn-add {
+                            background: url(../image/icon-add.jpg)rem(22px) rem(20px) no-repeat;
+                            background-size: rem(37px) rem(37px);
+                        }
+                        .btn-reduce {
+                            background: url(../image/icon-reduce.jpg)rem(22px) rem(20px) no-repeat;
+                            background-size: rem(37px) rem(37px);
+                        }
+                        .food-num {
+                            float: right;
+                            width: rem(120px);
+                            height: rem(80px);
+                            text-align: center;
+                            color: #000;
+                            line-height: rem(80px);
+                            font-size: rem(28px);
+                            overflow: hidden;
+                        }
+                    }
+                }
+            }
+            .no-tip {
+                float: left;
+                margin-top: rem(320px);
+                width: 10rem;
+                height: rem(300px);
+                position: relative;
+                .img {
+                    width: rem(225px);
+                    height: rem(189px);
+                    background: url(../image/zanweifu.png)center center no-repeat;
+                    background-size: rem(225px) rem(189px);
+                    position: absolute;
+                    left: rem(265px);
+                    top: 0;
+                }
+                p {
+                    position: absolute;
+                    width: 10rem;
+                    text-align: center;
+                    left: 0;
+                    top: rem(200px);
+                    font-size: rem(30px);
+                    color: #848d96;
+                }
+            }
+        }
+        .btn-yes {
+            width: 10rem;
+            height: rem(98px);
+            line-height: rem(98px);
+            text-align: center;
+            font-size: rem(36px);
+            background-color: #3562f3;
+            color: #949494;
+            color: #fff;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+    }
+
+    [data-page="chooseshop"] {
+        font-size: rem(24px);
+        background-color: #f5f6f8;
+        .am-button.btn-submit {
+            width: 10rem;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+        }
+    }

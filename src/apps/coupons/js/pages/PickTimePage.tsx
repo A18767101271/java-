@@ -2,8 +2,7 @@
 import { Switch, Picker, Checkbox, Modal } from 'antd-mobile';
 import TimePickerData from '../TimePickerData';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
-import '../../sass/EffectiveTimePickerView.scss';
-
+import '../../sass/PickTime.scss';
 
 interface EffectiveTimePickerViewProps {
     onEnter?: (result: EffectiveTimePickerValue[]) => void;
@@ -31,7 +30,6 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
 
     constructor(props: EffectiveTimePickerViewProps) {
         super(props);
-        console.log(props.data);
 
         if (props.data && props.data.length) {
 
@@ -132,6 +130,7 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
         }
 
         let times = form.times.sort((a, b) => { return a.beginHours * 100 + a.beginMinutes - b.beginHours * 100 + b.beginMinutes });
+
         for (let i = 0; i < times.length - 1; i++) {
             let s1 = times[i].beginHours * 100 + times[i].beginMinutes;
             let e1 = times[i].endHours * 100 + times[i].endMinutes;

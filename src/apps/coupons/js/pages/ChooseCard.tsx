@@ -1,4 +1,4 @@
-import '../../sass/HomePage.scss';
+import '../../sass/ChoosePage.scss';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
 import classNames from 'classNames';

@@ -1,0 +1,83 @@
+﻿    @charset "UTF-8";
+    $baseFontSize: 75px !default; // pixels to rem
+    @function rem($px) {
+        @return $px / $baseFontSize * 1rem;
+    }
+
+    .wrap {
+        .am-list-item .am-list-line .am-list-extra {
+            flex-basis: 65%;
+        }
+        .am-list-item .am-input-control input {
+            text-align: right;
+        }
+    }
+
+    [data-page="setpz"],
+    [data-page="setmj"],
+    [data-page="setdj"] {
+        background-color: #f5f6f8;
+        min-height: rem(1200px);
+        .upload {
+            width: 10rem;
+            height: rem(380px);
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .img-coupon {
+                width: rem(690px);
+                height: rem(320px);
+                background: url(../image/img_nor_peizhitupain.png)center center no-repeat;
+                background-size: rem(690px) rem(320px);
+            }
+        }
+        .headbar {
+            width: 10rem;
+            height: rem(70px);
+            line-height: rem(70px);
+            .text-1 {
+                float: left;
+                margin-left: rem(77px);
+                margin-right: rem(10px);
+            }
+            .text-2 {
+                float: left;
+                font-size: rem(22px);
+                color: #1d87eb;
+            }
+        }
+        .headbar.i-time {
+            background: url(../image/icon_shijianpeizhi.png) rem(30px) rem(21px) no-repeat;
+            background-size: rem(30px) rem(30px);
+        }
+        .headbar.i-laba {
+            background: url(../image/icon_youhuishehzi.png) rem(30px) rem(21px) no-repeat;
+            background-size: rem(30px) rem(30px);
+        }
+        .headbar.i-other {
+            background: url(../image/icon_qitashehzi.png) rem(30px) rem(21px) no-repeat;
+            background-size: rem(30px) rem(30px);
+        }
+        .am-list-item {
+            .am-button {
+                color: #a1a0a5;
+                background-color: #fff;
+                border: 1px solid #a1a0a5;
+            }
+            .am-button.active {
+                color: #108ee9;
+                background-color: #fff;
+                border: 1px solid #108ee9;
+            }
+        }
+        .btn-submit {
+            margin-top: rem(50px);
+        }
+        .am-list-item.list {
+            .am-list-content {
+                color: #1186ed;
+                font-size: rem(22px);
+            }
+        }
+    }

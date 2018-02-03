@@ -1,4 +1,4 @@
-import '../../sass/HomePage.scss';
+import '../../sass/SetPage.scss';
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import classNames from 'classNames';

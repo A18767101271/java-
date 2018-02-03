@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classNames';
 import StoreApis, { GetGroupsWithProductsData } from '../../../../services/store-apis';
-import '../../sass/SetHomePage.scss';
+import '../../sass/ChoosePage.scss';
 
 interface ChooseReturnProps {
     storeId: number;
@@ -48,7 +48,6 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
         } else {
             s = { id, num };
             this.state.selected.push(s);
-
         }
         if (s.num < 0) {
             s.num = 0;
