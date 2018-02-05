@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../sass/SetHomePage.scss';
 import { Switch, DatePicker, Picker, Modal, Toast } from 'antd-mobile';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import moment from 'moment';
 import UParams from '../../../../assets/libs/uparams';
 

@@ -1,7 +1,7 @@
 ﻿import '../../sass/HomePage.scss';
 import React from 'react';
 import { Modal } from 'antd-mobile';
-import classNames from 'classNames';
+import classNames from 'classnames';
 // import PageExtends from '../PageExtends.js';
 // import bridge from '../../../../assets/libs/sardine-bridge';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import getLocationDistance from './getLocationDistance';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 interface DistanceLabelProps {
     clinetLocation?: { lng: number, lat: number };

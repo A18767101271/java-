@@ -1,6 +1,6 @@
 import React from 'react';
 import './AppContent.scss';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 export default class AppContent extends React.Component<{ className?: string }>{
 

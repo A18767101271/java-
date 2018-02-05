@@ -2,7 +2,7 @@ import '../../sass/HomePage.scss';
 import CouponApis, { CouponDefineList } from '../../../../services/coupon-apis';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
-import classNames from 'classNames';
+import classNames from 'classnames';
 // import moment from 'moment';
 //import { Toast, Modal } from 'antd-mobile';
 

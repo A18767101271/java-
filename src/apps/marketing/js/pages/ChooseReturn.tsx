@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import StoreApis, { GetGroupsWithProductsData } from '../../../../services/store-apis';
 import '../../sass/SetHomePage.scss';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import ActivityLine from '../ActivityLine';
 import DistanceLabel from '../DistanceLabel';
 import './ShopItem.scss';

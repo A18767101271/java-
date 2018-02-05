@@ -1,9 +1,9 @@
 import '../../sass/SetPage.scss';
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import moment from 'moment';
-import bridge from '../../../../assets/libs/sardine-bridge';
+import bridge from '@jx/sardine-bridge';
 import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button, Toast } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
 import CouponApis, { CouponCreate } from '../../../../services/coupon-apis';

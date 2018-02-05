@@ -2,7 +2,7 @@ import '../../sass/HomePage.scss';
 import React from 'react';
 import Layout from '../../../../apps/components/AppLayout';
 import CouponApis from '../../../../services/coupon-apis';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import moment from 'moment';
 import { DatePicker, Modal } from 'antd-mobile';
 import UParams from '../../../../assets/libs/uparams';

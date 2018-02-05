@@ -6,7 +6,7 @@ import UParams from '../../../../assets/libs/uparams';
 //import bridge from '../../../../assets/libs/sardine-bridge';
 import { DatePicker, Picker, Switch, Modal, Toast } from 'antd-mobile';
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import moment from 'moment';
 
 

@@ -1,7 +1,7 @@
 import '../../sass/HomePage.scss';
 import PromotionApis, { GetPromotionListData } from '../../../../services/promotion-apis';
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import moment from 'moment';
 import { Toast, Modal } from 'antd-mobile';
 

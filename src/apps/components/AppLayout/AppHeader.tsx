@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import './AppHeader.scss';
 import UParams from '../../../assets/libs/uparams';
 

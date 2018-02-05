@@ -2,7 +2,7 @@
 import React from 'react';
 import { Switch, Picker, Modal } from 'antd-mobile';
 import PickTimeData from '../BizTimePickerData';
-import classNames from 'classNames';
+import classNames from 'classnames';
 //import PageExtends from '../PageExtends.js';
 //import bridge from '../../../../assets/libs/sardine-bridge';
 

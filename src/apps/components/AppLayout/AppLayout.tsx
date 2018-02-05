@@ -2,7 +2,7 @@ import React from 'react';
 import AppHeader from './AppHeader';
 import AppFooter from './AppFooter';
 import AppContent from './AppContent';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 
 class AppLayout extends React.Component<{ className?: string }>{

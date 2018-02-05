@@ -3,7 +3,7 @@ import '../../sass/HomePage.scss';
 //import bridge from '../../../../assets/libs/sardine-bridge';
 import SettledApis, { FormData } from '../../../../services/settled-apis';
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import { Toast, Modal } from 'antd-mobile';
 
 interface HomePageProps {

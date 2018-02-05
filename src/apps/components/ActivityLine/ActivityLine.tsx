@@ -1,5 +1,5 @@
 import React from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import ActivityIcon, { BaseProps } from './ActivityIcon';
 import './ActivityLine.scss';
 
