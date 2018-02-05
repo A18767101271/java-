@@ -3,11 +3,12 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import classNames from 'classNames';
 import moment from 'moment';
+import CouponApis, { CouponCreate } from '../../../../services/coupon-apis';
 import bridge from '../../../../assets/libs/sardine-bridge';
-import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button, Toast } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
 import PickTimePage from './PickTimePage';
-import ChooseReturn from './ChooseReturn';
+import ChooseShop from './ChooseShop';
 
 const Item = List.Item;
 
@@ -100,15 +101,17 @@ class SetMJ extends React.Component<SetMJProps, {
     id?: number;
     couponType: number;
     name?: string;
-    logoPic?: { uid?: string, url: string }[];
+    logoPicUrl?: string;
     effectiveTime?: number;
     validityTime?: number;
-    validityType?: number;
+    validityType: number;
     beginDate?: Date;
     endDate?: Date;
 
-    realAmount?: string;
+    storeIds?: number[];
+    isAllStore: boolean;
 
+    realAmount?: string;
     limitAmount?: string;
 
     remarks?: string;
@@ -124,6 +127,7 @@ class SetMJ extends React.Component<SetMJProps, {
     constructor(props: SetMJProps) {
         super(props);
         this.state = {
+            isAllStore: true,
             merchantId: props.storeId,
             couponType: 2,
             validityType: 1,
@@ -138,56 +142,178 @@ class SetMJ extends React.Component<SetMJProps, {
 
     onUploadImg() {
 
-        const localId: {}[] = [];
+        var self = this;
+        let arr: string[] = [];
 
         bridge.getImages({
             count: 1,
             source: ['album', 'camera'],
+            sizeType: ['original', 'compressed'],
             complete: function (data) {
-                console.log(data);
-                localId.push(data.localIds[data.localIds.length - 1]);
-                if (data.localIds && data.localIds.length > 0)
+                if (data.localIds && data.localIds.length > 0) {
+                    arr = data.localIds;
                     bridge.getImageData({
                         localId: data.localIds[data.localIds.length - 1], //图片本地ID
                         complete: function (data) {
-                            console.log(data);
+                            if (data.localData) {
+                                self.setState({
+                                    logoPicUrl: data.localData
+                                }, () => {
+                                    bridge.uploadImages({
+                                        typeId: 1,
+                                        localIds: [arr[arr.length - 1]],
+                                        showProgress: true,
+                                        complete: function (data) {
+                                            if (data.resultCode == "success") {
+                                                Toast.info('上传成功', 2);
+                                            }
+                                            else {
+                                                Toast.info('上传失败', 2);
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+
                         }
-                    });
+                    })
+                }
+
+
             }
-        });
+        })
+
 
     }
 
     onSubmit() {
 
+        let obj = {} as CouponCreate;
+
+        obj.merchantId = this.props.storeId;
+        obj.couponType = this.state.couponType;
+        obj.validityType = this.state.validityType;
+
         if (!this.state.name) {
-            Modal.alert('提示', '请输入卡券名称');
+            Modal.alert('提示', '请输入卡券配置名称');
             return;
+        }
+        else {
+            obj.name = this.state.name;
+        }
+
+        if (this.state.logoPicUrl && this.state.logoPicUrl) {
+            obj.logoPicUrl = this.state.logoPicUrl;
         }
 
         if (this.state.validityType == 2) {
+
             if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
                 Modal.alert('提示', '开始时间无效');
                 return;
+            }
+            else {
+                obj.validityStartTime = moment(this.state.beginDate).unix();
             }
 
             if (!this.state.endDate || this.state.endDate <= this.state.beginDate) {
                 Modal.alert('提示', '结束时间无效');
                 return;
             }
+            else {
+                obj.validityEndTime = moment(this.state.endDate).unix();
+            }
+
         }
+
         else {
 
-            if (!this.state.effectiveTime || !this.state.validityTime) {
-                Modal.alert('提示', '请选择时间');
+            if (!this.state.validityTime || !this.state.validityTime) {
+                Modal.alert('提示', '请选择有效期');
                 return;
+            }
+            else {
+                obj.validityTime = this.state.validityTime;
             }
         }
 
-        if ((!this.state.selected || !this.state.selected.length) && (!this.state.serviceContent)) {
-            Modal.alert('提示', '请选择商品项目或服务内容');
+        if (!this.state.effectiveTime) {
+            Modal.alert('提示', '请选择生效期');
             return;
         }
+        else {
+            obj.effectiveTime = this.state.effectiveTime;
+        }
+
+        if (!this.state.bizTimes || !this.state.bizTimes.length) {
+            Modal.alert('提示', '请选择可用周期');
+            return;
+        }
+        else {
+            obj.marketingMeta = JSON.stringify({
+                spans: this.state.bizTimes && this.state.bizTimes.map(p => {
+                    const l = p.days;
+                    let s = '00:00';
+                    let e = '23:59';
+                    const fm = (v: number) => { return v < 10 ? '0' + v : v + '' }
+                    if (!p.is24th && p.time) {
+                        let all = 'false';
+                        s = fm(p.time.beginHours) + ':' + fm(p.time.beginMinutes);
+                        e = fm(p.time.endHours) + ':' + fm(p.time.endMinutes);
+                        return { s, e, l, all };
+                    }
+                    else {
+                        return { s, e, l };
+                    }
+
+                })
+            })
+        }
+
+
+        if (!this.state.realAmount) {
+            Modal.alert('提示', '请输入面额设置');
+            return;
+        }
+        else {
+            obj.realAmount = Number(this.state.realAmount) * 100;
+        }
+
+        if (!this.state.limitAmount) {
+            Modal.alert('提示', '请输入使用门槛');
+            return;
+        }
+        else {
+            obj.limitAmount = Number(this.state.limitAmount) * 100;
+        }
+
+        if (this.state.remarks) {
+            obj.remarks = this.state.remarks;
+        }
+
+        if (this.state.useNotice) {
+            obj.useNotice = this.state.useNotice;
+        }
+
+        if (this.state.isAllStore) {
+            obj.isAllStore = 1;
+        }
+        else {
+            obj.isAllStore = 0;
+            obj.storeIds = this.state.storeIds
+        }
+
+        console.log(obj);
+
+        CouponApis.CouponDefineCreate(obj).then((data) => {
+            console.log(data);
+            if (data.couDefId) {
+                Modal.alert('提示', '提交成功', [{ text: '确定', onPress: () => console.log(1) }])
+            }
+        }).catch(err => {
+            console.log(err);
+            Modal.alert('提示', err.msg);
+        });
     }
 
     backToMain() {
@@ -207,17 +333,17 @@ class SetMJ extends React.Component<SetMJProps, {
         }, () => this.backToMain())
     }
 
-    onSelected(selected?: { id: number, num: number, price?: number, name?: string }[]) {
-        this.setState({
-            selected: selected
-        }, () => this.backToMain())
-    }
-
-
     formatTimeText(beginHours: number, beginMinutes: number, endHours: number, endMinutes: number) {
         const tnum = (v: number) => { return v < 10 ? '0' + v : v + '' }
         console.log(tnum(endHours), tnum(endMinutes))
         return tnum(beginHours) + ':' + tnum(beginMinutes) + '-' + tnum(endHours) + ':' + tnum(endMinutes) + ',';
+    }
+
+    onChooseShop(data: number[], data2: boolean) {
+        this.setState({
+            storeIds: data,
+            isAllStore: data2
+        }, () => this.backToMain())
     }
 
     mainRender() {
@@ -242,141 +368,119 @@ class SetMJ extends React.Component<SetMJProps, {
                 <List><InputItem value={this.state.name || ''} placeholder={'卡券名称最多12个字'} maxLength={12} onChange={(e) => this.setState({ name: (e || '').trim() })}>卡券配置名称</InputItem></List>
                 <WhiteSpace />
 
-                <Item extra={(this.state.logoPic && this.state.logoPic.length) ? '已上传图片' : '请上传'} arrow={'horizontal'} onClick={() => { this.onUploadImg() }}>卡券配置配图</Item>
+                <Item extra={(this.state.logoPicUrl) ? '已上传图片' : '请上传'} arrow={'horizontal'} onClick={() => { this.onUploadImg() }}>卡券配置配图</Item>
 
                 <div className="upload">
-                    <img className="img-coupon" src={this.state.logoPic && this.state.logoPic[this.state.logoPic.length - 1].url} />
+                    <img className="img-coupon" src={this.state.logoPicUrl} />
                 </div>
 
                 <div className='headbar i-time'>
                     <div className='text-1'>时间设置</div>
                 </div>
 
-                <List>
-                    <Item extra={<div>
-                        <Button
-                            size={'small'}
-                            inline={true}
-                            style={{ marginRight: '4px' }}
-                            className={classNames("", { 'active': this.state.validityType == 1 })}
-                            onClick={() => this.setState({ validityType: 1 })}>固定天数
+
+                <Item extra={<div>
+                    <Button
+                        size={'small'}
+                        inline={true}
+                        style={{ marginRight: '4px' }}
+                        className={classNames("", { 'active': this.state.validityType == 1 })}
+                        onClick={() => this.setState({ validityType: 1 })}>固定天数
                                 </Button>
-                        <Button
-                            size={'small'}
-                            inline={true}
-                            style={{ marginRight: '4px' }}
-                            className={classNames("", { 'active': this.state.validityType == 2 })}
-                            onClick={() => this.setState({ validityType: 2 })}>指定区域时间
+                    <Button
+                        size={'small'}
+                        inline={true}
+                        style={{ marginRight: '4px' }}
+                        className={classNames("", { 'active': this.state.validityType == 2 })}
+                        onClick={() => this.setState({ validityType: 2 })}>指定区域时间
                                 </Button>
-                    </div>}>有效期</Item>
+                </div>}>有效期
 
-                    {this.state.validityType == 1 ?
-                        <div>
-                            <Picker
-                                data={data2}
-                                cols={1}
-                                title=""
-                                value={this.state.validityTime ? [this.state.validityTime] : undefined}
-                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ validityTime: vals[0] }) } }}
-                            >
-                                <Item extra={(data1.find(p => p.value == this.state.validityTime) || { label: '请选择固定时段' }).label} arrow={'horizontal'} >生效后有效期</Item>
-                            </Picker>
+                    </Item>
 
-                            <Picker
-                                data={data1}
-                                cols={1}
-                                title=""
-                                value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
-                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
-                            >
-                                <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
-                            </Picker>
+                {this.state.validityType == 1 ?
+                    <div>
+                        <Picker
+                            data={data2}
+                            cols={1}
+                            title=""
+                            value={this.state.validityTime ? [this.state.validityTime] : undefined}
+                            onOk={vals => { if (vals && vals.length == 1) { this.setState({ validityTime: vals[0] }) } }}
+                        >
+                            <Item extra={(data1.find(p => p.value == this.state.validityTime) || { label: '请选择固定时段' }).label} arrow={'horizontal'} >生效后有效期</Item>
+                        </Picker>
 
-                            <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                                window.location.href = '#/setmj/picktime?shopid=' + this.props.storeId;
-                            }}>可用时间</Item>
+                    </div>
 
-                            {this.state.bizTimes && this.state.bizTimes.length ?
-                                <div>
-                                    <Item extra={avaCycle.substring(0, avaCycle.length - 1)} wrap={true} className={'list'}>每周可用周期</Item>
-                                    <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
-                                </div>
-                                :
-                                undefined
+                    :
 
-                            }
+                    <div>
+                        <DatePicker
+                            mode="date"
+                            value={this.state.beginDate}
+                            minDate={moment().startOf('day').toDate()}
+                            onOk={data => {
+                                this.setState({
+                                    beginDate: data
+                                })
+                            }}
+                        >
+                            <Item extra={this.state.beginDate ? moment(this.state.beginDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >起始日期</Item>
+                        </DatePicker>
 
+                        <DatePicker
+                            mode="date"
+                            value={this.state.endDate}
+                            minDate={this.state.beginDate ? moment(this.state.beginDate).add(1, 'day').subtract(1, 'milliseconds').toDate() : moment().startOf('day').toDate()}
+                            onOk={data => {
+                                this.setState({
+                                    endDate: data
+                                })
+                            }}
+                        >
+                            <Item extra={this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >结束日期</Item>
+                        </DatePicker>
+                    </div>
+                }
 
-                        </div> :
+                <Picker
+                    data={data1}
+                    cols={1}
+                    title=""
+                    value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
+                    onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
+                >
+                    <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
+                </Picker>
 
-                        <div>
-                            <DatePicker
-                                mode="date"
-                                value={this.state.beginDate}
-                                minDate={moment().startOf('day').toDate()}
-                                onOk={data => {
-                                    this.setState({
-                                        beginDate: data
-                                    })
-                                }}
-                            >
-                                <Item extra={this.state.beginDate ? moment(this.state.beginDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >起始日期</Item>
-                            </DatePicker>
+                <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
+                    window.location.href = '#/setmj/picktime?shopid=' + this.props.storeId;
+                }}>可用时间
+                    </Item>
 
-                            <DatePicker
-                                mode="date"
-                                value={this.state.endDate}
-                                minDate={this.state.beginDate ? moment(this.state.beginDate).add(1, 'day').subtract(1, 'milliseconds').toDate() : moment().startOf('day').toDate()}
-                                onOk={data => {
-                                    this.setState({
-                                        endDate: data
-                                    })
-                                }}
-                            >
-                                <Item extra={this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >结束日期</Item>
-                            </DatePicker>
-
-                            <Picker
-                                data={data1}
-                                cols={1}
-                                title=""
-                                value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
-                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
-                            >
-                                <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
-                            </Picker>
-
-                            <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                                window.location.href = '#/setmj/picktime?shopid=' + this.props.storeId;
-                            }}>可用时间</Item>
-
-                            {this.state.bizTimes && this.state.bizTimes.length ?
-                                <div>
-                                    <Item extra={avaCycle.substring(0, avaCycle.length - 1)} className={'list'} wrap={true}>每周可用周期</Item>
-                                    <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
-                                </div>
-                                :
-                                undefined
-
-                            }
-
-                        </div>}
-                </List>
+                {this.state.bizTimes && this.state.bizTimes.length ?
+                    <div>
+                        <Item extra={avaCycle.substring(0, avaCycle.length - 1)} className={'list'} wrap={true}>每周可用周期</Item>
+                        <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
+                    </div>
+                    :
+                    undefined
+                }
 
                 <div className='headbar i-laba'>
                     <div className='text-1'>优惠设置</div>
                 </div>
 
                 <List>
-                    <InputItem value={this.state.realAmount || ''} type={'money'} placeholder={'请输入卡券面额'} onChange={e => {
+                    <InputItem value={this.state.realAmount || ''} type={'text'} placeholder={'请输入卡券面额'} onChange={e => {
                         let result = re.test(e);
                         if (result || !e) this.setState({ realAmount: e });
                     }} >面额设置</InputItem>
 
-                    <InputItem value={this.state.limitAmount || ''} type={'money'} placeholder={'请输入最低可用金额'} onChange={e => {
+                    <InputItem value={this.state.limitAmount || ''} type={'text'} placeholder={'请输入卡券面额'} onChange={e => {
                         let result = re.test(e);
                         if (result || !e) this.setState({ limitAmount: e });
-                    }} >门槛设置</InputItem>
+                    }} >使用门槛</InputItem>
 
                 </List>
 
@@ -385,7 +489,7 @@ class SetMJ extends React.Component<SetMJProps, {
                 </div>
 
                 <List>
-                    <Item extra={'请选择,默认通用'} arrow={'horizontal'} >选择可用店铺</Item>
+                    <Item extra={this.state.isAllStore ? '默认全店铺通用' : '已选择' + (this.state.storeIds && this.state.storeIds.length) + '家店铺'} arrow={'horizontal'} onClick={() => window.location.href = '#/setmj/chooseshop?shopid=' + this.props.storeId}>选择可用店铺</Item>
                 </List>
 
                 <List renderHeader={() => '使用须知'}>
@@ -406,7 +510,7 @@ class SetMJ extends React.Component<SetMJProps, {
                         onChange={e => this.setState({ remarks: e })} />
                 </List>
 
-                <Button type={'primary'} className={'btn-submit'}>保存</Button>
+                <Button type={'primary'} className={'btn-submit'} onClick={() => this.onSubmit()}>保存</Button>
 
             </div >
         )
@@ -425,11 +529,12 @@ class SetMJ extends React.Component<SetMJProps, {
                     }}
                 />} />
 
-                <Route path='/setmj/choosereturn' render={() => <ChooseReturn
+                <Route path='/setmj/chooseshop' render={() => <ChooseShop
                     storeId={this.props.storeId}
-                    selected={this.state.selected ? this.state.selected : undefined}
-                    onEnter={value => {
-                        this.onSelected(value);
+                    data={this.state.storeIds}
+                    allChoose={this.state.isAllStore}
+                    onEnter={(val1: number[], val2: boolean) => {
+                        this.onChooseShop(val1, val2);
                     }}
                 />} />
 

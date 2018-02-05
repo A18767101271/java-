@@ -4,7 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import classNames from 'classNames';
 import moment from 'moment';
 import bridge from '../../../../assets/libs/sardine-bridge';
-import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button } from 'antd-mobile';
+import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button, Toast } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
 import CouponApis, { CouponCreate } from '../../../../services/coupon-apis';
 import PickTimePage from './PickTimePage';
@@ -102,7 +102,7 @@ class SetPZ extends React.Component<SetPZProps, {
     id?: number;
     couponType: number;
     name?: string;
-    logoPic?: { uid?: string, url: string }[];
+    logoPicUrl?: string;
     effectiveTime?: number;
     validityTime?: number;
     validityType: number;
@@ -144,23 +144,47 @@ class SetPZ extends React.Component<SetPZProps, {
 
     onUploadImg() {
 
-        const localId: {}[] = [];
+        var self = this;
+        let arr: string[] = [];
 
         bridge.getImages({
             count: 1,
             source: ['album', 'camera'],
+            sizeType: ['original', 'compressed'],
             complete: function (data) {
-                console.log(data);
-                localId.push(data.localIds[data.localIds.length - 1]);
-                if (data.localIds && data.localIds.length > 0)
+                if (data.localIds && data.localIds.length > 0) {
+                    arr = data.localIds;
                     bridge.getImageData({
                         localId: data.localIds[data.localIds.length - 1], //图片本地ID
                         complete: function (data) {
-                            console.log(data);
+                            if (data.localData) {
+                                self.setState({
+                                    logoPicUrl: data.localData
+                                }, () => {
+                                    bridge.uploadImages({
+                                        typeId: 1,
+                                        localIds: [arr[arr.length - 1]],
+                                        showProgress: true,
+                                        complete: function (data) {
+                                            if (data.resultCode == "success") {
+                                                Toast.info('上传成功', 2);
+                                            }
+                                            else {
+                                                Toast.info('上传失败', 2);
+                                            }
+                                        }
+                                    })
+                                })
+                            }
+
                         }
-                    });
+                    })
+                }
+
+
             }
-        });
+        })
+
 
     }
 
@@ -173,15 +197,15 @@ class SetPZ extends React.Component<SetPZProps, {
         obj.validityType = this.state.validityType;
 
         if (!this.state.name) {
-            Modal.alert('提示', '请输入卡券名称');
+            Modal.alert('提示', '请输入卡券配置名称');
             return;
         }
         else {
             obj.name = this.state.name;
         }
 
-        if (this.state.logoPic && this.state.logoPic.length) {
-            obj.logoPicUrl = this.state.logoPic[0].url;
+        if (this.state.logoPicUrl) {
+            obj.logoPicUrl = this.state.logoPicUrl;
         }
 
         if (this.state.remarks) {
@@ -214,19 +238,24 @@ class SetPZ extends React.Component<SetPZProps, {
             return;
         }
         else {
-            obj.marketingMeta = JSON.stringify([{
+            obj.marketingMeta = JSON.stringify({
                 spans: this.state.bizTimes && this.state.bizTimes.map(p => {
                     const l = p.days;
                     let s = '00:00';
                     let e = '23:59';
                     const fm = (v: number) => { return v < 10 ? '0' + v : v + '' }
                     if (!p.is24th && p.time) {
+                        let all = 'false';
                         s = fm(p.time.beginHours) + ':' + fm(p.time.beginMinutes);
                         e = fm(p.time.endHours) + ':' + fm(p.time.endMinutes);
+                        return { s, e, l, all };
                     }
-                    return { s, e, l };
+                    else {
+                        return { s, e, l };
+                    }
+
                 })
-            }])
+            })
         }
 
         if (this.state.validityType == 2) {
@@ -262,9 +291,16 @@ class SetPZ extends React.Component<SetPZProps, {
 
 
         if (this.state.selected && this.state.selected.length && this.state.serviceContent) {
-            obj.couponProducts = JSON.stringify([
-                this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } }),
-                { "productId": 0, "serviceContent": this.state.serviceContent }]);
+            let arr: {
+                productId: number,
+                productName?: string,
+                num?: number,
+                serviceContent?: string
+            }[] = this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } });
+            arr.push({ "productId": 0, "serviceContent": this.state.serviceContent });
+
+            obj.couponProducts = JSON.stringify(arr);
+
         }
 
         else if ((!this.state.selected || !this.state.selected.length) && this.state.serviceContent) {
@@ -272,9 +308,9 @@ class SetPZ extends React.Component<SetPZProps, {
         }
 
         else if ((this.state.selected && this.state.selected.length) && !this.state.serviceContent) {
-            obj.couponProducts = JSON.stringify([
+            obj.couponProducts = JSON.stringify(
                 this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } })
-            ]);
+            );
         }
 
         else {
@@ -286,11 +322,13 @@ class SetPZ extends React.Component<SetPZProps, {
 
         CouponApis.CouponDefineCreate(obj).then((data) => {
             console.log(data);
-        })
-
-
-
-
+            if (data.couDefId) {
+                Modal.alert('提示', '提交成功', [{ text: '确定', onPress: () => bridge.close }])
+            }
+        }).catch(err => {
+            console.log(err);
+            Modal.alert('提示', JSON.stringify(err));
+        });
     }
 
     backToMain() {
@@ -351,126 +389,103 @@ class SetPZ extends React.Component<SetPZProps, {
                 <List><InputItem value={this.state.name || ''} placeholder={'卡券名称最多12个字'} maxLength={12} onChange={(e) => this.setState({ name: (e || '').trim() })}>卡券配置名称</InputItem></List>
                 <WhiteSpace />
 
-                <Item extra={(this.state.logoPic && this.state.logoPic.length) ? '已上传图片' : '请上传'} arrow={'horizontal'} onClick={() => { this.onUploadImg() }}>卡券配置配图</Item>
+                <Item extra={(this.state.logoPicUrl) ? '已上传图片' : '请上传'} arrow={'horizontal'} onClick={() => { this.onUploadImg() }}>卡券配置配图</Item>
 
                 <div className="upload">
-                    <img className="img-coupon" src={this.state.logoPic && this.state.logoPic[this.state.logoPic.length - 1].url} />
+                    <img className="img-coupon" src={this.state.logoPicUrl} />
                 </div>
 
                 <div className='headbar i-time'>
                     <div className='text-1'>时间设置</div>
                 </div>
 
-                <List>
-                    <Item extra={<div>
-                        <Button
-                            size={'small'}
-                            inline={true}
-                            style={{ marginRight: '4px' }}
-                            className={classNames("", { 'active': this.state.validityType == 1 })}
-                            onClick={() => this.setState({ validityType: 1 })}>固定天数
+                <Item extra={<div>
+                    <Button
+                        size={'small'}
+                        inline={true}
+                        style={{ marginRight: '4px' }}
+                        className={classNames("", { 'active': this.state.validityType == 1 })}
+                        onClick={() => this.setState({ validityType: 1 })}>固定天数
                                 </Button>
-                        <Button
-                            size={'small'}
-                            inline={true}
-                            style={{ marginRight: '4px' }}
-                            className={classNames("", { 'active': this.state.validityType == 2 })}
-                            onClick={() => this.setState({ validityType: 2 })}>指定区域时间
+                    <Button
+                        size={'small'}
+                        inline={true}
+                        style={{ marginRight: '4px' }}
+                        className={classNames("", { 'active': this.state.validityType == 2 })}
+                        onClick={() => this.setState({ validityType: 2 })}>指定区域时间
                                 </Button>
-                    </div>}>有效期</Item>
+                </div>}>有效期
 
-                    {this.state.validityType == 1 ?
-                        <div>
-                            <Picker
-                                data={data2}
-                                cols={1}
-                                title=""
-                                value={this.state.validityTime ? [this.state.validityTime] : undefined}
-                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ validityTime: vals[0] }) } }}
-                            >
-                                <Item extra={(data1.find(p => p.value == this.state.validityTime) || { label: '请选择固定时段' }).label} arrow={'horizontal'} >生效后有效期</Item>
-                            </Picker>
+                    </Item>
 
-                            <Picker
-                                data={data1}
-                                cols={1}
-                                title=""
-                                value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
-                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
-                            >
-                                <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
-                            </Picker>
+                {this.state.validityType == 1 ?
+                    <div>
+                        <Picker
+                            data={data2}
+                            cols={1}
+                            title=""
+                            value={this.state.validityTime ? [this.state.validityTime] : undefined}
+                            onOk={vals => { if (vals && vals.length == 1) { this.setState({ validityTime: vals[0] }) } }}
+                        >
+                            <Item extra={(data1.find(p => p.value == this.state.validityTime) || { label: '请选择固定时段' }).label} arrow={'horizontal'} >生效后有效期</Item>
+                        </Picker>
 
-                            <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                                window.location.href = '#/setpz/picktime?shopid=' + this.props.storeId;
-                            }}>可用时间</Item>
+                    </div>
 
-                            {this.state.bizTimes && this.state.bizTimes.length ?
-                                <div>
-                                    <Item extra={avaCycle.substring(0, avaCycle.length - 1)} wrap={true} className={'list'}>每周可用周期</Item>
-                                    <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
-                                </div>
-                                :
-                                undefined
+                    :
 
-                            }
+                    <div>
+                        <DatePicker
+                            mode="date"
+                            value={this.state.beginDate}
+                            minDate={moment().startOf('day').toDate()}
+                            onOk={data => {
+                                this.setState({
+                                    beginDate: data
+                                })
+                            }}
+                        >
+                            <Item extra={this.state.beginDate ? moment(this.state.beginDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >起始日期</Item>
+                        </DatePicker>
 
+                        <DatePicker
+                            mode="date"
+                            value={this.state.endDate}
+                            minDate={this.state.beginDate ? moment(this.state.beginDate).add(1, 'day').subtract(1, 'milliseconds').toDate() : moment().startOf('day').toDate()}
+                            onOk={data => {
+                                this.setState({
+                                    endDate: data
+                                })
+                            }}
+                        >
+                            <Item extra={this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >结束日期</Item>
+                        </DatePicker>
+                    </div>
+                }
 
-                        </div> :
+                <Picker
+                    data={data1}
+                    cols={1}
+                    title=""
+                    value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
+                    onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
+                >
+                    <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
+                </Picker>
 
-                        <div>
-                            <DatePicker
-                                mode="date"
-                                value={this.state.beginDate}
-                                minDate={moment().startOf('day').toDate()}
-                                onOk={data => {
-                                    this.setState({
-                                        beginDate: data
-                                    })
-                                }}
-                            >
-                                <Item extra={this.state.beginDate ? moment(this.state.beginDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >起始日期</Item>
-                            </DatePicker>
+                <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
+                    window.location.href = '#/setpz/picktime?shopid=' + this.props.storeId;
+                }}>可用时间
+                    </Item>
 
-                            <DatePicker
-                                mode="date"
-                                value={this.state.endDate}
-                                minDate={this.state.beginDate ? moment(this.state.beginDate).add(1, 'day').subtract(1, 'milliseconds').toDate() : moment().startOf('day').toDate()}
-                                onOk={data => {
-                                    this.setState({
-                                        endDate: data
-                                    })
-                                }}
-                            >
-                                <Item extra={this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >结束日期</Item>
-                            </DatePicker>
-
-                            <Picker
-                                data={data1}
-                                cols={1}
-                                title=""
-                                value={this.state.effectiveTime ? [this.state.effectiveTime] : undefined}
-                                onOk={vals => { if (vals && vals.length == 1) { this.setState({ effectiveTime: vals[0] }) } }}
-                            >
-                                <Item extra={(data2.find(p => p.value == this.state.effectiveTime) || { label: '请选择领取后生效时间' }).label} arrow={'horizontal'} >生效期</Item>
-                            </Picker>
-
-                            <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                                window.location.href = '#/setpz/picktime?shopid=' + this.props.storeId;
-                            }}>可用时间</Item>
-
-                            {this.state.bizTimes && this.state.bizTimes.length ?
-                                <div>
-                                    <Item extra={avaCycle.substring(0, avaCycle.length - 1)} className={'list'} wrap={true}>每周可用周期</Item>
-                                    <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
-                                </div>
-                                :
-                                undefined
-
-                            }
-
-                        </div>}
-                </List>
+                {this.state.bizTimes && this.state.bizTimes.length ?
+                    <div>
+                        <Item extra={avaCycle.substring(0, avaCycle.length - 1)} className={'list'} wrap={true}>每周可用周期</Item>
+                        <Item extra={timeCycle.substring(0, timeCycle.length - 1) || '全天'} wrap={true} className={'list'}>每天可用时段</Item>
+                    </div>
+                    :
+                    undefined
+                }
 
                 <div className='headbar i-laba'>
                     <div className='text-1'>优惠设置</div>
@@ -562,9 +577,6 @@ class SetPZ extends React.Component<SetPZProps, {
                 <Route path='/setpz' exact render={() => this.mainRender()} />
 
             </Switch>
-
-
-
         )
     }
 

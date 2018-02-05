@@ -129,7 +129,7 @@ export default class SardineJSBridge {
     }
 
     ready(callback: () => void) {
-        
+
         if (jsBridgeInited) callback(); else readys.push(callback);
     }
 
@@ -145,6 +145,14 @@ export default class SardineJSBridge {
             data: opt.data
         }, opt);
     }
+
+    close(_opt: {}) {
+        bridgeInvoke(this.options, 'close', {
+
+        });
+    }
+
+
     browser(opt: { url: string } & BridgeInvokeCallbackOptions) {
         bridgeInvoke(this.options, 'browser', {
             url: opt.url

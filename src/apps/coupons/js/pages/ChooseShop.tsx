@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toast } from 'antd-mobile';
 import { Button, List, Checkbox, WhiteSpace, Switch, Modal } from 'antd-mobile';
 import CouponApis from '../../../../services/coupon-apis';
 import '../../sass/ChoosePage.scss';
@@ -45,10 +46,13 @@ class ChooseShop extends React.Component<ChooseShopProps, {
 
         let req = { merchantId: this.props.storeId };
 
+        Toast.loading('加载中...');
+
         CouponApis.ListUseAble(req).then((data) => {
             this.setState({
                 getData: data
             }, () => {
+                Toast.hide();
                 if (this.state.getData && this.state.getData.length) {
                     for (var i = 0; i < this.state.getData.length; i++) {
                         arr.push(this.state.getData[i].storeId)
@@ -58,6 +62,9 @@ class ChooseShop extends React.Component<ChooseShopProps, {
                     })
                 }
             })
+        }).catch((err) => {
+            Toast.hide();
+            Modal.alert('提示', err.msg);
         })
     }
 
