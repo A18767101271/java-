@@ -1,12 +1,7 @@
 import '../../sass/HomePage.scss';
 import CouponApis, { CouponDefineList } from '../../../../services/coupon-apis';
 import React from 'react';
-import Layout from '../../../../apps/components/AppLayout';
 import classNames from 'classnames';
-// import moment from 'moment';
-//import { Toast, Modal } from 'antd-mobile';
-
-const { Header, Content } = Layout;
 
 interface HomePageProps {
     mchId: number,
@@ -99,21 +94,18 @@ class HomePage extends React.Component<HomePageProps, HomePageState>{
 
         return (
 
-            <Layout>
-                <Header title='卡券管理' addIsShow={true} addUrl={'add'} />
-                <Content>
-                    <div className="wrap clearfix" data-page='home'>
 
-                        {this.state.data && this.state.data.couponDefineDTOList && this.state.data.couponDefineDTOList.length ? this.state.data.couponDefineDTOList.map(p =>
+            <div className="wrap clearfix" data-page='home'>
 
-                            p.couponType == 1 ? <CardMJ key={p.couDefId} item={p} status={p.status} /> : p.couponType == 3 ? <CardPZ key={p.couDefId} item={p} status={p.status} /> : <CardDJ key={p.couDefId} item={p} status={p.status} />
+                {this.state.data && this.state.data.couponDefineDTOList && this.state.data.couponDefineDTOList.length ? this.state.data.couponDefineDTOList.map(p =>
 
-                        ) : undefined}
+                    p.couponType == 1 ? <CardMJ key={p.couDefId} item={p} status={p.status} /> : p.couponType == 3 ? <CardPZ key={p.couDefId} item={p} status={p.status} /> : <CardDJ key={p.couDefId} item={p} status={p.status} />
 
-                    </div>
+                ) : undefined}
 
-                </Content >
-            </Layout >);
+            </div>
+
+        );
     }
 
 }
