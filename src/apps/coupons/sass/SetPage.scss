@@ -4,15 +4,37 @@
         @return $px / $baseFontSize * 1rem;
     }
 
-    .wrap {
-        .am-list-item .am-list-line .am-list-extra {
+    .am-list-item .am-list-line {
+        .am-input-label {
+            font-size: rem(28px);
+        }
+        .am-list-content {
+            font-size: rem(28px);
+        }
+        .am-list-extra {
+            font-size: rem(28px);
             flex-basis: 65%;
         }
-        .am-list-item .am-input-control input {
+        .am-input-control input {
+            font-size: rem(28px);
             text-align: right;
         }
     }
 
+    .am-list-item {
+        .am-textarea-control {
+            textarea {
+                font-size: rem(28px);
+            }
+        }
+    } // .am-list-item .am-list-line .am-list-extra {
+    //     font-size: rem(28px);
+    //     flex-basis: 65%;
+    // }
+    // .am-list-item .am-input-control input {
+    //     font-size: rem(28px);
+    //     text-align: right;
+    // }
     [data-page="setpz"],
     [data-page="setmj"],
     [data-page="setdj"] {
