@@ -9,7 +9,7 @@ import classNames from 'classnames';
 const { Header, Content } = Layout;
 
 interface CardListProps {
-    storeId: number
+    mchId: number
 }
 
 interface CardListState {
@@ -50,7 +50,7 @@ class CardList extends React.Component<CardListProps, CardListState>{
         const marketItemList = () => {
             return (
                 <div>
-                    <div className='card' onClick={() => window.location.href = '#/getconfig?cardid=159?shopid=' + this.props.storeId}>
+                    <div className='card' onClick={() => window.location.href = '#/getconfig?cardid=159?shopid=' + this.props.mchId}>
                         <div className='icon'>凭</div>
                         <div className='status'>已上架</div>
                         <div className='line name'>送可乐1瓶凭证券</div>

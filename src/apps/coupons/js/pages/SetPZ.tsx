@@ -6,7 +6,13 @@ import moment from 'moment';
 import bridge from '@jx/sardine-bridge';
 import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button, Toast } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
-import CouponApis, { CouponCreate } from '../../../../services/coupon-apis';
+
+import { SardineApiClient } from '@jx/sardine-api';
+
+//import CouponApis from '../../../../services/coupon-apis';
+
+
+import CouponApis, { CouponDefineCreateRequest } from '@jx/sardine-apiservice/lib/coupon-apis';
 import PickTimePage from './PickTimePage';
 import ChooseReturn from './ChooseReturn';
 import ChooseShop from './ChooseShop';
@@ -94,7 +100,8 @@ const data1 = [{
 
 
 interface SetPZProps {
-    storeId: number,
+    mchId: number;
+    apiClient: SardineApiClient;
 }
 
 class SetPZ extends React.Component<SetPZProps, {
@@ -125,17 +132,18 @@ class SetPZ extends React.Component<SetPZProps, {
     bizTimes?: EffectiveTimePickerValue[];
 
 }>{
-
+    CouponApis: CouponApis;
     constructor(props: SetPZProps) {
         super(props);
         this.state = {
             isAllStore: true,
-            merchantId: props.storeId,
+            merchantId: props.mchId,
             couponType: 3,
             validityType: 1,
             beginDate: moment().startOf('day').toDate(),
             bizTimes: []
         };
+        this.CouponApis = new CouponApis(props.apiClient);
     }
 
     componentWillMount() {
@@ -190,18 +198,22 @@ class SetPZ extends React.Component<SetPZProps, {
 
     onSubmit() {
 
-        let obj = {} as CouponCreate;
-
-        obj.merchantId = this.props.storeId;
-        obj.couponType = this.state.couponType;
-        obj.validityType = this.state.validityType;
-
-        if (!this.state.name) {
+        const couponName = this.state.name;
+        if (!couponName) {
             Modal.alert('提示', '请输入卡券配置名称');
             return;
         }
-        else {
-            obj.name = this.state.name;
+
+        let obj: CouponDefineCreateRequest = {
+            merchantId: this.props.mchId,
+            couponType: this.state.couponType,
+            validityType: this.state.validityType,
+            name: couponName,
+            isAllStore: this.state.isAllStore
+        };
+
+        if (!this.state.isAllStore) {
+            obj.storeIds = this.state.storeIds
         }
 
         if (this.state.logoPicUrl) {
@@ -216,13 +228,6 @@ class SetPZ extends React.Component<SetPZProps, {
             obj.useNotice = this.state.useNotice;
         }
 
-        if (this.state.isAllStore) {
-            obj.isAllStore = 1;
-        }
-        else {
-            obj.isAllStore = 0;
-            obj.storeIds = this.state.storeIds
-        }
 
 
         if (!this.state.effectiveTime) {
@@ -288,46 +293,52 @@ class SetPZ extends React.Component<SetPZProps, {
                 obj.validityTime = this.state.validityTime;
             }
         }
+        let arr: {
+            productId: number,
+            productName?: string,
+            num?: number,
+            serviceContent?: string
+        }[] = [];
 
+        if (this.state.selected && this.state.selected.length > 0) {
 
-        if (this.state.selected && this.state.selected.length && this.state.serviceContent) {
-            let arr: {
-                productId: number,
-                productName?: string,
-                num?: number,
-                serviceContent?: string
-            }[] = this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } });
-            arr.push({ "productId": 0, "serviceContent": this.state.serviceContent });
+            this.state.selected.forEach(p => {
+                arr.push({ productId: p.id, productName: p.name, num: p.num });
+            });
+        }
 
-            obj.couponProducts = JSON.stringify(arr);
+        if (this.state.serviceContent) {
+
+            arr.push({ productId: 0, serviceContent: this.state.serviceContent });
 
         }
 
-        else if ((!this.state.selected || !this.state.selected.length) && this.state.serviceContent) {
-            obj.couponProducts = JSON.stringify([{ "productId": 0, "serviceContent": this.state.serviceContent }]);
-        }
-
-        else if ((this.state.selected && this.state.selected.length) && !this.state.serviceContent) {
-            obj.couponProducts = JSON.stringify(
-                this.state.selected.map(p => { return { productId: p.id, productName: p.name, num: p.num } })
-            );
-        }
-
-        else {
+        if (arr.length < 1) {
             Modal.alert('提示', '请选择商品项目或服务内容');
             return;
         }
 
+        obj.couponProducts = arr;
+
         console.log(obj);
 
-        CouponApis.CouponDefineCreate(obj).then((data) => {
-            console.log(data);
-            if (data.couDefId) {
-                Modal.alert('提示', '提交成功', [{ text: '确定', onPress: () => bridge.close }])
+        this.CouponApis.couponDefineCreate(obj).then(resp => {
+
+            if (resp.success) {
+                const data = resp.getData();
+
+                console.log(data);
+
+                if (data.couDefId) {
+                    Modal.alert('提示', '提交成功', [{ text: '确定', onPress: () => bridge.close }])
+                }
+            } else {
+                console.log(resp);
+                Modal.alert('提示', JSON.stringify(resp));
             }
-        }).catch(err => {
-            console.log(err);
-            Modal.alert('提示', JSON.stringify(err));
+
+
+
         });
     }
 
@@ -474,7 +485,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 </Picker>
 
                 <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                    window.location.href = '#/setpz/picktime?shopid=' + this.props.storeId;
+                    window.location.href = '#/setpz/picktime?shopid=' + this.props.mchId;
                 }}>可用时间
                     </Item>
 
@@ -493,7 +504,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 </div>
 
                 <List>
-                    <Item extra={this.state.selected && this.state.selected.length ? '已选择' : '请选择'} arrow={'horizontal'} onClick={() => window.location.href = '#setpz/choosereturn?shopid=' + this.props.storeId}>商品内容</Item>
+                    <Item extra={this.state.selected && this.state.selected.length ? '已选择' : '请选择'} arrow={'horizontal'} onClick={() => window.location.href = '#setpz/choosereturn?shopid=' + this.props.mchId}>商品内容</Item>
                 </List>
 
                 {this.state.selected && this.state.selected.length > 0 ?
@@ -517,7 +528,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 </div>
 
                 <List>
-                    <Item extra={this.state.isAllStore ? '默认全店铺通用' : '已选择' + (this.state.storeIds && this.state.storeIds.length) + '家店铺'} arrow={'horizontal'} onClick={() => window.location.href = '#/setpz/chooseshop?shopid=' + this.props.storeId}>选择可用店铺</Item>
+                    <Item extra={this.state.isAllStore ? '默认全店铺通用' : '已选择' + (this.state.storeIds && this.state.storeIds.length) + '家店铺'} arrow={'horizontal'} onClick={() => window.location.href = '#/setpz/chooseshop?shopid=' + this.props.mchId}>选择可用店铺</Item>
                 </List>
 
                 <List renderHeader={() => '使用须知'}>
@@ -558,7 +569,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 />} />
 
                 <Route path='/setpz/chooseshop' render={() => <ChooseShop
-                    storeId={this.props.storeId}
+                    storeId={this.props.mchId}
                     data={this.state.storeIds}
                     allChoose={this.state.isAllStore}
                     onEnter={(val1: number[], val2: boolean) => {
@@ -567,7 +578,7 @@ class SetPZ extends React.Component<SetPZProps, {
                 />} />
 
                 <Route path='/setpz/choosereturn' render={() => <ChooseReturn
-                    storeId={this.props.storeId}
+                    storeId={this.props.mchId}
                     selected={this.state.selected ? this.state.selected : undefined}
                     onEnter={value => {
                         this.onSelected(value);

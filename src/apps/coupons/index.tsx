@@ -3,20 +3,29 @@ import ReactDOM from 'react-dom';
 import { Modal } from 'antd-mobile';
 import App from './App';
 import bridge from '@jx/sardine-bridge';
+import { SardineApiClient } from '@jx/sardine-api';
 
 import UParams from '../../assets/libs/uparams';
 
 let params = UParams();
-const shopId = parseInt(params.shopid);
+
+
+const mchid = parseInt(params.mchid);
 
 
 bridge.config({ appKey: "9kyty1wjtqvhc8gyl0i5ipkc" });
 
-if (isNaN(shopId) || shopId < 1) {
-    Modal.alert('提示', '参数shopid无效', []);
+const apiClient = new SardineApiClient({
+    gatewayUrl: "https://tenv.mttstudio.net/web-api/",
+    loginUrl: "https://tenv.mttstudio.net/login/",
+    appKey: "9kyty1wjtqvhc8gyl0i5ipkc"
+});
+
+if (isNaN(mchid) || mchid < 1) {
+    Modal.alert('提示', '参数mchid无效', []);
 }
 else {
-    ReactDOM.render(<App storeId={shopId} />, document.getElementById('app'));
+    ReactDOM.render(<App mchId={mchid} apiClient={apiClient} />, document.getElementById('app'));
 }
 
 

@@ -9,7 +9,7 @@ import Layout from '../../../../apps/components/AppLayout';
 const { Header, Content } = Layout;
 
 interface AddPageProps {
-    storeId: number,
+    mchId: number,
 }
 
 class AddPage extends React.Component<AddPageProps>{
@@ -26,26 +26,26 @@ class AddPage extends React.Component<AddPageProps>{
     render() {
         return (
             <Layout>
-                <Header title='新增卡券'/>
+                <Header title='新增卡券' />
                 <Content>
                     <div className="wrap clearfix" data-page='add'>
 
                         <div className='card card-ping'>
                             <div className='name'>凭证券</div>
                             <div className='text'>凭证券的相关文案和提示大概在这些字以内</div>
-                            <div className='btn' onClick={() => window.location.href = "#/setpz?shopid=" + this.props.storeId}>立即添加</div>
+                            <div className='btn' onClick={() => window.location.href = "#/setpz"}>立即添加</div>
                         </div>
 
                         <div className='card card-dai'>
                             <div className='name'>代金券</div>
                             <div className='text'>代金券的相关文案和提示大概在这些字以内</div>
-                            <div className='btn' onClick={() => window.location.href = "#/setdj?shopid=" + this.props.storeId}>立即添加</div>
+                            <div className='btn' onClick={() => window.location.href = "#/setdj"}>立即添加</div>
                         </div>
 
                         <div className='card card-man'>
                             <div className='name'>满减券</div>
                             <div className='text'>满减券的相关文案和提示大概在这些字以内</div>
-                            <div className='btn' onClick={() => window.location.href = "#/setmj?shopid=" + this.props.storeId}>立即添加</div>
+                            <div className='btn' onClick={() => window.location.href = "#/setmj"}>立即添加</div>
                         </div>
 
                     </div>

@@ -9,7 +9,7 @@ import classNames from 'classnames';
 const { Header, Content } = Layout;
 
 interface CardDetailsProps {
-    storeId: number
+    mchId: number
 }
 
 class CardDetails extends React.Component<CardDetailsProps, {
@@ -113,7 +113,7 @@ class CardDetails extends React.Component<CardDetailsProps, {
 
         const BtnPush = () => {
             return (
-                <div className='btn-push' onClick={() => window.location.href = '#/choose?type=2?shopid=' + this.props.storeId + '?cardid=' + parms.cardid}>立即发布</div>
+                <div className='btn-push' onClick={() => window.location.href = '#/choose?type=2?shopid=' + this.props.mchId + '?cardid=' + parms.cardid}>立即发布</div>
             )
         }
 

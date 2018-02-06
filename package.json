@@ -14,7 +14,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@jx/sardine-bridge": "^1.0.21",
+    "@jx/sardine-api": "^1.0.19",
+    "@jx/sardine-apiservice": "^1.0.26",
+    "@jx/sardine-bridge": "^1.0.27",
     "@types/classnames": "^2.2.3",
     "@types/prop-types": "^15.5.2",
     "@types/react": "^16.0.22",

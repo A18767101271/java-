@@ -11,7 +11,7 @@ import ChooseCard from './ChooseCard';
 const { Header, Content } = Layout;
 
 interface SelfServiceCardProps {
-    storeId: number,
+    mchId: number,
 }
 
 class SelfServiceCard extends React.Component<SelfServiceCardProps, {
@@ -42,7 +42,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
 
     componentWillMount() {
 
-        CouponApis.CouponDefineList({ store_id: this.props.storeId, page_size: this.state.pageSize, page_number: this.state.pageNumber }).then(data => {
+        CouponApis.CouponDefineList({ store_id: this.props.mchId, page_size: this.state.pageSize, page_number: this.state.pageNumber }).then(data => {
             this.setState({
                 cardList: data
             }, () => {
@@ -76,7 +76,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
 
     onSubmit(_num) {
 
-        window.location.href = '#/selfcardlist?shopid=' + this.props.storeId;
+        window.location.href = '#/selfcardlist?shopid=' + this.props.mchId;
 
         if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
             Modal.alert('提示', '开始时间无效');
@@ -252,7 +252,7 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
 
     render() {
         if (this.state.chooseCards) {
-            return <ChooseCard storeId={this.props.storeId} cardId={this.state.cardId} cardList={this.state.cardList} onSelect={cardInfo => {
+            return <ChooseCard storeId={this.props.mchId} cardId={this.state.cardId} cardList={this.state.cardList} onSelect={cardInfo => {
                 this.setState({
                     cardInfo: cardInfo,
                     chooseCards: false,

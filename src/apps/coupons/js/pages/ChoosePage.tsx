@@ -6,7 +6,7 @@ import UParams from '../../../../assets/libs/uparams';
 const { Header, Content } = Layout;
 
 interface AddPageProps {
-    storeId: number,
+    mchId: number,
 }
 
 class AddPage extends React.Component<AddPageProps, {
@@ -38,7 +38,7 @@ class AddPage extends React.Component<AddPageProps, {
         const ChooseContent = () => {
             return (
                 <div className='setion'>
-                    <div className='list l-1' onClick={() => { this.state.cardId ? window.location.href = '#/selfcard?cardid=' + this.state.cardId + '?shopid=' + this.props.storeId : window.location.href = '#/selfcard?shopid=' + this.props.storeId }}><div className='left fl'>自助领券</div><div className='right fr'></div></div>
+                    <div className='list l-1' onClick={() => { this.state.cardId ? window.location.href = '#/selfcard?cardid=' + this.state.cardId + '?shopid=' + this.props.mchId : window.location.href = '#/selfcard?shopid=' + this.props.mchId }}><div className='left fl'>自助领券</div><div className='right fr'></div></div>
                     <div className='list l-2'><div className='left fl'>定制发券</div><div className='right fr'></div></div>
                     <div className='list l-3'><div className='left fl'>下单返券</div><div className='right fr'></div></div>
                 </div>
@@ -61,7 +61,7 @@ class AddPage extends React.Component<AddPageProps, {
                                 <div className='t-2'>请选择卡券上线方式</div>
                             </div> : undefined}
                         <ChooseContent />
-                        {this.state.type == 1 ? <div className='btn' onClick={() => window.location.href = '#/?shopid=' + this.props.storeId}>返回卡券列表</div> : undefined}
+                        {this.state.type == 1 ? <div className='btn' onClick={() => window.location.href = '#/?shopid=' + this.props.mchId}>返回卡券列表</div> : undefined}
                     </div>
 
                 </Content>

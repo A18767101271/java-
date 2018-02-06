@@ -93,7 +93,7 @@ const data1 = [{
 
 
 interface SetMJProps {
-    storeId: number,
+    mchId: number,
 }
 
 class SetMJ extends React.Component<SetMJProps, {
@@ -128,7 +128,7 @@ class SetMJ extends React.Component<SetMJProps, {
         super(props);
         this.state = {
             isAllStore: true,
-            merchantId: props.storeId,
+            merchantId: props.mchId,
             couponType: 2,
             validityType: 1,
             beginDate: moment().startOf('day').toDate(),
@@ -190,7 +190,7 @@ class SetMJ extends React.Component<SetMJProps, {
 
         let obj = {} as CouponCreate;
 
-        obj.merchantId = this.props.storeId;
+        obj.merchantId = this.props.mchId;
         obj.couponType = this.state.couponType;
         obj.validityType = this.state.validityType;
 
@@ -454,7 +454,7 @@ class SetMJ extends React.Component<SetMJProps, {
                 </Picker>
 
                 <Item extra={this.state.bizTimes && this.state.bizTimes.length ? '已选择' : '请选择可用周期,默认不限'} arrow={'horizontal'} onClick={() => {
-                    window.location.href = '#/setmj/picktime?shopid=' + this.props.storeId;
+                    window.location.href = '#/setmj/picktime?shopid=' + this.props.mchId;
                 }}>可用时间
                     </Item>
 
@@ -489,7 +489,7 @@ class SetMJ extends React.Component<SetMJProps, {
                 </div>
 
                 <List>
-                    <Item extra={this.state.isAllStore ? '默认全店铺通用' : '已选择' + (this.state.storeIds && this.state.storeIds.length) + '家店铺'} arrow={'horizontal'} onClick={() => window.location.href = '#/setmj/chooseshop?shopid=' + this.props.storeId}>选择可用店铺</Item>
+                    <Item extra={this.state.isAllStore ? '默认全店铺通用' : '已选择' + (this.state.storeIds && this.state.storeIds.length) + '家店铺'} arrow={'horizontal'} onClick={() => window.location.href = '#/setmj/chooseshop?shopid=' + this.props.mchId}>选择可用店铺</Item>
                 </List>
 
                 <List renderHeader={() => '使用须知'}>
@@ -530,7 +530,7 @@ class SetMJ extends React.Component<SetMJProps, {
                 />} />
 
                 <Route path='/setmj/chooseshop' render={() => <ChooseShop
-                    storeId={this.props.storeId}
+                    storeId={this.props.mchId}
                     data={this.state.storeIds}
                     allChoose={this.state.isAllStore}
                     onEnter={(val1: number[], val2: boolean) => {

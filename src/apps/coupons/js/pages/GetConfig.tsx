@@ -10,7 +10,7 @@ import { Modal } from 'antd-mobile';
 const { Header, Content } = Layout;
 
 interface AddPageProps {
-    storeId: number,
+    mchId: number,
 }
 
 class AddPage extends React.Component<AddPageProps, {
