@@ -5,10 +5,13 @@ import App from './App';
 import bridge from '@jx/sardine-bridge';
 import { SardineApiClient } from '@jx/sardine-api';
 
+import VConsole from 'vconsole';
+
 import UParams from '../../assets/libs/uparams';
 
 let params = UParams();
 
+new VConsole();
 
 const mchid = parseInt(params.mchid);
 
