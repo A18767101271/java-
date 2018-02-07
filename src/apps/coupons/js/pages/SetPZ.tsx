@@ -109,7 +109,10 @@ class SetPZ extends React.Component<SetPZProps, {
     id?: number;
     couponType: number;
     name?: string;
+
+    logoUid?: string;
     logoPicUrl?: string;
+
     effectiveTime?: number;
     validityTime?: number;
     validityType: number;
@@ -141,7 +144,7 @@ class SetPZ extends React.Component<SetPZProps, {
             couponType: 3,
             validityType: 1,
             beginDate: moment().startOf('day').toDate(),
-            bizTimes: []
+            bizTimes: [{ 'days': [1, 2, 3, 4, 5, 6, 7], 'is24th': true }]
         };
         this.CouponApis = new CouponApis(props.apiClient);
     }
@@ -161,32 +164,40 @@ class SetPZ extends React.Component<SetPZProps, {
             sizeType: ['original', 'compressed'],
             complete: function (data) {
                 if (data.localIds && data.localIds.length > 0) {
-                    arr = data.localIds;
-                    bridge.getImageData({
-                        localId: data.localIds[data.localIds.length - 1], //图片本地ID
-                        complete: function (data) {
-                            if (data.localData) {
-                                self.setState({
-                                    logoPicUrl: data.localData
-                                }, () => {
-                                    bridge.uploadImages({
-                                        typeId: 1,
-                                        localIds: [arr[arr.length - 1]],
-                                        showProgress: true,
-                                        complete: function (data) {
-                                            if (data.resultCode == "success") {
-                                                Toast.info('上传成功', 2);
-                                            }
-                                            else {
-                                                Toast.info('上传失败', 2);
-                                            }
-                                        }
-                                    })
-                                })
-                            }
 
-                        }
+                    self.setState({
+                        logoUid: data.localIds[data.localIds.length - 1]
+                    }, () => {
+
+                        arr = data.localIds;
+                        bridge.getImageData({
+                            localId: data.localIds[data.localIds.length - 1], //图片本地ID
+                            complete: function (data) {
+                                if (data.localData) {
+                                    self.setState({
+                                        logoPicUrl: data.localData
+                                    }, () => {
+                                        bridge.uploadImages({
+                                            typeId: 1,
+                                            localIds: [arr[arr.length - 1]],
+                                            showProgress: true,
+                                            complete: function (data) {
+                                                if (data.resultCode == "success") {
+                                                    Toast.info('上传成功', 2);
+                                                }
+                                                else {
+                                                    Toast.info('上传失败', 2);
+                                                }
+                                            }
+                                        })
+                                    })
+                                }
+
+                            }
+                        })
+
                     })
+
                 }
 
 
@@ -216,8 +227,8 @@ class SetPZ extends React.Component<SetPZProps, {
             obj.storeIds = this.state.storeIds
         }
 
-        if (this.state.logoPicUrl) {
-            obj.logoPicUrl = this.state.logoPicUrl;
+        if (this.state.logoUid) {
+            obj.logoPicUrl = this.state.logoUid;
         }
 
         if (this.state.remarks) {
@@ -227,8 +238,6 @@ class SetPZ extends React.Component<SetPZProps, {
         if (this.state.useNotice) {
             obj.useNotice = this.state.useNotice;
         }
-
-
 
         if (!this.state.effectiveTime) {
             Modal.alert('提示', '请选择生效期');
@@ -330,7 +339,12 @@ class SetPZ extends React.Component<SetPZProps, {
                 console.log(data);
 
                 if (data.couDefId) {
-                    Modal.alert('提示', '提交成功', [{ text: '确定', onPress: () => bridge.close }])
+                    Modal.alert('提示', '提交成功', [{
+                        text: '确定', onPress: () => {
+                            bridge.close();
+                        }
+
+                    }])
                 }
             } else {
                 console.log(resp);

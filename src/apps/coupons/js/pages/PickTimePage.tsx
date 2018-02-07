@@ -67,13 +67,13 @@ export default class EffectiveTimePickerView extends React.Component<EffectiveTi
 
         else {
             this.state = {
-                dayChecked1: false,
-                dayChecked2: false,
-                dayChecked3: false,
-                dayChecked4: false,
-                dayChecked5: false,
-                dayChecked6: false,
-                dayChecked7: false,
+                dayChecked1: true,
+                dayChecked2: true,
+                dayChecked3: true,
+                dayChecked4: true,
+                dayChecked5: true,
+                dayChecked6: true,
+                dayChecked7: true,
                 allDay: true,
                 times: []
             }
