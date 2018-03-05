@@ -45,7 +45,7 @@ export default class HomePage extends React.Component<HomePageProps>{
             return;
         }
         Toast.loading('加载中', 30);
-        SettledApis.formApprovalSubmit({ formId: form.formId }).then(_data => {
+        SettledApis.formApprovalSubmit({ formId: form ? form.formId : 1 }).then(_data => {
             Toast.hide();
             window.location.replace('#/success');
         }).catch(err => {

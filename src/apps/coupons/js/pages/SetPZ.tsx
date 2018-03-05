@@ -164,11 +164,9 @@ class SetPZ extends React.Component<SetPZProps, {
             sizeType: ['original', 'compressed'],
             complete: function (data) {
                 if (data.localIds && data.localIds.length > 0) {
-
                     self.setState({
                         logoUid: data.localIds[data.localIds.length - 1]
                     }, () => {
-
                         arr = data.localIds;
                         bridge.getImageData({
                             localId: data.localIds[data.localIds.length - 1], //图片本地ID
@@ -182,6 +180,7 @@ class SetPZ extends React.Component<SetPZProps, {
                                             localIds: [arr[arr.length - 1]],
                                             showProgress: true,
                                             complete: function (data) {
+                                                console.log(data.resultCode,10);
                                                 if (data.resultCode == "success") {
                                                     Toast.info('上传成功', 2);
                                                 }
@@ -411,7 +410,7 @@ class SetPZ extends React.Component<SetPZProps, {
         return (
             <div className="wrap" data-page='setpz'>
 
-                <List><InputItem value={this.state.name || ''} placeholder={'卡券名称最多12个字'} maxLength={12} onChange={(e) => this.setState({ name: (e || '').trim() })}>卡券配置名称</InputItem></List>
+                <List><InputItem value={this.state.name || ''} placeholder={'卡券名称最多12个字'} maxLength={12} onChange={(e) => this.setState({ name: (e || '').trim() })}>卡券名称</InputItem></List>
                 <WhiteSpace />
 
                 <Item extra={(this.state.logoPicUrl) ? '已上传图片' : '请上传'} arrow={'horizontal'} onClick={() => { this.onUploadImg() }}>卡券配置配图</Item>
@@ -440,7 +439,7 @@ class SetPZ extends React.Component<SetPZProps, {
                         onClick={() => this.setState({ validityType: 2 })}>指定区域时间
                                 </Button>
                 </div>}>有效期
-
+    
                     </Item>
 
                 {this.state.validityType == 1 ?

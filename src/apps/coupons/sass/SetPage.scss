@@ -4,6 +4,10 @@
         @return $px / $baseFontSize * 1rem;
     }
 
+    .am-list-item .am-list-line .am-input-label {
+        font-size: rem(100px);
+    }
+
     .am-list-item .am-list-line {
         .am-input-label {
             font-size: rem(28px);

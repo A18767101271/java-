@@ -3,12 +3,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import classNames from 'classnames';
 import moment from 'moment';
-import CouponApis, { CouponCreate } from '../../../../services/coupon-apis';
+import CouponApis, { CouponDefineCreateRequest } from '@jx/sardine-apiservice/lib/coupon-apis';
 import bridge from '@jx/sardine-bridge';
 import { Picker, DatePicker, TextareaItem, Modal, List, InputItem, WhiteSpace, Button, Toast } from 'antd-mobile';
 import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
 import PickTimePage from './PickTimePage';
 import ChooseShop from './ChooseShop';
+import { SardineApiClient } from '@jx/sardine-api';
+
 
 const Item = List.Item;
 
@@ -94,6 +96,7 @@ const data1 = [{
 
 interface SetMJProps {
     mchId: number,
+    apiClient: SardineApiClient
 }
 
 class SetMJ extends React.Component<SetMJProps, {
@@ -101,7 +104,10 @@ class SetMJ extends React.Component<SetMJProps, {
     id?: number;
     couponType: number;
     name?: string;
+
+    logoUid?: string;
     logoPicUrl?: string;
+
     effectiveTime?: number;
     validityTime?: number;
     validityType: number;
@@ -123,7 +129,7 @@ class SetMJ extends React.Component<SetMJProps, {
     bizTimes?: EffectiveTimePickerValue[];
 
 }>{
-
+    CouponApis: CouponApis;
     constructor(props: SetMJProps) {
         super(props);
         this.state = {
@@ -132,8 +138,9 @@ class SetMJ extends React.Component<SetMJProps, {
             couponType: 2,
             validityType: 1,
             beginDate: moment().startOf('day').toDate(),
-            bizTimes: []
+            bizTimes: [{ 'days': [1, 2, 3, 4, 5, 6, 7], 'is24th': true }]
         };
+        this.CouponApis = new CouponApis(props.apiClient);
     }
 
     componentWillMount() {
@@ -151,32 +158,40 @@ class SetMJ extends React.Component<SetMJProps, {
             sizeType: ['original', 'compressed'],
             complete: function (data) {
                 if (data.localIds && data.localIds.length > 0) {
-                    arr = data.localIds;
-                    bridge.getImageData({
-                        localId: data.localIds[data.localIds.length - 1], //图片本地ID
-                        complete: function (data) {
-                            if (data.localData) {
-                                self.setState({
-                                    logoPicUrl: data.localData
-                                }, () => {
-                                    bridge.uploadImages({
-                                        typeId: 1,
-                                        localIds: [arr[arr.length - 1]],
-                                        showProgress: true,
-                                        complete: function (data) {
-                                            if (data.resultCode == "success") {
-                                                Toast.info('上传成功', 2);
-                                            }
-                                            else {
-                                                Toast.info('上传失败', 2);
-                                            }
-                                        }
-                                    })
-                                })
-                            }
 
-                        }
+                    self.setState({
+                        logoUid: data.localIds[data.localIds.length - 1]
+                    }, () => {
+
+                        arr = data.localIds;
+                        bridge.getImageData({
+                            localId: data.localIds[data.localIds.length - 1], //图片本地ID
+                            complete: function (data) {
+                                if (data.localData) {
+                                    self.setState({
+                                        logoPicUrl: data.localData
+                                    }, () => {
+                                        bridge.uploadImages({
+                                            typeId: 1,
+                                            localIds: [arr[arr.length - 1]],
+                                            showProgress: true,
+                                            complete: function (data) {
+                                                if (data.resultCode == "success") {
+                                                    Toast.info('上传成功', 2);
+                                                }
+                                                else {
+                                                    Toast.info('上传失败', 2);
+                                                }
+                                            }
+                                        })
+                                    })
+                                }
+
+                            }
+                        })
+
                     })
+
                 }
 
 
@@ -188,53 +203,34 @@ class SetMJ extends React.Component<SetMJProps, {
 
     onSubmit() {
 
-        let obj = {} as CouponCreate;
-
-        obj.merchantId = this.props.mchId;
-        obj.couponType = this.state.couponType;
-        obj.validityType = this.state.validityType;
-
-        if (!this.state.name) {
+        const couponName = this.state.name;
+        if (!couponName) {
             Modal.alert('提示', '请输入卡券配置名称');
             return;
         }
-        else {
-            obj.name = this.state.name;
+
+        let obj: CouponDefineCreateRequest = {
+            merchantId: this.props.mchId,
+            couponType: this.state.couponType,
+            validityType: this.state.validityType,
+            name: couponName,
+            isAllStore: this.state.isAllStore
+        };
+
+        if (!this.state.isAllStore) {
+            obj.storeIds = this.state.storeIds
         }
 
-        if (this.state.logoPicUrl && this.state.logoPicUrl) {
-            obj.logoPicUrl = this.state.logoPicUrl;
+        if (this.state.logoUid) {
+            obj.logoPicUrl = this.state.logoUid;
         }
 
-        if (this.state.validityType == 2) {
-
-            if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
-                Modal.alert('提示', '开始时间无效');
-                return;
-            }
-            else {
-                obj.validityStartTime = moment(this.state.beginDate).unix();
-            }
-
-            if (!this.state.endDate || this.state.endDate <= this.state.beginDate) {
-                Modal.alert('提示', '结束时间无效');
-                return;
-            }
-            else {
-                obj.validityEndTime = moment(this.state.endDate).unix();
-            }
-
+        if (this.state.remarks) {
+            obj.remarks = this.state.remarks;
         }
 
-        else {
-
-            if (!this.state.validityTime || !this.state.validityTime) {
-                Modal.alert('提示', '请选择有效期');
-                return;
-            }
-            else {
-                obj.validityTime = this.state.validityTime;
-            }
+        if (this.state.useNotice) {
+            obj.useNotice = this.state.useNotice;
         }
 
         if (!this.state.effectiveTime) {
@@ -270,49 +266,72 @@ class SetMJ extends React.Component<SetMJProps, {
             })
         }
 
+        if (this.state.validityType == 2) {
+
+            if (!this.state.beginDate || this.state.beginDate < moment().startOf('day').toDate()) {
+                Modal.alert('提示', '开始时间无效');
+                return;
+            }
+            else {
+                obj.validityStartTime = moment(this.state.beginDate).unix();
+            }
+
+            if (!this.state.endDate || this.state.endDate <= this.state.beginDate) {
+                Modal.alert('提示', '结束时间无效');
+                return;
+            }
+            else {
+                obj.validityEndTime = moment(this.state.endDate).unix();
+            }
+
+        }
+
+        else {
+
+            if (!this.state.validityTime || !this.state.validityTime) {
+                Modal.alert('提示', '请选择有效期');
+                return;
+            }
+            else {
+                obj.validityTime = this.state.validityTime;
+            }
+        }
 
         if (!this.state.realAmount) {
-            Modal.alert('提示', '请输入面额设置');
+            Modal.alert('提示', '请设置面额');
             return;
         }
         else {
-            obj.realAmount = Number(this.state.realAmount) * 100;
+            obj.realAmount = Number(this.state.realAmount);
         }
 
         if (!this.state.limitAmount) {
-            Modal.alert('提示', '请输入使用门槛');
+            Modal.alert('提示', '请设置面额');
             return;
         }
         else {
-            obj.limitAmount = Number(this.state.limitAmount) * 100;
+            obj.limitAmount = Number(this.state.limitAmount);
         }
 
-        if (this.state.remarks) {
-            obj.remarks = this.state.remarks;
-        }
+        this.CouponApis.couponDefineCreate(obj).then(resp => {
 
-        if (this.state.useNotice) {
-            obj.useNotice = this.state.useNotice;
-        }
+            if (resp.success) {
+                const data = resp.getData();
 
-        if (this.state.isAllStore) {
-            obj.isAllStore = 1;
-        }
-        else {
-            obj.isAllStore = 0;
-            obj.storeIds = this.state.storeIds
-        }
+                console.log(data);
 
-        console.log(obj);
+                if (data.couDefId) {
+                    Modal.alert('提示', '提交成功', [{
+                        text: '确定', onPress: () => {
+                            bridge.close();
+                        }
 
-        CouponApis.CouponDefineCreate(obj).then((data) => {
-            console.log(data);
-            if (data.couDefId) {
-                Modal.alert('提示', '提交成功', [{ text: '确定', onPress: () => console.log(1) }])
+                    }])
+                }
+            } else {
+                console.log(resp);
+                Modal.alert('提示', JSON.stringify(resp));
             }
-        }).catch(err => {
-            console.log(err);
-            Modal.alert('提示', err.msg);
         });
     }
 

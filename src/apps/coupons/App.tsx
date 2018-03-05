@@ -31,7 +31,6 @@ class App extends React.Component<AppProps>{
         super(props);
     }
 
-
     render() {
         return <HashRouter>
             <Switch>
@@ -39,15 +38,14 @@ class App extends React.Component<AppProps>{
                 <Route path='/' exact render={() => <HomePage mchId={this.props.mchId} />} />
                 <Route path='/add' render={() => <AddPage mchId={this.props.mchId} />} />
                 <Route path='/setpz' render={() => <SetPZ mchId={this.props.mchId} apiClient={this.props.apiClient} />} />
-                <Route path='/setdj' render={() => <SetDJ mchId={this.props.mchId} />} />
-                <Route path='/setmj' render={() => <SetMJ mchId={this.props.mchId} />} />
+                <Route path='/setdj' render={() => <SetDJ mchId={this.props.mchId} apiClient={this.props.apiClient} />} />
+                <Route path='/setmj' render={() => <SetMJ mchId={this.props.mchId} apiClient={this.props.apiClient} />} />
                 <Route path='/details' render={() => <CardDetails mchId={this.props.mchId} />} />
                 <Route path='/choose' render={() => <ChoosePage mchId={this.props.mchId} />} />
                 <Route path='/selfcard' render={() => <SelfServiceCard mchId={this.props.mchId} />} />
                 <Route path='/selfcardlist' render={() => <SelfCardList mchId={this.props.mchId} />} />
                 <Route path='/getconfig' render={() => <GetConfig mchId={this.props.mchId} />} />
                 <Route path='/editconfig' render={() => <EditConfig mchId={this.props.mchId} />} />
-
 
             </Switch>
         </HashRouter>
