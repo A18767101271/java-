@@ -14,15 +14,17 @@ let params = UParams();
 new VConsole();
 
 const mchid = parseInt(params.mchid);
-
+console.log(mchid);
 
 bridge.config({ appKey: "9kyty1wjtqvhc8gyl0i5ipkc" });
 
 const apiClient = new SardineApiClient({
-    gatewayUrl: "https://tenv.mttstudio.net/web-api/",
-    loginUrl: "https://tenv.mttstudio.net/login/",
+    gatewayUrl: "https://gw.mttstudio.net/gateway",
+    loginUrl: "https://auth.mttstudio.net/login/",
     appKey: "9kyty1wjtqvhc8gyl0i5ipkc"
 });
+
+
 
 if (isNaN(mchid) || mchid < 1) {
     Modal.alert('提示', '参数mchid无效', []);

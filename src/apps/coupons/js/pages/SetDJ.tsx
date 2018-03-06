@@ -10,6 +10,7 @@ import EffectiveTimePickerValue from '../EffectiveTimePickerValue';
 import PickTimePage from './PickTimePage';
 import ChooseShop from './ChooseShop';
 
+import StoreApis from '@jx/sardine-apiservice/lib/store-apis';
 import { SardineApiClient } from '@jx/sardine-api';
 
 const Item = List.Item;
@@ -130,6 +131,7 @@ class SetDJ extends React.Component<SetDJProps, {
 
 }>{
     CouponApis: CouponApis;
+    StoreApis: StoreApis;
     constructor(props: SetDJProps) {
         super(props);
         this.state = {
@@ -141,6 +143,7 @@ class SetDJ extends React.Component<SetDJProps, {
             bizTimes: [{ 'days': [1, 2, 3, 4, 5, 6, 7], 'is24th': true }]
         };
         this.CouponApis = new CouponApis(props.apiClient);
+        this.StoreApis = new StoreApis(props.apiClient);
     }
 
     componentWillMount() {
@@ -408,7 +411,7 @@ class SetDJ extends React.Component<SetDJProps, {
                         onClick={() => this.setState({ validityType: 2 })}>指定区域时间
                                 </Button>
                 </div>}>有效期
-
+    
                     </Item>
 
                 {this.state.validityType == 1 ?
@@ -537,7 +540,8 @@ class SetDJ extends React.Component<SetDJProps, {
                 />} />
 
                 <Route path='/setdj/chooseshop' render={() => <ChooseShop
-                    storeId={this.props.mchId}
+                    merchantId={this.props.mchId}
+                    storeApis={this.StoreApis}
                     data={this.state.storeIds}
                     allChoose={this.state.isAllStore}
                     onEnter={(val1: number[], val2: boolean) => {

@@ -11,6 +11,7 @@ import PickTimePage from './PickTimePage';
 import ChooseShop from './ChooseShop';
 import { SardineApiClient } from '@jx/sardine-api';
 
+import StoreApis from '@jx/sardine-apiservice/lib/store-apis';
 
 const Item = List.Item;
 
@@ -130,6 +131,7 @@ class SetMJ extends React.Component<SetMJProps, {
 
 }>{
     CouponApis: CouponApis;
+    StoreApis: StoreApis;
     constructor(props: SetMJProps) {
         super(props);
         this.state = {
@@ -141,6 +143,7 @@ class SetMJ extends React.Component<SetMJProps, {
             bizTimes: [{ 'days': [1, 2, 3, 4, 5, 6, 7], 'is24th': true }]
         };
         this.CouponApis = new CouponApis(props.apiClient);
+        this.StoreApis = new StoreApis(props.apiClient);
     }
 
     componentWillMount() {
@@ -414,7 +417,7 @@ class SetMJ extends React.Component<SetMJProps, {
                         onClick={() => this.setState({ validityType: 2 })}>指定区域时间
                                 </Button>
                 </div>}>有效期
-
+    
                     </Item>
 
                 {this.state.validityType == 1 ?
@@ -549,7 +552,8 @@ class SetMJ extends React.Component<SetMJProps, {
                 />} />
 
                 <Route path='/setmj/chooseshop' render={() => <ChooseShop
-                    storeId={this.props.mchId}
+                    merchantId={this.props.mchId}
+                    storeApis={this.StoreApis}
                     data={this.state.storeIds}
                     allChoose={this.state.isAllStore}
                     onEnter={(val1: number[], val2: boolean) => {

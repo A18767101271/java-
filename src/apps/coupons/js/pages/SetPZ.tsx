@@ -11,8 +11,8 @@ import { SardineApiClient } from '@jx/sardine-api';
 
 //import CouponApis from '../../../../services/coupon-apis';
 
-
 import CouponApis, { CouponDefineCreateRequest } from '@jx/sardine-apiservice/lib/coupon-apis';
+import StoreApis from '@jx/sardine-apiservice/lib/store-apis';
 import PickTimePage from './PickTimePage';
 import ChooseReturn from './ChooseReturn';
 import ChooseShop from './ChooseShop';
@@ -136,6 +136,7 @@ class SetPZ extends React.Component<SetPZProps, {
 
 }>{
     CouponApis: CouponApis;
+    StoreApis:StoreApis;
     constructor(props: SetPZProps) {
         super(props);
         this.state = {
@@ -147,6 +148,7 @@ class SetPZ extends React.Component<SetPZProps, {
             bizTimes: [{ 'days': [1, 2, 3, 4, 5, 6, 7], 'is24th': true }]
         };
         this.CouponApis = new CouponApis(props.apiClient);
+        this.StoreApis = new StoreApis(props.apiClient);
     }
 
     componentWillMount() {
@@ -582,7 +584,8 @@ class SetPZ extends React.Component<SetPZProps, {
                 />} />
 
                 <Route path='/setpz/chooseshop' render={() => <ChooseShop
-                    storeId={this.props.mchId}
+                    merchantId={this.props.mchId}
+                    storeApis={this.StoreApis}
                     data={this.state.storeIds}
                     allChoose={this.state.isAllStore}
                     onEnter={(val1: number[], val2: boolean) => {
@@ -591,7 +594,8 @@ class SetPZ extends React.Component<SetPZProps, {
                 />} />
 
                 <Route path='/setpz/choosereturn' render={() => <ChooseReturn
-                    storeId={this.props.mchId}
+                    merchantId={this.props.mchId}
+                    storeApis={this.StoreApis}
                     selected={this.state.selected ? this.state.selected : undefined}
                     onEnter={value => {
                         this.onSelected(value);

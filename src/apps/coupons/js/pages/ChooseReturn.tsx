@@ -1,16 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import StoreApis, { GetGroupsWithProductsData } from '../../../../services/store-apis';
+import StoreApis from '@jx/sardine-apiservice/lib/store-apis';
 import '../../sass/ChoosePage.scss';
 
 interface ChooseReturnProps {
-    storeId: number;
+    merchantId: number;
+    storeApis: StoreApis;
     selected?: { id: number, num: number, name?: string, price?: number }[];
     onEnter?: (selected: { id: number, num: number, name?: string, price?: number }[]) => void;
 }
 
 class ChooseReturn extends React.Component<ChooseReturnProps, {
-    data?: GetGroupsWithProductsData;
+    data?: any;
     groupId?: number;
     selected: { id: number, num: number, price?: number, name?: string }[];
 }> {
@@ -24,8 +25,8 @@ class ChooseReturn extends React.Component<ChooseReturnProps, {
 
     componentWillMount() {
 
-        StoreApis.getGroupsWithProducts({
-            storeId: this.props.storeId,
+        this.props.storeApis.getMerchantProducts({
+            merchantId: this.props.merchantId,
             pageNumber: 0,
             pageSize: 999,
         }).then(data => {

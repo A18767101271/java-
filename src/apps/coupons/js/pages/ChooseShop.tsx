@@ -1,14 +1,16 @@
 import React from 'react';
 import { Toast } from 'antd-mobile';
 import { Button, List, Checkbox, WhiteSpace, Switch, Modal } from 'antd-mobile';
-import CouponApis from '../../../../services/coupon-apis';
+//import CouponApis from '../../../../services/coupon-apis';
+import StoreApis from '@jx/sardine-apiservice/lib/store-apis';
 import '../../sass/ChoosePage.scss';
 
 const Item = List.Item;
 const Brief = Item.Brief;
 
 interface ChooseShopProps {
-    storeId: number;
+    merchantId: number;
+    storeApis: StoreApis;
     data?: number[];
     allChoose?: boolean;
     onEnter?: (val1: number[], val2: boolean) => void;
@@ -18,7 +20,7 @@ class ChooseShop extends React.Component<ChooseShopProps, {
     allChoose?: boolean;
     getData?: {
         name: string,
-        address: string,
+        address?: string,
         districtId: number,
         districtName: string,
         cityId: number,
@@ -44,27 +46,33 @@ class ChooseShop extends React.Component<ChooseShopProps, {
 
         let arr: number[] = [];
 
-        let req = { merchantId: this.props.storeId };
+        let req = { merchantId: this.props.merchantId };
 
         Toast.loading('加载中...');
 
-        CouponApis.ListUseAble(req).then((data) => {
-            this.setState({
-                getData: data
-            }, () => {
-                Toast.hide();
-                if (this.state.getData && this.state.getData.length) {
-                    for (var i = 0; i < this.state.getData.length; i++) {
-                        arr.push(this.state.getData[i].storeId)
+        this.props.storeApis.getStoreUseableList(req).then((data) => {
+            if (data.success == true) {
+
+                this.setState({
+                    getData: data.getData()
+                }, () => {
+                    Toast.hide();
+                    if (this.state.getData && this.state.getData.length) {
+                        for (var i = 0; i < this.state.getData.length; i++) {
+                            arr.push(this.state.getData[i].storeId)
+                        }
+                        this.setState({
+                            allIdArry: arr
+                        })
                     }
-                    this.setState({
-                        allIdArry: arr
-                    })
-                }
-            })
-        }).catch((err) => {
-            Toast.hide();
-            Modal.alert('提示', err.msg);
+                })
+
+            }
+            else {
+                Toast.hide();
+                Modal.alert('提示', data.msg || '');
+            }
+
         })
     }
 
@@ -151,7 +159,7 @@ class ChooseShop extends React.Component<ChooseShopProps, {
                 <WhiteSpace />
                 {this.state.allChoose ?
                     undefined :
-                    this.state.getData && this.state.getData.length ? this.state.getData.map(p => <CheckDayItem key={p.storeId} id={p.storeId} title={p.name} area={p.provinceName + p.cityName + p.districtName} address={p.address}
+                    this.state.getData && this.state.getData.length ? this.state.getData.map(p => <CheckDayItem key={p.storeId} id={p.storeId} title={p.name} area={p.provinceName + p.cityName + p.districtName} address={p.address || ''}
                         checked={this.state.checkedIdArry && this.state.checkedIdArry.find(s => s === p.storeId) ? true : false} onChange={v => this.onDayChecked(p.storeId, v)} />) : undefined
                 }
 
