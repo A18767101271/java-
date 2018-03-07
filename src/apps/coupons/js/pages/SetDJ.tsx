@@ -143,7 +143,6 @@ class SetDJ extends React.Component<SetDJProps, {
             bizTimes: [{ 'days': [1, 2, 3, 4, 5, 6, 7], 'is24th': true }]
         };
         this.CouponApis = new CouponApis(props.apiClient);
-        this.StoreApis = new StoreApis(props.apiClient);
     }
 
     componentWillMount() {

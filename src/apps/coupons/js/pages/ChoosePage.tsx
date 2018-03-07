@@ -38,8 +38,8 @@ class AddPage extends React.Component<AddPageProps, {
         const ChooseContent = () => {
             return (
                 <div className='setion'>
-                    <div className='list l-1' onClick={() => { this.state.cardId ? window.location.href = '#/selfcard?cardid=' + this.state.cardId + '?shopid=' + this.props.mchId : window.location.href = '#/selfcard?shopid=' + this.props.mchId }}><div className='left fl'>自助领券</div><div className='right fr'></div></div>
-                    <div className='list l-2'><div className='left fl'>定制发券</div><div className='right fr'></div></div>
+                    <div className='list l-1' onClick={() => { this.state.cardId ? window.location.href = '#/selfcard?cardid=' + this.state.cardId + '?mchid=' + this.props.mchId : window.location.href = '#/selfcard?mchid=' + this.props.mchId }}><div className='left fl'>自助领券</div><div className='right fr'></div></div>
+                    <div className='list l-2' onClick={() => { this.state.cardId ? window.location.href = '#/selfmadecard?cardid=' + this.state.cardId + '?mchid=' + this.props.mchId : window.location.href = '#/selfmadecard?mchid=' + this.props.mchId }}><div className='left fl'>定制发券</div><div className='right fr'></div></div>
                     <div className='list l-3'><div className='left fl'>下单返券</div><div className='right fr'></div></div>
                 </div>
             )

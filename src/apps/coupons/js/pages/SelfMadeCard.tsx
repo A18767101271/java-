@@ -5,13 +5,14 @@ import CouponApis from '@jx/sardine-apiservice/lib/coupon-apis';
 //import CouponApis from '../../../../services/coupon-apis';
 import classNames from 'classnames';
 import moment from 'moment';
-import { DatePicker, Modal } from 'antd-mobile';
+import { DatePicker, Modal, List, WhiteSpace, InputItem, TextareaItem, Button, Switch } from 'antd-mobile';
 import UParams from '../../../../assets/libs/uparams';
 import ChooseCard from './ChooseCard';
 
 import { SardineApiClient } from '@jx/sardine-api';
 
 const { Header, Content } = Layout;
+const Item = List.Item;
 
 interface SelfServiceCardProps {
     mchId: number,
@@ -25,12 +26,14 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
     num?: number;
     beginDate?: Date;
     endDate?: Date;
-    setNum?: number;
+    setNum?: string;
     price?: string;
     chooseCards: boolean;
     pageSize: number;
     pageNumber: number;
     isCard: boolean;
+    remarks?: string;
+    agree?: boolean;
 }>{
     CouponApis: CouponApis;
     constructor(props: SelfServiceCardProps) {
@@ -92,12 +95,14 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
             Modal.alert('提示', '结束时间无效');
             return;
         }
+
     }
 
 
     mainRender() {
 
         const re = /^(([1-9]\d*)|0)(\.\d{0,2}?)?$/;
+        const re2 = /^[1-9]\d*$/;
         const data1 = ['', '满减券', '代金券', '凭证券'];
         const item1 = this.state.cardInfo;
 
@@ -166,16 +171,11 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
         return (
 
             <Layout>
-                <Header title='新增自助领券' />
+                <Header title='新增定制领券' />
                 <Content>
-                    <div className="wrap" data-page='selfcard'>
+                    <div className="wrap" data-page='selfmadecard'>
 
-                        <div className='row' onClick={() => this.setState({ chooseCards: true })}>
-                            <div className='left fl'>选择卡券</div>
-                            <div className='right fr'>
-                                <span>{this.state.isCard ? data1[item1.couponType] : '请选择'}</span>
-                            </div>
-                        </div>
+                        <Item extra={this.state.isCard ? data1[item1.couponType] : '请选择'} arrow={'horizontal'} onClick={() => this.setState({ chooseCards: true })}>选择卡券</Item>
 
                         {this.state.isCard ?
                             item1.couponType == 1 ?
@@ -185,10 +185,12 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
                                     : <CardDJ item={item1} status={item1.status} />
                             : <NoCard />}
 
-                        <div className='row'>
-                            <div className='left fl'>可领数量</div>
-                            <div className="right fr"><input type="text" placeholder="请输入每个用户可领券数 默认为1" value={this.state.num || ''} onChange={e => this.setState({ num: parseInt(e.target.value) })} /></div>
+                        <div className='row tiptext'>
+                            <div className='left fl'>领取提示:每位用户仅可领取一次</div>
                         </div>
+
+                        <WhiteSpace />
+
 
                         <div>
 
@@ -202,16 +204,8 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
                                     })
                                 }}
                             >
-                                <div className="row">
-                                    <div className="left fl">领取开始时间</div>
-                                    <div className="right fr">
-                                        <span>{this.state.beginDate ? moment(this.state.beginDate).format('YYYY-MM-DD') : '请设置日期'}</span>
-                                        <i></i>
-                                    </div>
-                                </div>
+                                <List><Item extra={this.state.beginDate ? moment(this.state.beginDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >领取开始时间</Item></List>
                             </DatePicker>
-
-
 
                             <DatePicker
                                 mode="date"
@@ -223,33 +217,48 @@ class SelfServiceCard extends React.Component<SelfServiceCardProps, {
                                     })
                                 }}
                             >
-                                <div className="row">
-                                    <div className="left fl">领取结束时间</div>
-                                    <div className="right fr">
-                                        <span>{this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'}</span>
-                                        <i></i>
-                                    </div>
-                                </div>
+                                <Item extra={this.state.endDate ? moment(this.state.endDate).format('YYYY-MM-DD') : '请设置日期'} arrow={'horizontal'} >领取结束时间</Item>
                             </DatePicker>
 
                         </div>
 
-                        <div className='row'>
-                            <div className='left fl'>设置库存量</div>
-                            <div className="right fr"><input type="text" placeholder="设置发放数量 不填写时为不限" value={this.state.setNum || ''} onChange={e => this.setState({ setNum: parseInt(e.target.value) })} /></div>
-                        </div>
 
-                        <div className='row'>
-                            <div className='left fl'>单价</div>
-                            <div className="right fr"><input type="text" placeholder="请设置单价" value={this.state.price || ''}
-                                onChange={e => {
-                                    let result = re.test(e.target.value);
-                                    if (result || !e.target.value) this.setState({ price: e.target.value });
-                                }} /></div>
-                        </div>
+                        <List><InputItem value={this.state.setNum || ''} placeholder={'设置发放数量 不填写时为不限'} maxLength={4} onChange={e => {
+                            let result = re2.test(e);
+                            if (result || !e) this.setState({ setNum: e });
+                        }}>设置库存量</InputItem></List>
 
-                        <div className='btn btn-1' onClick={() => this.onSubmit(1)}>保存</div>
-                        <div className='btn btn-2' onClick={() => this.onSubmit(2)}>立即发布</div>
+                        <InputItem value={this.state.price || ''} placeholder={'输入投放成本'} onChange={e => {
+                            let result = re.test(e);
+                            if (result || !e) this.setState({ price: e });
+                        }}>每张卡券投放成本</InputItem>
+
+                        <List renderHeader={() => '备注'}>
+                            <TextareaItem
+                                placeholder="请输入发放卡券希望达成的目标和预期"
+                                count={50}
+                                rows={3}
+                                value={this.state.remarks || ''}
+                                onChange={e => this.setState({ remarks: e })} />
+                        </List>
+
+                        <WhiteSpace />
+
+                        <List>
+                            <Item className='ex' extra={
+                                <Switch checked={this.state.agree} onChange={e => this.setState({ agree: e })} />
+                            }><span className='ex-1'>阅读并同意</span><span className='ex-2'>《卡券营销发放协议》</span></Item>
+                        </List>
+
+                        <WhiteSpace />
+                        <WhiteSpace />
+
+                        {this.state.agree ? <Button className='btn' type="primary">提交申请</Button> : <Button disabled className='btn' type="primary">提交申请</Button>}
+
+                        <WhiteSpace />
+
+                        {/* <div className='btn btn-1' onClick={() => this.onSubmit(1)}>保存</div>
+                        <div className='btn btn-2' onClick={() => this.onSubmit(2)}>立即发布</div> */}
 
                     </div>
 

@@ -14,6 +14,7 @@ import SelfServiceCard from './js/pages/SelfServiceCard';
 import SelfCardList from './js/pages/SelfCardList';
 import GetConfig from './js/pages/GetConfig';
 import EditConfig from './js/pages/EditConfig';
+import SelfMadeCard from './js/pages/SelfMadeCard';
 
 import FastClick from 'fastclick';
 import './sass/App.scss';
@@ -42,7 +43,8 @@ class App extends React.Component<AppProps>{
                 <Route path='/setmj' render={() => <SetMJ mchId={this.props.mchId} apiClient={this.props.apiClient} />} />
                 <Route path='/details' render={() => <CardDetails mchId={this.props.mchId} />} />
                 <Route path='/choose' render={() => <ChoosePage mchId={this.props.mchId} />} />
-                <Route path='/selfcard' render={() => <SelfServiceCard mchId={this.props.mchId} />} />
+                <Route path='/selfcard' render={() => <SelfServiceCard mchId={this.props.mchId} apiClient={this.props.apiClient} />} />
+                <Route path='/selfmadecard' render={() => <SelfMadeCard mchId={this.props.mchId} apiClient={this.props.apiClient} />} />
                 <Route path='/selfcardlist' render={() => <SelfCardList mchId={this.props.mchId} />} />
                 <Route path='/getconfig' render={() => <GetConfig mchId={this.props.mchId} />} />
                 <Route path='/editconfig' render={() => <EditConfig mchId={this.props.mchId} />} />

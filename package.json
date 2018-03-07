@@ -15,7 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "@jx/sardine-api": "^1.0.21",
-    "@jx/sardine-apiservice": "^1.0.31",
+    "@jx/sardine-apiservice": "^1.0.32",
     "@jx/sardine-bridge": "^1.0.32",
     "@types/classnames": "^2.2.3",
     "@types/prop-types": "^15.5.2",
