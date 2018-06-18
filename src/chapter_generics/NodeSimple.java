@@ -1,6 +1,6 @@
 package chapter_generics;
 
-public class NodeAction<T> {
+public class NodeSimple<T> {
 
     class Node<T> {
         T data;

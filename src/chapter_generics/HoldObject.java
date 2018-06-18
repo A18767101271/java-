@@ -7,7 +7,7 @@ import chapter_14.Pet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HoldObj {
+public class HoldObject {
 
     private static <T> void print(Holder<T> holder){
         T t = holder.get();
