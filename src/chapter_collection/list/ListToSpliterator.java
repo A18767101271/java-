@@ -3,7 +3,6 @@ package chapter_collection.list;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Spliterator;
-import java.util.function.Consumer;
 
 /**
  * 将List切割成多个
@@ -38,7 +37,5 @@ public class ListToSpliterator {
         spliterator.forEachRemaining(s -> {
             System.out.print(s + " ");
         });
-
-
     }
 }
