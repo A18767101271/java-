@@ -3,7 +3,7 @@ package chapter_generics;
 import java.util.Iterator;
 
 /**
- * 斐波纳兹
+ * 斐波纳兹 数列
  * Created by wislie on 2018/6/19.
  */
 public class Fibonacci implements Generator<Integer>, Iterable<Integer> {
