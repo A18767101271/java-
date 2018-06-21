@@ -22,4 +22,14 @@ public class BasicGenerator<T> implements Generator<T> {
     public static <T> Generator<T> create(Class<T> generator){
         return new BasicGenerator(generator);
     }
+
+    public static void main(String[] args) {
+
+            Generator<CountObject> generator =  BasicGenerator.create(CountObject.class);
+
+        for(int i =0; i < 3; i++) {
+            System.out.println(generator.next());
+        }
+
+    }
 }
