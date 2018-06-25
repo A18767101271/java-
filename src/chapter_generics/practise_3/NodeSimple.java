@@ -1,4 +1,4 @@
-package chapter_generics;
+package chapter_generics.practise_3;
 
 public class NodeSimple<T> {
 

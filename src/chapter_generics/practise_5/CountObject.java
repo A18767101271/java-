@@ -1,4 +1,4 @@
-package chapter_generics;
+package chapter_generics.practise_5;
 
 /**
  * Created by wislie on 2018/6/21.

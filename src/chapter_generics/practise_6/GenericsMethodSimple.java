@@ -1,4 +1,4 @@
-package chapter_generics;
+package chapter_generics.practise_6;
 
 import chapter_14.Pet;
 

@@ -1,4 +1,4 @@
-package chapter_generics;
+package chapter_generics.practise_2;
 
 /**
  * 元组

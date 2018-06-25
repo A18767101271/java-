@@ -1,4 +1,4 @@
-package chapter_generics;
+package chapter_generics.practise_5;
 
 import java.util.Iterator;
 

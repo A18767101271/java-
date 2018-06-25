@@ -1,4 +1,4 @@
-package chapter_generics;
+package chapter_generics.practise_4;
 
 import java.util.ArrayList;
 import java.util.List;
