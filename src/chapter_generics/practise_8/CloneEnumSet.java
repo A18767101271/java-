@@ -3,7 +3,7 @@ package chapter_generics.practise_8;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-//练习17
+//
 public class CloneEnumSet {
     public static void main(String[] args) {
 
