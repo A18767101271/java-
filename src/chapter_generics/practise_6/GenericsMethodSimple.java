@@ -1,6 +1,6 @@
 package chapter_generics.practise_6;
 
-import chapter_14.Pet;
+import chapter_rtti.Pet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,15 +37,15 @@ public class GenericsMethodSimple {
         return new ArrayList<T>();
     }
 
-    public static <T> void displayList(List<T> list){
+    public static <T> void displayList(List<T> list) {
         System.out.println("value:" + list);
     }
 
-    public static <K, V> Map<K,V> map() {
-        return new HashMap<K,V>();
+    public static <K, V> Map<K, V> map() {
+        return new HashMap<K, V>();
     }
 
-    public static void displayMap(Map<String, List<? extends Pet>> map){
+    public static void displayMap(Map<String, List<? extends Pet>> map) {
         System.out.println("map:" + map);
     }
 
@@ -58,8 +58,9 @@ public class GenericsMethodSimple {
         //推断并不了解
         gms.display(gms.getInstance("she"));
 
-        GenericsMethodSimple.displayList(GenericsMethodSimple.list());
+        displayList(list());
 
-        GenericsMethodSimple.displayMap(GenericsMethodSimple.map());
+        displayMap(map());
+
     }
 }

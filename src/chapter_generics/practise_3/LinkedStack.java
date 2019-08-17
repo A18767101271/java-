@@ -1,6 +1,6 @@
 package chapter_generics.practise_3;
 
-public class LinkedStack<T> {
+public class LinkedStack {
 
     public static void main(String[] args) {
         NodeSimple stack = new NodeSimple();

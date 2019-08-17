@@ -11,6 +11,6 @@ public class CloneEnumSet {
         sets.add("one");
         Set<String> cloneSets = (Set<String>) ((LinkedHashSet<String>) sets).clone();
         sets.add("two");
-        System.out.println("cloneSets:"+cloneSets);
+        System.out.println("sets:"+sets+" cloneSets:"+cloneSets);//sets:[one, two] cloneSets:[one]
     }
 }

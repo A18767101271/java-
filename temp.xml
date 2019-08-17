@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GYJ>
+  <transtime>20190416100912</transtime>
+  <orderid>56645645768</orderid>
+  <rds>
+    <rd>
+      <trantype>0</trantype>
+      <sellerid>111</sellerid>
+      <customerid>222</customerid>
+      <customername>333</customername>
+      <id>444</id>
+    </rd>
+  </rds>
+</GYJ>

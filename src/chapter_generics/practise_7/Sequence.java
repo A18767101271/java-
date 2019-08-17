@@ -57,6 +57,7 @@ public class Sequence<T> {
         Selector selector = sequence.selector();
         for(int i = 0; i < sequence.items.length; i++){
             sequence.add("data-"+i);
+//            sequence.push(new Object());
         }
 
         while (!selector.end()){

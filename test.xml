@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="GB2312" standalone="no"?>
+<GYJ>
+	<transtime>20190416100912</transtime>
+	<orderid>56645645768</orderid>
+	<rds>
+		<rd>
+			<trantype>0</trantype>
+			<sellerid>#query("sellerid")</sellerid>
+			<customerid>#query("customerid")</customerid>
+			<customername>#query("customername")</customername>
+			<id>#query("id")</id>
+		</rd>
+	</rds>
+</GYJ>

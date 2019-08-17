@@ -1,6 +1,7 @@
 package chapter_collection.list;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -57,5 +58,7 @@ public class ListToArrays {
         for (Object data : desc_3) {
             System.out.print(data + " ");
         }
+
+        Arrays.asList(src_3);
     }
 }

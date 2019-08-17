@@ -1,9 +1,9 @@
 package chapter_generics.practise_1;
 
-import chapter_14.Dog;
-import chapter_14.LiteralPetCreator;
-import chapter_14.Pet;
-import chapter_generics.practise_1.Holder;
+import chapter_rtti.Dog;
+import chapter_rtti.LiteralPetCreator;
+import chapter_rtti.Pet;
+import chapter_rtti.PetCreator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class HoldObject {
         print(doubleHolder);
 
         //可以持有某个基类，也可以持有导出类型
-        LiteralPetCreator literalPetCreator = new LiteralPetCreator();
+        PetCreator literalPetCreator = new LiteralPetCreator();
         Pet pet = literalPetCreator.randomPet();
         Holder<Pet> petHolder = new Holder<>(pet);
         System.out.println("pet:"+petHolder.get().toString());
