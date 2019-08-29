@@ -10,14 +10,19 @@ public class FormatString {
 
         String str = "wislie";
 
-        printFormat(String.format("%d", 1024));//1024
-        printFormat(String.format("%c", str.charAt(0)));//w
-        printFormat(String.format("%b", str));//true
-        printFormat(String.format("%s", str));//wislie
-        printFormat(String.format("%.3f", 1024.1024));//1024.102
-        printFormat(String.format("%e", 128.1));//1.281000e+02
-        printFormat(String.format("%x", 256));//100
-        printFormat(String.format("%h", 127));//7f
+        printFormat(String.format("%b", -1));//false
+        printFormat(String.format("%c", 98));  //b
+        printFormat(String.format("%o", 20)); //24
+        printFormat(String.format("%h", 20)); //14
+        printFormat(String.format("%d", 20)); //12
+        printFormat(String.format("%x", 20)); //f
+        printFormat(String.format("%.2f", 20f)); //15.00
+        printFormat(String.format("%e", 20.1)); //1.510000e+01
+        printFormat(String.format("%.2g", 1024.1)); //1.0e+03
+        printFormat(String.format("%s", 123)); //123
+
+
+
     }
 
     private static void printFormat(String str) {

@@ -19,6 +19,7 @@ public class AmountIsLegal {
         String regex = "^[0-9]+$|^[0-9]+\\.[0-9]{1,2}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
+        boolean isMatches = matcher.matches();
         System.out.println("input:"+input +" "+matcher.matches());
     }
 }

@@ -130,7 +130,7 @@ public class StrategyPattern {
 
     public static void main(String[] args) {
         StrategyPattern pattern = new StrategyPattern();
-        pattern.startTravel(90);
+        pattern.startTravel(120);
 
     }
 }
