@@ -1,4 +1,4 @@
-package chapter_annotation;
+package chapter_annotation.sample_1;
 
 
 import java.lang.annotation.Annotation;
@@ -13,7 +13,7 @@ public class Test {
 
     public static void main(String[] args) {
         try {
-            Class cls = Class.forName("chapter_annotation.Child");
+            Class cls = Class.forName("chapter_annotation.sample_1.Child");
 
             Field field = cls.getDeclaredField("item");
             boolean isFieldAnnotationPresent = field.isAnnotationPresent(Description.class);

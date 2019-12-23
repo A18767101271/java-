@@ -68,8 +68,8 @@ public class DeepCopy2 implements Serializable {
         DeepCopy2 sample = new DeepCopy2(10, new Inner("blue", 255));
         DeepCopy2 copySample = sample.deepClone();
 
-        System.out.println("sample==copySample:" + (sample == copySample));
-        System.out.println("sample:" + sample);
-        System.out.println("copySample:" + copySample);
+        System.out.println("sample==copySample:" + (sample == copySample)); //false
+        System.out.println("sample:" + sample); //DeepCopy2{len=10, inner=Inner{color='blue', alpha=255}}
+        System.out.println("copySample:" + copySample); //DeepCopy2{len=10, inner=Inner{color='blue', alpha=255}}
     }
 }

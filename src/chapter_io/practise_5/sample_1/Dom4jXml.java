@@ -1,14 +1,16 @@
 package chapter_io.practise_5.sample_1;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
+import org.dom4j.*;
 import org.dom4j.io.OutputFormat;
+import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by wislie on 2018/12/21.
@@ -47,6 +49,40 @@ public class Dom4jXml {
             System.out.print("生成XML文件成功");
         } catch (IOException e) {
             System.out.print("生成XML文件失败");
+            e.printStackTrace();
+        }
+
+        String path = "src/xml/permission.xml";
+        parseXml(path);
+
+    }
+
+
+    private static void parseXml(String xmlPath){
+        //1.创建Reader对象
+        SAXReader reader = new SAXReader();
+        //2.加载xml
+        Document document = null;
+        try {
+            document = reader.read(new File(xmlPath));
+            //3.获取根节点
+            Element rootElement = document.getRootElement();
+            Iterator iterator = rootElement.elementIterator();
+            while (iterator.hasNext()){
+                Element stu = (Element) iterator.next();
+                List<Attribute> attributes = stu.attributes();
+                System.out.println("======获取属性值======");
+                for (Attribute attribute : attributes) {
+                    System.out.println(attribute.getValue());
+                }
+                System.out.println("======遍历子节点======");
+                Iterator iterator1 = stu.elementIterator();
+                while (iterator1.hasNext()){
+                    Element stuChild = (Element) iterator1.next();
+                    System.out.println("节点名："+stuChild.getName()+"---节点值："+stuChild.getStringValue());
+                }
+            }
+        } catch (DocumentException e) {
             e.printStackTrace();
         }
 

@@ -39,8 +39,8 @@ public class ShallowCopy implements Cloneable {
 
         ShallowCopy cloneObj = (ShallowCopy) sample.clone();
 
-        System.out.println("浅度拷贝 (cloneObj == sample):" + (cloneObj == sample));
-        System.out.println("sample:" + sample);
-        System.out.println("cloneObj:" + cloneObj);
+        System.out.println("浅度拷贝 (cloneObj == sample):" + (cloneObj == sample)); //false
+        System.out.println("sample:" + sample); //sample:{age=1, name='wislie'}
+        System.out.println("cloneObj:" + cloneObj); //cloneObj:{age=1, name='wislie'}
     }
 }

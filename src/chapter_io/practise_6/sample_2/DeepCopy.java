@@ -37,7 +37,9 @@ public class DeepCopy implements Cloneable {
         DeepCopy d = null;
         try {
             d = (DeepCopy) super.clone();
-            d.setShaderCopy((ShallowCopy) shaderCopy.clone());
+            if(shaderCopy != null){
+                d.setShaderCopy((ShallowCopy) shaderCopy.clone());
+            }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
         }
@@ -55,8 +57,8 @@ public class DeepCopy implements Cloneable {
     public static void main(String[] args) {
         DeepCopy sample = new DeepCopy("high", new ShallowCopy(12, "wislie"));
         DeepCopy cloneObj = (DeepCopy) sample.clone();
-        System.out.println("深度拷贝 (cloneObj == sample):" + (cloneObj == sample));
-        System.out.println("sample:" + sample);
-        System.out.println("cloneObj:" + cloneObj);
+        System.out.println("深度拷贝 (cloneObj == sample):" + (cloneObj == sample)); //false
+        System.out.println("sample:" + sample); //{value='high', shaderCopy={age=12, name='wislie'}}
+        System.out.println("cloneObj:" + cloneObj);//{value='high', shaderCopy={age=12, name='wislie'}}
     }
 }
