@@ -29,7 +29,7 @@ fun main(args: Array<String>) {
     println(str);//abc.length is 3
 
     //需要在原生字符串中表示字面值$字符
-    val price = """${'$'}9.99""";
+    val price = "${'$'}9.99";
     println(price);
 
 

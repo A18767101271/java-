@@ -17,7 +17,6 @@ fun main(args: Array<String>) {
 
 fun describe(obj: Any): String =
         when (obj) {
-
             "wislie" -> "will be different";
             is Int -> "is a number";
             !is String -> "is not a string";

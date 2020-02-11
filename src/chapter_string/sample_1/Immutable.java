@@ -26,5 +26,17 @@ public class Immutable {
         System.out.println("s1:" + s1 + " ,s2:" + s2);
 
         System.out.println("abc:"+name.substring(0, 0));
+
+        queryStringLength();
+    }
+
+    private static void queryStringLength(){
+        int len = (int) Math.pow(2,16);
+        String str = "";
+
+        for(int i = 0; i < len;i++){
+            str += "a";
+        }
+        System.out.println(str.length());
     }
 }
