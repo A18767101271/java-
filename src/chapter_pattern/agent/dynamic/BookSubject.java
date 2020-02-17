@@ -7,7 +7,7 @@ package chapter_pattern.agent.dynamic;
  * desc   : bookSubject
  * version: 1.0
  */
-public class BookSubject implements Subject {
+public class BookSubject implements Subject,Material {
     private String string;
 
     @Override
@@ -18,5 +18,10 @@ public class BookSubject implements Subject {
     @Override
     public String readString() {
         return string;
+    }
+
+    @Override
+    public String getColor() {
+        return "red";
     }
 }

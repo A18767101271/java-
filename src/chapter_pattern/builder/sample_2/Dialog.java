@@ -42,7 +42,6 @@ public class Dialog {
     private static class Builder {
 
         private String title;
-
         private String msg;
 
         private OnClickListener onClickListener;
@@ -63,21 +62,17 @@ public class Dialog {
         }
 
         public Dialog build() {
-
             if ("".equals(title) || title == null) {
                 throw new NullPointerException("title 不能为空");
             }
-
             if ("".equals(msg) || msg == null) {
                 throw new NullPointerException("msg 不能为空");
             }
-
             Dialog dialog = new Dialog(title, msg);
             if (onClickListener != null) {
                 dialog.setOnClickListener(onClickListener);
             }
             return dialog;
-
         }
     }
 
@@ -110,17 +105,17 @@ public class Dialog {
 
     public static void main(String[] args) {
         new Builder()
-                .title("复工")
-                .msg("离复工还有1天")
-                .setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick() {
-                        System.out.println("点击开工");
-                    }
-                })
-                .build()
-                .show()
-                .onClick();
+            .title("复工")
+            .msg("离复工还有1天")
+            .setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick() {
+                    System.out.println("点击开工");
+                }
+            })
+            .build()
+            .show()
+            .onClick();
         /**
          * 打印------------------
          * 点击开工

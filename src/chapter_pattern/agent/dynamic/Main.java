@@ -1,5 +1,9 @@
 package chapter_pattern.agent.dynamic;
 
+import kotlin.io.FilesKt;
+import sun.misc.ProxyGenerator;
+
+import java.io.File;
 import java.lang.reflect.*;
 
 /**
@@ -12,9 +16,9 @@ import java.lang.reflect.*;
 public class Main {
 
     public static void main(String[] args) {
-        Subject bookSubject = new BookSubject();
-//        InvocationHandler handler = new SubjectDynamic(bookSubject);
-        Subject subject = (Subject) Proxy.newProxyInstance(bookSubject.getClass().getClassLoader(),
+        BookSubject bookSubject = new BookSubject();
+        //代理对象
+        Proxy delegate = (Proxy) Proxy.newProxyInstance(BookSubject.class.getClassLoader(),
                 bookSubject.getClass().getInterfaces(), new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) {
@@ -29,7 +33,17 @@ public class Main {
                         return result;
                     }
                 });
-        subject.writeString("wislie");
-        System.out.println("result:" + subject.readString());
+
+        //如果从Subject接口实现
+        if (delegate instanceof Subject) {
+            Subject subject = (Subject) delegate;
+            subject.writeString("好好学习");
+            System.out.println("subject..." + subject.readString());
+        }
+        //如果从Material接口实现
+        if (delegate instanceof Material) {
+            Material material = (Material) delegate;
+            System.out.println("material..." + material.getColor());
+        }
     }
 }
